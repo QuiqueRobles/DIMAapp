@@ -16,7 +16,7 @@ import LoginScreen from './src/screens/Login/LoginScreen';
 import RegisterScreen from './src/screens/Login/RegisterScreen';
 import ForgotPasswordScreen from '@/screens/Login/ForgotPassword';
 import OwnerLoginScreen from '@/screens/Login/OwnerLogScreen';
-
+import OwnerRegisterScreen from '@/screens/Login/OwnerRegisterScreen';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -94,6 +94,7 @@ const AuthStack = () => (
     <Stack.Screen name="Register" component={RegisterScreen} />
     <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
     <Stack.Screen name="OwnerLogin" component={OwnerLoginScreen} />
+    <Stack.Screen name="OwnerRegister" component={OwnerRegisterScreen} />
   </Stack.Navigator>
 );
 

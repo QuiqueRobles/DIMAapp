@@ -5,29 +5,16 @@ import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 import { AppNavigationProp } from '../../navigation';
 
-export default function OwnerLoginScreen() {
+export default function OwnerRegisterScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [clubname,setClubName]=useState('');
+  const [clubaddress,setClubAddress]=useState('');
   const supabase = useSupabaseClient();
   const navigation = useNavigation<AppNavigationProp>();
 
-  const handleOwnerSignIn = async () => {
-    setIsLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    setIsLoading(false);
-    if (error) {
-      alert(error.message);
-    } else {
-      // Navigate to owner dashboard or perform owner-specific actions
-      alert('Owner logged in successfully');
-    }
-  };
 
   return (
     <KeyboardAvoidingView 
@@ -35,11 +22,35 @@ export default function OwnerLoginScreen() {
       style={styles.container}
     >
       <Image
-        source={require('../../../assets/nightmi_logo.png')}
+        source={require('../../../assets/nightmi_business_logo.png')}
         style={styles.logo}
         resizeMode="contain"
       />
-      <Text style={styles.title}>Owner Login</Text>
+      <Text style={styles.signIn}>Interested in working with us? Fill this form, you'll be contacted!</Text>
+      <View style={styles.inputContainer}>
+        <Feather name="user" size={24} color="#9CA3AF" style={styles.icon} />
+        <TextInput
+          style={styles.input}
+          placeholder="Club Name"
+          placeholderTextColor="#9CA3AF"
+          value={clubname}
+          onChangeText={setClubName}
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
+      </View>
+      <View style={styles.inputContainer}>
+        <Feather name="map" size={24} color="#9CA3AF" style={styles.icon} />
+        <TextInput
+          style={styles.input}
+          placeholder="Club address"
+          placeholderTextColor="#9CA3AF"
+          value={clubaddress}
+          onChangeText={setClubAddress}
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
+      </View>
       <View style={styles.inputContainer}>
         <Feather name="mail" size={24} color="#9CA3AF" style={styles.icon} />
         <TextInput
@@ -56,25 +67,22 @@ export default function OwnerLoginScreen() {
         <Feather name="lock" size={24} color="#9CA3AF" style={styles.icon} />
         <TextInput
           style={styles.input}
-          placeholder="Password"
+          placeholder="Phone"
           placeholderTextColor="#9CA3AF"
           value={password}
           onChangeText={setPassword}
-          secureTextEntry
         />
       </View>
-      <TouchableOpacity style={styles.button} onPress={handleOwnerSignIn} disabled={isLoading}>
+      
+      <TouchableOpacity style={styles.button} disabled={isLoading}>
         {isLoading ? (
           <Text style={styles.buttonText}>Loading...</Text>
         ) : (
-          <Text style={styles.buttonText}>Sign In as Owner</Text>
+          <Text style={styles.buttonText}>Confirm</Text>
         )}
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-        <Text style={styles.backToLogin}>Back to User Login</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('OwnerRegister')}>
-        <Text style={styles.backToLogin}>Register as owner</Text>
+      <TouchableOpacity onPress={() => navigation.navigate('OwnerLogin')}>
+        <Text style={styles.signIn}>Already have an account? Sign in</Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>
   );
@@ -83,29 +91,25 @@ export default function OwnerLoginScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1F2937',
+    backgroundColor: '#1E1E1E',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
   },
   logo: {
-    width: 200,
-    height: 100,
-    marginBottom: 20,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#FFFFFF',
-    marginBottom: 20,
+    width: 300,
+    height: 150,
+    marginBottom: 1,
   },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: '100%',
+    width: '80%',
     height: 50,
-    backgroundColor: '#374151',
+    backgroundColor: '#1E1E1E',
+    borderWidth:1,
     borderRadius: 8,
+    borderColor:'#FFFFFF',
     paddingHorizontal: 16,
     marginBottom: 16,
   },
@@ -115,12 +119,13 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: 16,
+    alignItems:'center',
     color: '#FFFFFF',
   },
   button: {
-    width: '100%',
+    width: '80%',
     height: 50,
-    backgroundColor: '#A78BFA',
+    backgroundColor: '#5500FF',
     borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
@@ -131,8 +136,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
-  backToLogin: {
-    color: '#A78BFA',
+  signIn: {
+    width:'80%',
+    color: '#FFFFFF',
+    alignItems:'center',
+    textAlign:'center',
+    marginBottom:40,
     marginTop: 16,
   },
 });
+  
+  
