@@ -17,6 +17,14 @@ import RegisterScreen from './src/screens/Login/RegisterScreen';
 import ForgotPasswordScreen from '@/screens/Login/ForgotPassword';
 import OwnerLoginScreen from '@/screens/Login/OwnerLogScreen';
 
+// Suppress warning about defaultProps
+const error = console.error;
+console.error = (...args: any) => {
+  if (/defaultProps/.test(args[0])) return;
+  error(...args);
+};
+
+
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 

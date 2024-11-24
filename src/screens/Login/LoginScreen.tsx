@@ -31,7 +31,7 @@ export default function LoginScreen() {
       style={styles.container}
     >
       <Image
-        source={require('../../../assets/nightmi_logo.png')}
+        source={require('@/assets/nightmi_logo.png')}
         style={styles.logo}
         resizeMode="contain"
       />
