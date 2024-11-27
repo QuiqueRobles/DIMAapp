@@ -4,6 +4,7 @@ import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 import { AppNavigationProp } from '../../navigation';
+import commonStyles from '@/styles/commonStyles';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
@@ -28,63 +29,86 @@ export default function LoginScreen() {
   return (
     <KeyboardAvoidingView 
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={styles.container}
+      style={styles.loginPageContainer}
     >
+      
       <Image
         source={require('@/assets/nightmi_logo.png')}
-        style={styles.logo}
+        style={commonStyles.fullLogo}
         resizeMode="contain"
       />
-      <View style={styles.inputContainer}>
-        <Feather name="mail" size={24} color="#9CA3AF" style={styles.icon} />
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          placeholderTextColor="#9CA3AF"
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
-          autoCapitalize="none"
-        />
+      <View style={styles.loginFormContainer}>
+        <View style={styles.fieldContainer}>
+          <Text style={commonStyles.standardText}>Email</Text>
+          <View style={commonStyles.inputContainer}>
+            <Feather name="mail" size={24} color="#9CA3AF"/>
+            <TextInput
+              style={commonStyles.textInput}
+              placeholder="Value"
+              placeholderTextColor="#9CA3AF"
+              value={email}
+              onChangeText={setEmail}
+              keyboardType="email-address"
+              autoCapitalize="none"
+            />
+          </View>
+        </View>
+        <View style={styles.fieldContainer}>
+          <Text style={commonStyles.standardText}>Password</Text>
+          <View style={commonStyles.inputContainer}>
+            <Feather name="lock" size={24} color="#9CA3AF" />
+            <TextInput
+              style={commonStyles.textInput}
+              placeholder="Value"
+              placeholderTextColor="#9CA3AF"
+              value={password}
+              onChangeText={setPassword}
+              secureTextEntry
+            />
+          </View>
+        </View>
       </View>
-      <View style={styles.inputContainer}>
-        <Feather name="lock" size={24} color="#9CA3AF" style={styles.icon} />
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          placeholderTextColor="#9CA3AF"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-        />
-      </View>
-      <TouchableOpacity style={styles.button} onPress={handleSignIn} disabled={isLoading}>
+      <TouchableOpacity style={commonStyles.primaryButton} onPress={handleSignIn} disabled={isLoading}>
         {isLoading ? (
-          <Text style={styles.buttonText}>Loading...</Text>
+          <Text style={commonStyles.primaryButtonText}>Loading...</Text>
         ) : (
-          <Text style={styles.buttonText}>Sign In</Text>
+          <Text style={commonStyles.primaryButtonText}>Sign In</Text>
         )}
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
-        <Text style={styles.forgotPassword}>Forgot Password?</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-        <Text style={styles.signUp}>New here? Sign up!</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('OwnerLogin')}>
-        <Text style={styles.ownerText}>Are you an owner?</Text>
-      </TouchableOpacity>
+      <View style={styles.otherOptionsContainer}>
+        <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
+          <Text style={commonStyles.secondaryText}>Forgot Password?</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+          <Text style={commonStyles.textLink}>New here? Sign up!</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('OwnerLogin')}>
+          <Text style={commonStyles.secondaryText}>Are you an owner?</Text>
+        </TouchableOpacity>
+      </View>
     </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  loginPageContainer: {
     flex: 1,
-    backgroundColor: '#1F2937',
+    width: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
+    justifyContent: 'flex-start',
+    paddingTop: 120,
+    padding: 15,
+    backgroundColor: '#1F2937',
+  },
+  loginFormContainer: {
+    paddingTop: 40,
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    width: '100%',
+    height: 'auto',
+    gap: 25,
+    minHeight: 400,
   },
   logo: {
     width: 200,
@@ -101,39 +125,20 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     marginBottom: 16,
   },
-  icon: {
-    marginRight: 10,
-  },
-  input: {
-    flex: 1,
-    fontSize: 16,
-    color: '#FFFFFF',
-  },
-  button: {
-    width: '100%',
-    height: 50,
-    backgroundColor: 'bg-purple-600',
-    borderRadius: 8,
+  fieldContainer:{
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
     alignItems: 'center',
+    width: '100%',
+    height: 'auto',
+    gap: 10,
+  },
+  otherOptionsContainer: {
+    flexDirection: 'column',
     justifyContent: 'center',
-    marginTop: 16,
-  },
-  buttonText: {
-    color: '#FFFFFF',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  forgotPassword: {
-    color: '#9CA3AF',
-    marginTop: 48,
-    marginBottom:8
-  },
-  signUp: {
-    color: '#A78BFA',
-    marginTop: 8,
-  },
-  ownerText: {
-    color: '#9CA3AF',
+    alignItems: 'center',
+    width: '100%',
+    gap: 8,
     marginTop: 16,
   },
 });
