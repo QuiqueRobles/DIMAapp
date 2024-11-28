@@ -91,14 +91,14 @@ const HomeScreen: React.FC = () => {
     if (!loading) return null;
     return (
       <View style={styles.footerLoader}>
-        <ActivityIndicator size="large" color="#8856a3" />
+        <ActivityIndicator size="large" color="#4F46E5" />
       </View>
     );
   };
 
   return (
     <LinearGradient
-      colors={['#8856a3', '#000000']}
+      colors={['#4F46E5', '#000000']}
       style={styles.gradient}
       locations={[0, 0.3]}
     >
@@ -134,7 +134,7 @@ const HomeScreen: React.FC = () => {
             contentContainerStyle={styles.listContainer}
             showsVerticalScrollIndicator={false}
             refreshControl={
-              <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor="#8856a3" />
+              <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor="#4F46E5" />
             }
             onEndReached={handleLoadMore}
             onEndReachedThreshold={0.1}
