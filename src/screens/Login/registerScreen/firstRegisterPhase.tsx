@@ -12,16 +12,21 @@ import commonStyles from '@/styles/commonStyles';
 
 interface FirstRegisterPhaseProps {
     goToSecondPage: () => void;
+    email: string;
+    setEmail: (email: string) => void;
+    password: string;
+    setPassword: (password: string) => void;
+    confirmPassword: string;
+    setConfirmPassword: (confirmPassword: string) => void;
 }
 
-const FirstRegisterPhase: React.FC<FirstRegisterPhaseProps> = ({goToSecondPage}) => {
+const FirstRegisterPhase: React.FC<FirstRegisterPhaseProps> = (
+    {goToSecondPage,email,setEmail,password,setPassword,confirmPassword,setConfirmPassword}) => {
 
-    //form input states
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const navigation = useNavigation<AppNavigationProp>();
+
+
 
     return (
         <View style={styles.firstPageContainer}> 
@@ -30,13 +35,13 @@ const FirstRegisterPhase: React.FC<FirstRegisterPhaseProps> = ({goToSecondPage})
                 <View style={commonStyles.inputContainer}>
                     <Feather name="mail" size={24} color="#9CA3AF"  />
                     <TextInput
-                    style={commonStyles.textInput}
-                    placeholder="Value"
-                    placeholderTextColor="#9CA3AF"
-                    value={email}
-                    onChangeText={setEmail}
-                    keyboardType="email-address"
-                    autoCapitalize="none"
+                        style={commonStyles.textInput}
+                        placeholder="Value"
+                        placeholderTextColor="#9CA3AF"
+                        value={email}
+                        onChangeText={setEmail}
+                        keyboardType="email-address"
+                        autoCapitalize="none"
                     />
                 </View> 
             </View>
@@ -92,7 +97,7 @@ const styles = StyleSheet.create({
     fieldContainer:{
         flexDirection: 'column',
         justifyContent: 'flex-start',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         width: '100%',
         height: 'auto',
         gap: 10,
