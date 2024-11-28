@@ -13,9 +13,17 @@ import MapScreen from './src/screens/MapScreen';
 import TicketScreen from './src/screens/TicketsScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import LoginScreen from './src/screens/Login/LoginScreen';
-import RegisterScreen from './src/screens/Login/RegisterScreen';
+import RegisterScreen from '@/screens/Login/registerScreen';
 import ForgotPasswordScreen from '@/screens/Login/ForgotPassword';
 import OwnerLoginScreen from '@/screens/Login/OwnerLogScreen';
+
+// Suppress warning about defaultProps
+const error = console.error;
+console.error = (...args: any) => {
+  if (/defaultProps/.test(args[0])) return;
+  error(...args);
+};
+
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();

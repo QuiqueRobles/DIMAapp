@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, KeyboardAvo
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
-import { AppNavigationProp } from '../../navigation';
+import { AppNavigationProp } from '@/navigation';
 
 export default function ForgotPasswordScreen() {
   const [email, setEmail] = useState('');
@@ -30,7 +30,7 @@ export default function ForgotPasswordScreen() {
       style={styles.container}
     >
       <Image
-        source={require('../../../assets/nightmi_logo.png')}
+        source={require('@/assets/nightmi_logo.png')}
         style={styles.logo}
         resizeMode="contain"
       />

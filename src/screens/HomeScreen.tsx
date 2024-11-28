@@ -3,7 +3,7 @@ import { View, Text, FlatList, Image, TouchableOpacity, SafeAreaView, ActivityIn
 import { StatusBar } from 'expo-status-bar';
 import { Feather } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import {supabase} from '../lib/supabase'
+import {supabase} from '@/lib/supabase'
 
 interface Club {
   id: string;
