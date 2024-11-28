@@ -13,6 +13,7 @@ import commonStyles from '@/styles/commonStyles';
 import SecondRegisterPhase from '@/screens/Login/registerScreen/secondRegisterPhase';
 import FirstRegisterPhase from '@/screens/Login/registerScreen/firstRegisterPhase';
 
+
 export default function RegisterScreen() {
 
   //navigation between pages
@@ -27,6 +28,39 @@ export default function RegisterScreen() {
   const [isLoading, setIsLoading] = useState(false);
   const supabase = useSupabaseClient();
   const navigation = useNavigation<AppNavigationProp>();
+
+  const handleRegister = async () => {
+
+    if (!email || !password || !confirmPassword) {
+      alert('Please enter all fields');
+      setCurrentPage(0);
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      alert('Passwords do not match');
+      setCurrentPage(0);
+      return;
+    }
+
+    const { error } = await supabase.auth.signUp({
+        email,
+        password,
+    });
+    
+    if (error) {
+        alert(error.message);
+        setCurrentPage(0);
+    }
+  };
+
+  const handleSubmit = () => {
+    if(currentPage == 0){
+      setCurrentPage(1);
+    }else{
+      handleRegister();
+    }
+  }
 
 
   return (
@@ -51,7 +85,15 @@ export default function RegisterScreen() {
             (
               <SecondRegisterPhase />
             ) : (
-              <FirstRegisterPhase goToSecondPage={()=>{setCurrentPage(1)}}/>
+              <FirstRegisterPhase 
+                goToSecondPage={()=>{setCurrentPage(1)}}
+                email={email}
+                setEmail={setEmail}
+                password={password}
+                setPassword={setPassword}
+                confirmPassword={confirmPassword}
+                setConfirmPassword={setConfirmPassword}
+              />
             )
           }
         </View>
@@ -74,7 +116,7 @@ export default function RegisterScreen() {
               )
             }
         </View>
-        <TouchableOpacity style={commonStyles.primaryButton} onPress={()=>{setCurrentPage(1)}}>
+        <TouchableOpacity style={commonStyles.primaryButton} onPress={()=>{handleSubmit()}}>
           <Text style={commonStyles.primaryButtonText}>Submit</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
