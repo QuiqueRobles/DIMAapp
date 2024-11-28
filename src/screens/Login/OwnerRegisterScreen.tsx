@@ -1,19 +1,30 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, Platform } from 'react-native';
-import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 import { AppNavigationProp } from '../../navigation';
 
 export default function OwnerRegisterScreen() {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [clubname,setClubName]=useState('');
   const [clubaddress,setClubAddress]=useState('');
-  const supabase = useSupabaseClient();
+  const [clubphone,setClubPhone]=useState('');
   const navigation = useNavigation<AppNavigationProp>();
+  const [showText, setShowText] = useState(false);
+  const [missingparameters,setMissingParameters]=useState(true);
+  const checkInputs=()=>{
+    if (clubname==''|| clubaddress=='' || clubphone=='' || email=='') {
+      setMissingParameters(true)
+    }
+    else {setMissingParameters(false)}
+
+  }
+  const handlePress= () => {
+    if (!missingparameters)
+    setShowText(true); 
+    else alert("Missing Parameters")
+  };
 
 
   return (
@@ -26,66 +37,79 @@ export default function OwnerRegisterScreen() {
         style={styles.logo}
         resizeMode="contain"
       />
-      <Text style={styles.signIn}>Interested in working with us? Fill this form, you'll be contacted!</Text>
-      <View style={styles.inputContainer}>
-        <Feather name="user" size={24} color="#9CA3AF" style={styles.icon} />
-        <TextInput
-          style={styles.input}
-          placeholder="Club Name"
-          placeholderTextColor="#9CA3AF"
-          value={clubname}
-          onChangeText={setClubName}
-          keyboardType="email-address"
-          autoCapitalize="none"
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <Feather name="map" size={24} color="#9CA3AF" style={styles.icon} />
-        <TextInput
-          style={styles.input}
-          placeholder="Club address"
-          placeholderTextColor="#9CA3AF"
-          value={clubaddress}
-          onChangeText={setClubAddress}
-          keyboardType="email-address"
-          autoCapitalize="none"
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <Feather name="mail" size={24} color="#9CA3AF" style={styles.icon} />
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          placeholderTextColor="#9CA3AF"
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
-          autoCapitalize="none"
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <Feather name="lock" size={24} color="#9CA3AF" style={styles.icon} />
-        <TextInput
-          style={styles.input}
-          placeholder="Phone"
-          placeholderTextColor="#9CA3AF"
-          value={password}
-          onChangeText={setPassword}
-        />
-      </View>
-      
-      <TouchableOpacity style={styles.button} disabled={isLoading}>
-        {isLoading ? (
-          <Text style={styles.buttonText}>Loading...</Text>
-        ) : (
-          <Text style={styles.buttonText}>Confirm</Text>
-        )}
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('OwnerLogin')}>
-        <Text style={styles.signIn}>Already have an account? Sign in</Text>
-      </TouchableOpacity>
-    </KeyboardAvoidingView>
-  );
+      {!showText && ( 
+        <>
+          <Text style={styles.signIn}>Interested in working with us? Fill this form, you'll be contacted!</Text>
+          <View style={styles.inputContainer}>
+            <Feather name="user" size={24} color="#9CA3AF" style={styles.icon} />
+            <TextInput
+              style={styles.input}
+              placeholder="Club Name"
+              placeholderTextColor="#9CA3AF"
+              value={clubname}
+              onChangeText={(text)=>{setClubAddress(text);
+                checkInputs();} }
+              keyboardType="email-address"
+              autoCapitalize="none"
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <Feather name="map" size={24} color="#9CA3AF" style={styles.icon} />
+            <TextInput
+              style={styles.input}
+              placeholder="Club address"
+              placeholderTextColor="#9CA3AF"
+              value={clubaddress}
+              onChangeText={(text)=>{setClubAddress(text);
+                checkInputs();} }
+              keyboardType="email-address"
+              autoCapitalize="none"
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <Feather name="mail" size={24} color="#9CA3AF" style={styles.icon} />
+            <TextInput
+              style={styles.input}
+              placeholder="Email"
+              placeholderTextColor="#9CA3AF"
+              value={email}
+              onChangeText={(text)=>{setEmail(text);
+                checkInputs();} }
+              keyboardType="email-address"
+              autoCapitalize="none"
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <Feather name="phone" size={24} color="#9CA3AF" style={styles.icon} />
+            <TextInput
+              style={styles.input}
+              placeholder="Phone"
+              placeholderTextColor="#9CA3AF"
+              value={clubphone}
+              onChangeText={(text)=>{setClubPhone(text);
+                checkInputs();}
+              }
+              keyboardType="phone-pad"
+            />
+          </View>
+          
+          <TouchableOpacity style={styles.button} disabled={isLoading} onPress={handlePress}>
+            {isLoading ? (
+              <Text style={styles.buttonText}>Loading...</Text>
+            ) : ( 
+              <Text style={styles.buttonText}>Confirm</Text>
+            )}
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('OwnerLogin')}>
+            <Text style={styles.signIn}>Already have an account? Sign in</Text>
+          </TouchableOpacity>
+          
+      </> )}
+      {showText && (
+        <>
+          <Text style={styles.signIn}>Thank you for being interested in our project. We'll be contacting you soon!</Text></>
+      )}
+    </KeyboardAvoidingView> );
 }
 
 const styles = StyleSheet.create({

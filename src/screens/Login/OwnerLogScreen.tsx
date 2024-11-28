@@ -35,7 +35,7 @@ export default function OwnerLoginScreen() {
       style={styles.container}
     >
       <Image
-        source={require('../../../assets/nightmi_logo.png')}
+        source={require('../../../assets/nightmi_business_logo.png')}
         style={styles.logo}
         resizeMode="contain"
       />
@@ -83,14 +83,14 @@ export default function OwnerLoginScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1F2937',
+    backgroundColor: '#1E1E1E',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
   },
   logo: {
-    width: 200,
-    height: 100,
+    width: 300,
+    height: 150,
     marginBottom: 20,
   },
   title: {
@@ -102,10 +102,12 @@ const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: '100%',
+    width: '80%',
     height: 50,
-    backgroundColor: '#374151',
+    backgroundColor: '#1E1E1E',
+    borderWidth:1,
     borderRadius: 8,
+    borderColor:'#FFFFFF',
     paddingHorizontal: 16,
     marginBottom: 16,
   },
@@ -115,12 +117,13 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: 16,
+    alignItems:'center',
     color: '#FFFFFF',
   },
   button: {
-    width: '100%',
+    width: '80%',
     height: 50,
-    backgroundColor: '#A78BFA',
+    backgroundColor: '#5500FF',
     borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
@@ -132,7 +135,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   backToLogin: {
-    color: '#A78BFA',
+    color: '#FFFFFF',
     marginTop: 16,
   },
 });
