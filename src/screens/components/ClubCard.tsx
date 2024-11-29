@@ -53,7 +53,7 @@ export const ClubCard: React.FC<ClubCardProps> = ({ club, onPress, distance }) =
           <View style={styles.content}>
             <View style={styles.header}>
               <View style={styles.titleContainer}>
-                <Text style={styles.title} numberOfLines={1}>{club.name}</Text>
+                <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">{club.name}</Text>
                 <View style={styles.ratingContainer}>
                   <Feather name="star" size={16} color="#FFD700" />
                   <Text style={styles.rating}>{club.rating.toFixed(1)}</Text>
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    height: '100%',
+    height: '70%', // Increased from 60% to 70%
     padding: 15,
     justifyContent: 'flex-end',
   },
@@ -144,10 +144,13 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   title: {
-    fontSize: 22,
+    fontSize: 22, // Reduced from 24 to 22
     fontWeight: 'bold',
     color: '#FFFFFF',
     marginBottom: 4,
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 10,
   },
   ratingContainer: {
     flexDirection: 'row',
@@ -211,4 +214,3 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
 });
-
