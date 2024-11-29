@@ -16,6 +16,7 @@ import LoginScreen from './src/screens/Login/LoginScreen';
 import RegisterScreen from '@/screens/Login/registerScreen';
 import ForgotPasswordScreen from '@/screens/Login/ForgotPassword';
 import OwnerLoginScreen from '@/screens/Login/OwnerLogScreen';
+import ClubScreen from './src/screens/ClubScreen';
 
 // Suppress warning about defaultProps
 const error = console.error;
@@ -131,7 +132,10 @@ const AppNavigator = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {session ? (
-          <Stack.Screen name="Main" component={MainTabs} />
+          <>
+            <Stack.Screen name="Main" component={MainTabs} />
+            <Stack.Screen name="Club" component={ClubScreen} />
+          </>
         ) : (
           <Stack.Screen name="Auth" component={AuthStack} />
         )}
