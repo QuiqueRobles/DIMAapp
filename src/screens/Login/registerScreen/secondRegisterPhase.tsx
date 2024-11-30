@@ -10,11 +10,22 @@ import RadioGroup, {RadioButtonProps} from 'react-native-radio-buttons-group';
 import { FontAwesome } from '@expo/vector-icons';
 import commonStyles from '@/styles/commonStyles';
 
+interface SecondRegisterPhaseProps {
+    username: string;
+    setUsername: (username: string) => void;
+    dateOfBirth: Date;
+    setDateOfBirth: (date: Date) => void;
+    country: Country | undefined;
+    setCountry: (country: Country) => void;
+    gender: string;
+    setGender: (gender:string) => void;
+}
 
-export default function SecondRegisterPhase() {
+
+const SecondRegisterPhase: React.FC<SecondRegisterPhaseProps> = (
+    {username, setUsername, dateOfBirth, setDateOfBirth, country, setCountry,gender,setGender}) => {
 
     //date of birth selection
-    const [date, setDate] = useState(new Date());
     const [showDatepicker, setshowDatepicker] = useState(false);
     interface DatePickerEvent {
         type: string;
@@ -23,9 +34,9 @@ export default function SecondRegisterPhase() {
         };
     }
     const onChange = (event: DatePickerEvent, selectedDate?: Date | undefined) => {
-        const currentDate = selectedDate || date;
+        const currentDate = selectedDate || dateOfBirth;
         setshowDatepicker(Platform.OS === 'ios');
-        setDate(currentDate);
+        setDateOfBirth(currentDate);
     };
     const showDatepickerDatepicker = () => {
         setshowDatepicker(true);
@@ -40,8 +51,7 @@ export default function SecondRegisterPhase() {
     };
 
     //country selection
-    const [countryCode, setCountryCode] = useState<CountryCode>('US');
-    const [country, setCountry] = useState<Country>();
+    const [countryCode, setCountryCode] = useState<CountryCode>(country?.cca2 || 'US');
     const [visible, setVisible] = useState<boolean>(false);
     const onSelect = (country: Country) => {
         setCountryCode(country.cca2)
@@ -80,7 +90,7 @@ export default function SecondRegisterPhase() {
             borderColor: '#9CA3AF',
         }
     ]), []);
-    const [selectedGender, setSelectedGender] = useState<string | undefined>();
+
 
 
     return (
@@ -93,6 +103,8 @@ export default function SecondRegisterPhase() {
                   style={commonStyles.textInput}
                   placeholder="Value"
                   placeholderTextColor="#9CA3AF"
+                  value={username}
+                  onChangeText={setUsername}
                 />
               </View>
             </View>
@@ -100,13 +112,13 @@ export default function SecondRegisterPhase() {
               <View style={styles.dateInputHeader}>
                 <Text style={commonStyles.standardText}>Date of Birth:</Text>
                 <TouchableOpacity onPress={showDatepickerDatepicker} style={styles.dateInputButton}>
-                  <Text style={commonStyles.standardText}>{formatDate(date)}</Text>
+                  <Text style={commonStyles.standardText}>{formatDate(dateOfBirth)}</Text>
                 </TouchableOpacity>
               </View>
               {showDatepicker && (
                 <View style={styles.datePickerContainer}>
                   <DateTimePicker
-                    value={date}
+                    value={dateOfBirth}
                     mode="date"
                     display="spinner"
                     onChange={onChange}
@@ -163,8 +175,8 @@ export default function SecondRegisterPhase() {
               <View style={styles.genderFormContainer}>
                 <RadioGroup
                   radioButtons={genderButtons}
-                  onPress={setSelectedGender}
-                  selectedId={selectedGender}
+                  onPress={setGender}
+                  selectedId={gender}
                   containerStyle={
                     {
                       flexDirection: 'column',
@@ -270,3 +282,5 @@ const styles = StyleSheet.create({
         paddingTop: 4,
     },
 });
+
+export default SecondRegisterPhase;
