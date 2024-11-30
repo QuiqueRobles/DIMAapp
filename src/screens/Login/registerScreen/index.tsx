@@ -19,15 +19,20 @@ export default function RegisterScreen() {
   //navigation between pages
   const [currentPage, setCurrentPage] = useState(0);
   
-  const [selectedGender, setSelectedGender] = useState<string | undefined>();
+  //backend
+  const supabase = useSupabaseClient();
 
   //form input states
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const supabase = useSupabaseClient();
   const navigation = useNavigation<AppNavigationProp>();
+  const [username, setUsername] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState(new Date());
+  const [country, setCountry] = useState<Country>();
+  const [gender, setGender] = useState('');
+
 
   const handleRegister = async () => {
 
@@ -43,15 +48,58 @@ export default function RegisterScreen() {
       return;
     }
 
-    const { error } = await supabase.auth.signUp({
+    if(!username || !dateOfBirth || !country){
+      alert('Please enter all fields');
+      setCurrentPage(1);
+      return;
+    }
+
+    if (username.length <= 8 || username.length >= 20) {
+      alert('Username must be between 8 and 20 characters');
+      setCurrentPage(1);
+      return;
+    }
+
+
+    try{
+      const { data: authData, error: authError } = await supabase.auth.signUp({
         email,
         password,
-    });
-    
-    if (error) {
-        alert(error.message);
-        setCurrentPage(0);
+      });
+
+      if(authError) throw authError;
+
+
+      const userId = authData.user?.id;
+      if (!userId) {
+        throw new Error('User ID is null');
+      }
+
+      const formattedDateOfBirth = dateOfBirth.toISOString().split('T')[0];
+
+      const {data: userData, error: userError} = await supabase.from('profiles').insert([
+        {
+          id: userId,
+          name: username,
+          date_of_birth: formattedDateOfBirth,
+          country: country?.name,
+        }
+      ]);
+
+
+      if(userError){
+        throw userError;
+      }
+
+
+    }catch(error: any){
+      alert(error.message);
+      setCurrentPage(0);
     }
+    
+
+    
+
   };
 
   const handleSubmit = () => {
@@ -83,7 +131,16 @@ export default function RegisterScreen() {
         <View style={styles.innerPageContainer}>
           {(currentPage == 1) ?
             (
-              <SecondRegisterPhase />
+              <SecondRegisterPhase 
+                username={username}
+                setUsername={setUsername}
+                dateOfBirth={dateOfBirth}
+                setDateOfBirth={setDateOfBirth}
+                country={country}
+                setCountry={setCountry}
+                gender={gender}
+                setGender={setGender}
+              />
             ) : (
               <FirstRegisterPhase 
                 goToSecondPage={()=>{setCurrentPage(1)}}
