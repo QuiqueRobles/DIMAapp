@@ -1,79 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import MapView, { Marker, Callout } from 'react-native-maps';
 import { StatusBar } from 'expo-status-bar';
 import { Feather } from '@expo/vector-icons';
+import { supabase } from '@/lib/supabase';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 interface Club {
   id: string;
   name: string;
   rating: number;
   attendees: number;
-  price: number;
   category: string;
   latitude: number;
   longitude: number;
+  address: string;
 }
 
-const clubs: Club[] = [
-  {
-    id: '1',
-    name: 'Armani Privé',
-    rating: 4.8,
-    attendees: 250,
-    price: 30,
-    category: 'Luxury',
-    latitude: 45.4668,
-    longitude: 9.1905,
-  },
-  {
-    id: '2',
-    name: 'Just Cavalli',
-    rating: 4.6,
-    attendees: 200,
-    price: 25,
-    category: 'Fashion',
-    latitude: 45.4715,
-    longitude: 9.1765,
-  },
-  {
-    id: '3',
-    name: 'Hollywood',
-    rating: 4.5,
-    attendees: 180,
-    price: 20,
-    category: 'Nightclub',
-    latitude: 45.4642,
-    longitude: 9.1900,
-  },
-  {
-    id: '4',
-    name: 'Loolapaloosa',
-    rating: 4.3,
-    attendees: 220,
-    price: 15,
-    category: 'Dance',
-    latitude: 45.4819,
-    longitude: 9.2058,
-  },
-  {
-    id: '5',
-    name: 'Volt Club',
-    rating: 4.7,
-    attendees: 190,
-    price: 22,
-    category: 'Electronic',
-    latitude: 45.4785,
-    longitude: 9.1896,
-  },
-];
+type RootStackParamList = {
+  Club: { clubId: string };
+};
+
+type MapScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Club'>;
 
 const { width, height } = Dimensions.get('window');
 
-const CustomMarker: React.FC<{ club: Club }> = ({ club }) => (
+const CustomMarker: React.FC<{ club: Club; onPress: (club: Club) => void }> = ({ club, onPress }) => (
   <Marker
     coordinate={{ latitude: club.latitude, longitude: club.longitude }}
     title={club.name}
+    onPress={() => onPress(club)}
   >
     <View style={styles.markerContainer}>
       <View style={styles.marker}>
@@ -81,30 +38,86 @@ const CustomMarker: React.FC<{ club: Club }> = ({ club }) => (
       </View>
     </View>
     <Callout tooltip>
-      <View style={styles.calloutContainer}>
-        <Text style={styles.calloutTitle}>{club.name}</Text>
-        <View style={styles.calloutDetails}>
-          <View style={styles.calloutRow}>
-            <Feather name="star" size={16} color="#FFD700" />
-            <Text style={styles.calloutText}>{club.rating}</Text>
+      <TouchableOpacity onPress={() => onPress(club)}>
+        <View style={styles.calloutContainer}>
+          <Text style={styles.calloutTitle}>{club.name}</Text>
+          <View style={styles.calloutDetails}>
+            <View style={styles.calloutRow}>
+              <Feather name="star" size={16} color="#FFD700" />
+              <Text style={styles.calloutText}>{club.rating.toFixed(1)}</Text>
+            </View>
+            <View style={styles.calloutRow}>
+              <Feather name="users" size={16} color="#A78BFA" />
+              <Text style={styles.calloutText}>{club.attendees}</Text>
+            </View>
           </View>
-          <View style={styles.calloutRow}>
-            <Feather name="users" size={16} color="#A78BFA" />
-            <Text style={styles.calloutText}>{club.attendees}</Text>
-          </View>
-          <View style={styles.calloutRow}>
-            <Feather name="tag" size={16} color="#10B981" />
-            <Text style={styles.calloutText}>€{club.price}</Text>
-          </View>
+          <Text style={styles.calloutCategory}>{club.category}</Text>
         </View>
-        <Text style={styles.calloutCategory}>{club.category}</Text>
-      </View>
+      </TouchableOpacity>
     </Callout>
   </Marker>
 );
 
 const MapScreen: React.FC = () => {
+  const [clubs, setClubs] = useState<Club[]>([]);
   const [selectedClub, setSelectedClub] = useState<Club | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const navigation = useNavigation<MapScreenNavigationProp>();
+
+  useEffect(() => {
+    fetchClubs();
+  }, []);
+
+  const fetchClubs = async () => {
+    try {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from('club')
+        .select('*')
+        .not('latitude', 'is', null)
+        .not('longitude', 'is', null);
+
+      if (error) throw error;
+
+      const clubsWithCoordinates = data
+        .filter((club: any) => club.latitude && club.longitude)
+        .map((club: any) => ({
+          ...club,
+          latitude: parseFloat(club.latitude),
+          longitude: parseFloat(club.longitude),
+        }));
+
+      setClubs(clubsWithCoordinates);
+    } catch (error) {
+      console.error('Error fetching clubs:', error);
+      setError('Failed to fetch clubs. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleClubPress = (club: Club) => {
+    setSelectedClub(club);
+    navigation.navigate('Club', { clubId: club.id });
+  };
+
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <Text>Loading clubs...</Text>
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={styles.errorContainer}>
+        <Text>{error}</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -112,15 +125,15 @@ const MapScreen: React.FC = () => {
       <MapView
         style={styles.map}
         initialRegion={{
-          latitude: 45.4642,
-          longitude: 9.1900,
+          latitude: clubs[0]?.latitude || 0,
+          longitude: clubs[0]?.longitude || 0,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
         onPress={() => setSelectedClub(null)}
       >
         {clubs.map((club) => (
-          <CustomMarker key={club.id} club={club} />
+          <CustomMarker key={club.id} club={club} onPress={handleClubPress} />
         ))}
       </MapView>
       {selectedClub && (
@@ -130,22 +143,19 @@ const MapScreen: React.FC = () => {
           <View style={styles.bottomSheetDetails}>
             <View style={styles.bottomSheetRow}>
               <Feather name="star" size={18} color="#FFD700" />
-              <Text style={styles.bottomSheetText}>{selectedClub.rating}</Text>
+              <Text style={styles.bottomSheetText}>{selectedClub.rating.toFixed(1)}</Text>
             </View>
             <View style={styles.bottomSheetRow}>
               <Feather name="users" size={18} color="#A78BFA" />
               <Text style={styles.bottomSheetText}>{selectedClub.attendees}</Text>
             </View>
-            <View style={styles.bottomSheetRow}>
-              <Feather name="tag" size={18} color="#10B981" />
-              <Text style={styles.bottomSheetText}>€{selectedClub.price}</Text>
-            </View>
           </View>
+          <Text style={styles.bottomSheetAddress}>{selectedClub.address}</Text>
           <TouchableOpacity
             style={styles.bottomSheetButton}
-            onPress={() => console.log(`Book ${selectedClub.name}`)}
+            onPress={() => handleClubPress(selectedClub)}
           >
-            <Text style={styles.bottomSheetButtonText}>Book Now</Text>
+            <Text style={styles.bottomSheetButtonText}>View Details</Text>
           </TouchableOpacity>
         </View>
       )}
@@ -241,6 +251,11 @@ const styles = StyleSheet.create({
     marginLeft: 6,
     fontSize: 16,
   },
+  bottomSheetAddress: {
+    fontSize: 14,
+    color: '#4B5563',
+    marginBottom: 16,
+  },
   bottomSheetButton: {
     backgroundColor: '#6D28D9',
     borderRadius: 8,
@@ -252,6 +267,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 export default MapScreen;
+
