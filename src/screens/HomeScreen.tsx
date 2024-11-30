@@ -3,10 +3,19 @@ import { View, FlatList, ActivityIndicator, StyleSheet, Text, RefreshControl } f
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { supabase } from '@/lib/supabase';
 import { SearchBar } from './components/SearchBar';
 import { ActionButtons } from './components/ActionButtons';
 import { ClubCard } from './components/ClubCard';
+
+type RootStackParamList = {
+  Home: undefined;
+  Club: { clubId: string };
+};
+
+type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 
 interface Club {
   id: string;
@@ -34,6 +43,11 @@ const HomeScreen: React.FC = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
+  const navigation = useNavigation<HomeScreenNavigationProp>();
+
+  const handleClubPress = (clubId: string) => {
+    navigation.navigate('Club', { clubId });
+  };
 
   const fetchClubs = useCallback(async (pageToFetch: number = 0, shouldRefresh: boolean = false) => {
     try {
@@ -91,14 +105,14 @@ const HomeScreen: React.FC = () => {
     if (!loading) return null;
     return (
       <View style={styles.footerLoader}>
-        <ActivityIndicator size="large" color="#8856a3" />
+        <ActivityIndicator size="large" color="#4F46E5" />
       </View>
     );
   };
 
   return (
     <LinearGradient
-      colors={['#8856a3', '#000000']}
+      colors={['#4F46E5', '#000000']}
       style={styles.gradient}
       locations={[0, 0.3]}
     >
@@ -127,14 +141,14 @@ const HomeScreen: React.FC = () => {
             renderItem={({ item }) => (
               <ClubCard
                 club={item}
-                onPress={() => console.log(`Selected club: ${item.name}`)}
+                onPress={() => handleClubPress(item.id)}
               />
             )}
             keyExtractor={(item) => item.id}
             contentContainerStyle={styles.listContainer}
             showsVerticalScrollIndicator={false}
             refreshControl={
-              <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor="#8856a3" />
+              <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor="#4F46E5" />
             }
             onEndReached={handleLoadMore}
             onEndReachedThreshold={0.1}
@@ -189,4 +203,3 @@ const styles = StyleSheet.create({
 });
 
 export default HomeScreen;
-
