@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, Text, StyleSheet, Dimensions, TouchableOpacity, Platform, ActivityIndicator } from 'react-native';
 import MapView, { Marker, Callout } from 'react-native-maps';
 import { StatusBar } from 'expo-status-bar';
 import { Feather } from '@expo/vector-icons';
@@ -38,22 +38,20 @@ const CustomMarker: React.FC<{ club: Club; onPress: (club: Club) => void }> = ({
       </View>
     </View>
     <Callout tooltip>
-      <TouchableOpacity onPress={() => onPress(club)}>
-        <View style={styles.calloutContainer}>
-          <Text style={styles.calloutTitle}>{club.name}</Text>
-          <View style={styles.calloutDetails}>
-            <View style={styles.calloutRow}>
-              <Feather name="star" size={16} color="#FFD700" />
-              <Text style={styles.calloutText}>{club.rating.toFixed(1)}</Text>
-            </View>
-            <View style={styles.calloutRow}>
-              <Feather name="users" size={16} color="#A78BFA" />
-              <Text style={styles.calloutText}>{club.attendees}</Text>
-            </View>
+      <View style={styles.calloutContainer}>
+        <Text style={styles.calloutTitle}>{club.name}</Text>
+        <View style={styles.calloutDetails}>
+          <View style={styles.calloutRow}>
+            <Feather name="star" size={16} color="#FFD700" />
+            <Text style={styles.calloutText}>{club.rating.toFixed(1)}</Text>
           </View>
-          <Text style={styles.calloutCategory}>{club.category}</Text>
+          <View style={styles.calloutRow}>
+            <Feather name="users" size={16} color="#A78BFA" />
+            <Text style={styles.calloutText}>{club.attendees}</Text>
+          </View>
         </View>
-      </TouchableOpacity>
+        <Text style={styles.calloutCategory}>{club.category}</Text>
+      </View>
     </Callout>
   </Marker>
 );
@@ -63,6 +61,7 @@ const MapScreen: React.FC = () => {
   const [selectedClub, setSelectedClub] = useState<Club | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const mapRef = useRef<MapView>(null);
 
   const navigation = useNavigation<MapScreenNavigationProp>();
 
@@ -100,12 +99,27 @@ const MapScreen: React.FC = () => {
 
   const handleClubPress = (club: Club) => {
     setSelectedClub(club);
-    navigation.navigate('Club', { clubId: club.id });
+    if (mapRef.current) {
+      mapRef.current.animateToRegion({
+        latitude: club.latitude,
+        longitude: club.longitude,
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.01,
+      }, 1000);
+    }
+  };
+
+  const handleViewDetails = () => {
+    if (selectedClub) {
+      console.log('Navigating to club:', selectedClub.id);
+      navigation.navigate('Club', { clubId: selectedClub.id });
+    }
   };
 
   if (loading) {
     return (
       <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#6D28D9" />
         <Text>Loading clubs...</Text>
       </View>
     );
@@ -123,6 +137,7 @@ const MapScreen: React.FC = () => {
     <View style={styles.container}>
       <StatusBar style="dark" />
       <MapView
+        ref={mapRef}
         style={styles.map}
         initialRegion={{
           latitude: clubs[0]?.latitude || 0,
@@ -137,31 +152,34 @@ const MapScreen: React.FC = () => {
         ))}
       </MapView>
       {selectedClub && (
-        <View style={styles.bottomSheet}>
-          <Text style={styles.bottomSheetTitle}>{selectedClub.name}</Text>
-          <Text style={styles.bottomSheetCategory}>{selectedClub.category}</Text>
-          <View style={styles.bottomSheetDetails}>
-            <View style={styles.bottomSheetRow}>
-              <Feather name="star" size={18} color="#FFD700" />
-              <Text style={styles.bottomSheetText}>{selectedClub.rating.toFixed(1)}</Text>
+        <TouchableOpacity 
+          style={styles.bottomSheet}
+          onPress={handleViewDetails}
+          activeOpacity={0.8}
+        >
+          <View style={styles.bottomSheetContent}>
+            <Text style={styles.bottomSheetTitle}>{selectedClub.name}</Text>
+            <Text style={styles.bottomSheetCategory}>{selectedClub.category}</Text>
+            <View style={styles.bottomSheetDetails}>
+              <View style={styles.bottomSheetRow}>
+                <Feather name="star" size={18} color="#FFD700" />
+                <Text style={styles.bottomSheetText}>{selectedClub.rating.toFixed(1)}</Text>
+              </View>
+              <View style={styles.bottomSheetRow}>
+                <Feather name="users" size={18} color="#A78BFA" />
+                <Text style={styles.bottomSheetText}>{selectedClub.attendees}</Text>
+              </View>
             </View>
-            <View style={styles.bottomSheetRow}>
-              <Feather name="users" size={18} color="#A78BFA" />
-              <Text style={styles.bottomSheetText}>{selectedClub.attendees}</Text>
+            <Text style={styles.bottomSheetAddress}>{selectedClub.address}</Text>
+            <View style={styles.viewDetailsIndicator}>
+              <Feather name="chevron-right" size={24} color="#6D28D9" />
             </View>
           </View>
-          <Text style={styles.bottomSheetAddress}>{selectedClub.address}</Text>
-          <TouchableOpacity
-            style={styles.bottomSheetButton}
-            onPress={() => handleClubPress(selectedClub)}
-          >
-            <Text style={styles.bottomSheetButtonText}>View Details</Text>
-          </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
       )}
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -221,12 +239,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    padding: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: -2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
     elevation: 5,
+    zIndex: 1,
+  },
+  bottomSheetContent: {
+    padding: 20,
   },
   bottomSheetTitle: {
     fontSize: 24,
@@ -256,16 +273,11 @@ const styles = StyleSheet.create({
     color: '#4B5563',
     marginBottom: 16,
   },
-  bottomSheetButton: {
-    backgroundColor: '#6D28D9',
-    borderRadius: 8,
-    padding: 12,
-    alignItems: 'center',
-  },
-  bottomSheetButtonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold',
+  viewDetailsIndicator: {
+    position: 'absolute',
+    right: 20,
+    top: '50%',
+    transform: [{ translateY: -12 }],
   },
   loadingContainer: {
     flex: 1,
@@ -280,4 +292,3 @@ const styles = StyleSheet.create({
 });
 
 export default MapScreen;
-
