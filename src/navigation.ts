@@ -7,6 +7,7 @@ export type RootStackParamList = {
   Register: undefined;
   ForgotPassword: undefined;
   OwnerLogin: undefined;
+  OwnerRegister:undefined;
   Home: undefined;
   Map: undefined;
   Tickets: undefined;
