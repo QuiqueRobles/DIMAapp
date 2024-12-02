@@ -4,10 +4,17 @@ import { Feather } from '@expo/vector-icons';
 
 interface ClubDetailsProps {
   club: {
+    id: string;
+    name: string;
+    rating: number;
+    num_reviews: number;
     address: string;
+    image: string | null;
+    category: string | null;
+    music_genre?: string | null;
+    attendees: number;
     opening_hours: string;
     dress_code: string | null;
-    music_genre: string | null | undefined;
     description: string | null;
   };
 }

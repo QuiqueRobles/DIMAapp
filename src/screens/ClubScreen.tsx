@@ -57,6 +57,7 @@ interface Review {
   club_id: string;
   text: string | null;
   num_stars: number;
+  user_name: string;
 }
 
 const ClubScreen: React.FC = () => {
