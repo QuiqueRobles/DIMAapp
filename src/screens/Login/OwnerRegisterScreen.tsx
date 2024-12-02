@@ -47,7 +47,7 @@ export default function OwnerRegisterScreen() {
               placeholder="Club Name"
               placeholderTextColor="#9CA3AF"
               value={clubname}
-              onChangeText={(text)=>{setClubAddress(text);
+              onChangeText={(text)=>{setClubName(text);
                 checkInputs();} }
               keyboardType="email-address"
               autoCapitalize="none"
