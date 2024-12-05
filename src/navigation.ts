@@ -12,6 +12,8 @@ export type RootStackParamList = {
   Map: undefined;
   Tickets: undefined;
   Profile: undefined;
+  BuyTicket: undefined;
+  Calendar: undefined;
 };
 
 export type AppNavigationProp = NavigationProp<RootStackParamList>;
