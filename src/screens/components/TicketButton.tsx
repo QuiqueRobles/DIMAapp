@@ -5,20 +5,48 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 type RootStackParamList = {
-  Tickets: { eventId: string };
+  BuyTicket: { 
+    eventId: string; 
+    eventName: string; 
+    eventDate: string; 
+    eventPrice: number; 
+    clubName: string;
+    eventDescription: string | null;
+    eventImage: string | null;
+  };
 };
 
-type TicketScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Tickets'>;
+type BuyTicketScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'BuyTicket'>;
 
-interface TicketButtonProps {
-  eventId: string;
+interface Event {
+  id: string;
+  created_at: string;
+  club_id: string;
+  date: string;
+  name: string | null;
+  price: number | null;
+  description: string | null;
+  image: string | null;
 }
 
-const TicketButton: React.FC<TicketButtonProps> = ({ eventId }) => {
-  const navigation = useNavigation<TicketScreenNavigationProp>();
+interface TicketButtonProps {
+  event: Event;
+  clubName: string;
+}
+
+const TicketButton: React.FC<TicketButtonProps> = ({ event, clubName }) => {
+  const navigation = useNavigation<BuyTicketScreenNavigationProp>();
 
   const handlePress = () => {
-    navigation.navigate('Tickets', { eventId });
+    navigation.navigate('BuyTicket', { 
+      eventId: event.id, 
+      eventName: event.name || 'Unnamed Event', 
+      eventDate: event.date, 
+      eventPrice: event.price !== null ? event.price / 100 : 0, 
+      clubName,
+      eventDescription: event.description,
+      eventImage: event.image
+    });
   };
 
   return (
@@ -42,6 +70,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     alignItems: 'center',
     justifyContent: 'center',
+    margin: 16,
   },
   buttonText: {
     color: '#FFFFFF',
