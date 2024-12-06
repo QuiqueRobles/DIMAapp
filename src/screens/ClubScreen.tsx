@@ -6,13 +6,13 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Feather } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { supabase } from '@/lib/supabase';
-import { format } from 'date-fns';
 import ClubHeader from './components/ClubHeader';
 import ClubDetails from './components/ClubDetails';
 import EventsList from './components/EventsList';
 import ReviewsList from './components/ReviewsList';
 import ErrorDisplay from './components/ErrorDisplay';
 import LoadingSpinner from './components/LoadingSpinner';
+import TicketButton from './components/TicketButton';
 
 const { width, height } = Dimensions.get('window');
 
@@ -57,7 +57,7 @@ interface Review {
   club_id: string;
   text: string | null;
   num_stars: number;
-  user_name: string;
+  // Elimina la propiedad 'profiles' si ya no la estamos obteniendo directamente
 }
 
 const ClubScreen: React.FC = () => {
@@ -174,7 +174,16 @@ const ClubScreen: React.FC = () => {
               </TouchableOpacity>
             </View>
             {events.length > 0 ? (
-              <EventsList events={events} />
+              <EventsList 
+                events={events} 
+                clubName={club.name}
+                renderTicketButton={(event) => (
+                  <TicketButton 
+                    event={event}
+                    clubName={club.name}
+                  />
+                )}
+              />
             ) : (
               <Text style={styles.noEventsText}>No upcoming events</Text>
             )}

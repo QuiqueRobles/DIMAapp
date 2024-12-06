@@ -18,6 +18,8 @@ import ForgotPasswordScreen from '@/screens/Login/ForgotPassword';
 import OwnerLoginScreen from '@/screens/Login/OwnerLogScreen';
 import OwnerRegisterScreen from '@/screens/Login/OwnerRegisterScreen';
 import ClubScreen from './src/screens/ClubScreen';
+import BuyTicketScreen from '@/screens/BuyTicketScreen';
+import CalendarScreen from '@/screens/CalendarScreen';
 
 // Suppress warning about defaultProps
 const error = console.error;
@@ -137,6 +139,8 @@ const AppNavigator = () => {
           <>
             <Stack.Screen name="Main" component={MainTabs} />
             <Stack.Screen name="Club" component={ClubScreen} />
+            <Stack.Screen name="BuyTicket" component={BuyTicketScreen} />
+            <Stack.Screen name="Calendar" component={CalendarScreen} />
           </>
         ) : (
           <Stack.Screen name="Auth" component={AuthStack} />
