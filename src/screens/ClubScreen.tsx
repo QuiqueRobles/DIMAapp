@@ -12,6 +12,7 @@ import EventsList from './components/EventsList';
 import ReviewsList from './components/ReviewsList';
 import ErrorDisplay from './components/ErrorDisplay';
 import LoadingSpinner from './components/LoadingSpinner';
+import TicketButton from './components/TicketButton';
 
 const { width, height } = Dimensions.get('window');
 
@@ -42,17 +43,21 @@ interface Club {
 
 interface Event {
   id: string;
-  name: string;
+  created_at: string;
+  club_id: string;
   date: string;
-  time: string;
+  name: string | null;
+  price: number | null;
 }
 
 interface Review {
   id: string;
-  user_name: string;
-  rating: number;
-  comment: string;
   created_at: string;
+  user_id: string;
+  club_id: string;
+  text: string | null;
+  num_stars: number;
+  // Elimina la propiedad 'profiles' si ya no la estamos obteniendo directamente
 }
 
 const ClubScreen: React.FC = () => {
@@ -89,17 +94,17 @@ const ClubScreen: React.FC = () => {
         .limit(3);
 
       if (eventsError) throw new Error('Failed to fetch events');
-      setEvents(eventsData);
+      setEvents(eventsData || []);
 
       const { data: reviewsData, error: reviewsError } = await supabase
         .from('review')
         .select('*')
         .eq('club_id', clubId)
         .order('created_at', { ascending: false })
-        .limit(3);
+        .limit(5);
 
       if (reviewsError) throw new Error('Failed to fetch reviews');
-      setReviews(reviewsData);
+      setReviews(reviewsData || []);
 
     } catch (err: unknown) {
       if (err instanceof Error) {
@@ -135,29 +140,29 @@ const ClubScreen: React.FC = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <Image
-        source={{ uri: club.image || 'https://via.placeholder.com/400x200?text=No+Image' }}
-        style={styles.backgroundImage}
-      />
-      <LinearGradient
-        colors={['rgba(31, 41, 55, 0)', 'rgba(31, 41, 55, 1)']}
-        style={styles.gradient}
-      />
-      <SafeAreaView edges={['top']} style={styles.safeArea}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => navigation.goBack()}
-        >
-          <Feather name="arrow-left" size={24} color="#FFFFFF" />
-        </TouchableOpacity>
-      </SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <ScrollView
         contentContainerStyle={styles.scrollContent}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor="#A78BFA" />
         }
       >
+        <View style={styles.imageContainer}>
+          <Image
+            source={{ uri: club.image || 'https://via.placeholder.com/400x200?text=No+Image' }}
+            style={styles.image}
+          />
+          <LinearGradient
+            colors={['rgba(0,0,0,0)', 'rgba(0,0,0,0.8)']}
+            style={styles.imageGradient}
+          />
+          <TouchableOpacity
+            style={styles.backButton}
+            onPress={() => navigation.goBack()}
+          >
+            <Feather name="arrow-left" size={24} color="#FFFFFF" />
+          </TouchableOpacity>
+        </View>
         <View style={styles.content}>
           <ClubHeader club={club} />
           <ClubDetails club={club} />
@@ -168,7 +173,20 @@ const ClubScreen: React.FC = () => {
                 <Text style={styles.seeAllText}>See All</Text>
               </TouchableOpacity>
             </View>
-            <EventsList events={events} />
+            {events.length > 0 ? (
+              <EventsList 
+                events={events} 
+                clubName={club.name}
+                renderTicketButton={(event) => (
+                  <TicketButton 
+                    event={event}
+                    clubName={club.name}
+                  />
+                )}
+              />
+            ) : (
+              <Text style={styles.noEventsText}>No upcoming events</Text>
+            )}
           </View>
           <View style={styles.section}>
             <View style={styles.sectionHeader}>
@@ -177,11 +195,15 @@ const ClubScreen: React.FC = () => {
                 <Text style={styles.seeAllText}>See All</Text>
               </TouchableOpacity>
             </View>
-            <ReviewsList reviews={reviews} />
+            {reviews.length > 0 ? (
+              <ReviewsList reviews={reviews} />
+            ) : (
+              <Text style={styles.noReviewsText}>No reviews yet</Text>
+            )}
           </View>
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -190,38 +212,34 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#1F2937',
   },
-  backgroundImage: {
-    position: 'absolute',
-    width: '100%',
-    height: height * 0.4,
-    top: 0,
-    left: 0,
-  },
-  gradient: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    height: height * 0.4,
-  },
-  safeArea: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    zIndex: 10,
-  },
   scrollContent: {
     flexGrow: 1,
-    paddingTop: height * 0.3,
+  },
+  imageContainer: {
+    height: height * 0.4,
+    width: width,
+    position: 'relative',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+  },
+  imageGradient: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: '50%',
   },
   backButton: {
-    marginLeft: 16,
-    marginTop: 16,
+    position: 'absolute',
+    top: 16,
+    left: 16,
+    zIndex: 10,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     borderRadius: 20,
     padding: 8,
-    alignSelf: 'flex-start',
   },
   content: {
     flex: 1,
@@ -229,6 +247,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#1F2937',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
+    marginTop: -20,
   },
   section: {
     marginTop: 24,
@@ -237,10 +256,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 12,
+    marginBottom: 16,
   },
   sectionTitle: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: 'bold',
     color: '#FFFFFF',
   },
@@ -248,6 +267,17 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#A78BFA',
     fontWeight: '600',
+  },
+  noEventsText: {
+    color: '#9CA3AF',
+    fontSize: 16,
+    textAlign: 'center',
+  },
+  noReviewsText: {
+    color: '#9CA3AF',
+    fontSize: 16,
+    textAlign: 'center',
+    marginTop: 16,
   },
 });
 

@@ -67,21 +67,13 @@ export default function RegisterScreen() {
         password,
       });
 
-      console.log('authData:',authData);
-      console.log('authError:',authError);
-
       if(authError) throw authError;
 
 
-      const userId = authData.user.id;
-
-      console.log('values to be written in profiles:',{
-        userId,
-        username,
-        dateOfBirth,
-        country,
-        gender,
-      })
+      const userId = authData.user?.id;
+      if (!userId) {
+        throw new Error('User ID is null');
+      }
 
       const formattedDateOfBirth = dateOfBirth.toISOString().split('T')[0];
 
@@ -94,8 +86,6 @@ export default function RegisterScreen() {
         }
       ]);
 
-      console.log('userData:',userData);
-      console.log('userError:',userError);
 
       if(userError){
         throw userError;
@@ -103,7 +93,6 @@ export default function RegisterScreen() {
 
 
     }catch(error: any){
-      console.log('error:',error);
       alert(error.message);
       setCurrentPage(0);
     }

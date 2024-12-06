@@ -7,10 +7,13 @@ export type RootStackParamList = {
   Register: undefined;
   ForgotPassword: undefined;
   OwnerLogin: undefined;
+  OwnerRegister:undefined;
   Home: undefined;
   Map: undefined;
   Tickets: undefined;
   Profile: undefined;
+  BuyTicket: undefined;
+  Calendar: undefined;
 };
 
 export type AppNavigationProp = NavigationProp<RootStackParamList>;
