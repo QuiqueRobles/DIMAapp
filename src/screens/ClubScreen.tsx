@@ -12,15 +12,14 @@ import EventsList from './components/EventsList';
 import ReviewsList from './components/ReviewsList';
 import ErrorDisplay from './components/ErrorDisplay';
 import LoadingSpinner from './components/LoadingSpinner';
-import TicketButton from './components/TicketButton';
 
 const { width, height } = Dimensions.get('window');
 
 type RootStackParamList = {
   Home: undefined;
   Club: { clubId: string };
-  Events: { clubId: string };
-  Reviews: { clubId: string };
+  Reviews: { clubId: string; clubName: string };
+  Calendar: { clubId: string; clubName: string };
 };
 
 type ClubScreenRouteProp = RouteProp<RootStackParamList, 'Club'>;
@@ -48,6 +47,8 @@ interface Event {
   date: string;
   name: string | null;
   price: number | null;
+  description: string | null;
+  image: string | null;
 }
 
 interface Review {
@@ -57,7 +58,6 @@ interface Review {
   club_id: string;
   text: string | null;
   num_stars: number;
-  // Elimina la propiedad 'profiles' si ya no la estamos obteniendo directamente
 }
 
 const ClubScreen: React.FC = () => {
@@ -148,6 +148,7 @@ const ClubScreen: React.FC = () => {
         }
       >
         <View style={styles.imageContainer}>
+          <View style={styles.imageOverlay} />
           <Image
             source={{ uri: club.image || 'https://via.placeholder.com/400x200?text=No+Image' }}
             style={styles.image}
@@ -162,6 +163,9 @@ const ClubScreen: React.FC = () => {
           >
             <Feather name="arrow-left" size={24} color="#FFFFFF" />
           </TouchableOpacity>
+          <View style={styles.clubType}>
+            <Text style={styles.clubTypeText}>{club.category || 'Nightclub'}</Text>
+          </View>
         </View>
         <View style={styles.content}>
           <ClubHeader club={club} />
@@ -169,7 +173,7 @@ const ClubScreen: React.FC = () => {
           <View style={styles.section}>
             <View style={styles.sectionHeader}>
               <Text style={styles.sectionTitle}>Upcoming Events</Text>
-              <TouchableOpacity onPress={() => navigation.navigate('Events', { clubId })}>
+              <TouchableOpacity onPress={() => navigation.navigate('Calendar', { clubId: club.id, clubName: club.name })}>
                 <Text style={styles.seeAllText}>See All</Text>
               </TouchableOpacity>
             </View>
@@ -177,12 +181,7 @@ const ClubScreen: React.FC = () => {
               <EventsList 
                 events={events} 
                 clubName={club.name}
-                renderTicketButton={(event) => (
-                  <TicketButton 
-                    event={event}
-                    clubName={club.name}
-                  />
-                )}
+                clubId={club.id}
               />
             ) : (
               <Text style={styles.noEventsText}>No upcoming events</Text>
@@ -191,12 +190,12 @@ const ClubScreen: React.FC = () => {
           <View style={styles.section}>
             <View style={styles.sectionHeader}>
               <Text style={styles.sectionTitle}>Reviews</Text>
-              <TouchableOpacity onPress={() => navigation.navigate('Reviews', { clubId })}>
+              <TouchableOpacity onPress={() => navigation.navigate('Reviews', { clubId: club.id, clubName: club.name })}>
                 <Text style={styles.seeAllText}>See All</Text>
               </TouchableOpacity>
             </View>
             {reviews.length > 0 ? (
-              <ReviewsList reviews={reviews} />
+              <ReviewsList reviews={reviews.slice(0, 3)} />
             ) : (
               <Text style={styles.noReviewsText}>No reviews yet</Text>
             )}
@@ -219,6 +218,11 @@ const styles = StyleSheet.create({
     height: height * 0.4,
     width: width,
     position: 'relative',
+    backgroundColor: '#1F2937',
+  },
+  imageOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(31, 41, 55, 0.5)',
   },
   image: {
     width: '100%',
@@ -240,6 +244,20 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     borderRadius: 20,
     padding: 8,
+  },
+  clubType: {
+    position: 'absolute',
+    top: 16,
+    right: 16,
+    backgroundColor: 'rgba(167, 139, 250, 0.8)',
+    borderRadius: 16,
+    paddingVertical: 4,
+    paddingHorizontal: 12,
+  },
+  clubTypeText: {
+    color: '#FFFFFF',
+    fontSize: 12,
+    fontWeight: '600',
   },
   content: {
     flex: 1,
@@ -282,4 +300,3 @@ const styles = StyleSheet.create({
 });
 
 export default ClubScreen;
-
