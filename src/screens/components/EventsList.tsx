@@ -2,8 +2,6 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { format, parseISO } from 'date-fns';
 import TicketButton from './TicketButton';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 interface Event {
   id: string;
@@ -22,23 +20,9 @@ interface EventsListProps {
   clubId: string;
 }
 
-type RootStackParamList = {
-  Calendar: { clubId: string };
-};
-
-type EventsListNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Calendar'>;
-
 const EventsList: React.FC<EventsListProps> = ({ events, clubName, clubId }) => {
-  const navigation = useNavigation<EventsListNavigationProp>();
-
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>Upcoming Events</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('Calendar', { clubId })}>
-          <Text style={styles.seeAllText}>See All</Text>
-        </TouchableOpacity>
-      </View>
       {events.map((event) => (
         <View key={event.id} style={styles.eventItem}>
           {event.image && (
@@ -70,23 +54,6 @@ const EventsList: React.FC<EventsListProps> = ({ events, clubName, clubId }) => 
 const styles = StyleSheet.create({
   container: {
     marginTop: 16,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 16,
-    paddingHorizontal: 16,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#FFFFFF',
-  },
-  seeAllText: {
-    fontSize: 14,
-    color: '#A78BFA',
-    fontWeight: '600',
   },
   eventItem: {
     backgroundColor: '#374151',

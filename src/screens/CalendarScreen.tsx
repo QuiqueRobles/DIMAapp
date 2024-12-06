@@ -9,7 +9,7 @@ import { Feather } from '@expo/vector-icons';
 import EventCard from './components/EventCard';
 
 type RootStackParamList = {
-  Calendar: { clubId: string };
+  Calendar: { clubId: string; clubName: string };
   BuyTicket: { 
     eventId: string; 
     eventName: string; 
@@ -36,15 +36,13 @@ interface Event {
 const CalendarScreen: React.FC = () => {
   const route = useRoute<CalendarScreenRouteProp>();
   const navigation = useNavigation<CalendarScreenNavigationProp>();
-  const { clubId } = route.params;
+  const { clubId, clubName } = route.params;
 
   const [events, setEvents] = useState<Event[]>([]);
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
-  const [clubName, setClubName] = useState<string>('');
 
   useEffect(() => {
     fetchEvents();
-    fetchClubName();
   }, []);
 
   const fetchEvents = async () => {
@@ -57,20 +55,6 @@ const CalendarScreen: React.FC = () => {
       console.error('Error fetching events:', error);
     } else {
       setEvents(data || []);
-    }
-  };
-
-  const fetchClubName = async () => {
-    const { data, error } = await supabase
-      .from('club')
-      .select('name')
-      .eq('id', clubId)
-      .single();
-
-    if (error) {
-      console.error('Error fetching club name:', error);
-    } else {
-      setClubName(data?.name || '');
     }
   };
 
@@ -159,3 +143,4 @@ const styles = StyleSheet.create({
 });
 
 export default CalendarScreen;
+
