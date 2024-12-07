@@ -75,12 +75,12 @@ export default function ProfileScreen() {
       setLoading(true);
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error('No user found');
-      console.log('user:',user.id);
+      //console.log('user:',user.id);
 
       const { data, error } = await supabase
         .from('profiles')
         .select('*')
-        .eq('user_id', user.id)
+        .eq('profile_id', user.id)
         .single();
 
       if (error) throw error;
