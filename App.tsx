@@ -21,6 +21,10 @@ import ClubScreen from './src/screens/ClubScreen';
 import BuyTicketScreen from '@/screens/BuyTicketScreen';
 import CalendarScreen from '@/screens/CalendarScreen';
 import ReviewsScreen from '@/screens/ReviewScreen';
+import ClubManageScreen from '@/screens/ClubManageScreen';
+import EventManageScreen from '@/screens/EventManageScreen';
+import HomeOwnerScreen from '@/screens/HomeOwnerScreen';
+import MapOwnerScreen from '@/screens/MapOwnerScreen';
 // Suppress warning about defaultProps
 const error = console.error;
 console.error = (...args: any) => {
@@ -30,6 +34,7 @@ console.error = (...args: any) => {
 
 
 const Tab = createBottomTabNavigator();
+const Tab2=createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 interface TabBarIconProps {
@@ -42,7 +47,8 @@ const tabIcons: { [key: string]: keyof typeof Feather.glyphMap } = {
   Home: 'home',
   Map: 'map-pin',
   Tickets: 'bookmark',
-  Profile: 'user'
+  Profile: 'user',
+  Events:'calendar'
 };
 
 const CustomTabBar: React.FC<any> = ({ state, descriptors, navigation }) => {
@@ -98,6 +104,21 @@ const MainTabs = () => (
     <Tab.Screen name="Tickets" component={TicketScreen} />
     <Tab.Screen name="Profile" component={ProfileScreen} />
   </Tab.Navigator>
+  
+);
+const MainTabs_owner = () => (
+  <Tab2.Navigator
+    tabBar={(props) => <CustomTabBar {...props} />}
+    screenOptions={{
+      headerShown: false,
+    }}
+  >
+    <Tab2.Screen name="Home" component={HomeOwnerScreen} />
+    <Tab2.Screen name="Map" component={MapOwnerScreen} />
+    <Tab2.Screen name="Events" component={EventManageScreen} />
+    <Tab2.Screen name="Profile" component={ClubManageScreen} />
+  </Tab2.Navigator>
+  
 );
 
 const AuthStack = () => (
@@ -113,6 +134,7 @@ const AuthStack = () => (
 const AppNavigator = () => {
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isOwner,SetIsOwner]=useState(false)
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -136,6 +158,7 @@ const AppNavigator = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {session ? (
+          isOwner ? (
           <>
             <Stack.Screen name="Main" component={MainTabs} />
             <Stack.Screen name="Club" component={ClubScreen} />
@@ -143,6 +166,16 @@ const AppNavigator = () => {
             <Stack.Screen name="Calendar" component={CalendarScreen} />
             <Stack.Screen name="Reviews" component={ReviewsScreen} />
           </>
+          ):(
+            <>
+            <Stack.Screen name="MainOwner" component={MainTabs_owner} />
+            <Stack.Screen name="HomeOwner" component={HomeOwnerScreen} />
+            <Stack.Screen name="MapOwner" component={MapOwnerScreen} />
+            <Stack.Screen name="EventsManage" component={EventManageScreen} />
+            <Stack.Screen name="ClubManage" component={ClubManageScreen} />
+          </>
+
+          )
         ) : (
           <Stack.Screen name="Auth" component={AuthStack} />
         )}
