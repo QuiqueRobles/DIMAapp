@@ -77,9 +77,20 @@ export default function RegisterScreen() {
 
       const formattedDateOfBirth = dateOfBirth.toISOString().split('T')[0];
 
-      const {data: userData, error: userError} = await supabase.from('profiles').insert([
+      const {data: tableUserData, error: tableUserError} = await supabase.from('users').insert([
         {
-          id: userId,
+          user_id: userId,
+          isClub: false,
+        }
+      ]);
+
+      if(tableUserError){
+        throw tableUserError;
+      }
+
+      const {data: tableProfileData, error: tableProfileError} = await supabase.from('profiles').insert([
+        {
+          profile_id: userId,
           name: username,
           date_of_birth: formattedDateOfBirth,
           country: country?.name,
@@ -87,8 +98,8 @@ export default function RegisterScreen() {
       ]);
 
 
-      if(userError){
-        throw userError;
+      if(tableProfileError){
+        throw tableProfileError;
       }
 
 
