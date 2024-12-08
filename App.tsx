@@ -7,6 +7,7 @@ import { Feather } from '@expo/vector-icons';
 import { Session } from '@supabase/supabase-js';
 import { SessionContextProvider } from '@supabase/auth-helpers-react';
 import { supabase } from './src/lib/supabase';
+import { isOwnerProvider } from 'isOwner';
 
 import HomeScreen from './src/screens/HomeScreen';
 import MapScreen from './src/screens/MapScreen';
@@ -159,20 +160,21 @@ const AppNavigator = () => {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {session ? (
           isOwner ? (
-          <>
+        
+           <>
+           <Stack.Screen name="MainOwner" component={MainTabs_owner} />
+           <Stack.Screen name="HomeOwner" component={HomeOwnerScreen} />
+           <Stack.Screen name="MapOwner" component={MapOwnerScreen} />
+           <Stack.Screen name="EventsManage" component={EventManageScreen} />
+           <Stack.Screen name="ClubManage" component={ClubManageScreen} />
+         </>
+          ):(
+            <>
             <Stack.Screen name="Main" component={MainTabs} />
             <Stack.Screen name="Club" component={ClubScreen} />
             <Stack.Screen name="BuyTicket" component={BuyTicketScreen} />
             <Stack.Screen name="Calendar" component={CalendarScreen} />
             <Stack.Screen name="Reviews" component={ReviewsScreen} />
-          </>
-          ):(
-            <>
-            <Stack.Screen name="MainOwner" component={MainTabs_owner} />
-            <Stack.Screen name="HomeOwner" component={HomeOwnerScreen} />
-            <Stack.Screen name="MapOwner" component={MapOwnerScreen} />
-            <Stack.Screen name="EventsManage" component={EventManageScreen} />
-            <Stack.Screen name="ClubManage" component={ClubManageScreen} />
           </>
 
           )
@@ -187,7 +189,9 @@ const AppNavigator = () => {
 export default function App() {
   return (
     <SessionContextProvider supabaseClient={supabase}>
+      <isOwnerProvider>
       <AppNavigator />
+      </isOwnerProvider>
     </SessionContextProvider>
   );
 }
