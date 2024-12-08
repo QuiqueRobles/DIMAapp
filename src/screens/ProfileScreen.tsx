@@ -31,6 +31,7 @@ interface UserProfile {
   gender_id: string;
   country: string;
   profile_picture: string;
+  profile_id: string;
 }
 
 const genderOptions = [
@@ -77,15 +78,29 @@ export default function ProfileScreen() {
       if (!user) throw new Error('No user found');
       //console.log('user:',user.id);
 
+      
+
       const { data, error } = await supabase
         .from('profiles')
         .select('*')
         .eq('profile_id', user.id)
         .single();
 
+      
+
       if (error) throw error;
       if (data){
-        setUserData(data as UserProfile);
+        setUserData({
+          id: data.id,
+          name: data.name,
+          email: user.email,
+          phone: user.phone,
+          date_of_birth: data.date_of_birth,
+          gender_id: data.gender_id,
+          country: data.country,
+          profile_picture: data.profile_picture,
+          profile_id: user.id,
+        } as UserProfile);
       } 
     } catch (error) {
       console.error('Error fetching user profile:', error);
@@ -99,15 +114,25 @@ export default function ProfileScreen() {
     if (!userData) return;
 
     try {
-      const validatedData = userSchema.parse(userData);
+      //const validatedData = userSchema.parse(userData);
       setLoading(true);
 
-      const { error } = await supabase
-        .from('users')
-        .update(validatedData)
+      // const { error } = await supabase
+      //   .from('profiles')
+      //   .update(validatedData)
+      //   .eq('id', userData.id);
+      const { error: profilesTableError } = await supabase
+        .from('profiles')
+        .update({name: userData.name})
         .eq('id', userData.id);
+      if (profilesTableError) throw profilesTableError;
 
-      if (error) throw error;
+      const { error: authTableError } = await supabase.auth.updateUser({
+        email: userData.email,
+        phone: userData.phone,
+      });
+
+      if (authTableError) throw authTableError;
 
       setIsEditing(false);
       Alert.alert('Success', 'Profile updated successfully');
@@ -184,7 +209,10 @@ export default function ProfileScreen() {
           .from('user_images')
           .upload(filePath, formData);
 
-        if (uploadError) throw uploadError;
+        if (uploadError){
+          console.error('Error uploading image:', uploadError);
+          throw uploadError;
+        } 
 
         const { data: { publicUrl } } = supabase.storage
           .from('user_images')
@@ -192,14 +220,14 @@ export default function ProfileScreen() {
 
 
         const { error: updateError } = await supabase
-          .from('users')
+          .from('profiles')
           .update({ profile_picture: publicUrl })
           .eq('id', userData?.id);
 
         if (updateError) throw updateError;
 
         setUserData(prev => prev ? { ...prev, profile_picture: publicUrl } : null);
-        Alert.alert('Success', 'Profile picture updated successfully');
+        //Alert.alert('Success', 'Profile picture updated successfully');
       } catch (error) {
         console.error('Error uploading image:', error);
         Alert.alert('Error', 'Failed to upload image. Please try again.');
@@ -261,11 +289,11 @@ export default function ProfileScreen() {
       </Text>
 
       {renderField('name', 'Name', 'Enter your name')}
-      {renderField('email', 'Email', 'Enter your email')}
-      {renderField('phone', 'Phone', 'Enter your phone number')}
-      {renderField('favorite_club', 'Favorite Club', 'Enter your favorite club')}
+      {renderField('email', 'Email', userData?.email || 'Enter your email')}
+      {/*renderField('phone', 'Phone', userData?.phone || 'Enter your phone number')*/}
+      {/*renderField('favorite_club', 'Favorite Club', 'Enter your favorite club')*/}
 
-      <View style={styles.fieldContainer}>
+      {/* <View style={styles.fieldContainer}>
         <Text style={styles.label}>Date of Birth</Text>
         <TouchableOpacity
           onPress={() => isEditing && setShowDatePicker(true)}
@@ -308,7 +336,7 @@ export default function ProfileScreen() {
             <Picker.Item key={option.value} label={option.label} value={option.value} color={isEditing ? '#FFFFFF' : '#666666'} />
           ))}
         </Picker>
-      </View>
+      </View> */}
 
       <TouchableOpacity
         onPress={() => isEditing ? handleSave() : setIsEditing(true)}
