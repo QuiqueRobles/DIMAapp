@@ -4,6 +4,7 @@ import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 import { AppNavigationProp } from '@/navigation';
+import { useSession } from 'isOwner';
 
 export default function OwnerLoginScreen() {
   const [email, setEmail] = useState('');
@@ -12,6 +13,7 @@ export default function OwnerLoginScreen() {
   const [isLoading, setIsLoading] = useState(false);
   const supabase = useSupabaseClient();
   const navigation = useNavigation<AppNavigationProp>();
+  const {isOwner,setisOwner}=useSession();
 
   const handleOwnerSignIn = async () => {
     setIsLoading(true);
@@ -26,6 +28,7 @@ export default function OwnerLoginScreen() {
     } else {
       // Navigate to owner dashboard or perform owner-specific actions
       alert('Owner logged in successfully');
+      setisOwner(true);
     }
   };
 
@@ -73,6 +76,9 @@ export default function OwnerLoginScreen() {
       <TouchableOpacity onPress={() => navigation.navigate('Login')}>
         <Text style={styles.backToLogin}>Back to User Login</Text>
       </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('OwnerRegister')}>
+        <Text style={styles.backToLogin}>Register as owner</Text>
+      </TouchableOpacity>
     </KeyboardAvoidingView>
   );
 }
@@ -80,14 +86,14 @@ export default function OwnerLoginScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1F2937',
+    backgroundColor: '#1E1E1E',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
   },
   logo: {
-    width: 200,
-    height: 100,
+    width: 300,
+    height: 150,
     marginBottom: 20,
   },
   title: {
@@ -99,10 +105,12 @@ const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: '100%',
+    width: '80%',
     height: 50,
-    backgroundColor: '#374151',
+    backgroundColor: '#1E1E1E',
+    borderWidth:1,
     borderRadius: 8,
+    borderColor:'#FFFFFF',
     paddingHorizontal: 16,
     marginBottom: 16,
   },
@@ -112,12 +120,13 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: 16,
+    alignItems:'center',
     color: '#FFFFFF',
   },
   button: {
-    width: '100%',
+    width: '80%',
     height: 50,
-    backgroundColor: '#A78BFA',
+    backgroundColor: '#5500FF',
     borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
@@ -129,7 +138,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   backToLogin: {
-    color: '#A78BFA',
+    color: '#FFFFFF',
     marginTop: 16,
   },
 });

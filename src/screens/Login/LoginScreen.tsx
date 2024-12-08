@@ -6,6 +6,7 @@ import { Feather } from '@expo/vector-icons';
 import { AppNavigationProp } from '../../navigation';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useSession } from 'isOwner';
 
 const { width, height } = Dimensions.get('window');
 
@@ -16,6 +17,7 @@ export default function LoginScreen() {
   const [showPassword, setShowPassword] = useState(false);
   const supabase = useSupabaseClient();
   const navigation = useNavigation<AppNavigationProp>();
+  const {isOwner,setisOwner}=useSession();
 
   const handleSignIn = async () => {
     if (!email || !password) {
@@ -26,7 +28,8 @@ export default function LoginScreen() {
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
-    });
+    })
+    setisOwner(false);
 
     setIsLoading(false);
     if (error) {

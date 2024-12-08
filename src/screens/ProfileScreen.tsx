@@ -75,15 +75,18 @@ export default function ProfileScreen() {
       setLoading(true);
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error('No user found');
+      //console.log('user:',user.id);
 
       const { data, error } = await supabase
-        .from('users')
+        .from('profiles')
         .select('*')
-        .eq('id', user.id)
+        .eq('profile_id', user.id)
         .single();
 
       if (error) throw error;
-      if (data) setUserData(data as UserProfile);
+      if (data){
+        setUserData(data as UserProfile);
+      } 
     } catch (error) {
       console.error('Error fetching user profile:', error);
       Alert.alert('Error', 'Failed to load profile. Please try again.');
