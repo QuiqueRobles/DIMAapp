@@ -7,7 +7,7 @@ import { Feather } from '@expo/vector-icons';
 import { Session } from '@supabase/supabase-js';
 import { SessionContextProvider } from '@supabase/auth-helpers-react';
 import { supabase } from './src/lib/supabase';
-import { isOwnerProvider } from 'isOwner';
+import { IsOwnerProvider, useSession } from 'isOwner';
 
 import HomeScreen from './src/screens/HomeScreen';
 import MapScreen from './src/screens/MapScreen';
@@ -135,7 +135,7 @@ const AuthStack = () => (
 const AppNavigator = () => {
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [isOwner,SetIsOwner]=useState(false)
+  const {isOwner,setisOwner}=useSession();
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -189,9 +189,9 @@ const AppNavigator = () => {
 export default function App() {
   return (
     <SessionContextProvider supabaseClient={supabase}>
-      <isOwnerProvider>
+      <IsOwnerProvider>
       <AppNavigator />
-      </isOwnerProvider>
+      </IsOwnerProvider>
     </SessionContextProvider>
   );
 }
