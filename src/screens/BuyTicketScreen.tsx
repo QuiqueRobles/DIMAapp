@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRoute, RouteProp, useNavigation } from '@react-navigation/native';
@@ -6,6 +6,9 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Feather } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { format, parseISO } from 'date-fns';
+import { useStripe } from '@stripe/stripe-react-native';
+import { supabase } from '../lib/supabase';
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from '@env';
 
 type RootStackParamList = {
   BuyTicket: { 
@@ -28,6 +31,8 @@ const BuyTicketScreen: React.FC = () => {
   const { eventId, eventName, eventDate, eventPrice, clubName, eventDescription, eventImage } = route.params;
 
   const [quantity, setQuantity] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const { initPaymentSheet, presentPaymentSheet } = useStripe();
 
   const handleIncrement = () => {
     setQuantity(prev => Math.min(prev + 1, 10));
@@ -37,24 +42,127 @@ const BuyTicketScreen: React.FC = () => {
     setQuantity(prev => Math.max(prev - 1, 1));
   };
 
-  const handlePurchase = () => {
-    Alert.alert(
-      "Purchase Confirmation",
-      `You are about to purchase ${quantity} ticket(s) for ${eventName} at ${clubName} for a total of $${(quantity * eventPrice).toFixed(2)}. Do you want to proceed?`,
-      [
-        {
-          text: "Cancel",
-          style: "cancel"
+  const fetchPaymentSheetParams = async () => {
+    try {
+      console.log('Fetching payment intent...');
+      const response = await fetch(`${SUPABASE_URL}/functions/v1/create-payment-intent`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
         },
-        { 
-          text: "OK", 
-          onPress: () => {
-            Alert.alert("Success", "Your tickets have been purchased!");
-            navigation.goBack();
-          }
-        }
-      ]
-    );
+        body: JSON.stringify({
+          amount: Math.round(quantity * eventPrice * 100),
+          currency: 'usd',
+        }),
+      });
+
+      console.log('Response status:', response.status);
+      console.log('Response headers:', response.headers);
+
+      const responseText = await response.text();
+      console.log('Response text:', responseText);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      let data;
+      try {
+        data = JSON.parse(responseText);
+      } catch (error) {
+        console.error('Error parsing JSON:', error);
+        throw new Error('Invalid JSON response');
+      }
+
+      console.log('Parsed data:', data);
+
+      if (!data.clientSecret) {
+        console.error('No client secret in response:', data);
+        throw new Error('No client secret received');
+      }
+
+      return { paymentIntent: data.clientSecret };
+    } catch (error) {
+      console.error('Error fetching payment intent:', error);
+      Alert.alert('Error', 'Unable to initialize payment. Please try again.');
+      throw error;
+    }
+  };
+
+  const initializePaymentSheet = async () => {
+    try {
+      console.log('Initializing payment sheet...');
+      const { paymentIntent } = await fetchPaymentSheetParams();
+
+      const { error } = await initPaymentSheet({
+        paymentIntentClientSecret: paymentIntent,
+        merchantDisplayName: 'Your App Name',
+        returnURL: 'your-app-scheme://stripe-redirect',
+      });
+
+      if (error) {
+        console.error('Error initializing payment sheet:', error);
+        Alert.alert(`Error code: ${error.code}`, error.message);
+      } else {
+        console.log('Payment sheet initialized successfully');
+      }
+    } catch (error) {
+      console.error('Error in initializePaymentSheet:', error);
+      Alert.alert('Error', 'Failed to initialize payment. Please try again.');
+    }
+  };
+
+  useEffect(() => {
+    initializePaymentSheet();
+  }, []);
+
+  const handlePurchase = async () => {
+    setLoading(true);
+    try {
+      console.log('Presenting payment sheet...');
+      const { error } = await presentPaymentSheet();
+
+      if (error) {
+        console.error('Error presenting payment sheet:', error);
+        Alert.alert(`Error code: ${error.code}`, error.message);
+      } else {
+        console.log('Payment successful');
+        await createTicketInDatabase();
+        Alert.alert('Success', 'Your payment was successful!');
+        navigation.goBack();
+      }
+    } catch (error) {
+      console.error('Error in handlePurchase:', error);
+      Alert.alert('Error', 'Failed to process payment. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const createTicketInDatabase = async () => {
+    try {
+      console.log('Creating ticket in database...');
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error('No user logged in');
+
+      const { data, error } = await supabase
+        .from('tickets')
+        .insert({
+          user_id: user.id,
+          club_id: 'CLUB_ID', // You need to pass the club ID from the event details
+          event_id: eventId,
+          total_price: quantity * eventPrice,
+          event_date: eventDate,
+          num_people: quantity,
+        });
+
+      if (error) throw error;
+      console.log('Ticket created:', data);
+    } catch (error) {
+      console.error('Error creating ticket:', error);
+      Alert.alert('Error', 'Failed to create ticket. Please try again.');
+    }
   };
 
   const formatEventDate = (dateString: string) => {
@@ -105,14 +213,16 @@ const BuyTicketScreen: React.FC = () => {
           <Text style={styles.totalLabel}>Total:</Text>
           <Text style={styles.totalPrice}>${(quantity * eventPrice).toFixed(2)}</Text>
         </View>
-        <TouchableOpacity onPress={handlePurchase}>
+        <TouchableOpacity onPress={handlePurchase} disabled={loading}>
           <LinearGradient
             colors={['#8B5CF6', '#7C3AED']}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
             style={styles.purchaseButton}
           >
-            <Text style={styles.purchaseButtonText}>Purchase Tickets</Text>
+            <Text style={styles.purchaseButtonText}>
+              {loading ? 'Processing...' : 'Purchase Tickets'}
+            </Text>
           </LinearGradient>
         </TouchableOpacity>
       </ScrollView>
