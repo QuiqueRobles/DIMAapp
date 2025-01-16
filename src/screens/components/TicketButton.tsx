@@ -13,6 +13,7 @@ type RootStackParamList = {
     clubName: string;
     eventDescription: string | null;
     eventImage: string | null;
+    clubId: string; // Add clubId to the navigation params
   };
 };
 
@@ -45,7 +46,8 @@ const TicketButton: React.FC<TicketButtonProps> = ({ event, clubName }) => {
       eventPrice: event.price !== null ? event.price / 100 : 0, 
       clubName,
       eventDescription: event.description,
-      eventImage: event.image
+      eventImage: event.image,
+      clubId: event.club_id // Add clubId to the navigation params
     });
   };
 
@@ -80,3 +82,4 @@ const styles = StyleSheet.create({
 });
 
 export default TicketButton;
+

@@ -1,3 +1,4 @@
+import { STRIPE_PUBLISHABLE_KEY } from '@env';
 import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -8,7 +9,7 @@ import { Session } from '@supabase/supabase-js';
 import { SessionContextProvider } from '@supabase/auth-helpers-react';
 import { supabase } from './src/lib/supabase';
 import { IsOwnerProvider, useSession } from 'isOwner';
-
+import { StripeProvider } from '@stripe/stripe-react-native';
 import HomeScreen from './src/screens/HomeScreen';
 import MapScreen from './src/screens/MapScreen';
 import TicketScreen from './src/screens/TicketsScreen';
@@ -188,10 +189,15 @@ const AppNavigator = () => {
 
 export default function App() {
   return (
-    <SessionContextProvider supabaseClient={supabase}>
-      <IsOwnerProvider>
-      <AppNavigator />
-      </IsOwnerProvider>
-    </SessionContextProvider>
+    <StripeProvider
+      publishableKey={STRIPE_PUBLISHABLE_KEY}
+      merchantIdentifier="tu_identificador_de_comerciante" // Necesario para Apple Pay
+    >
+      <SessionContextProvider supabaseClient={supabase}>
+        <IsOwnerProvider>
+          <AppNavigator />
+        </IsOwnerProvider>
+      </SessionContextProvider>
+    </StripeProvider>
   );
 }

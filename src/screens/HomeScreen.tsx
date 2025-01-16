@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, FlatList, ActivityIndicator, StyleSheet, Text, RefreshControl } from 'react-native';
+import { View, FlatList, ActivityIndicator, StyleSheet, Text, RefreshControl, TouchableOpacity } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Feather } from '@expo/vector-icons';
 import { supabase } from '@/lib/supabase';
 import { SearchBar } from './components/SearchBar';
-import { ActionButtons } from './components/ActionButtons';
 import { ClubCard } from './components/ClubCard';
+import { FilterModal } from './components/FilterModal';
 
 type RootStackParamList = {
   Home: undefined;
@@ -33,7 +34,15 @@ interface Club {
   description: string | null;
 }
 
-const ITEMS_PER_PAGE = 10;
+interface Filters {
+  category: string | null;
+  musicGenre: string | null;
+  minRating: number;
+  dressCode: string | null;
+  minAttendees: number;
+}
+
+const ITEMS_PER_PAGE = 20;
 
 const HomeScreen: React.FC = () => {
   const [clubs, setClubs] = useState<Club[]>([]);
@@ -43,6 +52,14 @@ const HomeScreen: React.FC = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
+  const [isFilterModalVisible, setIsFilterModalVisible] = useState(false);
+  const [filters, setFilters] = useState<Filters>({
+    category: null,
+    musicGenre: null,
+    minRating: 0,
+    dressCode: null,
+    minAttendees: 0,
+  });
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
   const handleClubPress = (clubId: string) => {
@@ -54,10 +71,28 @@ const HomeScreen: React.FC = () => {
       setLoading(true);
       setError(null);
 
-      const { data, error, count } = await supabase
+      let query = supabase
         .from('club')
         .select('*', { count: 'exact' })
-        .order('rating', { ascending: false })
+        .order('rating', { ascending: false });
+
+      if (filters.category) {
+        query = query.eq('category', filters.category);
+      }
+      if (filters.musicGenre) {
+        query = query.eq('music_genre', filters.musicGenre);
+      }
+      if (filters.minRating > 0) {
+        query = query.gte('rating', filters.minRating);
+      }
+      if (filters.dressCode) {
+        query = query.eq('dress_code', filters.dressCode);
+      }
+      if (filters.minAttendees > 0) {
+        query = query.gte('attendees', filters.minAttendees);
+      }
+
+      const { data, error, count } = await query
         .range(pageToFetch * ITEMS_PER_PAGE, (pageToFetch + 1) * ITEMS_PER_PAGE - 1);
 
       if (error) throw error;
@@ -74,7 +109,7 @@ const HomeScreen: React.FC = () => {
       setLoading(false);
       setRefreshing(false);
     }
-  }, []);
+  }, [filters]);
 
   useEffect(() => {
     fetchClubs();
@@ -90,6 +125,16 @@ const HomeScreen: React.FC = () => {
       fetchClubs(page + 1);
     }
   }, [loading, hasMore, page, fetchClubs]);
+
+  const handleFilterPress = () => {
+    setIsFilterModalVisible(true);
+  };
+
+  const handleFilterApply = (newFilters: Filters) => {
+    setFilters(newFilters);
+    setIsFilterModalVisible(false);
+    fetchClubs(0, true);
+  };
 
   const filteredClubs = clubs.filter(club => {
     const query = searchQuery.toLowerCase();
@@ -119,17 +164,16 @@ const HomeScreen: React.FC = () => {
       <SafeAreaView style={styles.container}>
         <StatusBar style="light" />
         
-        <SearchBar
-          value={searchQuery}
-          onChangeText={setSearchQuery}
-          onClear={() => setSearchQuery('')}
-        />
-
-        <ActionButtons
-          onFilterPress={() => console.log('Filter pressed')}
-          onMapPress={() => console.log('Map pressed')}
-          onSortPress={() => console.log('Sort pressed')}
-        />
+        <View style={styles.header}>
+          <SearchBar
+            value={searchQuery}
+            onChangeText={setSearchQuery}
+            onClear={() => setSearchQuery('')}
+          />
+          <TouchableOpacity style={styles.filterButton} onPress={handleFilterPress}>
+            <Feather name="filter" size={24} color="#FFFFFF" />
+          </TouchableOpacity>
+        </View>
 
         {error ? (
           <View style={styles.errorContainer}>
@@ -160,6 +204,13 @@ const HomeScreen: React.FC = () => {
             }
           />
         )}
+
+        <FilterModal
+          isVisible={isFilterModalVisible}
+          onClose={() => setIsFilterModalVisible(false)}
+          onApply={handleFilterApply}
+          initialFilters={filters}
+        />
       </SafeAreaView>
     </LinearGradient>
   );
@@ -171,6 +222,19 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingTop: 20,
+    paddingBottom: 10,
+  },
+  filterButton: {
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    borderRadius: 8,
+    padding: 10,
+    marginLeft: 10,
   },
   listContainer: {
     padding: 20,
@@ -203,3 +267,4 @@ const styles = StyleSheet.create({
 });
 
 export default HomeScreen;
+
