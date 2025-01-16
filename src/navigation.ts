@@ -19,6 +19,7 @@ export type RootStackParamList = {
   EventManage: undefined;
   HomeOwner: undefined;
   MapOwner: undefined;
+  EditProfile: undefined;
 };
 
 export type AppNavigationProp = NavigationProp<RootStackParamList>;

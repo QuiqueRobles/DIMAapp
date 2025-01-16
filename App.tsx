@@ -15,7 +15,7 @@ import MapScreen from './src/screens/MapScreen';
 import TicketScreen from './src/screens/TicketsScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import LoginScreen from './src/screens/Login/LoginScreen';
-import RegisterScreen from '@/screens/Login/registerScreen';
+import RegisterScreen from '@/screens/Login/RegisterScreen';
 import ForgotPasswordScreen from '@/screens/Login/ForgotPassword';
 import OwnerLoginScreen from '@/screens/Login/OwnerLogScreen';
 import OwnerRegisterScreen from '@/screens/Login/OwnerRegisterScreen';
@@ -27,7 +27,8 @@ import ClubManageScreen from '@/screens/ClubManageScreen';
 import EventManageScreen from '@/screens/EventManageScreen';
 import HomeOwnerScreen from '@/screens/HomeOwnerScreen';
 import MapOwnerScreen from '@/screens/MapOwnerScreen';
-// Suppress warning about defaultProps
+import EditProfileScreen from '@/screens/EditProfileScreen';
+
 const error = console.error;
 console.error = (...args: any) => {
   if (/defaultProps/.test(args[0])) return;
@@ -174,6 +175,7 @@ const AppNavigator = () => {
             <Stack.Screen name="Main" component={MainTabs} />
             <Stack.Screen name="Club" component={ClubScreen} />
             <Stack.Screen name="BuyTicket" component={BuyTicketScreen} />
+            <Stack.Screen name="EditProfile" component={EditProfileScreen} />
             <Stack.Screen name="Calendar" component={CalendarScreen} />
             <Stack.Screen name="Reviews" component={ReviewsScreen} />
           </>
