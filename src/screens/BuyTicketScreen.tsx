@@ -19,6 +19,7 @@ type RootStackParamList = {
     clubName: string;
     eventDescription: string | null;
     eventImage: string | null;
+    clubId: string;
   };
 };
 
@@ -28,7 +29,7 @@ type BuyTicketScreenNavigationProp = NativeStackNavigationProp<RootStackParamLis
 const BuyTicketScreen: React.FC = () => {
   const route = useRoute<BuyTicketScreenRouteProp>();
   const navigation = useNavigation<BuyTicketScreenNavigationProp>();
-  const { eventId, eventName, eventDate, eventPrice, clubName, eventDescription, eventImage } = route.params;
+  const { eventId, eventName, eventDate, eventPrice, clubName, eventDescription, eventImage, clubId } = route.params;
 
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -115,55 +116,90 @@ const BuyTicketScreen: React.FC = () => {
 
   useEffect(() => {
     initializePaymentSheet();
-  }, []);
+  }, [quantity]);
 
   const handlePurchase = async () => {
-    setLoading(true);
-    try {
-      console.log('Presenting payment sheet...');
-      const { error } = await presentPaymentSheet();
+  setLoading(true);
+  try {
+    console.log('Presenting payment sheet...');
+    const { error: paymentError } = await presentPaymentSheet();
 
-      if (error) {
-        console.error('Error presenting payment sheet:', error);
-        Alert.alert(`Error code: ${error.code}`, error.message);
-      } else {
-        console.log('Payment successful');
-        await createTicketInDatabase();
-        Alert.alert('Success', 'Your payment was successful!');
-        navigation.goBack();
-      }
-    } catch (error) {
-      console.error('Error in handlePurchase:', error);
-      Alert.alert('Error', 'Failed to process payment. Please try again.');
-    } finally {
-      setLoading(false);
+    if (paymentError) {
+      console.error('Error presenting payment sheet:', JSON.stringify(paymentError, null, 2));
+      Alert.alert(`Payment Error: ${paymentError.code}`, paymentError.message);
+      return;
     }
-  };
+
+    console.log('Payment successful');
+    const ticketData = await createTicketInDatabase();
+    console.log('Ticket created successfully:', JSON.stringify(ticketData, null, 2));
+    Alert.alert('Success', 'Your payment was successful and ticket has been created!');
+    navigation.goBack();
+  } catch (error) {
+    console.error('Error in handlePurchase:', error instanceof Error ? error.stack : JSON.stringify(error, null, 2));
+    if (error instanceof Error) {
+      Alert.alert('Error', `Failed to process payment or create ticket: ${error.message}`);
+    } else {
+      Alert.alert('Error', 'An unknown error occurred while processing your purchase');
+    }
+  } finally {
+    setLoading(false);
+  }
+};
+
+
 
   const createTicketInDatabase = async () => {
-    try {
-      console.log('Creating ticket in database...');
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error('No user logged in');
-
-      const { data, error } = await supabase
-        .from('tickets')
-        .insert({
-          user_id: user.id,
-          club_id: 'CLUB_ID', // You need to pass the club ID from the event details
-          event_id: eventId,
-          total_price: quantity * eventPrice,
-          event_date: eventDate,
-          num_people: quantity,
-        });
-
-      if (error) throw error;
-      console.log('Ticket created:', data);
-    } catch (error) {
-      console.error('Error creating ticket:', error);
-      Alert.alert('Error', 'Failed to create ticket. Please try again.');
+  try {
+    console.log('Creating ticket in database...');
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
+    
+    if (userError) {
+      console.error('Error getting user:', JSON.stringify(userError, null, 2));
+      throw new Error(`User error: ${userError.message}`);
     }
-  };
+    
+    if (!user) {
+      console.error('No user found');
+      throw new Error('No user logged in');
+    }
+
+    const ticketData = {
+      user_id: user.id,
+      club_id: clubId,
+      event_id: eventId,
+      purchase_date: new Date().toISOString(),
+      total_price: quantity * eventPrice,
+      event_date: eventDate,
+      num_people: quantity,
+    };
+
+    console.log('Ticket data to be inserted:', JSON.stringify(ticketData, null, 2));
+
+    const { data, error } = await supabase
+      .from('ticket')
+      .insert(ticketData)
+      .select();
+
+    if (error) {
+      console.error('Supabase insertion error:', JSON.stringify(error, null, 2));
+      throw new Error(`Supabase error: ${error.message || 'Unknown error occurred during insertion'}`);
+    }
+
+    if (!data || data.length === 0) {
+      console.error('No data returned from ticket insertion');
+      throw new Error('No data returned from ticket insertion');
+    }
+
+    console.log('Ticket created:', JSON.stringify(data[0], null, 2));
+    return data[0];
+  } catch (error) {
+    console.error('Error creating ticket:', error instanceof Error ? error.stack : JSON.stringify(error, null, 2));
+    throw error;
+  }
+};
+
+
 
   const formatEventDate = (dateString: string) => {
     try {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import { format, parseISO } from 'date-fns';
 import TicketButton from './TicketButton';
 
@@ -17,10 +17,9 @@ interface Event {
 interface EventsListProps {
   events: Event[];
   clubName: string;
-  clubId: string;
 }
 
-const EventsList: React.FC<EventsListProps> = ({ events, clubName, clubId }) => {
+const EventsList: React.FC<EventsListProps> = ({ events, clubName }) => {
   return (
     <View style={styles.container}>
       {events.map((event) => (
