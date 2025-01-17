@@ -11,12 +11,14 @@ import {
   Platform
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Feather } from '@expo/vector-icons';
+import { Feather, FontAwesome } from '@expo/vector-icons';
 import { supabase } from '@/lib/supabase';
 import { useNavigation } from '@react-navigation/native';
 import { AppNavigationProp } from '@/navigation';
 import * as ImagePicker from 'expo-image-picker';
 import { format } from 'date-fns';
+import CountryFlag from "react-native-country-flag";
+import countryCodes from 'country-codes-list';
 
 interface UserProfile {
   id: string;
@@ -34,6 +36,24 @@ const genderMap: { [key: string]: string } = {
   'male': 'Male',
   'female': 'Female',
   'other': 'Other',
+};
+
+const getGenderIcon = (gender: string) => {
+  switch (gender) {
+    case 'male':
+      return 'mars';
+    case 'female':
+      return 'venus';
+    case 'other':
+      return 'transgender-alt';
+    default:
+      return 'genderless';
+  }
+};
+
+const getCountryCode = (country: string) => {
+  const myCountryCodesObject = countryCodes.customList('countryNameEn', '{countryCode}');
+  return myCountryCodesObject[country] || 'ES';
 };
 
 export default function ProfileScreen() {
@@ -140,9 +160,9 @@ export default function ProfileScreen() {
           .getPublicUrl(filePath);
 
         const { error: updateError } = await supabase
-          .from('profiles')  // Changed from 'profile' to 'profiles'
+          .from('profiles')
           .update({ profile_picture: publicUrl })
-          .eq('profile_id', userData?.profile_id);  // Changed from 'id' to 'profile_id'
+          .eq('profile_id', userData?.profile_id);
 
         if (updateError) throw updateError;
 
@@ -157,10 +177,18 @@ export default function ProfileScreen() {
     }
   };
 
-  const renderProfileInfo = (label: string, value: string) => (
+  const renderProfileInfo = (label: string, value: string, type?: 'gender' | 'country') => (
     <View style={styles.infoContainer}>
       <Text style={styles.infoLabel}>{label}</Text>
-      <Text style={styles.infoValue}>{value}</Text>
+      <View style={styles.infoValueContainer}>
+        {type === 'gender' && (
+          <FontAwesome name={getGenderIcon(value.toLowerCase())} size={20} color="#A78BFA" style={styles.icon} />
+        )}
+        {type === 'country' && (
+          <CountryFlag isoCode={getCountryCode(value)} size={20} style={styles.flag} />
+        )}
+        <Text style={styles.infoValue}>{value}</Text>
+      </View>
     </View>
   );
 
@@ -183,8 +211,8 @@ export default function ProfileScreen() {
       <Text style={styles.email}>{userData?.email}</Text>
 
       {renderProfileInfo('Date of Birth', userData?.date_of_birth ? format(new Date(userData.date_of_birth), 'MMMM d, yyyy') : 'Not specified')}
-      {renderProfileInfo('Gender', genderMap[userData?.gender_id || 'not_specified'])}
-      {renderProfileInfo('Country', userData?.country || 'Not specified')}
+      {renderProfileInfo('Gender', genderMap[userData?.gender_id || 'not_specified'], 'gender')}
+      {renderProfileInfo('Country', userData?.country || 'Not specified', 'country')}
 
       <TouchableOpacity
         onPress={() => navigation.navigate('EditProfile')}
@@ -268,9 +296,22 @@ const styles = StyleSheet.create({
     color: '#9CA3AF',
     marginBottom: 4,
   },
+  infoValueContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   infoValue: {
     fontSize: 16,
     color: '#FFFFFF',
+    marginLeft: 8,
+  },
+  icon: {
+    width: 20,
+    height: 20,
+  },
+  flag: {
+    width: 20,
+    height: 20,
   },
   editButton: {
     backgroundColor: '#7C3AED',

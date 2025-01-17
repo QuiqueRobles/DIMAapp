@@ -18,6 +18,7 @@ import { AppNavigationProp } from '@/navigation';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Picker } from '@react-native-picker/picker';
 import { z } from 'zod';
+import CountryPicker, { Country, CountryCode } from 'react-native-country-picker-modal';
 
 interface UserProfile {
   id: string;
@@ -26,6 +27,7 @@ interface UserProfile {
   date_of_birth: string;
   gender_id: string;
   country: string;
+  countryCode: CountryCode;
   profile_id: string;
 }
 
@@ -36,20 +38,13 @@ const genderOptions = [
   { label: 'Other', value: 'other' },
 ];
 
-const countryOptions = [
-  { label: 'Select Country', value: '' },
-  { label: 'United States', value: 'US' },
-  { label: 'United Kingdom', value: 'UK' },
-  { label: 'Canada', value: 'CA' },
-  // Add more countries as needed
-];
-
 const userSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Invalid email address'),
   date_of_birth: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Invalid date format'),
   gender_id: z.string(),
   country: z.string(),
+  countryCode: z.string(),
 });
 
 export default function EditProfileScreen() {
@@ -84,6 +79,7 @@ export default function EditProfileScreen() {
           date_of_birth: data.date_of_birth,
           gender_id: data.gender_id,
           country: data.country,
+          countryCode: data.country_code || 'US',
           profile_id: user.id,
         });
       }
@@ -109,6 +105,7 @@ export default function EditProfileScreen() {
           date_of_birth: validatedData.date_of_birth,
           gender_id: validatedData.gender_id,
           country: validatedData.country,
+          country_code: validatedData.countryCode,
         })
         .eq('id', userData.id);
 
@@ -171,6 +168,10 @@ export default function EditProfileScreen() {
     </View>
   );
 
+  const onSelectCountry = (country: Country) => {
+    setUserData(prev => prev ? { ...prev, country: country.name, countryCode: country.cca2 } : null);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
@@ -216,17 +217,27 @@ export default function EditProfileScreen() {
 
         <View style={styles.fieldContainer}>
           <Text style={styles.label}>Country</Text>
-          <Picker
-            selectedValue={userData?.country}
-            onValueChange={(itemValue) => 
-              setUserData(prev => prev ? { ...prev, country: itemValue } : null)
-            }
-            style={styles.picker}
-          >
-            {countryOptions.map((option) => (
-              <Picker.Item key={option.value} label={option.label} value={option.value} color="#FFFFFF" />
-            ))}
-          </Picker>
+          <CountryPicker
+            countryCode={userData?.countryCode as CountryCode}
+            withFilter
+            withFlag
+            withCountryNameButton
+            withAlphaFilter
+            withCallingCode={false}
+            withEmoji
+            onSelect={onSelectCountry}
+            containerButtonStyle={styles.countryPickerButton}
+            theme={{
+              primaryColor: '#FFFFFF',
+              primaryColorVariant: '#7C3AED',
+              backgroundColor: '#374151',
+              onBackgroundTextColor: '#FFFFFF',
+              fontSize: 16,
+              fontFamily: Platform.OS === 'ios' ? 'System' : 'Roboto',
+              filterPlaceholderTextColor: '#9CA3AF',
+              activeOpacity: 0.7,
+            }}
+          />
         </View>
 
         <TouchableOpacity
@@ -290,6 +301,12 @@ const styles = StyleSheet.create({
   dateText: {
     color: '#FFFFFF',
     fontSize: 16,
+  },
+  countryPickerButton: {
+    backgroundColor: '#374151',
+    borderRadius: 8,
+    padding: 12,
+    justifyContent: 'center',
   },
   button: {
     backgroundColor: '#7C3AED',
