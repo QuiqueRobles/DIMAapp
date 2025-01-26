@@ -1,6 +1,6 @@
  
   import React, { useState, useEffect } from 'react';
-  import { View, ScrollView, Text, TouchableOpacity, RefreshControl, Image, StyleSheet, Dimensions,Alert,Button} from 'react-native';
+  import { View, ScrollView, Text, TouchableOpacity, RefreshControl, Image, StyleSheet, Dimensions,Alert,Button,GestureResponderEvent} from 'react-native';
   import { SafeAreaView } from 'react-native-safe-area-context';
   import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
   import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -25,12 +25,13 @@
     Reviews: { clubId: string; clubName: string };
     Calendar: { clubId: string; clubName: string };
   };
+
   
   type ClubScreenRouteProp = RouteProp<RootStackParamList, 'Club'>;
   type ClubScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Club'>;
   
 
-    interface club {
+    interface Club {
       id: string;
       name: string;
       rating: number;
@@ -38,7 +39,7 @@
       address: string;
       image: string | null;
       category: string | null;
-      music_genre?: string | null;
+      music_genre: string | null;
       attendees: number;
       opening_hours: string;
       dress_code: string | null;
@@ -65,7 +66,7 @@
   }
   
   const HomeOwner: React.FC = () => {
-    const [club, setClub] = useState<club | null>(null);
+    const [club, setClub] = useState<Club | null>(null);
     const [events, setEvents] = useState<Event[]>([]);
     const [reviews, setReviews] = useState<Review[]>([]);
     const [loading, setLoading] = useState(true);
@@ -173,7 +174,7 @@
           const { data: { publicUrl } } = supabase.storage
             .from('clubs-image')
             .getPublicUrl(filePath);
-           
+           alert(publicUrl);
           const { error: updateError } = await supabase
             .from('club') 
             .update({'image': publicUrl })
@@ -209,11 +210,12 @@
                }
          
                Alert.alert('Success', 'Club details updated successfully.');
+               setEdit(!edit);
              } catch (error) {
                Alert.alert('Error', 'Failed to update club details.');
                console.error(error);
              }
-             setEdit(!edit);
+             
            };
          
     
@@ -258,9 +260,9 @@
                 />
                 <Text style={styles.seeAllText}>Tap to Change Image</Text>
                 </TouchableOpacity>
-            <TouchableOpacity
+            <TouchableOpacity onPress={() => navigation.goBack()}
               style={styles.backButton}
-              onPress={() => navigation.goBack()}
+              
             >
               <Feather name="arrow-left" size={24} color="#FFFFFF" />
             </TouchableOpacity>
@@ -271,14 +273,14 @@
           <View style={styles.content}>
             <ClubHeader club={club} />
             <View>
-            <TouchableOpacity 
-  style={styles.EditButton} 
-  onPress={edit? (() =>saveChanges ):(setEdit(!edit))}
->
+            <TouchableOpacity onPress={edit? (() => {
+    saveChanges().catch((error) => console.error('Error:', error));
+  }):(()=>setEdit(!edit))}
+              style={styles.EditButton} >
   <Text style={styles.seeAllText}>{edit ? 'Save' : 'Edit'}</Text>
 </TouchableOpacity>
       {edit ? (
-        <ClubEdit club={club} setClub={setClub}  />
+        <ClubEdit club={club} setClub={setClub}/>
       ) : (
         <ClubDetails club={club} />
       )}

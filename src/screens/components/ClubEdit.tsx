@@ -2,23 +2,24 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput ,Alert} from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { supabase } from '@/lib/supabase';
+interface Club {
+  id: string;
+  name: string;
+  rating: number;
+  num_reviews: number;
+  address: string;
+  image: string | null;
+  category: string | null;
+  music_genre: string | null;
+  attendees: number;
+  opening_hours: string;
+  dress_code: string | null;
+  description: string | null;}
 
-interface ClubDetailsProps {
-  club: {
-    id: string;
-    name: string;
-    rating: number;
-    num_reviews: number;
-    address: string;
-    image: string | null;
-    category: string | null;
-    music_genre?: string | null;
-    attendees: number;
-    opening_hours: string;
-    dress_code: string | null;
-    description: string | null;
-  };
-  setClub: React.Dispatch<React.SetStateAction<ClubDetailsProps['club']>>;
+
+interface ClubEditsProps {
+  club:Club;
+  setClub: React.Dispatch<React.SetStateAction<ClubEditsProps['club']| null >>;
 }
 const EditableDetailItem: React.FC<{
     icon: keyof typeof Feather.glyphMap;
@@ -40,11 +41,11 @@ const EditableDetailItem: React.FC<{
     </View>
   );
 
-const ClubDetails: React.FC<ClubDetailsProps> = ({ club ,setClub}) => {
-    const [editableClub, setEditableClub] = useState(club);
-  
-    const handleUpdate = (key: keyof ClubDetailsProps['club'], value: string) => {
-        setClub((prev) => ({ ...prev, [key]: value }));
+const ClubEdit: React.FC<ClubEditsProps> = ({ club ,setClub}) => {
+    //const [editableClub, setEditableClub] = useState(club);
+    const handleUpdate = (key: keyof ClubEditsProps['club'], value: string) => {
+        setClub((prev) =>prev? { ...prev, [key]: value }: null);
+       setEditableClub(club);
       };
     
 
@@ -56,42 +57,40 @@ const ClubDetails: React.FC<ClubDetailsProps> = ({ club ,setClub}) => {
       <EditableDetailItem
         icon="map-pin"
         label="Address"
-        value={editableClub.address}
+        value={club.address}
         onChange={(value) => handleUpdate('address', value)}
       />
       <EditableDetailItem
         icon="clock"
         label="Opening Hours"
-        value={editableClub.opening_hours}
+        value={club.opening_hours || ''}
         onChange={(value) => handleUpdate('opening_hours', value)}
       />
-      {editableClub.dress_code && (
+      
         <EditableDetailItem
           icon="user"
           label="Dress Code"
-          value={editableClub.dress_code}
+          value={club.dress_code || ''}
           onChange={(value) => handleUpdate('dress_code', value)}
         />
-      )}
-      {editableClub.music_genre && (
+      
         <EditableDetailItem
           icon="music"
           label="Music Genre"
-          value={editableClub.music_genre}
+          value={club.music_genre ||''}
           onChange={(value) => handleUpdate('music_genre', value)}
         />
-      )}
-      {editableClub.description && (
+  
         <View style={styles.descriptionContainer}>
           <Text style={styles.descriptionTitle}>About</Text>
           <TextInput
             style={styles.descriptionInput}
-            value={editableClub.description}
+            value={club.description || ''}
             onChangeText={(value) => handleUpdate('description', value)}
             multiline
           />
         </View>
-      )}
+      
     </View>
   );
 }
@@ -147,6 +146,6 @@ const styles = StyleSheet.create({
     textAlignVertical: 'top',
   },
 });
-export default ClubDetails;
+export default ClubEdit;
 
 
