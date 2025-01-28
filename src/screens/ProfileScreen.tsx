@@ -32,7 +32,7 @@ interface UserProfile {
 }
 
 const genderMap: { [key: string]: string } = {
-  'not_specified': 'Not Specified',
+  'not_specified': 'Not Specified',    
   'male': 'Male',
   'female': 'Female',
   'other': 'Other',
@@ -211,7 +211,7 @@ export default function ProfileScreen() {
       <Text style={styles.email}>{userData?.email}</Text>
 
       {renderProfileInfo('Date of Birth', userData?.date_of_birth ? format(new Date(userData.date_of_birth), 'MMMM d, yyyy') : 'Not specified')}
-      {renderProfileInfo('Gender', genderMap[userData?.gender_id || 'not_specified'], 'gender')}
+      {renderProfileInfo('Gender', genderMap[userData?.gender_id || 'not_specified'] || 'Not_specified', 'gender')}
       {renderProfileInfo('Country', userData?.country || 'Not specified', 'country')}
 
       <TouchableOpacity
