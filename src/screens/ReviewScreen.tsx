@@ -5,9 +5,9 @@ import { useRoute, RouteProp, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Feather } from '@expo/vector-icons';
 import { supabase } from '@/lib/supabase';
-import ReviewItem from './components/ReviewItem';
-import ErrorDisplay from './components/ErrorDisplay';
-import LoadingSpinner from './components/LoadingSpinner';
+import ReviewItem from '@/components/ReviewItem';
+import ErrorDisplay from '@/components/ErrorDisplay';
+import LoadingSpinner from '@/components/LoadingSpinner';
 
 type RootStackParamList = {
   Reviews: { clubId: string; clubName: string };

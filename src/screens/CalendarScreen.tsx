@@ -6,7 +6,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { supabase } from '@/lib/supabase';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Feather } from '@expo/vector-icons';
-import EventCard from './components/EventCard';
+import EventCard from '@/components/EventCard';
 
 type RootStackParamList = {
   Calendar: { clubId: string; clubName: string };
