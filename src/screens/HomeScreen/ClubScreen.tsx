@@ -6,12 +6,12 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Feather } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { supabase } from '@/lib/supabase';
-import ClubHeader from './components/ClubHeader';
-import ClubDetails from './components/ClubDetails';
-import EventsList from './components/EventsList';
-import ReviewsList from './components/ReviewsList';
-import ErrorDisplay from './components/ErrorDisplay';
-import LoadingSpinner from './components/LoadingSpinner';
+import ClubHeader from '@/components/ClubHeader';
+import ClubDetails from '@/components/ClubDetails';
+import EventsList from '@/components/EventsList';
+import ReviewsList from '@/components/ReviewsList';
+import ErrorDisplay from '@/components/ErrorDisplay';
+import LoadingSpinner from '@/components/LoadingSpinner';
 
 const { width, height } = Dimensions.get('window');
 

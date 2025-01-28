@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { 
   View, 
   Text, 
@@ -13,7 +13,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Feather, FontAwesome } from '@expo/vector-icons';
 import { supabase } from '@/lib/supabase';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { AppNavigationProp } from '@/navigation';
 import * as ImagePicker from 'expo-image-picker';
 import { format } from 'date-fns';
@@ -61,10 +61,6 @@ export default function ProfileScreen() {
   const [loading, setLoading] = useState(true);
   const navigation = useNavigation<AppNavigationProp>();
 
-  useEffect(() => {
-    fetchUserProfile();
-  }, []);
-
   const fetchUserProfile = async () => {
     try {
       setLoading(true);
@@ -90,6 +86,9 @@ export default function ProfileScreen() {
           profile_id: user.id,
         });
       }
+
+      //console.log('User profile:', data);
+
     } catch (error) {
       console.error('Error fetching user profile:', error);
       Alert.alert('Error', 'Failed to load profile. Please try again.');
@@ -97,6 +96,12 @@ export default function ProfileScreen() {
       setLoading(false);
     }
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchUserProfile();
+    }, [])
+  );
 
   const handleLogout = async () => {
     Alert.alert(

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, Modal } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { supabase } from '../lib/supabase'; // Asegúrate de que esta ruta sea correcta
-import TicketCard from './components/TicketCard';
-import ExpandedTicket from './components/ExpandedTicket';
-import LoadingSpinner from './components/LoadingSpinner';
-import ErrorDisplay from './components/ErrorDisplay';
+import { supabase } from '@/lib/supabase'; // Asegúrate de que esta ruta sea correcta
+import TicketCard from '@/components/TicketCard';
+import ExpandedTicket from '@/components/ExpandedTicket';
+import LoadingSpinner from '@/components/LoadingSpinner';
+import ErrorDisplay from '@/components/ErrorDisplay';
 
 interface Ticket {
   id: string;

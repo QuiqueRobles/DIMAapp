@@ -7,9 +7,9 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Feather } from '@expo/vector-icons';
 import { supabase } from '@/lib/supabase';
-import { SearchBar } from './components/SearchBar';
-import { ClubCard } from './components/ClubCard';
-import { FilterModal } from './components/FilterModal';
+import { SearchBar } from '@/components/SearchBar';
+import { ClubCard } from '@/components/ClubCard';
+import { FilterModal } from '@/components/FilterModal';
 
 type RootStackParamList = {
   Home: undefined;
