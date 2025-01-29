@@ -3,8 +3,12 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, KeyboardAvo
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 import { AppNavigationProp } from '../../navigation';
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
+import { add } from 'date-fns';
 
 export default function OwnerRegisterScreen() {
+  const supabase = useSupabaseClient();
+  const KNOWN_PASSWORD = 'club_password';
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [clubname,setClubName]=useState('');
@@ -20,10 +24,71 @@ export default function OwnerRegisterScreen() {
     else {setMissingParameters(false)}
 
   }
+
+  const handleRegister = async () => {
+    setIsLoading(true);
+
+    if (clubname.length == 0 || clubname.length > 20) {
+      alert('Club name must be between 1 and 20 characters');
+      return;
+    }
+
+    try {
+      const {data: clubAuthData, error: authError } = await supabase.auth.signUp({
+         email, 
+         password:KNOWN_PASSWORD, 
+         phone:clubphone 
+      });
+      
+    
+  
+      if(authError) throw authError;
+  
+  
+      const clubId = clubAuthData.user?.id;
+      if (!clubId) {
+        throw new Error('User ID is null');
+      }
+
+
+      const {data: tableUserData, error: tableUserError} = await supabase.from('users').insert([
+        {
+          user_id: clubId,
+          isClub: true,
+        }
+      ]);
+
+      if(tableUserError){
+        throw tableUserError;
+      }
+
+      const {data: tableClubData, error: tableClubError} = await supabase.from('club').insert([
+        {
+          address: clubaddress,
+          club_id: clubId,
+          name: clubname,
+        }
+      ]);
+
+
+      if(tableClubError){
+        throw tableClubError;
+      }
+  
+    } catch(error: any){
+      alert(error.message);
+    }finally {
+      setIsLoading(false);
+      setShowText(true); 
+    }
+
+
+  };
+
   const handlePress= () => {
-    if (!missingparameters)
-    setShowText(true); 
-    else alert("Missing Parameters")
+    if (!missingparameters){
+      handleRegister();
+    }else alert("Missing Parameters")
   };
 
 
@@ -33,7 +98,7 @@ export default function OwnerRegisterScreen() {
       style={styles.container}
     >
       <Image
-        source={require('../../../assets/nightmi_business_logo.png')}
+        source={require('@/assets/nightmi_business_logo.png')}
         style={styles.logo}
         resizeMode="contain"
       />
@@ -47,7 +112,7 @@ export default function OwnerRegisterScreen() {
               placeholder="Club Name"
               placeholderTextColor="#9CA3AF"
               value={clubname}
-              onChangeText={(text)=>{setClubAddress(text);
+              onChangeText={(text)=>{setClubName(text);
                 checkInputs();} }
               keyboardType="email-address"
               autoCapitalize="none"

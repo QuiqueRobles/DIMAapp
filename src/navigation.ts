@@ -3,6 +3,7 @@ import { NavigationProp, RouteProp } from '@react-navigation/native';
 export type RootStackParamList = {
   Auth: undefined;
   Main: undefined;
+  MainOwner:undefined;
   Login: undefined;
   Register: undefined;
   ForgotPassword: undefined;
@@ -12,6 +13,13 @@ export type RootStackParamList = {
   Map: undefined;
   Tickets: undefined;
   Profile: undefined;
+  BuyTicket: undefined;
+  Calendar: undefined;
+  ClubManage: undefined;
+  EventManage: undefined;
+  HomeOwner: undefined;
+  MapOwner: undefined;
+  EditProfile: undefined;
 };
 
 export type AppNavigationProp = NavigationProp<RootStackParamList>;

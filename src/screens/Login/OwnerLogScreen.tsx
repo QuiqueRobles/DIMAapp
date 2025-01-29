@@ -3,7 +3,8 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, KeyboardAvo
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
-import { AppNavigationProp } from '../../navigation';
+import { AppNavigationProp } from '@/navigation';
+import { useSession } from 'isOwner';
 
 export default function OwnerLoginScreen() {
   const [email, setEmail] = useState('');
@@ -12,6 +13,7 @@ export default function OwnerLoginScreen() {
   const [isLoading, setIsLoading] = useState(false);
   const supabase = useSupabaseClient();
   const navigation = useNavigation<AppNavigationProp>();
+  const {isOwner,setisOwner}=useSession();
 
   const handleOwnerSignIn = async () => {
     setIsLoading(true);
@@ -26,6 +28,7 @@ export default function OwnerLoginScreen() {
     } else {
       // Navigate to owner dashboard or perform owner-specific actions
       alert('Owner logged in successfully');
+      setisOwner(true);
     }
   };
 
@@ -35,7 +38,7 @@ export default function OwnerLoginScreen() {
       style={styles.container}
     >
       <Image
-        source={require('../../../assets/nightmi_business_logo.png')}
+        source={require('@/assets/nightmi_logo.png')}
         style={styles.logo}
         resizeMode="contain"
       />
