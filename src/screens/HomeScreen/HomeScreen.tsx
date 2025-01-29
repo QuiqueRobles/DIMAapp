@@ -19,7 +19,7 @@ type RootStackParamList = {
 type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 
 interface Club {
-  id: string;
+  club_id: string;
   name: string;
   attendees: number;
   created_at: string;
@@ -185,10 +185,10 @@ const HomeScreen: React.FC = () => {
             renderItem={({ item }) => (
               <ClubCard
                 club={item}
-                onPress={() => handleClubPress(item.id)}
+                onPress={() => handleClubPress(item.club_id)}
               />
             )}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => item.club_id}
             contentContainerStyle={styles.listContainer}
             showsVerticalScrollIndicator={false}
             refreshControl={

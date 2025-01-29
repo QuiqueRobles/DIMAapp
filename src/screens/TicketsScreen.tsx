@@ -58,6 +58,8 @@ const TicketScreen: React.FC = () => {
           event:event_id (name)
         `)
         .eq('user_id', userData.user.id);
+      //console.log("ticketsData",ticketsData);
+      //console.log("ticketsError",ticketsError);
 
       if (ticketsError) {
        
@@ -72,7 +74,7 @@ const TicketScreen: React.FC = () => {
             const { data: clubData, error: clubError } = await supabase
               .from('club')
               .select('name')
-              .eq('id', ticket.club_id)
+              .eq('club_id', ticket.club_id)
               .single();
 
             if (clubError) {
