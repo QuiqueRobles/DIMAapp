@@ -45,7 +45,7 @@ const ClubEdit: React.FC<ClubEditsProps> = ({ club ,setClub}) => {
     //const [editableClub, setEditableClub] = useState(club);
     const handleUpdate = (key: keyof ClubEditsProps['club'], value: string) => {
         setClub((prev) =>prev? { ...prev, [key]: value }: null);
-       setEditableClub(club);
+       
       };
     
 

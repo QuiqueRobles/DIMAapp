@@ -1,0 +1,185 @@
+import { useState } from "react"
+import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from "react-native"
+import DateTimePicker from "@react-native-community/datetimepicker"
+import * as ImagePicker from "expo-image-picker"
+import { useClub } from "src/context/EventContext"
+
+type Props = {
+  visible: boolean
+  onClose: () => void
+}
+
+export default function AddEventModal({ visible, onClose }: Props) {
+  const [name, setName] = useState("")
+  const [date, setDate] = useState(new Date())
+  const [price, setPrice] = useState("")
+  const [description, setDescription] = useState("")
+  const [image, setImage] = useState<string | null>(null)
+
+  const { addEvent } = useClub()
+
+  const pickImage = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    })
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri)
+    }
+  }
+
+  const handleSubmit = () => {
+    addEvent({
+      club_id:"",
+      name,
+      date,
+      created_at: Date.now().toString(),
+      price: Number.parseFloat(price),
+      description,
+      image,
+      event_id:'',
+    })
+ 
+
+    onClose()
+    resetForm()
+  }
+
+  const resetForm = () => {
+    setName("")
+    setDate(new Date())
+    setPrice("")
+    setDescription("")
+    setImage(null)
+  }
+
+  return (
+    <Modal visible={visible} animationType="slide" transparent={true} onRequestClose={onClose}>
+      <View style={styles.modalContainer}>
+        <View style={styles.modalContent}>
+          <Text style={styles.title}>Add New Event</Text>
+
+          
+         
+
+          <TextInput
+            style={styles.input}
+            placeholder="Event Name"
+            placeholderTextColor="#666"
+            value={name}
+            onChangeText={setName}
+          />
+
+
+          <TextInput
+            style={styles.input}
+            placeholder="Price"
+            placeholderTextColor="#666"
+            value={price}
+            onChangeText={setPrice}
+            keyboardType="numeric"
+          />
+
+          <TextInput
+            style={[styles.input, styles.textArea]}
+            placeholder="Description"
+            placeholderTextColor="#666"
+            value={description}
+            onChangeText={setDescription}
+            multiline
+          />
+
+          <TouchableOpacity style={styles.imageButton} onPress={pickImage}>
+            <Text style={styles.imageButtonText}>{image ? "Change Image" : "Add Image"}</Text>
+          </TouchableOpacity>
+
+          {image && <Image source={{ uri: image }} style={styles.previewImage} />}
+
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity style={[styles.button, styles.cancelButton]} onPress={onClose}>
+              <Text style={styles.buttonText}>Cancel</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.button, styles.submitButton]} onPress={handleSubmit}>
+              <Text style={styles.buttonText}>Add Event</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    </Modal>
+  )
+}
+
+const styles = StyleSheet.create({
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContent: {
+    backgroundColor: "#1A1A1A",
+    borderRadius: 12,
+    padding: 20,
+    width: "90%",
+    maxHeight: "80%",
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#fff",
+    marginBottom: 20,
+    textAlign: "center",
+  },
+  input: {
+    backgroundColor: "#2A2A2A",
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 16,
+    color: "#fff",
+  },
+  textArea: {
+    height: 100,
+    textAlignVertical: "top",
+  },
+  imageButton: {
+    backgroundColor: "#2A2A2A",
+    padding: 12,
+    borderRadius: 8,
+    marginBottom: 16,
+  },
+  imageButtonText: {
+    color: "#8B5CF6",
+    textAlign: "center",
+  },
+  previewImage: {
+    width: "100%",
+    height: 200,
+    borderRadius: 8,
+    marginBottom: 16,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    gap: 12,
+  },
+  button: {
+    flex: 1,
+    padding: 12,
+    borderRadius: 8,
+    alignItems: "center",
+  },
+  cancelButton: {
+    backgroundColor: "#2A2A2A",
+  },
+  submitButton: {
+    backgroundColor: "#8B5CF6",
+  },
+  buttonText: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
+})
+

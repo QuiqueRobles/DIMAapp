@@ -5,15 +5,34 @@ import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 import { AppNavigationProp } from '@/navigation';
 import { useSession } from 'isOwner';
+import {useClub} from 'src/context/EventContext'
 
 export default function OwnerLoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  
+  const {clubId,setClubId} = useClub()
   const [isLoading, setIsLoading] = useState(false);
   const supabase = useSupabaseClient();
   const navigation = useNavigation<AppNavigationProp>();
   const {isOwner,setisOwner}=useSession();
+
+  const getAuthenticatedUserId = async () => {
+    try {
+      const { data: { user }, error } = await supabase.auth.getUser();
+      
+      if (error) {
+        throw new Error(`Error fetching authenticated user: ${error.message}`);
+      }
+      
+      if (!user) {
+        throw new Error('No authenticated user found');
+      }
+      setClubId(user.id)
+      return user.id; // Return the user's ID
+    } catch (err) {
+      return ''; // Return null if there's an error
+    }
+  };
 
   const handleOwnerSignIn = async () => {
     setIsLoading(true);
@@ -29,8 +48,13 @@ export default function OwnerLoginScreen() {
       // Navigate to owner dashboard or perform owner-specific actions
       alert('Owner logged in successfully');
       setisOwner(true);
+      const id = await getAuthenticatedUserId();
+      setClubId(id);
+
     }
   };
+     
+      
 
   return (
     <KeyboardAvoidingView 

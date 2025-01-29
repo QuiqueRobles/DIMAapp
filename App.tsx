@@ -14,7 +14,7 @@ import MapScreen from './src/screens/MapScreen';
 import TicketScreen from './src/screens/TicketsScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import LoginScreen from './src/screens/Login/LoginScreen';
-import RegisterScreen from '@/screens/Login/registerScreen';
+import RegisterScreen from '@/screens/Login/RegisterScreen';
 import ForgotPasswordScreen from '@/screens/Login/ForgotPassword';
 import OwnerLoginScreen from '@/screens/Login/OwnerLogScreen';
 import OwnerRegisterScreen from '@/screens/Login/OwnerRegisterScreen';
@@ -26,6 +26,7 @@ import ClubManageScreen from '@/screens/ClubManageScreen';
 import EventManageScreen from '@/screens/EventManageScreen';
 import HomeOwnerScreen from '@/screens/HomeOwnerScreen';
 import MapOwnerScreen from '@/screens/MapOwnerScreen';
+import { ClubProvider } from '@/context/EventContext';
 // Suppress warning about defaultProps
 const error = console.error;
 console.error = (...args: any) => {
@@ -190,7 +191,9 @@ export default function App() {
   return (
     <SessionContextProvider supabaseClient={supabase}>
       <IsOwnerProvider>
+        <ClubProvider>
       <AppNavigator />
+      </ClubProvider>
       </IsOwnerProvider>
     </SessionContextProvider>
   );
