@@ -15,14 +15,17 @@ export function formatDate(date: Date): string {
 }        
 
 interface Event {
-    event_id: string;
-    created_at: string;
-    club_id: string;
-    date: Date;
-    name: string;
-    price: number;
-    description: string;
-    image: string;
+
+    club_id: string | null
+    name: string
+    date: Date
+    created_at: string | null
+    price: number |null
+    description: string | null
+    image: string | null
+    event_id: string | null
+  
+
 }
 
 
@@ -30,7 +33,7 @@ const EventsManage = () => {
     const [loading, setLoading] = useState(true);
     const [isNewEventModalVisible, setIsNewEventModalVisible] = useState(false)
     const [isModifyEventModalVisible, setIsModifyEventModalVisible] = useState(false)
-    const { events,clubId,addEvent,setEvents } = useClub()
+    const { events,clubId,addEvent,setEvents,setClubId } = useClub()
     const [mytempEvents, setMytempEvents] = useState<Event[]>([]); //temporary variable to store events
 
     useEffect(() => {
@@ -45,14 +48,15 @@ const EventsManage = () => {
             const {data: {user} } = await supabase.auth.getUser();
             if(!user) throw new Error('Club not found');
             console.log("club:" ,user.id);
-
+            setClubId(user.id)
+            console.log('cluuubid',clubId)
             const {data: eventsData, error: eventsError} = await supabase.from('event').select('*').eq('club_id', user.id);
         
             console.log("events fetched:", eventsData);
             if (eventsError) throw new Error('Failed to fetch events');
             //setEvents(eventsData);
-            setMytempEvents(eventsData);
-            console.log("events: ", mytempEvents);
+            setEvents(eventsData);
+            console.log("events: ", events);
         } catch (error) {
             console.error(error);
         }finally{
@@ -129,7 +133,7 @@ const EventsManage = () => {
           </View>
           
           <OwnedEventsList 
-            events={mytempEvents} 
+            events={events}
             clubName="Club Name" 
           />
 

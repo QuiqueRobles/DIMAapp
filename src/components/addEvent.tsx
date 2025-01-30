@@ -1,8 +1,13 @@
 import { useState } from "react"
-import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from "react-native"
+import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet, Image,Alert} from "react-native"
 import DateTimePicker from "@react-native-community/datetimepicker"
 import * as ImagePicker from "expo-image-picker"
 import { useClub } from "src/context/EventContext"
+import { supabase } from "@/lib/supabase"
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
+
+
 
 type Props = {
   visible: boolean
@@ -16,7 +21,11 @@ export default function AddEventModal({ visible, onClose }: Props) {
   const [description, setDescription] = useState("")
   const [image, setImage] = useState<string | null>(null)
 
-  const { addEvent } = useClub()
+  const { addEvent,events,clubId } = useClub()
+  const newUUID = uuidv4();
+   
+   
+
 
   const pickImage = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
@@ -32,18 +41,20 @@ export default function AddEventModal({ visible, onClose }: Props) {
   }
 
   const handleSubmit = () => {
+    
     addEvent({
-      club_id:"",
+      club_id:clubId,
       name,
       date,
       created_at: Date.now().toString(),
       price: Number.parseFloat(price),
       description,
       image,
-      event_id:'',
+      event_id:newUUID,
     })
- 
-
+  
+    console.log("events",events)
+     saveChanges()
     onClose()
     resetForm()
   }
@@ -55,6 +66,34 @@ export default function AddEventModal({ visible, onClose }: Props) {
     setDescription("")
     setImage(null)
   }
+   const saveChanges = async () => {
+           try {
+            if (!clubId) {
+              throw new Error("Invalid UUID: club_id is empty or undefined");
+            }
+            else{
+             const { data, error } = await supabase
+               .from('event')
+               .insert({club_id:clubId,
+                name:name,
+                date: date,
+                created_at:Date().toString(),
+                price:  Number.parseFloat(price),
+                description:description,
+                image:image,
+                event_id:newUUID,
+
+
+
+            }) }
+           
+                 Alert.alert('Success', 'Club details updated successfully.');
+               } catch (error) {
+                 Alert.alert('Error', 'Failed to update club details.');
+                 console.error(error);
+               }
+               
+             };
 
   return (
     <Modal visible={visible} animationType="slide" transparent={true} onRequestClose={onClose}>

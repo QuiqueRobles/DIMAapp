@@ -6,14 +6,17 @@ import ModifyEventModal from '@/components/ModifyEvent';
 import { LinearGradient } from 'expo-linear-gradient';
 
 interface Event {
-  event_id: string;
-  created_at: string;
-  club_id: string;
-  date: Date;
-  name: string;
-  price: number;
-  description: string;
-  image: string;
+
+    club_id: string | null
+    name: string
+    date: Date
+    created_at: string | null
+    price: number |null
+    description: string | null
+    image: string | null
+    event_id: string | null
+
+
 }
 
 interface EventsListProps {
@@ -49,7 +52,7 @@ const OwnedEventsList: React.FC<EventsListProps> = ({ events, clubName }) => {
           )}
           <View style={styles.eventInfo}>
             <Text style={styles.eventName}>{event.name || 'Unnamed Event'}</Text>
-            <Text style={styles.eventDate}>{format(event.date, 'MMM d, yyyy')}</Text>
+            <Text style={styles.eventDate}>{format(parseISO(event.date.toISOString().split("T")[0]), 'MMM d, yyyy')}</Text>
             {event.description && (
               <Text style={styles.eventDescription} numberOfLines={2}>
                 {event.description}
@@ -72,6 +75,15 @@ const OwnedEventsList: React.FC<EventsListProps> = ({ events, clubName }) => {
               <Text style={styles.buttonText}>Modify Event</Text>
             </LinearGradient>
           </TouchableOpacity>
+          <ModifyEventButton 
+            eventId={event.event_id} 
+            clubId={event.club_id} 
+            eventName={event.name || 'Unnamed Event'} 
+            eventDate={event.date} 
+            eventPrice={event.price !== null ? event.price / 100 : 0} 
+            eventDescription={event.description} 
+            eventImage={event.image}
+            />
         </View>
       ))}
 
