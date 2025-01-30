@@ -1,3 +1,4 @@
+import { STRIPE_PUBLISHABLE_KEY } from '@env';
 import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -8,17 +9,17 @@ import { Session } from '@supabase/supabase-js';
 import { SessionContextProvider } from '@supabase/auth-helpers-react';
 import { supabase } from './src/lib/supabase';
 import { IsOwnerProvider, useSession } from 'isOwner';
-
-import HomeScreen from './src/screens/HomeScreen';
-import MapScreen from './src/screens/MapScreen';
+import { StripeProvider } from '@stripe/stripe-react-native';
+import HomeScreen from '@/screens/HomeScreen/HomeScreen';
+import MapScreen from '@/screens/MapScreen/MapScreen';
 import TicketScreen from './src/screens/TicketsScreen';
-import ProfileScreen from './src/screens/ProfileScreen';
+import ProfileScreen from '@/screens/ProfileScreen/ProfileScreen';
 import LoginScreen from './src/screens/Login/LoginScreen';
 import RegisterScreen from '@/screens/Login/RegisterScreen';
 import ForgotPasswordScreen from '@/screens/Login/ForgotPassword';
 import OwnerLoginScreen from '@/screens/Login/OwnerLogScreen';
 import OwnerRegisterScreen from '@/screens/Login/OwnerRegisterScreen';
-import ClubScreen from './src/screens/ClubScreen';
+import ClubScreen from '@/screens/HomeScreen/ClubScreen';
 import BuyTicketScreen from '@/screens/BuyTicketScreen';
 import CalendarScreen from '@/screens/CalendarScreen';
 import ReviewsScreen from '@/screens/ReviewScreen';
@@ -26,8 +27,11 @@ import ClubManageScreen from '@/screens/ClubManageScreen';
 import EventManageScreen from '@/screens/EventManageScreen';
 import HomeOwnerScreen from '@/screens/HomeOwnerScreen';
 import MapOwnerScreen from '@/screens/MapOwnerScreen';
+import EditProfileScreen from '@/screens/ProfileScreen/EditProfileScreen';
+import { set } from 'date-fns';
 import { ClubProvider } from '@/context/EventContext';
 // Suppress warning about defaultProps
+
 const error = console.error;
 console.error = (...args: any) => {
   if (/defaultProps/.test(args[0])) return;
@@ -137,15 +141,36 @@ const AppNavigator = () => {
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const {isOwner,setisOwner}=useSession();
+  const [userId, setUserId] = useState<string | null>(null);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
       setSession(session);
+      if(session?.user?.id){
+        setUserId(session.user.id);
+        console.log(session.user.id);
+        const { data, error } = await supabase.from('users').select('*').eq('user_id', session.user.id).single();
+
+        //console.log('Query Result:', data);
+        //console.log('Query Error:', error);
+
+
+        if (data) {
+          //console.log("isOwner correctly set");
+          setisOwner(data?.isClub);
+        }else{
+          alert(error?.message);
+        }
+
+      }
       setIsLoading(false);
     });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
+      if (session?.user) {
+        setUserId(session.user.id);
+      }
     });
 
     return () => subscription.unsubscribe();
@@ -174,6 +199,7 @@ const AppNavigator = () => {
             <Stack.Screen name="Main" component={MainTabs} />
             <Stack.Screen name="Club" component={ClubScreen} />
             <Stack.Screen name="BuyTicket" component={BuyTicketScreen} />
+            <Stack.Screen name="EditProfile" component={EditProfileScreen} />
             <Stack.Screen name="Calendar" component={CalendarScreen} />
             <Stack.Screen name="Reviews" component={ReviewsScreen} />
           </>
@@ -189,12 +215,15 @@ const AppNavigator = () => {
 
 export default function App() {
   return (
-    <SessionContextProvider supabaseClient={supabase}>
-      <IsOwnerProvider>
-        <ClubProvider>
-      <AppNavigator />
-      </ClubProvider>
-      </IsOwnerProvider>
-    </SessionContextProvider>
+    <StripeProvider
+      publishableKey={STRIPE_PUBLISHABLE_KEY}
+      merchantIdentifier="tu_identificador_de_comerciante" // Necesario para Apple Pay
+    >
+      <SessionContextProvider supabaseClient={supabase}>
+        <IsOwnerProvider>
+          <AppNavigator />
+        </IsOwnerProvider>
+      </SessionContextProvider>
+    </StripeProvider>
   );
 }

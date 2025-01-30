@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, Modal } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { supabase } from '../lib/supabase'; // Asegúrate de que esta ruta sea correcta
-import TicketCard from './components/TicketCard';
-import ExpandedTicket from './components/ExpandedTicket';
-import LoadingSpinner from './components/LoadingSpinner';
-import ErrorDisplay from './components/ErrorDisplay';
+import { supabase } from '@/lib/supabase'; // Asegúrate de que esta ruta sea correcta
+import TicketCard from '@/components/TicketCard';
+import ExpandedTicket from '@/components/ExpandedTicket';
+import LoadingSpinner from '@/components/LoadingSpinner';
+import ErrorDisplay from '@/components/ErrorDisplay';
 
 interface Ticket {
   id: string;
@@ -58,6 +58,8 @@ const TicketScreen: React.FC = () => {
           event:event_id (name)
         `)
         .eq('user_id', userData.user.id);
+      //console.log("ticketsData",ticketsData);
+      //console.log("ticketsError",ticketsError);
 
       if (ticketsError) {
        
@@ -72,7 +74,7 @@ const TicketScreen: React.FC = () => {
             const { data: clubData, error: clubError } = await supabase
               .from('club')
               .select('name')
-              .eq('id', ticket.club_id)
+              .eq('club_id', ticket.club_id)
               .single();
 
             if (clubError) {

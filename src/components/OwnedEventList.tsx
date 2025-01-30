@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import { format, parseISO } from 'date-fns';
-import TicketButton from './TicketButton';
+import ModifyEventButton from '@/components/ModifyEventButton';
 
 interface Event {
   id: string;
@@ -17,10 +17,9 @@ interface Event {
 interface EventsListProps {
   events: Event[];
   clubName: string;
-  clubId: string;
 }
 
-const EventsList: React.FC<EventsListProps> = ({ events, clubName, clubId }) => {
+const OwnedEventsList: React.FC<EventsListProps> = ({ events, clubName }) => {
   return (
     <View style={styles.container}>
       {events.map((event) => (
@@ -44,7 +43,16 @@ const EventsList: React.FC<EventsListProps> = ({ events, clubName, clubId }) => 
               <Text style={styles.eventPrice}>${(event.price / 100).toFixed(2)}</Text>
             )}
           </View>
-          <TicketButton event={event} clubName={clubName} />
+          
+          <ModifyEventButton 
+            eventId={event.id} 
+            clubId={event.club_id} 
+            eventName={event.name || 'Unnamed Event'} 
+            eventDate={event.date} 
+            eventPrice={event.price !== null ? event.price / 100 : 0} 
+            eventDescription={event.description} 
+            eventImage={event.image}
+            />
         </View>
       ))}
     </View>
@@ -96,5 +104,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default EventsList;
+export default OwnedEventsList;
 

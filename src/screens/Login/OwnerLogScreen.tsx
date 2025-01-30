@@ -46,7 +46,6 @@ export default function OwnerLoginScreen() {
       alert(error.message);
     } else {
       // Navigate to owner dashboard or perform owner-specific actions
-      alert('Owner logged in successfully');
       setisOwner(true);
       const id = await getAuthenticatedUserId();
       setClubId(id);

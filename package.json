@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo/vector-icons": "^14.0.4",
     "@react-native-async-storage/async-storage": "1.23.1",
     "@react-native-community/datetimepicker": "8.2.0",
     "@react-native-community/slider": "4.5.5",
@@ -16,8 +17,10 @@
     "@react-navigation/bottom-tabs": "^6.6.1",
     "@react-navigation/native": "^6.1.18",
     "@react-navigation/native-stack": "^6.11.0",
+    "@stripe/stripe-react-native": "0.38.6",
     "@supabase/auth-helpers-react": "^0.5.0",
     "@supabase/supabase-js": "^2.45.6",
+    "country-codes-list": "^1.6.11",
     "date-fns": "^4.1.0",
     "expo": "^52.0.8",
     "expo-blur": "~14.0.2",
@@ -30,7 +33,9 @@
     "react": "18.3.1",
     "react-native": "0.76.6",
     "react-native-calendars": "^1.1307.0",
+    "react-native-country-flag": "^2.0.2",
     "react-native-country-picker-modal": "^2.0.0",
+    "react-native-dotenv": "^3.4.11",
     "react-native-image-picker": "^7.2.3",
     "react-native-linear-gradient": "^2.8.3",
     "react-native-maps": "1.18.0",
@@ -41,6 +46,7 @@
     "react-native-vector-icons": "^10.2.0",
     "react-navigation": "^5.0.0",
     "slider": "^1.0.4",
+    "stripe": "^17.5.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
