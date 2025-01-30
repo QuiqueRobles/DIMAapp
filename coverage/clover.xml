@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1738264838714" clover="3.2.0">
-  <project timestamp="1738264838714" name="All files">
-    <metrics statements="1022" coveredstatements="8" conditionals="570" coveredconditionals="13" methods="257" coveredmethods="2" elements="1849" coveredelements="23" complexity="0" loc="1022" ncloc="1022" packages="15" files="53" classes="53"/>
+<coverage generated="1738268273528" clover="3.2.0">
+  <project timestamp="1738268273528" name="All files">
+    <metrics statements="1022" coveredstatements="19" conditionals="570" coveredconditionals="23" methods="257" coveredmethods="6" elements="1849" coveredelements="48" complexity="0" loc="1022" ncloc="1022" packages="15" files="53" classes="53"/>
     <package name="NightMi">
       <metrics statements="51" coveredstatements="0" conditionals="22" coveredconditionals="0" methods="18" coveredmethods="0"/>
       <file name="App.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\App.tsx">
@@ -78,12 +78,12 @@
       </file>
     </package>
     <package name="NightMi.src.components">
-      <metrics statements="87" coveredstatements="8" conditionals="90" coveredconditionals="13" methods="37" coveredmethods="2"/>
+      <metrics statements="87" coveredstatements="19" conditionals="90" coveredconditionals="23" methods="37" coveredmethods="6"/>
       <file name="ActionButtons.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\components\ActionButtons.tsx">
-        <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="11" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="17" count="4" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
       </file>
       <file name="ClubCard.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\components\ClubCard.tsx">
         <metrics statements="9" coveredstatements="8" conditionals="14" coveredconditionals="13" methods="3" coveredmethods="2"/>
@@ -98,18 +98,18 @@
         <line num="105" count="1" type="stmt"/>
       </file>
       <file name="ClubDetails.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\components\ClubDetails.tsx">
-        <metrics statements="5" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="39" count="0" type="stmt"/>
-        <line num="40" count="0" type="stmt"/>
-        <line num="48" count="0" type="stmt"/>
+        <metrics statements="5" coveredstatements="5" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="23" count="2" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="40" count="6" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
       </file>
       <file name="ClubHeader.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\components\ClubHeader.tsx">
-        <metrics statements="3" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="49" count="0" type="stmt"/>
+        <metrics statements="3" coveredstatements="3" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="49" count="1" type="stmt"/>
       </file>
       <file name="CountryPickerWrapper.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\components\CountryPickerWrapper.tsx">
         <metrics statements="2" coveredstatements="0" conditionals="7" coveredconditionals="0" methods="1" coveredmethods="0"/>

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -174,8 +174,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -191,8 +191,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -200,7 +200,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -264,8 +264,8 @@ interface ClubDetailsProps {
   };
 }
 &nbsp;
-const ClubDetails: React.FC&lt;ClubDetailsProps&gt; = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span> club }) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  return (</span>
+const ClubDetails: React.FC&lt;ClubDetailsProps&gt; = ({ club }) =&gt; {
+  return (
     &lt;View style={styles.container}&gt;
       &lt;DetailItem icon="map-pin" text={club.address} /&gt;
       &lt;DetailItem icon="clock" text={club.opening_hours} /&gt;
@@ -281,8 +281,8 @@ const ClubDetails: React.FC&lt;ClubDetailsProps&gt; = <span class="cstat-no" tit
   );
 };
 &nbsp;
-const DetailItem: React.FC&lt;{ icon: keyof typeof Feather.glyphMap; text: string }&gt; = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span> icon, text }) =&gt; (</span>
-<span class="cstat-no" title="statement not covered" >  &lt;View style={styles.detailItem}&gt;</span>
+const DetailItem: React.FC&lt;{ icon: keyof typeof Feather.glyphMap; text: string }&gt; = ({ icon, text }) =&gt; (
+  &lt;View style={styles.detailItem}&gt;
     &lt;View style={styles.iconContainer}&gt;
       &lt;Feather name={icon} size={16} color="#A78BFA" /&gt;
     &lt;/View&gt;
@@ -290,7 +290,7 @@ const DetailItem: React.FC&lt;{ icon: keyof typeof Feather.glyphMap; text: strin
   &lt;/View&gt;
 );
 &nbsp;
-const styles = <span class="cstat-no" title="statement not covered" >StyleSheet.create({</span>
+const styles = StyleSheet.create({
   container: {
     backgroundColor: 'rgba(31, 41, 55, 0.5)',
     borderRadius: 12,
@@ -340,7 +340,7 @@ export default ClubDetails;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-01-30T19:20:37.530Z
+                at 2025-01-30T20:17:51.702Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
