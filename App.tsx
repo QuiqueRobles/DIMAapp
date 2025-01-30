@@ -8,7 +8,7 @@ import { Feather } from '@expo/vector-icons';
 import { Session } from '@supabase/supabase-js';
 import { SessionContextProvider } from '@supabase/auth-helpers-react';
 import { supabase } from './src/lib/supabase';
-import { IsOwnerProvider, useSession } from 'isOwner';
+import { IsOwnerProvider, useSession } from './isOwner';
 import { StripeProvider } from '@stripe/stripe-react-native';
 import HomeScreen from '@/screens/HomeScreen/HomeScreen';
 import MapScreen from '@/screens/MapScreen/MapScreen';
