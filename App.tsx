@@ -29,6 +29,8 @@ import HomeOwnerScreen from '@/screens/HomeOwnerScreen';
 import MapOwnerScreen from '@/screens/MapOwnerScreen';
 import EditProfileScreen from '@/screens/ProfileScreen/EditProfileScreen';
 import { set } from 'date-fns';
+import { ClubProvider } from '@/context/EventContext';
+// Suppress warning about defaultProps
 
 const error = console.error;
 console.error = (...args: any) => {
