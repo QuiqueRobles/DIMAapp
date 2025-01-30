@@ -9,7 +9,7 @@ type RootStackParamList = {
         eventId: string;
         clubId: string;
         eventName: string;
-        eventDate: string;
+        eventDate: Date;
         eventPrice: number;
         eventDescription: string | null;
         eventImage: string | null;
@@ -20,7 +20,7 @@ const ModifyEventButton: React.FC<{
     eventId: string; 
     clubId: string; 
     eventName: string; 
-    eventDate: string; 
+    eventDate: Date; 
     eventPrice: number; 
     eventDescription: string | null; 
     eventImage: string | null; }> = ({ 

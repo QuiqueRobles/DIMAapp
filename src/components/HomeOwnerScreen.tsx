@@ -7,13 +7,13 @@
   import { Feather } from '@expo/vector-icons';
   import { LinearGradient } from 'expo-linear-gradient';
   import { supabase } from '@/lib/supabase';
-  import ClubHeader from './components/ClubHeader';
-  import ClubDetails from './components/ClubDetails';
-  import ClubEdit from './components/ClubEdit';
-  import EventsList from './components/EventsList';
-  import ReviewsList from './components/ReviewsList';
-  import ErrorDisplay from './components/ErrorDisplay';
-  import LoadingSpinner from './components/LoadingSpinner';
+  import ClubHeader from '@/components/ClubHeader';
+  import ClubDetails from '@/components/ClubDetails';
+  import ClubEdit from '@/components/ClubEdit';
+  import EventsList from '@/components/EventsList';
+  import ReviewsList from '@/components/ReviewsList';
+  import ErrorDisplay from '@/components/ErrorDisplay';
+  import LoadingSpinner from '@/components/LoadingSpinner';
   import { AppNavigationProp, AppRouteProp } from '@/navigation';
   import { launchImageLibrary } from 'react-native-image-picker';
   import * as ImagePicker from 'expo-image-picker';
@@ -194,29 +194,29 @@
       }
     };
  const saveChanges = async () => {
-         try {
-           const { data, error } = await supabase
-             .from('club')
-             .update({
-               address: club.address,
-               opening_hours: club.opening_hours,
-               dress_code: club.dress_code,
-               music_genre: club.music_genre,
-               description: club.description,
-             })
-             .eq('club_id', clubId);// Match by the unique club ID 
-             if (error) {
-                 throw error;
-               }
-         
-               Alert.alert('Success', 'Club details updated successfully.');
-               setEdit(!edit);
-             } catch (error) {
-               Alert.alert('Error', 'Failed to update club details.');
-               console.error(error);
-             }
-             
-           };
+    try {
+      const { data, error } = await supabase
+        .from('club')
+        .update({
+          address: club.address,
+          opening_hours: club.opening_hours,
+          dress_code: club.dress_code,
+          music_genre: club.music_genre,
+          description: club.description,
+        })
+        .eq('club_id', clubId);// Match by the unique club ID 
+        if (error) {
+            throw error;
+          }
+    
+          Alert.alert('Success', 'Club details updated successfully.');
+          setEdit(!edit);
+        } catch (error) {
+          Alert.alert('Error', 'Failed to update club details.');
+          console.error(error);
+        }
+        
+      };
          
     
   

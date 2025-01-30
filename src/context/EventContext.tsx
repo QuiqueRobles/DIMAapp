@@ -1,13 +1,13 @@
 import { createContext, useContext, useState } from "react"
 export type Event = {
-    club_id: string
-    name: string
-    date: Date
-    created_at: string | null
-    price: number
-    description: string
-    image: string | null
-    event_id: string
+    club_id: string,
+    name: string,
+    date: Date,
+    created_at: string,
+    price: number,
+    description: string,
+    image: string,
+    event_id: string,
   }
 
 type ClubContextType = {

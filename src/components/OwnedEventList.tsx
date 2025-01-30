@@ -1,17 +1,19 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import React, { useState } from 'react';
+import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { format, parseISO } from 'date-fns';
 import ModifyEventButton from '@/components/ModifyEventButton';
+import ModifyEventModal from '@/components/ModifyEvent';
+import { LinearGradient } from 'expo-linear-gradient';
 
 interface Event {
-  id: string;
+  event_id: string;
   created_at: string;
   club_id: string;
-  date: string;
-  name: string | null;
-  price: number | null;
-  description: string | null;
-  image: string | null;
+  date: Date;
+  name: string;
+  price: number;
+  description: string;
+  image: string;
 }
 
 interface EventsListProps {
@@ -20,10 +22,24 @@ interface EventsListProps {
 }
 
 const OwnedEventsList: React.FC<EventsListProps> = ({ events, clubName }) => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
+
+  const openModal = (event: Event) => {
+    setSelectedEvent(event);
+    setIsModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setIsModalVisible(false);
+    setSelectedEvent(null);
+  };
+
+
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       {events.map((event) => (
-        <View key={event.id} style={styles.eventItem}>
+        <View key={event.event_id} style={styles.eventItem}>
           {event.image && (
             <Image 
               source={{ uri: event.image }} 
@@ -33,7 +49,7 @@ const OwnedEventsList: React.FC<EventsListProps> = ({ events, clubName }) => {
           )}
           <View style={styles.eventInfo}>
             <Text style={styles.eventName}>{event.name || 'Unnamed Event'}</Text>
-            <Text style={styles.eventDate}>{format(parseISO(event.date), 'MMM d, yyyy')}</Text>
+            <Text style={styles.eventDate}>{format(event.date, 'MMM d, yyyy')}</Text>
             {event.description && (
               <Text style={styles.eventDescription} numberOfLines={2}>
                 {event.description}
@@ -44,18 +60,35 @@ const OwnedEventsList: React.FC<EventsListProps> = ({ events, clubName }) => {
             )}
           </View>
           
-          <ModifyEventButton 
-            eventId={event.id} 
-            clubId={event.club_id} 
-            eventName={event.name || 'Unnamed Event'} 
-            eventDate={event.date} 
-            eventPrice={event.price !== null ? event.price / 100 : 0} 
-            eventDescription={event.description} 
-            eventImage={event.image}
-            />
+          
+
+          <TouchableOpacity onPress={() => openModal(event)}>
+            <LinearGradient
+              colors={['#8B5CF6', '#7C3AED']}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+              style={styles.button}
+            >
+              <Text style={styles.buttonText}>Modify Event</Text>
+            </LinearGradient>
+          </TouchableOpacity>
         </View>
       ))}
-    </View>
+
+      {selectedEvent && (
+        <ModifyEventModal
+          visible={isModalVisible}
+          onClose={closeModal}
+          eventId={selectedEvent.event_id} 
+          clubId={selectedEvent.club_id} 
+          eventName={selectedEvent.name || 'Unnamed Event'} 
+          eventDate={selectedEvent.date} 
+          eventPrice={selectedEvent.price !== null ? selectedEvent.price / 100 : 0} 
+          eventDescription={selectedEvent.description} 
+          eventImage={selectedEvent.image}
+        />
+      )}
+    </ScrollView>
   );
 };
 
@@ -101,6 +134,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     color: '#10B981',
+  },
+  button: {
+    borderRadius: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 16,
+  },
+  buttonText: {
+    color: '#FFFFFF',
+    fontSize: 14,
+    fontWeight: '600',
   },
 });
 

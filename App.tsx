@@ -25,7 +25,7 @@ import CalendarScreen from '@/screens/CalendarScreen';
 import ReviewsScreen from '@/screens/ReviewScreen';
 import ClubManageScreen from '@/screens/ClubManageScreen';
 import EventManageScreen from '@/screens/EventManageScreen';
-import HomeOwnerScreen from '@/screens/HomeOwnerScreen';
+import HomeOwnerScreen from '@/components/HomeOwnerScreen';
 import MapOwnerScreen from '@/screens/MapOwnerScreen';
 import EditProfileScreen from '@/screens/ProfileScreen/EditProfileScreen';
 import { set } from 'date-fns';
@@ -219,11 +219,13 @@ export default function App() {
       publishableKey={STRIPE_PUBLISHABLE_KEY}
       merchantIdentifier="tu_identificador_de_comerciante" // Necesario para Apple Pay
     >
-      <SessionContextProvider supabaseClient={supabase}>
-        <IsOwnerProvider>
-          <AppNavigator />
-        </IsOwnerProvider>
-      </SessionContextProvider>
+      <ClubProvider>
+        <SessionContextProvider supabaseClient={supabase}>
+          <IsOwnerProvider>
+            <AppNavigator />
+          </IsOwnerProvider>
+        </SessionContextProvider>
+      </ClubProvider>
     </StripeProvider>
   );
 }

@@ -3,11 +3,11 @@ import { supabase } from '@/lib/supabase';
 import React, { useEffect, useState } from 'react';
 import { RefreshControl } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert, Image, StyleSheet, Button } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, Alert, Image, StyleSheet, Button } from 'react-native';
 import OwnedEventsList from '@/components/OwnedEventList';
 import { Calendar } from "react-native-calendars"
 //import { Plus } from "lucide-react-native"
-import AddEventModal from "src/screens/components/addEvent"
+import AddEventModal from "@/components/addEvent"
 import { ClubProvider, useClub } from "src/context/EventContext"
 
 export function formatDate(date: Date): string {
@@ -15,24 +15,27 @@ export function formatDate(date: Date): string {
 }        
 
 interface Event {
-    id: string;
+    event_id: string;
     created_at: string;
     club_id: string;
-    date: string;
-    name: string | null;
-    price: number | null;
-    description: string | null;
-    image: string | null;
+    date: Date;
+    name: string;
+    price: number;
+    description: string;
+    image: string;
 }
 
 
 const EventsManage = () => {
     const [loading, setLoading] = useState(true);
-    const [isModalVisible, setIsModalVisible] = useState(false)
+    const [isNewEventModalVisible, setIsNewEventModalVisible] = useState(false)
+    const [isModifyEventModalVisible, setIsModifyEventModalVisible] = useState(false)
     const { events,clubId,addEvent,setEvents } = useClub()
+    const [mytempEvents, setMytempEvents] = useState<Event[]>([]); //temporary variable to store events
 
     useEffect(() => {
         fetchEvents();
+        
     }, []);
     
     
@@ -45,9 +48,11 @@ const EventsManage = () => {
 
             const {data: eventsData, error: eventsError} = await supabase.from('event').select('*').eq('club_id', user.id);
         
-            console.log("events:", eventsData);
+            console.log("events fetched:", eventsData);
             if (eventsError) throw new Error('Failed to fetch events');
-            setEvents(eventsData || []);
+            //setEvents(eventsData);
+            setMytempEvents(eventsData);
+            console.log("events: ", mytempEvents);
         } catch (error) {
             console.error(error);
         }finally{
@@ -70,29 +75,35 @@ const EventsManage = () => {
       }, {})
     
     const fetchClubData = async () => {
-            try {
+      try {
 
-           
-              const { data: clubData, error: clubError } = await supabase
-                .from('event')
-                .select('*')
-                .eq('club_id', clubId)
-                .order('date', { ascending:true})
-                .limit(5) as { data: Event[], error: any }; // Explicit type);
+        console.log("fetching events for club:", clubId);
+      
+        const { data: clubData, error: clubError } = await supabase
+          .from('event')
+          .select('*')
+          .eq('club_id', clubId)
+          .order('date', { ascending:true})
+          .limit(5) as { data: Event[], error: any }; // Explicit type);
+
+        console.log("clubData:", clubData);
+        console.log("clubError:", clubError);
+  
+        if (clubError) throw new Error('Failed to fetch club data');
+        setEvents(clubData);  
+
         
-              if (clubError) throw new Error('Failed to fetch club data');
-              //setEvents(clubData); 
-              } 
-              catch (err: unknown) {
-                if (err instanceof Error) {
-                 
-                } else {
-                 
-                }
-              } finally {
-               
-              }
-            };
+      } 
+      catch (err: unknown) {
+        if (err instanceof Error) {
+          
+        } else {
+          
+        }
+      } finally {
+        
+      }
+    };
 
     
     return (
@@ -117,13 +128,18 @@ const EventsManage = () => {
             <Text style={styles.noEvents}>{events.length === 0 ? "No events yet" : "Today's events:"}</Text>
           </View>
           
-          <OwnedEventsList events={events} clubName="Club Name" />
+          <OwnedEventsList 
+            events={mytempEvents} 
+            clubName="Club Name" 
+          />
+
+          
     
-          <TouchableOpacity style={styles.fab} onPress={() => setIsModalVisible(true)}>
+          <TouchableOpacity style={styles.fab} onPress={() => setIsNewEventModalVisible(true)}>
             <Text/>
           </TouchableOpacity>
     
-          <AddEventModal visible={isModalVisible} onClose={() => setIsModalVisible(false)} />
+          <AddEventModal visible={isNewEventModalVisible} onClose={() => setIsNewEventModalVisible(false)} />
         </View>
         </ClubProvider>
       )
@@ -132,6 +148,7 @@ const EventsManage = () => {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
+      paddingTop: 70,
       backgroundColor: '#1F2937',
     },
     scrollContent: {
