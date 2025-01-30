@@ -7,13 +7,13 @@ import { supabase } from '@/lib/supabase';
 type Props = {
   visible: boolean
   onClose: () => void
-  eventId : string
-  clubId : string
+  eventId : string | null
+  clubId : string | null
   eventName : string
   eventDate : Date
   eventPrice : number
-  eventDescription : string 
-  eventImage : string 
+  eventDescription : string | null
+  eventImage : string | null
 }
 
 
@@ -91,7 +91,7 @@ function ModifyEventModal({ visible, onClose, eventId, clubId, eventName, eventD
               style={[styles.input, styles.textArea]}
               placeholder="Description"
               placeholderTextColor="#666"
-              value={description}
+              value={description || ""}
               onChangeText={setDescription}
               multiline
             />
