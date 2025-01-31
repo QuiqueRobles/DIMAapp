@@ -1,7 +1,7 @@
 // __test__/ActionButtons.test.tsx
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
-import { ActionButtons } from '../src/components/ActionButtons';
+import { ActionButtons } from '../../src/components/ActionButtons';
 
 // Mock @expo/vector-icons
 jest.mock('@expo/vector-icons', () => ({

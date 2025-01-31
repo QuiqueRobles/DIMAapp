@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -222,13 +222,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -257,8 +255,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -267,7 +267,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -356,11 +356,11 @@ interface ExpandedTicketProps {
   onClose: () =&gt; void;
 }
 &nbsp;
-const ExpandedTicket: React.FC&lt;ExpandedTicketProps&gt; = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span> ticket, onClose }) =&gt; {</span>
-  const eventDate = <span class="cstat-no" title="statement not covered" >new Date(ticket.event_date);</span>
-  const purchaseDate = <span class="cstat-no" title="statement not covered" >new Date(ticket.purchase_date);</span>
+const ExpandedTicket: React.FC&lt;ExpandedTicketProps&gt; = ({ ticket, onClose }) =&gt; {
+  const eventDate = new Date(ticket.event_date);
+  const purchaseDate = new Date(ticket.purchase_date);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
+  return (
     &lt;View style={styles.container}&gt;
       &lt;View style={styles.content}&gt;
         &lt;TouchableOpacity style={styles.closeButton} onPress={onClose}&gt;
@@ -391,8 +391,8 @@ const ExpandedTicket: React.FC&lt;ExpandedTicketProps&gt; = <span class="cstat-n
   );
 };
 &nbsp;
-const DetailItem: React.FC&lt;{ icon: string; label: string; value: string }&gt; = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span> icon, label, value }) =&gt; (</span>
-<span class="cstat-no" title="statement not covered" >  &lt;View style={styles.detailItem}&gt;</span>
+const DetailItem: React.FC&lt;{ icon: string; label: string; value: string }&gt; = ({ icon, label, value }) =&gt; (
+  &lt;View style={styles.detailItem}&gt;
     &lt;Feather name={icon} size={20} color="#A78BFA" /&gt;
     &lt;View style={styles.detailText}&gt;
       &lt;Text style={styles.detailLabel}&gt;{label}&lt;/Text&gt;
@@ -401,7 +401,7 @@ const DetailItem: React.FC&lt;{ icon: string; label: string; value: string }&gt;
   &lt;/View&gt;
 );
 &nbsp;
-const styles = <span class="cstat-no" title="statement not covered" >StyleSheet.create({</span>
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -472,7 +472,7 @@ export default ExpandedTicket;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-01-30T20:17:51.702Z
+                at 2025-01-31T10:32:32.991Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

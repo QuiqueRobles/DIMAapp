@@ -1,7 +1,7 @@
 // __test__/ClubCard.test.tsx
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
-import { ClubCard } from '../src/components/ClubCard';
+import { ClubCard } from '../../src/components/ClubCard';
 
 // Mock @expo/vector-icons
 jest.mock('@expo/vector-icons', () => ({

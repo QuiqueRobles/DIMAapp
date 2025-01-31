@@ -20,7 +20,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ value, onChangeText, onCle
         onChangeText={onChangeText}
       />
       {value.length > 0 && (
-        <TouchableOpacity onPress={onClear} style={styles.clearButton}>
+        <TouchableOpacity onPress={onClear} style={styles.clearButton} testID="clear-button">
           <Feather name="x" size={20} color="#9CA3AF" />
         </TouchableOpacity>
       )}

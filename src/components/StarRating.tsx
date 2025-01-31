@@ -15,11 +15,13 @@ const StarRating: React.FC<StarRatingProps> = ({ rating, onRatingChange }) => {
           key={star}
           onPress={() => onRatingChange(star)}
           style={styles.starContainer}
+          testID="star-button"
         >
           <Feather
             name={star <= rating ? 'star' : 'star'}
             size={30}
             color={star <= rating ? '#FFD700' : '#4B5563'}
+            testID={star <= rating ? 'filled-star' : 'empty-star'}
           />
         </TouchableOpacity>
       ))}
