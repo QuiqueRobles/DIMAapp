@@ -170,7 +170,7 @@ const HomeScreen: React.FC = () => {
             onChangeText={setSearchQuery}
             onClear={() => setSearchQuery('')}
           />
-          <TouchableOpacity style={styles.filterButton} onPress={handleFilterPress}>
+          <TouchableOpacity style={styles.filterButton} onPress={handleFilterPress}testID="filter-button">
             <Feather name="filter" size={24} color="#FFFFFF" />
           </TouchableOpacity>
         </View>
@@ -181,6 +181,7 @@ const HomeScreen: React.FC = () => {
           </View>
         ) : (
           <FlatList
+            testID="flat-list"
             data={filteredClubs}
             renderItem={({ item }) => (
               <ClubCard
@@ -192,7 +193,12 @@ const HomeScreen: React.FC = () => {
             contentContainerStyle={styles.listContainer}
             showsVerticalScrollIndicator={false}
             refreshControl={
-              <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor="#4F46E5" />
+              <RefreshControl 
+                testID="refresh-control"
+                refreshing={refreshing}
+                onRefresh={handleRefresh}
+                tintColor="#4F46E5"
+              />
             }
             onEndReached={handleLoadMore}
             onEndReachedThreshold={0.1}

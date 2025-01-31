@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet, Image,Alert} from "react-native"
 import DateTimePicker from "@react-native-community/datetimepicker"
 import * as ImagePicker from "expo-image-picker"
-import { useClub } from "src/context/EventContext"
+import { useClub } from "../../src/context/EventContext"
 import { supabase } from "@/lib/supabase"
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";

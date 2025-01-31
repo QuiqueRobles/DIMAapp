@@ -8,7 +8,7 @@ import OwnedEventsList from '@/components/OwnedEventList';
 import { Calendar } from "react-native-calendars"
 //import { Plus } from "lucide-react-native"
 import AddEventModal from "@/components/addEvent"
-import { ClubProvider, useClub } from "src/context/EventContext"
+import { ClubProvider, useClub } from "../../src/context/EventContext"
 
 export function formatDate(date: Date): string {
   return date.toString().split("T")[0]

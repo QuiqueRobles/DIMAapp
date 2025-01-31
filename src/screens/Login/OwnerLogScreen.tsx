@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 import { AppNavigationProp } from '@/navigation';
 import { useSession } from 'isOwner';
-import {useClub} from 'src/context/EventContext'
+import {useClub} from '../../../src/context/EventContext'
 
 export default function OwnerLoginScreen() {
   const [email, setEmail] = useState('');

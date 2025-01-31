@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">52.38% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/21</span>
+                <span class='fraction'>11/21</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>3/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">57.89% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/19</span>
+                <span class='fraction'>11/19</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -148,33 +148,33 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -209,33 +209,33 @@ type ClubContextType = {
 }
 &nbsp;
 &nbsp;
-const ClubContext = <span class="cstat-no" title="statement not covered" >createContext&lt;ClubContextType | undefined&gt;(undefined);</span>
+const ClubContext = createContext&lt;ClubContextType | undefined&gt;(undefined);
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >ClubProvider(</span>{ children }: { children: React.ReactNode }) {
-  const [events, setEvents] = <span class="cstat-no" title="statement not covered" >useState&lt;Event[]&gt;([]);</span>
-  const [clubId, setClubId] = <span class="cstat-no" title="statement not covered" >useState&lt;string | null&gt;(null);</span> // Initialize with null
+export function ClubProvider({ children }: { children: React.ReactNode }) {
+  const [events, setEvents] = useState&lt;Event[]&gt;([]);
+  const [clubId, setClubId] = useState&lt;string | null&gt;(null); // Initialize with null
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-    const fetchClubId = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      try {</span>
-        const { data: { user } } = <span class="cstat-no" title="statement not covered" >await supabase.auth.getUser();</span>
+  useEffect(() =&gt; {
+    const fetchClubId = async () =&gt; {
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
 <span class="cstat-no" title="statement not covered" >        if (!user) <span class="cstat-no" title="statement not covered" >throw new Error('Club not found');</span></span>
 <span class="cstat-no" title="statement not covered" >        console.log("club:", user.id);</span>
 <span class="cstat-no" title="statement not covered" >        setClubId(user.id); </span>// Set clubId when fetched
       } catch (error) {
-<span class="cstat-no" title="statement not covered" >        console.error(error);</span>
+        console.error(error);
       }
     };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    fetchClubId();</span>
+    fetchClubId();
   }, []); // Empty dependency array ensures this runs once when the component mounts
 &nbsp;
 &nbsp;
-  const addEvent = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(e</span>vent: Event) =&gt; {</span>
+  const addEvent = <span class="fstat-no" title="function not covered" >(e</span>vent: Event) =&gt; {
 <span class="cstat-no" title="statement not covered" >    setEvents(<span class="fstat-no" title="function not covered" >(p</span>rev) =&gt; <span class="cstat-no" title="statement not covered" >[...prev, event])</span></span>
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return &lt;ClubContext.Provider value={{ events,clubId,setClubId, addEvent,setEvents}}&gt;{children}&lt;/ClubContext.Provider&gt;</span>
+  return &lt;ClubContext.Provider value={{ events,clubId,setClubId, addEvent,setEvents}}&gt;{children}&lt;/ClubContext.Provider&gt;
 }
 &nbsp;
 export function <span class="fstat-no" title="function not covered" >useClub(</span>) {
@@ -253,7 +253,7 @@ export function <span class="fstat-no" title="function not covered" >useClub(</s
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-01-31T10:32:32.991Z
+                at 2025-01-31T17:00:05.424Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
