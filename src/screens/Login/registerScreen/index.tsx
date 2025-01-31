@@ -84,6 +84,7 @@ export default function RegisterScreen() {
         }
       ]);
 
+
       if(tableUserError){
         throw tableUserError;
       }
@@ -96,6 +97,7 @@ export default function RegisterScreen() {
           country: country?.name,
         }
       ]);
+
 
 
       if(tableProfileError){

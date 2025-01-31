@@ -15,7 +15,7 @@ import MapScreen from '@/screens/MapScreen/MapScreen';
 import TicketScreen from './src/screens/TicketsScreen';
 import ProfileScreen from '@/screens/ProfileScreen/ProfileScreen';
 import LoginScreen from './src/screens/Login/LoginScreen';
-import RegisterScreen from '@/screens/Login/RegisterScreen';
+import RegisterScreen from '@/screens/Login/registerScreen/index';
 import ForgotPasswordScreen from '@/screens/Login/ForgotPassword';
 import OwnerLoginScreen from '@/screens/Login/OwnerLogScreen';
 import OwnerRegisterScreen from '@/screens/Login/OwnerRegisterScreen';
