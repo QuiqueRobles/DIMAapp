@@ -5,7 +5,7 @@ import { useEffect } from "react"
 export type Event = {
     club_id: string | null
     name: string
-    date: Date
+    date: string
     created_at: string | null
     price: number |null
     description: string | null
@@ -17,8 +17,8 @@ type ClubContextType = {
   events: Event[]
   clubId: string | null
   setClubId: (clubId: string | null) => void;
-  addEvent: (event: Event) => void
-  setEvents: (event: Event[]) => void
+  addEvent: (events: Event) => void
+  setEvents: (events: Event[]) => void
 }
 
 
@@ -48,9 +48,7 @@ export function ClubProvider({ children }: { children: React.ReactNode }) {
     setEvents((prev) => [...prev, event])
   }
 
-  return <ClubContext.Provider value={{ events,clubId,setClubId, addEvent,setEvents(event) {
-      
-  }, }}>{children}</ClubContext.Provider>
+  return <ClubContext.Provider value={{ events,clubId,setClubId, addEvent,setEvents}}>{children}</ClubContext.Provider>
 }
 
 export function useClub() {

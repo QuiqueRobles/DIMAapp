@@ -23,7 +23,12 @@ export default function AddEventModal({ visible, onClose }: Props) {
 
   const { addEvent,events,clubId } = useClub()
   const newUUID = uuidv4();
-   
+  const now = new Date();
+
+  const dateString = now.toISOString().split("T")[0];  // "2025-01-30"
+  const timestampString = now.toISOString();           // "2025-01-30T17:21:21.000Z"
+
+
   const handleImageUpload = async () => {
     //const clubId=await getAuthenticatedUserId();
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -75,23 +80,21 @@ export default function AddEventModal({ visible, onClose }: Props) {
     }
   };
 
-
+  const newevent={    
+    club_id:clubId,
+    name,
+    date:dateString,
+    created_at:timestampString,
+    price: Number.parseFloat(price),
+    description,
+    image,
+    event_id:newUUID,}
 
 
   const handleSubmit = () => {
-    
-    addEvent({
-      club_id:clubId,
-      name,
-      date,
-      created_at: Date.toString(),
-      price: Number.parseFloat(price),
-      description,
-      image,
-      event_id:newUUID,
-    })
-  
-    console.log("events",events)
+
+    addEvent(newevent)
+    console.log("EVENTS",events)
      saveChanges()
     onClose()
     resetForm()
@@ -109,21 +112,12 @@ export default function AddEventModal({ visible, onClose }: Props) {
             if (!clubId) {
               throw new Error("Invalid UUID: club_id is empty or undefined");
             }
-            else{
+            else{ const now = new Date();
+              const dateString = now.toISOString().split("T")[0];  // "2025-01-30"
+              const timestampString = now.toISOString(); 
              const { data, error } = await supabase
                .from('event')
-               .insert({club_id:clubId,
-                name:name,
-                date: date,
-                created_at:Date().toString(),
-                price:  Number.parseFloat(price),
-                description:description,
-                image:image,
-                event_id:newUUID,
-
-
-
-            }) }
+               .insert(newevent) }
            
                  Alert.alert('Success', 'Club details updated successfully.');
                } catch (error) {
