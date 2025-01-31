@@ -80,7 +80,7 @@ const ClubScreen: React.FC = () => {
       const { data: clubData, error: clubError } = await supabase
         .from('club')
         .select('*')
-        .eq('id', clubId)
+        .eq('club_id', clubId)
         .single();
 
       if (clubError) throw new Error('Failed to fetch club data');

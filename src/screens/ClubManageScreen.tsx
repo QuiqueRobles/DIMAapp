@@ -9,7 +9,8 @@ import React, { useState, useEffect } from 'react';
     ActivityIndicator, 
     Alert, 
     StyleSheet,
-    Platform
+    Platform,
+    KeyboardAvoidingView,
   } from 'react-native';
   import { SafeAreaView } from 'react-native-safe-area-context';
   import { Feather } from '@expo/vector-icons';
@@ -19,99 +20,110 @@ import React, { useState, useEffect } from 'react';
   import DateTimePicker from '@react-native-community/datetimepicker';
   import { Picker } from '@react-native-picker/picker';
   import * as ImagePicker from 'expo-image-picker';
+  import commonStyles from '@/styles/commonStyles';
   import { z } from 'zod';
   
-  interface UserProfile {
-    id: string;
+  interface ClubProfile {
+    club_id: string;
     name: string;
-    email: string;
-    phone: string;
-    favorite_club: string;
-    date_of_birth: string;
-    gender_id: string;
-    country: string;
-    profile_picture: string;
+    image: string;
+    category: string;
+    description: string;
+    opening_hours: string;
+    dress_code: string;
+    music_genre: string;
+    rating: string;
+    num_reviews: string;
+    attendees: string;
   }
-  
-  const genderOptions = [
-    { label: 'Not Specified', value: 'not_specified' },
-    { label: 'Male', value: 'male' },
-    { label: 'Female', value: 'female' },
-    { label: 'Other', value: 'other' },
-  ];
-  
-  const countryOptions = [
-    { label: 'Select Country', value: '' },
-    { label: 'United States', value: 'US' },
-    { label: 'United Kingdom', value: 'UK' },
-    { label: 'Canada', value: 'CA' },
-    // Add more countries as needed
-  ];
-  
-  const userSchema = z.object({
+
+  const clubSchema = z.object({
     name: z.string().min(2, 'Name must be at least 2 characters'),
-    email: z.string().email('Invalid email address'),
-    phone: z.string().regex(/^\+?[1-9]\d{1,14}$/, 'Invalid phone number'),
-    favorite_club: z.string().optional(),
-    date_of_birth: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Invalid date format'),
-    gender_id: z.string(),
-    country: z.string(),
+    category: z.string().min(2, 'Category must be at least 2 characters'),
+    description: z.string().min(5, 'Description must be at least 5 characters'),
+    opening_hours: z.string().regex(/^\d{2}:\d{2} - \d{2}:\d{2}$/, 'Invalid opening hours format'),
+    dress_code: z.string().min(2, 'Dress code must be at least 2 characters'),
+    music_genre: z.string().min(2, 'Music genre must be at least 2 characters'),
+    attendees: z.string().regex(/^\d+$/, 'Invalid number of attendees'),
   });
+
+  
+  
+  // const clubSchema = z.object({
+  //   name: z.string().min(2, 'Name must be at least 2 characters'),
+  //   email: z.string().email('Invalid email address'),
+  //   phone: z.string().regex(/^\+?[1-9]\d{1,14}$/, 'Invalid phone number'),
+  //   favorite_club: z.string().optional(),
+  //   date_of_birth: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Invalid date format'),
+  //   gender_id: z.string(),
+  //   country: z.string(),
+  // });
   
   export default function ClubManage() {
     const [isEditing, setIsEditing] = useState(false);
-    const [userData, setUserData] = useState<UserProfile | null>(null);
+    const [clubData, setClubData] = useState<ClubProfile | null>(null);
     const [loading, setLoading] = useState(true);
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [showDatePicker, setShowDatePicker] = useState(false);
     const navigation = useNavigation<AppNavigationProp>();
   
     useEffect(() => {
-      fetchUserProfile();
+      fetchClubProfile();
     }, []);
   
-    const fetchUserProfile = async () => {
+    const fetchClubProfile = async () => {
       try {
         setLoading(true);
         const { data: { user } } = await supabase.auth.getUser();
         if (!user) throw new Error('No user found');
-        //console.log('user:',user.id);
+        console.log('user:',user.id);
   
         const { data, error } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('profile_id', user.id)
+          .from('club')
+          .select('club_id, name, image, category, description, opening_hours, dress_code, music_genre, rating, num_reviews, attendees')
+          .eq('club_id', user.id)
           .single();
   
         if (error) throw error;
         if (data){
-          setUserData(data as UserProfile);
+          const clubData: ClubProfile = {
+            ...data,
+            rating: data.rating.toString(),
+            num_reviews: data.num_reviews.toString(),
+            attendees: data.attendees.toString(),
+          };
+          setClubData(clubData); 
+          
         } 
       } catch (error) {
         console.error('Error fetching user profile:', error);
         Alert.alert('Error', 'Failed to load profile. Please try again.');
       } finally {
         setLoading(false);
+        //console.log("club data:",clubData);
       }
     };
   
+
     const handleSave = async () => {
-      if (!userData) return;
-  
+      
+      if (!clubData) return;
       try {
-        const validatedData = userSchema.parse(userData);
+
+        const validatedData = clubSchema.parse(clubData);
         setLoading(true);
   
         const { error } = await supabase
-          .from('users')
+          .from('club')
           .update(validatedData)
-          .eq('id', userData.id);
+          .eq('club_id', clubData.club_id);
   
         if (error) throw error;
-  
+        console.log('validatedData:',validatedData);
         setIsEditing(false);
         Alert.alert('Success', 'Profile updated successfully');
       } catch (error) {
+        console.log('error:',error);
         if (error instanceof z.ZodError) {
           const newErrors: Record<string, string> = {};
           error.errors.forEach((err) => {
@@ -121,7 +133,7 @@ import React, { useState, useEffect } from 'react';
           });
           setErrors(newErrors);
         } else {
-          console.error('Error updating user profile:', error);
+          console.error('Error updating club profile:', error);
           Alert.alert('Error', 'Failed to update profile. Please try again.');
         }
       } finally {
@@ -170,7 +182,7 @@ import React, { useState, useEffect } from 'react';
         try {
           setLoading(true);
           const ext = result.assets[0].uri.substring(result.assets[0].uri.lastIndexOf(".") + 1);
-          const fileName = `${userData?.id}-${Date.now()}.${ext}`;
+          const fileName = `${clubData?.club_id}-${Date.now()}.${ext}`;
           const filePath = `${fileName}`;
   
           const formData = new FormData();
@@ -194,11 +206,11 @@ import React, { useState, useEffect } from 'react';
           const { error: updateError } = await supabase
             .from('users')
             .update({ profile_picture: publicUrl })
-            .eq('id', userData?.id);
+            .eq('id', clubData?.club_id);
   
           if (updateError) throw updateError;
   
-          setUserData(prev => prev ? { ...prev, profile_picture: publicUrl } : null);
+          setClubData(prev => prev ? { ...prev, profile_picture: publicUrl } : null);
           Alert.alert('Success', 'Profile picture updated successfully');
         } catch (error) {
           console.error('Error uploading image:', error);
@@ -209,29 +221,13 @@ import React, { useState, useEffect } from 'react';
       }
     };
   
-    const renderDatePicker = () => (
-      <DateTimePicker
-        value={userData?.date_of_birth ? new Date(userData.date_of_birth) : new Date()}
-        mode="date"
-        display="default"
-        onChange={(event, selectedDate) => {
-          setShowDatePicker(false);
-          if (selectedDate && userData) {
-            setUserData({
-              ...userData,
-              date_of_birth: selectedDate.toISOString().split('T')[0],
-            });
-          }
-        }}
-      />
-    );
   
-    const renderField = (key: keyof UserProfile, label: string, placeholder: string) => (
+    const renderField = (key: keyof ClubProfile, label: string, placeholder: string) => (
       <View style={styles.fieldContainer}>
         <Text style={styles.label}>{label}</Text>
         <TextInput
-          value={userData?.[key] as string}
-          onChangeText={(text) => setUserData(prev => prev ? { ...prev, [key]: text } : null)}
+          value={clubData?.[key] as string}
+          onChangeText={(text) => setClubData(prev => prev ? { ...prev, [key]: text } : null)}
           placeholder={placeholder}
           placeholderTextColor="#666"
           style={[styles.input, !isEditing && styles.disabledInput]}
@@ -245,7 +241,7 @@ import React, { useState, useEffect } from 'react';
       <ScrollView style={styles.scrollView}>
         <View style={styles.profileImageContainer}>
           <Image
-            source={{ uri: userData?.profile_picture || 'https://via.placeholder.com/150' }}
+            source={{ uri: clubData?.image || 'https://via.placeholder.com/150' }}
             style={styles.profileImage}
           />
           <TouchableOpacity 
@@ -257,58 +253,18 @@ import React, { useState, useEffect } from 'react';
         </View>
   
         <Text style={styles.title}>
-          {isEditing ? 'Edit Profile' : userData?.name || 'User Profile'}
+          {isEditing ? 'Edit Profile' : clubData?.name || 'User Profile'}
         </Text>
   
         {renderField('name', 'Name', 'Enter your name')}
-        {renderField('email', 'Email', 'Enter your email')}
-        {renderField('phone', 'Phone', 'Enter your phone number')}
-        {renderField('favorite_club', 'Favorite Club', 'Enter your favorite club')}
-  
-        <View style={styles.fieldContainer}>
-          <Text style={styles.label}>Date of Birth</Text>
-          <TouchableOpacity
-            onPress={() => isEditing && setShowDatePicker(true)}
-            style={[styles.input, !isEditing && styles.disabledInput]}
-          >
-            <Text style={styles.dateText}>
-              {userData?.date_of_birth || 'Select Date of Birth'}
-            </Text>
-          </TouchableOpacity>
-          {showDatePicker && renderDatePicker()}
-        </View>
-  
-        <View style={styles.fieldContainer}>
-          <Text style={styles.label}>Gender</Text>
-          <Picker
-            selectedValue={userData?.gender_id}
-            onValueChange={(itemValue) => 
-              setUserData(prev => prev ? { ...prev, gender_id: itemValue } : null)
-            }
-            enabled={isEditing}
-            style={[styles.picker, !isEditing && styles.disabledPicker]}
-          >
-            {genderOptions.map((option) => (
-              <Picker.Item key={option.value} label={option.label} value={option.value} color={isEditing ? '#FFFFFF' : '#666666'} />
-            ))}
-          </Picker>
-        </View>
-  
-        <View style={styles.fieldContainer}>
-          <Text style={styles.label}>Country</Text>
-          <Picker
-            selectedValue={userData?.country}
-            onValueChange={(itemValue) => 
-              setUserData(prev => prev ? { ...prev, country: itemValue } : null)
-            }
-            enabled={isEditing}
-            style={[styles.picker, !isEditing && styles.disabledPicker]}
-          >
-            {countryOptions.map((option) => (
-              <Picker.Item key={option.value} label={option.label} value={option.value} color={isEditing ? '#FFFFFF' : '#666666'} />
-            ))}
-          </Picker>
-        </View>
+        {renderField('category', 'Category', 'Enter your email')}
+        {renderField('opening_hours', 'Opening Hours', 'Enter new opening hours')}
+        {renderField('description', 'Description', 'Enter your phone number')}
+        {renderField('attendees', 'Attendees', 'Enter your favorite club')}
+        {renderField('music_genre', 'Music Genre', 'Enter your favorite club')}
+        {renderField('dress_code', 'Dress Code', 'Enter your date of birth')}
+        
+        
   
         <TouchableOpacity
           onPress={() => isEditing ? handleSave() : setIsEditing(true)}
@@ -322,23 +278,27 @@ import React, { useState, useEffect } from 'react';
     );
   
     return (
-      <SafeAreaView style={styles.container}>
-        {loading ? (
-          <View style={styles.loadingContainer}>
-            <ActivityIndicator size="large" color="#A78BFA" />
-          </View>
-        ) : (
-          <>
-            {renderContent()}
-            <TouchableOpacity
-              onPress={handleLogout}
-              style={styles.logoutButton}
-            >
-              <Feather name="log-out" size={24} color="white" />
-            </TouchableOpacity>
-          </>
-        )}
-      </SafeAreaView>
+      <KeyboardAvoidingView 
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={commonStyles.pageContainer}>
+        <SafeAreaView style={styles.container}>
+          {loading ? (
+            <View style={styles.loadingContainer}>
+              <ActivityIndicator size="large" color="#A78BFA" />
+            </View>
+          ) : (
+            <>
+              {renderContent()}
+              <TouchableOpacity
+                onPress={handleLogout}
+                style={styles.logoutButton}
+              >
+                <Feather name="log-out" size={24} color="white" />
+              </TouchableOpacity>
+            </>
+          )}
+        </SafeAreaView>
+      </KeyboardAvoidingView>
     );
   }
   

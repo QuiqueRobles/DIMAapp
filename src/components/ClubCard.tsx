@@ -6,7 +6,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 const { width } = Dimensions.get('window');
 
 interface Club {
-  id: string;
+  club_id: string;
   name: string;
   rating: number;
   num_reviews: number;

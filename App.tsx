@@ -25,9 +25,12 @@ import CalendarScreen from '@/screens/CalendarScreen';
 import ReviewsScreen from '@/screens/ReviewScreen';
 import ClubManageScreen from '@/screens/ClubManageScreen';
 import EventManageScreen from '@/screens/EventManageScreen';
-import HomeOwnerScreen from '@/screens/HomeOwnerScreen';
+import HomeOwnerScreen from '@/components/HomeOwnerScreen';
 import MapOwnerScreen from '@/screens/MapOwnerScreen';
 import EditProfileScreen from '@/screens/ProfileScreen/EditProfileScreen';
+import { set } from 'date-fns';
+import { ClubProvider } from '@/context/EventContext';
+// Suppress warning about defaultProps
 
 const error = console.error;
 console.error = (...args: any) => {
@@ -138,15 +141,36 @@ const AppNavigator = () => {
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const {isOwner,setisOwner}=useSession();
+  const [userId, setUserId] = useState<string | null>(null);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
       setSession(session);
+      if(session?.user?.id){
+        setUserId(session.user.id);
+        console.log(session.user.id);
+        const { data, error } = await supabase.from('users').select('*').eq('user_id', session.user.id).single();
+
+        //console.log('Query Result:', data);
+        //console.log('Query Error:', error);
+
+
+        if (data) {
+          //console.log("isOwner correctly set");
+          setisOwner(data?.isClub);
+        }else{
+          alert(error?.message);
+        }
+
+      }
       setIsLoading(false);
     });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
+      if (session?.user) {
+        setUserId(session.user.id);
+      }
     });
 
     return () => subscription.unsubscribe();
@@ -195,11 +219,13 @@ export default function App() {
       publishableKey={STRIPE_PUBLISHABLE_KEY}
       merchantIdentifier="tu_identificador_de_comerciante" // Necesario para Apple Pay
     >
-      <SessionContextProvider supabaseClient={supabase}>
-        <IsOwnerProvider>
-          <AppNavigator />
-        </IsOwnerProvider>
-      </SessionContextProvider>
+      <ClubProvider>
+        <SessionContextProvider supabaseClient={supabase}>
+          <IsOwnerProvider>
+            <AppNavigator />
+          </IsOwnerProvider>
+        </SessionContextProvider>
+      </ClubProvider>
     </StripeProvider>
   );
 }
