@@ -8,7 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 interface Club {
-  id: string;
+  club_id: string;
   name: string;
   rating: number;
   attendees: number;
@@ -178,8 +178,8 @@ const MapScreen: React.FC = () => {
 
   const handleViewDetails = () => {
     if (selectedClub) {
-      console.log('Navigating to club:', selectedClub.id);
-      navigation.navigate('Club', { clubId: selectedClub.id });
+      console.log('Navigating to club:', selectedClub.club_id);
+      navigation.navigate('Club', { clubId: selectedClub.club_id });
     }
   };
 
@@ -223,10 +223,10 @@ const MapScreen: React.FC = () => {
       >
         {clubs.map((club) => (
           <CustomMarker 
-            key={club.id} 
+            key={club.club_id} 
             club={club} 
             onPress={handleClubPress}
-            isSelected={selectedClub?.id === club.id}
+            isSelected={selectedClub?.club_id === club.club_id}
           />
         ))}
       </MapView>
