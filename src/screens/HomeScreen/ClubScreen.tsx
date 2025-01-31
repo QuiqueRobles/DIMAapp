@@ -26,7 +26,7 @@ type ClubScreenRouteProp = RouteProp<RootStackParamList, 'Club'>;
 type ClubScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Club'>;
 
 interface Club {
-  id: string;
+  club_id: string;
   name: string;
   rating: number;
   num_reviews: number;
@@ -173,7 +173,7 @@ const ClubScreen: React.FC = () => {
           <View style={styles.section}>
             <View style={styles.sectionHeader}>
               <Text style={styles.sectionTitle}>Upcoming Events</Text>
-              <TouchableOpacity onPress={() => navigation.navigate('Calendar', { clubId: club.id, clubName: club.name })}>
+              <TouchableOpacity onPress={() => navigation.navigate('Calendar', { clubId: club.club_id, clubName: club.name })}>
                 <Text style={styles.seeAllText}>See All</Text>
               </TouchableOpacity>
             </View>
@@ -181,7 +181,7 @@ const ClubScreen: React.FC = () => {
               <EventsList 
                 events={events} 
                 clubName={club.name}
-                clubId={club.id}
+                clubId={club.club_id}
               />
             ) : (
               <Text style={styles.noEventsText}>No upcoming events</Text>
@@ -190,7 +190,7 @@ const ClubScreen: React.FC = () => {
           <View style={styles.section}>
             <View style={styles.sectionHeader}>
               <Text style={styles.sectionTitle}>Reviews</Text>
-              <TouchableOpacity onPress={() => navigation.navigate('Reviews', { clubId: club.id, clubName: club.name })}>
+              <TouchableOpacity onPress={() => navigation.navigate('Reviews', { clubId: club.club_id, clubName: club.name })}>
                 <Text style={styles.seeAllText}>See All</Text>
               </TouchableOpacity>
             </View>
