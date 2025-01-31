@@ -128,6 +128,9 @@ const TicketScreen: React.FC = () => {
   }
 
   return (
+
+    
+
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>My tickets</Text>
       <View style={styles.content}>

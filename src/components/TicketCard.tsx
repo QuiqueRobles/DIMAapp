@@ -22,6 +22,9 @@ const TicketCard: React.FC<TicketCardProps> = ({ ticket, onPress, isPast = false
   const eventDate = new Date(ticket.event_date);
 
   return (
+
+    console.log("ticket:", ticket),
+
     <TouchableOpacity style={[styles.card, isPast && styles.pastCard]} onPress={onPress}>
       <View style={styles.header}>
         <Text style={styles.eventName}>{ticket.event.name}</Text>
