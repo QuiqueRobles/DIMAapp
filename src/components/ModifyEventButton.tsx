@@ -6,8 +6,8 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 type RootStackParamList = {
     ModifyEvent: {
-        eventId: string;
-        clubId: string;
+        eventId: string | null;
+        clubId: string | null;
         eventName: string;
         eventDate: Date;
         eventPrice: number;
@@ -17,8 +17,8 @@ type RootStackParamList = {
 };
 
 const ModifyEventButton: React.FC<{ 
-    eventId: string; 
-    clubId: string; 
+    eventId: string |null; 
+    clubId: string | null; 
     eventName: string; 
     eventDate: Date; 
     eventPrice: number; 

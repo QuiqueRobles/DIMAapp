@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, ScrollView, Image, Modal, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, ScrollView, Image, Modal, TextInput, TouchableOpacity ,Alert} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as ImagePicker from "expo-image-picker"
 import { supabase } from '@/lib/supabase';
@@ -7,13 +7,13 @@ import { supabase } from '@/lib/supabase';
 type Props = {
   visible: boolean
   onClose: () => void
-  eventId : string
-  clubId : string
+  eventId : string | null
+  clubId : string | null
   eventName : string
-  eventDate : Date
+  eventDate : string
   eventPrice : number
-  eventDescription : string 
-  eventImage : string 
+  eventDescription : string | null
+  eventImage : string | null
 }
 
 
@@ -23,6 +23,57 @@ function ModifyEventModal({ visible, onClose, eventId, clubId, eventName, eventD
   const [price, setPrice] = useState(eventPrice.toString())
   const [description, setDescription] = useState(eventDescription)
   const [image, setImage] = useState(eventImage)
+
+  const handleImageUpload = async () => {
+      //const clubId=await getAuthenticatedUserId();
+      const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      
+      if (permissionResult.granted === false) {
+        Alert.alert('Permission Required', 'Please allow access to your photo library to upload an image.');
+        return;
+      }
+  
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [1, 1],
+        quality: 0.5,
+      });
+  
+      if (!result.canceled && result.assets[0].uri) {
+        try {
+      
+          const ext = result.assets[0].uri.substring(result.assets[0].uri.lastIndexOf(".") + 1);
+          const fileName = `${clubId}-${Date.now()}.${ext}`;
+          const filePath = `${fileName}`;
+  
+          const formData = new FormData();
+          formData.append('file', {
+            uri: result.assets[0].uri,
+            name: fileName,
+            type: `image/${ext}`
+          } as any);
+  
+          const { error: uploadError } = await supabase.storage
+            .from('event_image')
+            .upload(filePath, formData);
+  
+          if (uploadError) throw uploadError;
+  
+          const { data: { publicUrl } } = supabase.storage
+            .from('event_image')
+            .getPublicUrl(filePath);
+  
+           setImage(publicUrl)
+          Alert.alert('Success', 'Event picture updated successfully');
+        } catch (error) {
+          console.error('Error uploading image:', error);
+          Alert.alert('Error', 'Failed to upload image. Please try again.');
+        } finally {
+          
+        }
+      }
+    };
 
   const pickImage = async () => {
       const result = await ImagePicker.launchImageLibraryAsync({
@@ -91,12 +142,12 @@ function ModifyEventModal({ visible, onClose, eventId, clubId, eventName, eventD
               style={[styles.input, styles.textArea]}
               placeholder="Description"
               placeholderTextColor="#666"
-              value={description}
+              value={description || ""}
               onChangeText={setDescription}
               multiline
             />
   
-            <TouchableOpacity style={styles.imageButton} onPress={pickImage}>
+            <TouchableOpacity style={styles.imageButton} onPress={handleImageUpload}>
               <Text style={styles.imageButtonText}>{image ? "Change Image" : "Add Image"}</Text>
             </TouchableOpacity>
   

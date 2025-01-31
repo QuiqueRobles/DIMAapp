@@ -1,8 +1,13 @@
 import { useState } from "react"
-import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from "react-native"
+import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet, Image,Alert} from "react-native"
 import DateTimePicker from "@react-native-community/datetimepicker"
 import * as ImagePicker from "expo-image-picker"
 import { useClub } from "src/context/EventContext"
+import { supabase } from "@/lib/supabase"
+import "react-native-get-random-values";
+import { v4 as uuidv4 } from "uuid";
+
+
 
 type Props = {
   visible: boolean
@@ -16,34 +21,81 @@ export default function AddEventModal({ visible, onClose }: Props) {
   const [description, setDescription] = useState("")
   const [image, setImage] = useState<string | null>(null)
 
-  const { addEvent } = useClub()
+  const { addEvent,events,clubId } = useClub()
+  const newUUID = uuidv4();
+  const now = new Date();
 
-  const pickImage = async () => {
+  const dateString = now.toISOString().split("T")[0];  // "2025-01-30"
+  const timestampString = now.toISOString();           // "2025-01-30T17:21:21.000Z"
+
+
+  const handleImageUpload = async () => {
+    //const clubId=await getAuthenticatedUserId();
+    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    
+    if (permissionResult.granted === false) {
+      Alert.alert('Permission Required', 'Please allow access to your photo library to upload an image.');
+      return;
+    }
+
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    })
+      aspect: [1, 1],
+      quality: 0.5,
+    });
 
-    if (!result.canceled) {
-      setImage(result.assets[0].uri)
+    if (!result.canceled && result.assets[0].uri) {
+      try {
+    
+        const ext = result.assets[0].uri.substring(result.assets[0].uri.lastIndexOf(".") + 1);
+        const fileName = `${clubId}-${Date.now()}.${ext}`;
+        const filePath = `${fileName}`;
+
+        const formData = new FormData();
+        formData.append('file', {
+          uri: result.assets[0].uri,
+          name: fileName,
+          type: `image/${ext}`
+        } as any);
+
+        const { error: uploadError } = await supabase.storage
+          .from('clubs-image')
+          .upload(filePath, formData);
+
+        if (uploadError) throw uploadError;
+
+        const { data: { publicUrl } } = supabase.storage
+          .from('event-image')
+          .getPublicUrl(filePath);
+
+         setImage(publicUrl)
+        Alert.alert('Success', 'Profile picture updated successfully');
+      } catch (error) {
+        console.error('Error uploading image:', error);
+        Alert.alert('Error', 'Failed to upload image. Please try again.');
+      } finally {
+        
+      }
     }
-  }
+  };
+
+  const newevent={    
+    club_id:clubId,
+    name,
+    date:dateString,
+    created_at:timestampString,
+    price: Number.parseFloat(price),
+    description,
+    image,
+    event_id:newUUID,}
+
 
   const handleSubmit = () => {
-    addEvent({
-      club_id:"",
-      name,
-      date,
-      created_at: Date.now().toString(),
-      price: Number.parseFloat(price),
-      description,
-      image,
-      event_id:'',
-    })
- 
 
+    addEvent(newevent)
+    console.log("EVENTS",events)
+     saveChanges()
     onClose()
     resetForm()
   }
@@ -55,6 +107,25 @@ export default function AddEventModal({ visible, onClose }: Props) {
     setDescription("")
     setImage(null)
   }
+   const saveChanges = async () => {
+           try {
+            if (!clubId) {
+              throw new Error("Invalid UUID: club_id is empty or undefined");
+            }
+            else{ const now = new Date();
+              const dateString = now.toISOString().split("T")[0];  // "2025-01-30"
+              const timestampString = now.toISOString(); 
+             const { data, error } = await supabase
+               .from('event')
+               .insert(newevent) }
+           
+                 Alert.alert('Success', 'Club details updated successfully.');
+               } catch (error) {
+                 Alert.alert('Error', 'Failed to update club details.');
+                 console.error(error);
+               }
+               
+             };
 
   return (
     <Modal visible={visible} animationType="slide" transparent={true} onRequestClose={onClose}>
@@ -92,7 +163,7 @@ export default function AddEventModal({ visible, onClose }: Props) {
             multiline
           />
 
-          <TouchableOpacity style={styles.imageButton} onPress={pickImage}>
+          <TouchableOpacity style={styles.imageButton} onPress={handleImageUpload}>
             <Text style={styles.imageButtonText}>{image ? "Change Image" : "Add Image"}</Text>
           </TouchableOpacity>
 

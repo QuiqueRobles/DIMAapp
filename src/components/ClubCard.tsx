@@ -16,6 +16,7 @@ interface Club {
   music_genre?: string | null;
   attendees: number;
   opening_hours: string;
+  
 }
 
 interface ClubCardProps {
@@ -35,7 +36,7 @@ export const ClubCard: React.FC<ClubCardProps> = ({ club, onPress, distance }) =
   const openStatus = getOpenStatus();
 
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress} activeOpacity={0.9}>
+    <TouchableOpacity style={styles.container} onPress={onPress} activeOpacity={0.9} testID="club-card">
       <View style={styles.card}>
         <Image
           source={{ 
@@ -45,6 +46,7 @@ export const ClubCard: React.FC<ClubCardProps> = ({ club, onPress, distance }) =
           }}
           style={styles.image}
           onError={() => setImageError(true)}
+          testID="club-image"
         />
         <LinearGradient
           colors={['rgba(0,0,0,0)', 'rgba(0,0,0,0.8)', 'rgba(0,0,0,0.9)']}

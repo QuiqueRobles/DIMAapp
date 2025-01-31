@@ -1,3 +1,4 @@
+// src/components/ActionButtons.tsx
 import React from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { Feather } from '@expo/vector-icons';
@@ -15,13 +16,25 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
 }) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.button} onPress={onFilterPress}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={onFilterPress}
+        testID="filter-button" // Add testID
+      >
         <Feather name="filter" size={24} color="#FFFFFF" />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={onMapPress}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={onMapPress}
+        testID="map-button" // Add testID
+      >
         <Feather name="map" size={24} color="#FFFFFF" />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={onSortPress}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={onSortPress}
+        testID="sort-button" // Add testID
+      >
         <Feather name="arrow-down" size={24} color="#FFFFFF" />
       </TouchableOpacity>
     </View>
@@ -44,4 +57,3 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-

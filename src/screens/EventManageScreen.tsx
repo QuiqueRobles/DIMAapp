@@ -11,18 +11,21 @@ import AddEventModal from "@/components/addEvent"
 import { ClubProvider, useClub } from "src/context/EventContext"
 
 export function formatDate(date: Date): string {
-  return date.toISOString().split("T")[0]
+  return date.toString().split("T")[0]
 }        
 
 interface Event {
-    event_id: string;
-    created_at: string;
-    club_id: string;
-    date: Date;
-    name: string;
-    price: number;
-    description: string;
-    image: string;
+
+    club_id: string | null
+    name: string
+    date: string
+    created_at: string | null
+    price: number |null
+    description: string | null
+    image: string | null
+    event_id: string | null
+  
+
 }
 
 
@@ -30,7 +33,7 @@ const EventsManage = () => {
     const [loading, setLoading] = useState(true);
     const [isNewEventModalVisible, setIsNewEventModalVisible] = useState(false)
     const [isModifyEventModalVisible, setIsModifyEventModalVisible] = useState(false)
-    const { events,clubId,addEvent,setEvents } = useClub()
+    const { events,clubId,addEvent,setEvents,setClubId } = useClub()
     const [mytempEvents, setMytempEvents] = useState<Event[]>([]); //temporary variable to store events
 
     useEffect(() => {
@@ -45,14 +48,15 @@ const EventsManage = () => {
             const {data: {user} } = await supabase.auth.getUser();
             if(!user) throw new Error('Club not found');
             console.log("club:" ,user.id);
-
+            setClubId(user.id)
+            console.log('cluuubid',clubId)
             const {data: eventsData, error: eventsError} = await supabase.from('event').select('*').eq('club_id', user.id);
         
             console.log("events fetched:", eventsData);
             if (eventsError) throw new Error('Failed to fetch events');
             //setEvents(eventsData);
-            setMytempEvents(eventsData);
-            console.log("events: ", mytempEvents);
+            setEvents(eventsData);
+            console.log("events: ", events);
         } catch (error) {
             console.error(error);
         }finally{
@@ -61,7 +65,7 @@ const EventsManage = () => {
     };
     
     const markedDates = events.reduce((acc, event) => {
-        const formattedDate = formatDate(event.date)
+        const formattedDate = event.date
         
         return {
           ...acc,
@@ -74,40 +78,11 @@ const EventsManage = () => {
         }
       }, {})
     
-    const fetchClubData = async () => {
-      try {
-
-        console.log("fetching events for club:", clubId);
-      
-        const { data: clubData, error: clubError } = await supabase
-          .from('event')
-          .select('*')
-          .eq('club_id', clubId)
-          .order('date', { ascending:true})
-          .limit(5) as { data: Event[], error: any }; // Explicit type);
-
-        console.log("clubData:", clubData);
-        console.log("clubError:", clubError);
   
-        if (clubError) throw new Error('Failed to fetch club data');
-        setEvents(clubData);  
-
-        
-      } 
-      catch (err: unknown) {
-        if (err instanceof Error) {
-          
-        } else {
-          
-        }
-      } finally {
-        
-      }
-    };
 
     
     return (
-        <ClubProvider>
+       
         <View style={styles.container}>
           <Calendar
             theme={{
@@ -129,7 +104,7 @@ const EventsManage = () => {
           </View>
           
           <OwnedEventsList 
-            events={mytempEvents} 
+            events={events}
             clubName="Club Name" 
           />
 
@@ -141,7 +116,7 @@ const EventsManage = () => {
     
           <AddEventModal visible={isNewEventModalVisible} onClose={() => setIsNewEventModalVisible(false)} />
         </View>
-        </ClubProvider>
+        
       )
   };
 

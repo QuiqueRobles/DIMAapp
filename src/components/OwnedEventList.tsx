@@ -5,15 +5,20 @@ import ModifyEventButton from '@/components/ModifyEventButton';
 import ModifyEventModal from '@/components/ModifyEvent';
 import { LinearGradient } from 'expo-linear-gradient';
 
+
+
 interface Event {
-  event_id: string;
-  created_at: string;
-  club_id: string;
-  date: Date;
-  name: string;
-  price: number;
-  description: string;
-  image: string;
+
+    club_id: string | null
+    name: string
+    date: string
+    created_at: string | null
+    price: number |null
+    description: string | null
+    image: string | null
+    event_id: string | null
+
+
 }
 
 interface EventsListProps {
@@ -24,7 +29,8 @@ interface EventsListProps {
 const OwnedEventsList: React.FC<EventsListProps> = ({ events, clubName }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
-
+  const today = new Date();
+  const formattedDate = format(today, 'MMM d, yyyy');
   const openModal = (event: Event) => {
     setSelectedEvent(event);
     setIsModalVisible(true);
@@ -49,7 +55,7 @@ const OwnedEventsList: React.FC<EventsListProps> = ({ events, clubName }) => {
           )}
           <View style={styles.eventInfo}>
             <Text style={styles.eventName}>{event.name || 'Unnamed Event'}</Text>
-            <Text style={styles.eventDate}>{format(event.date, 'MMM d, yyyy')}</Text>
+            <Text style={styles.eventDate}>{formattedDate}</Text>
             {event.description && (
               <Text style={styles.eventDescription} numberOfLines={2}>
                 {event.description}
@@ -72,6 +78,7 @@ const OwnedEventsList: React.FC<EventsListProps> = ({ events, clubName }) => {
               <Text style={styles.buttonText}>Modify Event</Text>
             </LinearGradient>
           </TouchableOpacity>
+
         </View>
       ))}
 
@@ -83,7 +90,7 @@ const OwnedEventsList: React.FC<EventsListProps> = ({ events, clubName }) => {
           clubId={selectedEvent.club_id} 
           eventName={selectedEvent.name || 'Unnamed Event'} 
           eventDate={selectedEvent.date} 
-          eventPrice={selectedEvent.price !== null ? selectedEvent.price / 100 : 0} 
+          eventPrice={selectedEvent.price !== null ? selectedEvent.price: 0} 
           eventDescription={selectedEvent.description} 
           eventImage={selectedEvent.image}
         />
