@@ -25,7 +25,7 @@ import CalendarScreen from '@/screens/CalendarScreen';
 import ReviewsScreen from '@/screens/ReviewScreen';
 import ClubManageScreen from '@/screens/ClubManageScreen';
 import EventManageScreen from '@/screens/EventManageScreen';
-import HomeOwnerScreen from '@/components/HomeOwnerScreen';
+import HomeOwnerScreen from '@/screens/HomeOwnerScreen';
 import MapOwnerScreen from '@/screens/MapOwnerScreen';
 import EditProfileScreen from '@/screens/ProfileScreen/EditProfileScreen';
 import { set } from 'date-fns';

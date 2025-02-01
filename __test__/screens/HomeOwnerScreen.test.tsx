@@ -2,7 +2,7 @@
 import React from 'react';
 import { render, fireEvent, waitFor, act } from '@testing-library/react-native';
 import { Alert } from 'react-native';
-import HomeOwner from '../../src/components/HomeOwnerScreen';
+import HomeOwner from '../../src/screens/HomeOwnerScreen';
 import { supabase } from '@/lib/supabase';
 import * as ImagePicker from 'expo-image-picker';
 
