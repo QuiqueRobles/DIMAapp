@@ -16,9 +16,10 @@ interface TicketCardProps {
   };
   onPress: () => void;
   isPast?: boolean;
+  onWriteReviewPress?: () => void;
 }
 
-const TicketCard: React.FC<TicketCardProps> = ({ ticket, onPress, isPast = false }) => {
+const TicketCard: React.FC<TicketCardProps> = ({ ticket, onPress, isPast = false, onWriteReviewPress}) => {
   const eventDate = new Date(ticket.event_date);
 
   return (
@@ -47,6 +48,11 @@ const TicketCard: React.FC<TicketCardProps> = ({ ticket, onPress, isPast = false
           <Text style={styles.detailText}>{ticket.total_price.toFixed(2)}€</Text>
         </View>
       </View>
+      {isPast && (
+        <TouchableOpacity style={styles.reviewButton} onPress={onWriteReviewPress}>
+          <Text> Write Review</Text>
+        </TouchableOpacity>
+      )}
     </TouchableOpacity>
   );
 };
@@ -89,6 +95,13 @@ const styles = StyleSheet.create({
     marginLeft: 4,
     color: '#E5E7EB',
     fontSize: 14,
+  },
+  reviewButton: {
+    marginTop: 16,
+    padding: 8,
+    backgroundColor: '#A78BFA',
+    borderRadius: 8,
+    alignItems: 'center',
   },
 });
 

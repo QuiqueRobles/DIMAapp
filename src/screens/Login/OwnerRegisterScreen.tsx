@@ -34,46 +34,20 @@ export default function OwnerRegisterScreen() {
     }
 
     try {
-      const {data: clubAuthData, error: authError } = await supabase.auth.signUp({
-         email, 
-         password:KNOWN_PASSWORD, 
-         phone:clubphone 
-      });
+
+      console.log("clubname: ", clubname);
+      console.log("clubaddress: ", clubaddress);
+      console.log("clubphone: ", clubphone);
+      console.log("email: ", email);
       
-    
-  
-      if(authError) throw authError;
-  
-  
-      const clubId = clubAuthData.user?.id;
-      if (!clubId) {
-        throw new Error('User ID is null');
-      }
-
-
-      const {data: tableUserData, error: tableUserError} = await supabase.from('users').insert([
+      const {data: clubRequestData, error: clubRequestError} = await supabase.from('club_requests').insert([
         {
-          user_id: clubId,
-          isClub: true,
-        }
-      ]);
-
-      if(tableUserError){
-        throw tableUserError;
-      }
-
-      const {data: tableClubData, error: tableClubError} = await supabase.from('club').insert([
-        {
-          address: clubaddress,
-          club_id: clubId,
           name: clubname,
-        }
+          address: clubaddress,
+          phone: clubphone,
+          email: email,
+        },
       ]);
-
-
-      if(tableClubError){
-        throw tableClubError;
-      }
   
     } catch(error: any){
       alert(error.message);
