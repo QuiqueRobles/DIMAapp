@@ -1,0 +1,34 @@
+{
+  "profile": {
+    "noUserFound": "No se encontró ningún usuario",
+    "failedToLoad": "Error al cargar el perfil. Por favor, inténtelo de nuevo.",
+    "logout": "Cerrar sesión",
+    "logoutConfirmation": "¿Estás seguro de que quieres cerrar sesión?",
+    "cancel": "Cancelar",
+    "failedToSignOut": "Error al cerrar sesión. Por favor, inténtelo de nuevo.",
+    "permissionRequired": "Permiso requerido",
+    "allowPhotoLibraryAccess": "Por favor, permite el acceso a tu biblioteca de fotos para subir una imagen.",
+    "success": "Éxito",
+    "profilePictureUpdated": "Foto de perfil actualizada correctamente",
+    "error": "Error",
+    "failedToUploadImage": "Error al subir la imagen. Por favor, inténtelo de nuevo.",
+    "dateOfBirth": "Fecha de nacimiento",
+    "gender": "Género",
+    "country": "País",
+    "notSpecified": "No especificado",
+    "editProfile": "Editar perfil",
+    "selectLanguage": "Selecciona tu idioma"
+  },
+   "login": {
+    "email": "Correo electrónico",
+    "enterEmail": "Ingresa tu correo electrónico",
+    "password": "Contraseña",
+    "enterPassword": "Ingresa tu contraseña",
+    "signIn": "Iniciar sesión",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "newHere": "¿Nuevo aquí?",
+    "signUp": "¡Regístrate!",
+    "areYouOwner": "¿Eres propietario?",
+    "enterEmailPassword": "Por favor, ingresa tu correo electrónico y contraseña"
+  }
+}

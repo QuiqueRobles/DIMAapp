@@ -19,6 +19,8 @@ import * as ImagePicker from 'expo-image-picker';
 import { format } from 'date-fns';
 import CountryFlag from "react-native-country-flag";
 import countryCodes from 'country-codes-list';
+import LanguageSelector from '@/components/LanguageSelector';
+import { useTranslation } from 'react-i18next';
 
 interface UserProfile {
   id: string;
@@ -60,12 +62,13 @@ export default function ProfileScreen() {
   const [userData, setUserData] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const navigation = useNavigation<AppNavigationProp>();
+  const { t } = useTranslation();
 
   const fetchUserProfile = async () => {
     try {
       setLoading(true);
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error('No user found');
+      if (!user) throw new Error(t('profile.noUserFound'));
 
       const { data, error } = await supabase
         .from('profiles')
@@ -87,11 +90,9 @@ export default function ProfileScreen() {
         });
       }
 
-      //console.log('User profile:', data);
-
     } catch (error) {
       console.error('Error fetching user profile:', error);
-      Alert.alert('Error', 'Failed to load profile. Please try again.');
+      Alert.alert(t('profile.error'), t('profile.failedToLoad'));
     } finally {
       setLoading(false);
     }
@@ -105,19 +106,19 @@ export default function ProfileScreen() {
 
   const handleLogout = async () => {
     Alert.alert(
-      "Logout",
-      "Are you sure you want to logout?",
+      t('profile.logout'),
+      t('profile.logoutConfirmation'),
       [
-        { text: "Cancel", style: "cancel" },
+        { text: t('profile.cancel'), style: "cancel" },
         {
-          text: "Logout",
+          text: t('profile.logout'),
           onPress: async () => {
             try {
               await supabase.auth.signOut();
               navigation.navigate('Login');
             } catch (error) {
               console.error('Error signing out:', error);
-              Alert.alert('Error', 'Failed to sign out. Please try again.');
+              Alert.alert(t('profile.error'), t('profile.failedToSignOut'));
             }
           },
           style: "destructive"
@@ -129,7 +130,7 @@ export default function ProfileScreen() {
   const handleImageUpload = async () => {
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (permissionResult.granted === false) {
-      Alert.alert('Permission Required', 'Please allow access to your photo library to upload an image.');
+      Alert.alert(t('profile.permissionRequired'), t('profile.allowPhotoLibraryAccess'));
       return;
     }
 
@@ -172,10 +173,10 @@ export default function ProfileScreen() {
         if (updateError) throw updateError;
 
         setUserData(prev => prev ? { ...prev, profile_picture: publicUrl } : null);
-        Alert.alert('Success', 'Profile picture updated successfully');
+        Alert.alert(t('profile.success'), t('profile.profilePictureUpdated'));
       } catch (error) {
         console.error('Error uploading image:', error);
-        Alert.alert('Error', 'Failed to upload image. Please try again.');
+        Alert.alert(t('profile.error'), t('profile.failedToUploadImage'));
       } finally {
         setLoading(false);
       }
@@ -215,15 +216,17 @@ export default function ProfileScreen() {
       <Text style={styles.name}>{userData?.name}</Text>
       <Text style={styles.email}>{userData?.email}</Text>
 
-      {renderProfileInfo('Date of Birth', userData?.date_of_birth ? format(new Date(userData.date_of_birth), 'MMMM d, yyyy') : 'Not specified')}
-      {renderProfileInfo('Gender', genderMap[userData?.gender_id || 'not_specified'] || 'Not_specified', 'gender')}
-      {renderProfileInfo('Country', userData?.country || 'Not specified', 'country')}
+      {renderProfileInfo(t('profile.dateOfBirth'), userData?.date_of_birth ? format(new Date(userData.date_of_birth), 'MMMM d, yyyy') : t('profile.notSpecified'))}
+      {renderProfileInfo(t('profile.gender'), genderMap[userData?.gender_id || 'not_specified'] || t('profile.notSpecified'), 'gender')}
+      {renderProfileInfo(t('profile.country'), userData?.country || t('profile.notSpecified'), 'country')}
+
+      <LanguageSelector />
 
       <TouchableOpacity
         onPress={() => navigation.navigate('EditProfile')}
         style={styles.editButton}
       >
-        <Text style={styles.editButtonText}>Edit Profile</Text>
+        <Text style={styles.editButtonText}>{t('profile.editProfile')}</Text>
       </TouchableOpacity>
     </ScrollView>
   );
@@ -352,4 +355,3 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
 });
-

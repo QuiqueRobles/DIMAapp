@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">4.34% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/69</span>
+                <span class='fraction'>3/69</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">4.54% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/66</span>
+                <span class='fraction'>3/66</span>
             </div>
         
             
@@ -333,7 +333,13 @@
 <a name='L268'></a><a href='#L268'>268</a>
 <a name='L269'></a><a href='#L269'>269</a>
 <a name='L270'></a><a href='#L270'>270</a>
-<a name='L271'></a><a href='#L271'>271</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L271'></a><a href='#L271'>271</a>
+<a name='L272'></a><a href='#L272'>272</a>
+<a name='L273'></a><a href='#L273'>273</a>
+<a name='L274'></a><a href='#L274'>274</a>
+<a name='L275'></a><a href='#L275'>275</a>
+<a name='L276'></a><a href='#L276'>276</a>
+<a name='L277'></a><a href='#L277'>277</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -377,9 +383,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -518,12 +524,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -542,6 +550,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -551,7 +563,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -647,9 +659,9 @@ interface Filters {
   minAttendees: number;
 }
 &nbsp;
-const ITEMS_PER_PAGE = <span class="cstat-no" title="statement not covered" >20;</span>
+const ITEMS_PER_PAGE = 20;
 &nbsp;
-const HomeScreen: React.FC = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+const HomeScreen: React.FC = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
   const [clubs, setClubs] = <span class="cstat-no" title="statement not covered" >useState&lt;Club[]&gt;([]);</span>
   const [loading, setLoading] = <span class="cstat-no" title="statement not covered" >useState(true);</span>
   const [error, setError] = <span class="cstat-no" title="statement not covered" >useState&lt;string | null&gt;(null);</span>
@@ -775,7 +787,7 @@ const HomeScreen: React.FC = <span class="cstat-no" title="statement not covered
             onChangeText={setSearchQuery}
             onClear={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >setSearchQuery('')}</span>
           /&gt;
-          &lt;TouchableOpacity style={styles.filterButton} onPress={handleFilterPress}&gt;
+          &lt;TouchableOpacity style={styles.filterButton} onPress={handleFilterPress}testID="filter-button"&gt;
             &lt;Feather name="filter" size={24} color="#FFFFFF" /&gt;
           &lt;/TouchableOpacity&gt;
         &lt;/View&gt;
@@ -786,6 +798,7 @@ const HomeScreen: React.FC = <span class="cstat-no" title="statement not covered
           &lt;/View&gt;
         ) : (
           &lt;FlatList
+            testID="flat-list"
             data={filteredClubs}
             renderItem={<span class="fstat-no" title="function not covered" >({</span> item }) =&gt; (
 <span class="cstat-no" title="statement not covered" >              &lt;ClubCard</span>
@@ -797,7 +810,12 @@ const HomeScreen: React.FC = <span class="cstat-no" title="statement not covered
             contentContainerStyle={styles.listContainer}
             showsVerticalScrollIndicator={false}
             refreshControl={
-              &lt;RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor="#4F46E5" /&gt;
+              &lt;RefreshControl 
+                testID="refresh-control"
+                refreshing={refreshing}
+                onRefresh={handleRefresh}
+                tintColor="#4F46E5"
+              /&gt;
             }
             onEndReached={handleLoadMore}
             onEndReachedThreshold={0.1}
@@ -821,7 +839,7 @@ const HomeScreen: React.FC = <span class="cstat-no" title="statement not covered
   );
 };
 &nbsp;
-const styles = <span class="cstat-no" title="statement not covered" >StyleSheet.create({</span>
+const styles = StyleSheet.create({
   gradient: {
     flex: 1,
   },
@@ -880,7 +898,7 @@ export default HomeScreen;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-01-31T10:32:32.991Z
+                at 2025-01-31T18:30:39.457Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

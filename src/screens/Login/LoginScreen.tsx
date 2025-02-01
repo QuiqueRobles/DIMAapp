@@ -7,6 +7,8 @@ import { AppNavigationProp } from '../../navigation';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSession } from 'isOwner';
+import LanguageSelector2 from '@/components/LanguageSelector2';
+import { useTranslation } from 'react-i18next'; // Import useTranslation
 
 const { width, height } = Dimensions.get('window');
 
@@ -17,18 +19,19 @@ export default function LoginScreen() {
   const [showPassword, setShowPassword] = useState(false);
   const supabase = useSupabaseClient();
   const navigation = useNavigation<AppNavigationProp>();
-  const {isOwner,setisOwner}=useSession();
+  const { isOwner, setisOwner } = useSession();
+  const { t } = useTranslation(); // Initialize useTranslation
 
   const handleSignIn = async () => {
     if (!email || !password) {
-      alert('Please enter both email and password');
+      alert(t('login.enterEmailPassword')); // Translated alert
       return;
     }
     setIsLoading(true);
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
-    })
+    });
     setisOwner(false);
 
     setIsLoading(false);
@@ -44,29 +47,28 @@ export default function LoginScreen() {
       locations={[0, 0.3, 1]}
     >
       <SafeAreaView style={styles.safeArea}>
-        <KeyboardAvoidingView 
+        <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           style={styles.container}
         >
           <StatusBar barStyle="light-content" />
           <ScrollView contentContainerStyle={styles.scrollViewContent}>
-            <TouchableOpacity style={styles.languageToggle}>
-              <Text style={styles.languageText}>EN</Text>
-            </TouchableOpacity>
-            
+            {/* Language Selector */}
+            <LanguageSelector2 />
+
             <Image
               source={require('@/assets/nightmi_logo.png')}
               style={styles.logo}
               resizeMode="contain"
             />
-            
+
             <View style={styles.formContainer}>
-              <Text style={styles.label}>Email</Text>
+              <Text style={styles.label}>{t('login.email')}</Text> {/* Translated label */}
               <View style={styles.inputWrapper}>
                 <Feather name="mail" size={20} color="#9CA3AF" style={styles.inputIcon} />
                 <TextInput
                   style={styles.input}
-                  placeholder="Enter your email"
+                  placeholder={t('login.enterEmail')} // Translated placeholder
                   placeholderTextColor="#9CA3AF"
                   value={email}
                   onChangeText={setEmail}
@@ -75,12 +77,12 @@ export default function LoginScreen() {
                 />
               </View>
 
-              <Text style={styles.label}>Password</Text>
+              <Text style={styles.label}>{t('login.password')}</Text> {/* Translated label */}
               <View style={styles.inputWrapper}>
                 <Feather name="lock" size={20} color="#9CA3AF" style={styles.inputIcon} />
                 <TextInput
                   style={styles.input}
-                  placeholder="Enter your password"
+                  placeholder={t('login.enterPassword')} // Translated placeholder
                   placeholderTextColor="#9CA3AF"
                   value={password}
                   onChangeText={setPassword}
@@ -91,9 +93,9 @@ export default function LoginScreen() {
                 </TouchableOpacity>
               </View>
 
-              <TouchableOpacity 
-                style={[styles.signInButton, (!email || !password) && styles.disabledButton]} 
-                onPress={handleSignIn} 
+              <TouchableOpacity
+                style={[styles.signInButton, (!email || !password) && styles.disabledButton]}
+                onPress={handleSignIn}
                 disabled={isLoading || !email || !password}
               >
                 <LinearGradient
@@ -105,20 +107,22 @@ export default function LoginScreen() {
                   {isLoading ? (
                     <ActivityIndicator color="#FFFFFF" />
                   ) : (
-                    <Text style={styles.buttonText}>Sign In</Text>
+                    <Text style={styles.buttonText}>{t('login.signIn')}</Text> 
                   )}
                 </LinearGradient>
               </TouchableOpacity>
 
               <View style={styles.optionsContainer}>
                 <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
-                  <Text style={styles.optionText}>Forgot Password?</Text>
+                  <Text style={styles.optionText}>{t('login.forgotPassword')}</Text> {/* Translated text */}
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-                  <Text style={styles.optionText}>New here? <Text style={styles.highlightText}>Sign up!</Text></Text>
+                  <Text style={styles.optionText}>
+                    {t('login.newHere')} <Text style={styles.highlightText}>{t('login.signUp')}</Text> {/* Translated text */}
+                  </Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('OwnerLogin')}>
-                  <Text style={styles.optionText}>Are you an owner?</Text>
+                  <Text style={styles.optionText}>{t('login.areYouOwner')}</Text> {/* Translated text */}
                 </TouchableOpacity>
               </View>
             </View>
@@ -144,22 +148,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
     paddingTop: 60,
-  },
-  languageToggle: {
-    position: 'absolute',
-    top: 20,
-    right: 20,
-    backgroundColor: 'rgba(0, 0, 0, 0.2)',
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: '#4F46E5',
-  },
-  languageText: {
-    color: '#FFFFFF',
-    fontSize: 14,
-    fontWeight: '500',
   },
   logo: {
     width: width * 0.7,
@@ -232,4 +220,3 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
 });
-

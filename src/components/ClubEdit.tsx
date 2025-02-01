@@ -114,7 +114,7 @@ const ClubEdit: React.FC<ClubEditsProps> = ({ club ,setClub}) => {
           fetchAddressSuggestions(text);
         }}
         placeholder={club.address || 'address'}
-        placeholderTextColor='#FFFFFF'
+        placeholderTextColor="#9CA3AF"
         flatListProps={{
           keyExtractor: (_, index) => index.toString(),
           renderItem: ({ item }) => (
