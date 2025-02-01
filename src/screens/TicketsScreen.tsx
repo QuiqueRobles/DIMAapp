@@ -198,9 +198,9 @@ const TicketScreen: React.FC = () => {
   }
 
   return (
-    <SafeAreaView style={styles.safeContainer}>
+    <SafeAreaView style={styles.container}>
       <ScrollView
-        contentContainerStyle={styles.container}
+        contentContainerStyle={styles.content}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
         }
@@ -271,11 +271,11 @@ const TicketScreen: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  safeContainer: {
+  container: {
     flex: 1,
     backgroundColor: '#1F2937',
   },
-  container: {
+  content: {
     paddingHorizontal: 16,
     paddingBottom: 16,
   },
@@ -283,7 +283,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: '#FFFFFF',
-    paddingVertical: 16,
+    padding: 16,
   },
   sectionContainer: {
     marginBottom: 24,
@@ -292,6 +292,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     color: '#E5E7EB',
+    marginTop: 16,
     marginBottom: 8,
   },
   emptyText: {
