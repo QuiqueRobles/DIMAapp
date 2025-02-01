@@ -1,0 +1,22 @@
+{
+  "profile": {
+    "noUserFound": "No user found",
+    "failedToLoad": "Failed to load profile. Please try again.",
+    "logout": "Logout",
+    "logoutConfirmation": "Are you sure you want to logout?",
+    "cancel": "Cancel",
+    "failedToSignOut": "Failed to sign out. Please try again.",
+    "permissionRequired": "Permission Required",
+    "allowPhotoLibraryAccess": "Please allow access to your photo library to upload an image.",
+    "success": "Success",
+    "profilePictureUpdated": "Profile picture updated successfully",
+    "error": "Error",
+    "failedToUploadImage": "Failed to upload image. Please try again.",
+    "dateOfBirth": "Date of Birth",
+    "gender": "Gender",
+    "country": "Country",
+    "notSpecified": "Not specified",
+    "editProfile": "Edit Profile",
+    "selectLanguage": "Select your language"
+  }
+}

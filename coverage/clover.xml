@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1738342806186" clover="3.2.0">
-  <project timestamp="1738342806186" name="All files">
-    <metrics statements="1277" coveredstatements="265" conditionals="660" coveredconditionals="115" methods="296" coveredmethods="54" elements="2233" coveredelements="434" complexity="0" loc="1277" ncloc="1277" packages="16" files="59" classes="59"/>
+<coverage generated="1738348240481" clover="3.2.0">
+  <project timestamp="1738348240481" name="All files">
+    <metrics statements="1277" coveredstatements="266" conditionals="660" coveredconditionals="115" methods="296" coveredmethods="55" elements="2233" coveredelements="436" complexity="0" loc="1277" ncloc="1277" packages="16" files="59" classes="59"/>
     <package name="NightMi">
       <metrics statements="61" coveredstatements="39" conditionals="28" coveredconditionals="7" methods="18" coveredmethods="8"/>
       <file name="App.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\App.tsx">
@@ -148,9 +148,9 @@
       </file>
       <file name="EventCard.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\components\EventCard.tsx">
         <metrics statements="3" coveredstatements="3" conditionals="8" coveredconditionals="7" methods="1" coveredmethods="1"/>
-        <line num="21" count="2" type="stmt"/>
+        <line num="21" count="3" type="stmt"/>
         <line num="22" count="2" type="stmt"/>
-        <line num="58" count="2" type="stmt"/>
+        <line num="58" count="3" type="stmt"/>
       </file>
       <file name="EventsList.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\components\EventsList.tsx">
         <metrics statements="4" coveredstatements="4" conditionals="8" coveredconditionals="7" methods="2" coveredmethods="2"/>
@@ -496,7 +496,7 @@
       </file>
     </package>
     <package name="NightMi.src.screens">
-      <metrics statements="317" coveredstatements="13" conditionals="124" coveredconditionals="0" methods="65" coveredmethods="0"/>
+      <metrics statements="317" coveredstatements="14" conditionals="124" coveredconditionals="0" methods="65" coveredmethods="1"/>
       <file name="BuyTicketScreen.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\screens\BuyTicketScreen.tsx">
         <metrics statements="96" coveredstatements="2" conditionals="32" coveredconditionals="0" methods="12" coveredmethods="0"/>
         <line num="29" count="1" type="stmt"/>
@@ -597,9 +597,9 @@
         <line num="269" count="1" type="stmt"/>
       </file>
       <file name="CalendarScreen.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\screens\CalendarScreen.tsx">
-        <metrics statements="23" coveredstatements="2" conditionals="12" coveredconditionals="0" methods="8" coveredmethods="0"/>
-        <line num="36" count="1" type="stmt"/>
-        <line num="37" count="0" type="stmt"/>
+        <metrics statements="23" coveredstatements="3" conditionals="12" coveredconditionals="0" methods="8" coveredmethods="1"/>
+        <line num="36" count="2" type="stmt"/>
+        <line num="37" count="3" type="stmt"/>
         <line num="38" count="0" type="stmt"/>
         <line num="39" count="0" type="stmt"/>
         <line num="41" count="0" type="stmt"/>
@@ -620,7 +620,7 @@
         <line num="71" count="0" type="stmt"/>
         <line num="74" count="0" type="stmt"/>
         <line num="111" count="0" type="stmt"/>
-        <line num="127" count="1" type="stmt"/>
+        <line num="127" count="2" type="stmt"/>
       </file>
       <file name="ClubManageScreen.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\screens\ClubManageScreen.tsx">
         <metrics statements="82" coveredstatements="2" conditionals="46" coveredconditionals="0" methods="14" coveredmethods="0"/>

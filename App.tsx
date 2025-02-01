@@ -30,6 +30,9 @@ import MapOwnerScreen from '@/screens/MapOwnerScreen';
 import EditProfileScreen from '@/screens/ProfileScreen/EditProfileScreen';
 import { set } from 'date-fns';
 import { ClubProvider } from '@/context/EventContext';
+import i18n from './src/i18n';
+import { useTranslation } from 'react-i18next';
+import { I18nextProvider } from 'react-i18next';
 // Suppress warning about defaultProps
 
 const error = console.error;
@@ -142,7 +145,7 @@ const AppNavigator = () => {
   const [isLoading, setIsLoading] = useState(true);
   const {isOwner,setisOwner}=useSession();
   const [userId, setUserId] = useState<string | null>(null);
-
+  const { t } = useTranslation();
   useEffect(() => {
     supabase.auth.getSession().then(async ({ data: { session } }) => {
       setSession(session);
@@ -182,6 +185,7 @@ const AppNavigator = () => {
   }
 
   return (
+    <I18nextProvider i18n={i18n}>
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {session ? (
@@ -210,6 +214,7 @@ const AppNavigator = () => {
         )}
       </Stack.Navigator>
     </NavigationContainer>
+    </I18nextProvider>
   );
 };
 

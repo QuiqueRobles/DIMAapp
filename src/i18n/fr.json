@@ -1,0 +1,22 @@
+{
+  "profile": {
+    "noUserFound": "Aucun utilisateur trouvé",
+    "failedToLoad": "Échec du chargement du profil. Veuillez réessayer.",
+    "logout": "Déconnexion",
+    "logoutConfirmation": "Êtes-vous sûr de vouloir vous déconnecter?",
+    "cancel": "Annuler",
+    "failedToSignOut": "Échec de la déconnexion. Veuillez réessayer.",
+    "permissionRequired": "Autorisation requise",
+    "allowPhotoLibraryAccess": "Veuillez autoriser l'accès à votre bibliothèque photo pour télécharger une image.",
+    "success": "Succès",
+    "profilePictureUpdated": "Photo de profil mise à jour avec succès",
+    "error": "Erreur",
+    "failedToUploadImage": "Échec du téléchargement de l'image. Veuillez réessayer.",
+    "dateOfBirth": "Date de naissance",
+    "gender": "Genre",
+    "country": "Pays",
+    "notSpecified": "Non spécifié",
+    "editProfile": "Modifier le profil",
+    "selectLanguage": "Sélectionnez votre langue"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "profile": {
+    "noUserFound": "Kein Benutzer gefunden",
+    "failedToLoad": "Profil konnte nicht geladen werden. Bitte versuchen Sie es erneut.",
+    "logout": "Abmelden",
+    "logoutConfirmation": "Sind Sie sicher, dass Sie sich abmelden möchten?",
+    "cancel": "Abbrechen",
+    "failedToSignOut": "Abmeldung fehlgeschlagen. Bitte versuchen Sie es erneut.",
+    "permissionRequired": "Berechtigung erforderlich",
+    "allowPhotoLibraryAccess": "Bitte erlauben Sie den Zugriff auf Ihre Fotobibliothek, um ein Bild hochzuladen.",
+    "success": "Erfolg",
+    "profilePictureUpdated": "Profilbild erfolgreich aktualisiert",
+    "error": "Fehler",
+    "failedToUploadImage": "Bild konnte nicht hochgeladen werden. Bitte versuchen Sie es erneut.",
+    "dateOfBirth": "Geburtsdatum",
+    "gender": "Geschlecht",
+    "country": "Land",
+    "notSpecified": "Nicht angegeben",
+    "editProfile": "Profil bearbeiten",
+    "selectLanguage": "Wählen Sie Ihre Sprache"
+  }
+}
