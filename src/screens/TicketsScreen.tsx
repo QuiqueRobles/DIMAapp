@@ -13,7 +13,9 @@ import { supabase } from '@/lib/supabase';
 import TicketCard from '@/components/TicketCard';
 import ExpandedTicket from '@/components/ExpandedTicket';
 import LoadingSpinner from '@/components/LoadingSpinner';
+import ReviewForm from '@/components/ReviewForm';
 import ErrorDisplay from '@/components/ErrorDisplay';
+import { set } from 'date-fns';
 
 interface Ticket {
   id: string;
@@ -48,6 +50,10 @@ const TicketScreen: React.FC = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [selectedTicketForReview, setSelectedTicketForReview] = useState<Ticket | null>(null);
+  const [rating, setRating] = useState(0);
+  const [review, setReview] = useState('');
 
   useEffect(() => {
     fetchTickets();
@@ -189,6 +195,41 @@ const TicketScreen: React.FC = () => {
     setSelectedTicket(ticket);
   };
 
+  const handleReviewSubmit = async () => {
+    if (!selectedTicketForReview) return;
+
+    try {
+    
+
+      const { error: reviewError } = await supabase
+        .from('review')
+        .insert([
+          {
+            user_id: selectedTicketForReview.user_id,
+            club_id: selectedTicketForReview.club_id,
+            num_stars: rating,
+            text: review,
+          },
+        ]);
+
+      if (reviewError) {
+        if(reviewError.code === '23505'){
+          throw new Error('You have already submitted a review for this event');
+        }else{
+          throw new Error('Failed to submit review');
+        }
+      }
+
+      setShowReviewForm(false);
+      setSelectedTicketForReview(null);
+      setRating(0);
+      setReview('');
+      alert('Review submitted successfully');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'An unknown error occurred');
+    }
+  };
+
   if (loading) {
     return <LoadingSpinner />;
   }
@@ -237,6 +278,10 @@ const TicketScreen: React.FC = () => {
                 ticket={item}
                 onPress={() => handleTicketPress(item)}
                 isPast
+                onWriteReviewPress={() => {
+                  setSelectedTicketForReview(item);
+                  setShowReviewForm(true);
+                }}
               />
             )}
             ListEmptyComponent={
@@ -265,6 +310,31 @@ const TicketScreen: React.FC = () => {
             onClose={() => setSelectedTicket(null)}
           />
         )}
+      </Modal>
+      <Modal
+        visible={showReviewForm}
+        animationType="slide"
+        transparent
+        onRequestClose={() => setShowReviewForm(false)}
+      >
+        <ReviewForm 
+          clubName={selectedTicketForReview?.club.name || ''}
+          onReviewSubmit={() => {
+
+            handleReviewSubmit();
+          }}
+          onClose={() => {
+            setShowReviewForm(false)
+            setSelectedTicketForReview(null);
+            setRating(0);
+            setReview('');
+          }}
+          rating={rating}
+          rewiewtext={review}
+          setRating={setRating}
+          setReview={setReview}
+
+        />
       </Modal>
     </SafeAreaView>
   );
