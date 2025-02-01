@@ -61,7 +61,7 @@ const ClubEdit: React.FC<ClubEditsProps> = ({ club ,setClub}) => {
           `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(text)}`,
           {
             headers: {
-              "User-Agent": "MyApp/1.0 (your-email@example.com)", // Identify your app
+              "User-Agent":  "Nightmi/1.0(nightmi.com)",
             }, }
         );
         // Read response as text
@@ -171,7 +171,7 @@ const ClubEdit: React.FC<ClubEditsProps> = ({ club ,setClub}) => {
 
 
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     backgroundColor: 'rgba(31, 41, 55, 0.5)',
     borderRadius: 12,

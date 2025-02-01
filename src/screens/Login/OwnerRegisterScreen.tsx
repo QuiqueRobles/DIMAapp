@@ -6,6 +6,30 @@ import { AppNavigationProp } from '../../navigation';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { add } from 'date-fns';
 
+
+import Autocomplete from 'react-native-autocomplete-input';
+interface Club {
+  id: string;
+  name: string;
+  rating: number;
+  num_reviews: number;
+  address: string;
+  image: string | null;
+  category: string | null;
+  music_genre: string | null;
+  attendees: number;
+  opening_hours: string;
+  latitude:number;
+  longitude:number;
+  dress_code: string | null;
+  description: string | null;}
+
+
+interface ClubEditsProps {
+  club:Club;
+  setClub: React.Dispatch<React.SetStateAction<ClubEditsProps['club']| null >>;
+}
+
 export default function OwnerRegisterScreen() {
   const supabase = useSupabaseClient();
   const KNOWN_PASSWORD = 'club_password';
@@ -17,6 +41,8 @@ export default function OwnerRegisterScreen() {
   const navigation = useNavigation<AppNavigationProp>();
   const [showText, setShowText] = useState(false);
   const [missingparameters,setMissingParameters]=useState(true);
+  const[latitude,setLatitude]=useState('');
+  const[longitude,setLongitude]=useState('');
   const checkInputs=()=>{
     if (clubname==''|| clubaddress=='' || clubphone=='' || email=='') {
       setMissingParameters(true)
@@ -67,6 +93,8 @@ export default function OwnerRegisterScreen() {
           address: clubaddress,
           club_id: clubId,
           name: clubname,
+          latitude:latitude,
+          longitude:longitude,
         }
       ]);
 
@@ -90,6 +118,48 @@ export default function OwnerRegisterScreen() {
       handleRegister();
     }else alert("Missing Parameters")
   };
+
+      const [query, setQuery] = useState("");
+      const [suggestions, setSuggestions] = useState([]);
+      const [selectedAddress, setSelectedAddress] = useState(null);
+    
+      const fetchAddressSuggestions = async (text) => {
+        if (text.length < 3) return;
+    
+        try {
+          const response = await fetch(
+            `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(text)}`,
+            {
+              headers: {
+                "User-Agent": "Nightmi/1.0(nightmi.com)", 
+              }, }
+          );
+          // Read response as text
+      
+          const data = await response.json();
+    
+          setSuggestions(data.map((item) => ({
+            display_name: item.display_name,
+            lat: item.lat,
+            lon: item.lon,
+          })));
+        } catch (error) {
+          console.error("Error fetching address suggestions:", error);
+        }
+      };
+    
+  
+   
+      
+        const handleSelect = (address) => {
+          setQuery(address.display_name);
+          setSelectedAddress(address); 
+          setSuggestions([]); // Hide suggestions after selection
+        setLatitude(address.lat);
+        setLongitude(address.lon);
+        setClubAddress(address.display_name);
+        }
+  
 
 
   return (
@@ -118,19 +188,50 @@ export default function OwnerRegisterScreen() {
               autoCapitalize="none"
             />
           </View>
-          <View style={styles.inputContainer}>
+          <View style={styles.inputContainerAutocomplete}>
             <Feather name="map" size={24} color="#9CA3AF" style={styles.icon} />
-            <TextInput
-              style={styles.input}
-              placeholder="Club address"
-              placeholderTextColor="#9CA3AF"
-              value={clubaddress}
-              onChangeText={(text)=>{setClubAddress(text);
-                checkInputs();} }
-              keyboardType="email-address"
-              autoCapitalize="none"
-            />
-          </View>
+      <Autocomplete 
+        style={styles.autocompleteInput}
+        containerStyle={styles.autocompleteContainer}
+        listContainerStyle={{
+          display: suggestions.length > 0 ? "flex" : "none",
+          height: Math.min(suggestions.length *70,500),
+          zIndex:10,}}
+        inputContainerStyle={styles.autocompleteInput}
+        
+         // Remove extra borders if needed
+         // style={styles.inputContainer}
+        data={suggestions}
+        value={query}
+        onChangeText={(text) => {
+          setQuery(text);
+          fetchAddressSuggestions(text);
+        }}
+        placeholder={clubaddress||'Club Address'}
+        placeholderTextColor="#9CA3AF"
+        flatListProps={{
+          keyboardShouldPersistTaps: "handled",
+          keyExtractor: (_, index) => index.toString(),
+          getItemLayout: (_, index) => ({
+            length: 60,
+            offset:10 * index,
+            index,}),
+          renderItem: ({ item }) => (
+         
+
+            <TouchableOpacity style={styles.item}
+             onPress={() => handleSelect(item)}>
+              <Text style={styles.input}>{item.display_name}</Text>
+            </TouchableOpacity>
+       
+
+        ),
+
+
+        }}
+
+      />
+      </View>
           <View style={styles.inputContainer}>
             <Feather name="mail" size={24} color="#9CA3AF" style={styles.icon} />
             <TextInput
@@ -190,6 +291,19 @@ const styles = StyleSheet.create({
     height: 150,
     marginBottom: 1,
   },
+  item: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
+    height: 50,
+    backgroundColor: '#1E1E1E',
+    borderWidth:1,
+    borderRadius:8,
+    borderColor:'#FFFFFF',
+    paddingHorizontal: 16,
+    marginBottom: 1,
+ 
+  },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -202,6 +316,39 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     marginBottom: 16,
   },
+  autocompleteContainer: {
+    flex: 1,
+    zIndex: 10, // Ensures dropdown appears above other components
+  },
+  autocompleteInput: {
+    borderWidth: 0, // Removes extra border
+    backgroundColor: "#1E1E1E",
+  color:'#FFFFFF',
+  fontSize: 16,
+  },
+  listContainer:{
+    height:'300%',
+    zIndex:10,
+    
+  },
+
+
+  inputContainerAutocomplete:{
+    flexDirection:'row',
+    alignItems:'baseline',
+    width: '80%',
+    height:50,
+    backgroundColor: '#1E1E1E',
+    zIndex: 100,
+    borderWidth:1,
+    borderRadius: 8,
+    borderColor:'#FFFFFF',
+    paddingHorizontal: 16,
+    marginBottom: 16,
+
+  
+  },
+
   icon: {
     marginRight: 10,
   },
