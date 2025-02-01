@@ -18,5 +18,17 @@
     "notSpecified": "Not specified",
     "editProfile": "Edit Profile",
     "selectLanguage": "Select your language"
+  },
+   "login": {
+    "email": "Email",
+    "enterEmail": "Enter your email",
+    "password": "Password",
+    "enterPassword": "Enter your password",
+    "signIn": "Sign In",
+    "forgotPassword": "Forgot Password?",
+    "newHere": "New here?",
+    "signUp": "Sign up!",
+    "areYouOwner": "Are you an owner?",
+    "enterEmailPassword": "Please enter both email and password"
   }
 }

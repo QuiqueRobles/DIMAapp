@@ -18,5 +18,17 @@
     "notSpecified": "No especificado",
     "editProfile": "Editar perfil",
     "selectLanguage": "Selecciona tu idioma"
+  },
+   "login": {
+    "email": "Correo electrónico",
+    "enterEmail": "Ingresa tu correo electrónico",
+    "password": "Contraseña",
+    "enterPassword": "Ingresa tu contraseña",
+    "signIn": "Iniciar sesión",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "newHere": "¿Nuevo aquí?",
+    "signUp": "¡Regístrate!",
+    "areYouOwner": "¿Eres propietario?",
+    "enterEmailPassword": "Por favor, ingresa tu correo electrónico y contraseña"
   }
 }
