@@ -147,7 +147,7 @@ function ModifyEventModal({ visible, onClose, eventId, clubId, eventName, eventD
               multiline
             />
   
-            <TouchableOpacity style={styles.imageButton} onPress={handleImageUpload}>
+            <TouchableOpacity style={styles.imageButton} onPress={handleImageUpload }>
               <Text style={styles.imageButtonText}>{image ? "Change Image" : "Add Image"}</Text>
             </TouchableOpacity>
   

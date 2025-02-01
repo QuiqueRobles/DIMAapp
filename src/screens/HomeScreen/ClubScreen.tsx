@@ -102,7 +102,7 @@ const ClubScreen: React.FC = () => {
         .eq('club_id', clubId)
         .order('created_at', { ascending: false })
         .limit(5);
-
+       
       if (reviewsError) throw new Error('Failed to fetch reviews');
       setReviews(reviewsData || []);
 

@@ -41,6 +41,8 @@
       category: string | null;
       music_genre: string | null;
       attendees: number;
+      latitude:number;
+      longitude:number;
       opening_hours: string;
       dress_code: string | null;
       description: string | null;}
@@ -203,6 +205,8 @@
           dress_code: club.dress_code,
           music_genre: club.music_genre,
           description: club.description,
+          latitude:club?.latitude,
+          longitude:club?.longitude,
         })
         .eq('club_id', clubId);// Match by the unique club ID 
         if (error) {

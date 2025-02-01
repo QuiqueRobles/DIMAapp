@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput ,Alert} from 'react-native';
+import { View, Text, StyleSheet, TextInput,Alert} from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { supabase } from '@/lib/supabase';
+import Autocomplete from "react-native-autocomplete-input";
 interface Club {
   id: string;
   name: string;
@@ -13,6 +15,8 @@ interface Club {
   music_genre: string | null;
   attendees: number;
   opening_hours: string;
+  latitude:number;
+  longitude:number;
   dress_code: string | null;
   description: string | null;}
 
@@ -40,26 +44,95 @@ const EditableDetailItem: React.FC<{
       />
     </View>
   );
+  
+
 
 const ClubEdit: React.FC<ClubEditsProps> = ({ club ,setClub}) => {
     //const [editableClub, setEditableClub] = useState(club);
+    const [query, setQuery] = useState("");
+    const [suggestions, setSuggestions] = useState([]);
+    const [selectedAddress, setSelectedAddress] = useState(null);
+  
+    const fetchAddressSuggestions = async (text) => {
+      if (text.length < 3) return;
+  
+      try {
+        const response = await fetch(
+          `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(text)}`,
+          {
+            headers: {
+              "User-Agent": "MyApp/1.0 (your-email@example.com)", // Identify your app
+            }, }
+        );
+        // Read response as text
+    
+        const data = await response.json();
+  
+        setSuggestions(data.map((item) => ({
+          display_name: item.display_name,
+          lat: item.lat,
+          lon: item.lon,
+        })));
+      } catch (error) {
+        console.error("Error fetching address suggestions:", error);
+      }
+    };
+  
+
+  
     const handleUpdate = (key: keyof ClubEditsProps['club'], value: string) => {
         setClub((prev) =>prev? { ...prev, [key]: value }: null);
        
       };
     
-
+      const handleSelect = (address) => {
+        setQuery(address.display_name);
+        setSelectedAddress(address); 
+        setSuggestions([]); // Hide suggestions after selection
+        handleUpdate('latitude', address.lat);
+        handleUpdate('longitude',address.lon);
+        handleUpdate('address',address.display_name);
+      }
 
 
   return (
 
     <View style={styles.container}>
-      <EditableDetailItem
-        icon="map-pin"
-        label="Address"
-        value={club.address}
-        onChange={(value) => handleUpdate('address', value)}
+
+      <View style={styles.detailItem}>
+      <View style={styles.iconContainer}>
+              <Feather name={"map-pin"} size={16} color="#A78BFA" />
+            </View>
+      <Autocomplete 
+      
+       inputContainerStyle={{ borderWidth: 0 }} // Remove extra borders if needed
+       style={styles.detailInput}
+        data={suggestions}
+        value={query}
+        onChangeText={(text) => {
+          setQuery(text);
+          fetchAddressSuggestions(text);
+        }}
+        placeholder={club.address || 'address'}
+        placeholderTextColor='#FFFFFF'
+        flatListProps={{
+          keyExtractor: (_, index) => index.toString(),
+          renderItem: ({ item }) => (
+         
+
+            <TouchableOpacity style={styles.addresssuggestions}
+             onPress={() => handleSelect(item)}>
+              <Text style={styles.detailInput}>{item.display_name}</Text>
+            </TouchableOpacity>
+       
+
+        ),
+
+
+        }}
       />
+      </View>
+    
       <EditableDetailItem
         icon="clock"
         label="Opening Hours"
@@ -109,6 +182,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 12,
+   
   },
   iconContainer: {
     width: 32,
@@ -121,11 +195,13 @@ const styles = StyleSheet.create({
   },
   detailInput: {
     fontSize: 14,
-    color: '#E5E7EB',
+    color: '#FFFFFF',
     flex: 1,
     borderBottomWidth: 1,
     borderBottomColor: '#374151',
     paddingVertical: 2,
+     backgroundColor: 'rgba(31, 41, 55, 0.5)'
+    
   },
   descriptionContainer: {
     marginTop: 16,
@@ -145,6 +221,9 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     textAlignVertical: 'top',
   },
+  addresssuggestions:{
+    backgroundColor: 'rgba(31, 41, 55, 0.5)',
+  }
 });
 export default ClubEdit;
 
