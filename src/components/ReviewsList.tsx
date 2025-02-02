@@ -59,12 +59,17 @@ const ReviewItem: React.FC<{ review: Review }> = ({ review }) => {
 
 const ReviewsList: React.FC<ReviewsListProps> = ({ reviews }) => {
   return (
-    <FlatList
-      data={reviews}
-      renderItem={({ item }) => <ReviewItem review={item} />}
-      keyExtractor={(item) => item.id}
-      contentContainerStyle={styles.container}
-    />
+    // <FlatList
+    //   data={reviews}
+    //   renderItem={({ item }) => <ReviewItem review={item} />}
+    //   keyExtractor={(item) => item.id}
+    //   contentContainerStyle={styles.container}
+    // />
+    <View style={styles.container}>
+      {reviews.map((review) => (
+        <ReviewItem key={review.id} review={review} />
+      ))}
+    </View>
   );
 };
 
