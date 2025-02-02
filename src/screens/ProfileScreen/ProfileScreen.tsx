@@ -255,7 +255,7 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1F2937',
+    backgroundColor: '#121212',
   },
   scrollView: {
     flex: 1,
@@ -275,7 +275,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     right: '33%',
-    backgroundColor: '#7C3AED',
+    backgroundColor: '#5500FF',
     borderRadius: 20,
     padding: 8,
   },
@@ -293,10 +293,22 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   infoContainer: {
-    backgroundColor: '#374151',
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: ' 100%',
+    height: 50,
+    borderWidth:1,
     borderRadius: 8,
-    padding: 16,
+    borderColor:'#FFFFFF',
+    paddingHorizontal: 16,
     marginBottom: 16,
+
+    backgroundColor: '#151515',
+  
+    padding: 12,
+    color: '#FFFFFF',
+    fontSize: 16,
+ 
   },
   infoLabel: {
     fontSize: 14,
@@ -322,7 +334,7 @@ const styles = StyleSheet.create({
     height: 20,
   },
   editButton: {
-    backgroundColor: '#7C3AED',
+    backgroundColor: '#5500FF',
     borderRadius: 8,
     padding: 16,
     alignItems: 'center',

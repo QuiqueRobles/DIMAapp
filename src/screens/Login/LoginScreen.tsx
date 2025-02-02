@@ -42,7 +42,7 @@ export default function LoginScreen() {
 
   return (
     <LinearGradient
-      colors={['#4F46E5', '#000', '#000']}
+      colors={['#1D1E1D', '#1D1E1D', '#1D1E1D']}
       style={styles.gradient}
       locations={[0, 0.3, 1]}
     >
@@ -64,7 +64,7 @@ export default function LoginScreen() {
 
             <View style={styles.formContainer}>
               <Text style={styles.label}>{t('login.email')}</Text> {/* Translated label */}
-              <View style={styles.inputWrapper}>
+              <View style={styles.inputContainer}>
                 <Feather name="mail" size={20} color="#9CA3AF" style={styles.inputIcon} />
                 <TextInput
                   style={styles.input}
@@ -78,7 +78,7 @@ export default function LoginScreen() {
               </View>
 
               <Text style={styles.label}>{t('login.password')}</Text> {/* Translated label */}
-              <View style={styles.inputWrapper}>
+              <View style={styles.inputContainer}>
                 <Feather name="lock" size={20} color="#9CA3AF" style={styles.inputIcon} />
                 <TextInput
                   style={styles.input}
@@ -99,7 +99,7 @@ export default function LoginScreen() {
                 disabled={isLoading || !email || !password}
               >
                 <LinearGradient
-                  colors={['#4F46E5', '#7C3AED']}
+                  colors={['#5500FF', '#7C3AED']}
                   start={{ x: 0, y: 0 }}
                   end={{ x: 1, y: 0 }}
                   style={styles.gradientButton}
@@ -117,10 +117,11 @@ export default function LoginScreen() {
                   <Text style={styles.optionText}>{t('login.forgotPassword')}</Text> {/* Translated text */}
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-                  <Text style={styles.optionText}>
-                    {t('login.newHere')} <Text style={styles.highlightText}>{t('login.signUp')}</Text> {/* Translated text */}
-                  </Text>
-                </TouchableOpacity>
+  <Text style={styles.optionText}>
+    {t('login.newHere')} <Text style={[styles.optionText, styles.highlightText]}>{t('login.signUp')}</Text>
+  </Text>
+</TouchableOpacity>
+
                 <TouchableOpacity onPress={() => navigation.navigate('OwnerLogin')}>
                   <Text style={styles.optionText}>{t('login.areYouOwner')}</Text> {/* Translated text */}
                 </TouchableOpacity>
@@ -164,6 +165,23 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 8,
     fontWeight: '500',
+    alignItems:'center',
+    alignSelf:'center',
+  
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '80%',
+    height: 50,
+    backgroundColor: '#1E1E1E',
+    borderWidth:1,
+    borderRadius: 8,
+    borderColor:'#FFFFFF',
+    paddingHorizontal: 16,
+    marginBottom: 16,
+    alignSelf:'center',
+  
   },
   inputWrapper: {
     flexDirection: 'row',
@@ -188,10 +206,12 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   signInButton: {
-    width: '100%',
+    width: '80%',
     marginTop: 20,
     overflow: 'hidden',
     borderRadius: 8,
+    alignItems:'stretch',
+    alignSelf:'center',
   },
   disabledButton: {
     opacity: 0.5,

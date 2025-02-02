@@ -32,7 +32,8 @@ export function ClubProvider({ children }: { children: React.ReactNode }) {
     const fetchClubId = async () => {
       try {
         const { data: { user } } = await supabase.auth.getUser();
-        if (!user) throw new Error('Club not found');
+         if (!user)  return;
+         
         console.log("club:", user.id);
         setClubId(user.id); // Set clubId when fetched
       } catch (error) {

@@ -16,6 +16,7 @@ import LoadingSpinner from '@/components/LoadingSpinner';
 import ReviewForm from '@/components/ReviewForm';
 import ErrorDisplay from '@/components/ErrorDisplay';
 import { set } from 'date-fns';
+import { LinearGradient } from 'expo-linear-gradient';
 
 interface Ticket {
   id: string;
@@ -245,8 +246,18 @@ const TicketScreen: React.FC = () => {
     <SafeAreaView style={styles.container}>
       <View
         style={styles.content}
+        
       >
-        <Text style={styles.title}>My tickets</Text>
+        
+                <LinearGradient
+                  colors={['rgba(76, 43, 176, 0.97)', 'rgba(131, 27, 191, 0)']}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 1 }}
+                  style={styles.nameGradient}
+                />
+                <Text style={styles.title}>My Tickets</Text>
+              
+        
 
         
         <View style={styles.sectionContainer}>
@@ -351,7 +362,7 @@ const TicketScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1F2937',
+    backgroundColor: '#121212',
   },
   content: {
     paddingHorizontal: 16,
@@ -362,6 +373,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#FFFFFF',
     padding: 16,
+    alignSelf:'center',
+    fontFamily:'koboto'
   },
   sectionContainer: {
     marginBottom: 24,
@@ -372,12 +385,22 @@ const styles = StyleSheet.create({
     color: '#E5E7EB',
     marginTop: 16,
     marginBottom: 8,
+
   },
   emptyText: {
     color: '#9CA3AF',
     textAlign: 'center',
     marginTop: 16,
   },
+  nameGradient: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 10,
+    bottom: 0,
+    height:50,
+  },
+  
 });
 
 export default TicketScreen;

@@ -251,6 +251,7 @@ const styles = StyleSheet.create({
   map: {
     width: width,
     height: height,
+  
   },
   markerContainer: {
     width: 40,
@@ -270,7 +271,7 @@ const styles = StyleSheet.create({
     borderColor: '#F3E8FF',
   },
   calloutContainer: {
-    backgroundColor: 'white',
+    backgroundColor: '#151515',
     borderRadius: 6,
     padding: 6,
     maxWidth: 150,
@@ -292,7 +293,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     height: CARD_HEIGHT,
-    backgroundColor: 'white',
+    backgroundColor: '#151515',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     shadowColor: '#000',
@@ -325,7 +326,7 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#1F2937',
+    color: '#FFFFFF',
     marginBottom: 2,
   },
   cardCategory: {

@@ -228,13 +228,13 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   tag: {
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    backgroundColor: 'rgba(137, 18, 255, 0.61)',
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 15,
   },
   tagPurple: {
-    backgroundColor: 'rgba(167, 139, 250, 0.3)',
+    backgroundColor: 'rgba(255, 230, 0, 0.51)',
   },
   tagText: {
     color: '#FFFFFF',

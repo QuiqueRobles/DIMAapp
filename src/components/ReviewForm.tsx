@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     content: {
-        backgroundColor: '#1F2937',
+        backgroundColor: '#121212',
         borderRadius: 20,
         padding: 24,
         width: '90%',
@@ -89,14 +89,16 @@ const styles = StyleSheet.create({
         textAlign: 'left',
     },
     reviewTextInput: {
-        backgroundColor: '#F3F4F6',
+        backgroundColor: '#222222',
         height: 120,
         padding: 12,
         marginBottom: 16,
         borderRadius: 8,
+        color:'#FFFFFF',
+        
     },
     button: {
-        backgroundColor: '#A78BFA',
+        backgroundColor: '#5500FF',
         padding: 16,
         borderRadius: 8,
         alignItems: 'center',

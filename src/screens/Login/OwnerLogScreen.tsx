@@ -61,7 +61,7 @@ export default function OwnerLoginScreen() {
       style={styles.container}
     >
       <Image
-        source={require('@/assets/nightmi_logo.png')}
+        source={require('@/assets/nightmi_business_logo.png')}
         style={styles.logo}
         resizeMode="contain"
       />

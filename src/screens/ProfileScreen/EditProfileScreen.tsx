@@ -142,6 +142,7 @@ export default function EditProfileScreen() {
       value={userData?.date_of_birth ? new Date(userData.date_of_birth) : new Date()}
       mode="date"
       display="default"
+      style={styles.input}
       onChange={(event, selectedDate) => {
         setShowDatePicker(false);
         if (selectedDate && userData) {
@@ -202,17 +203,23 @@ export default function EditProfileScreen() {
 
         <View style={styles.fieldContainer}>
           <Text style={styles.label}>Gender</Text>
+          <View style={styles.picker}>
           <Picker
             selectedValue={userData?.gender_id}
             onValueChange={(itemValue) => 
               setUserData(prev => prev ? { ...prev, gender_id: itemValue } : null)
             }
             style={styles.picker}
+            
           >
             {genderOptions.map((option) => (
-              <Picker.Item key={option.value} label={option.label} value={option.value} color="#FFFFFF" />
+              <Picker.Item key={option.value} label={option.label} value={option.value} color="#151515"
+             
+              />
             ))}
           </Picker>
+          </View>
+         
         </View>
 
         <View style={styles.fieldContainer}>
@@ -230,7 +237,7 @@ export default function EditProfileScreen() {
             theme={{
               primaryColor: '#FFFFFF',
               primaryColorVariant: '#7C3AED',
-              backgroundColor: '#374151',
+              backgroundColor: '#151515',
               onBackgroundTextColor: '#FFFFFF',
               fontSize: 16,
               fontFamily: Platform.OS === 'ios' ? 'System' : 'Roboto',
@@ -257,7 +264,7 @@ export default function EditProfileScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1F2937',
+    backgroundColor: '#121212',
   },
   scrollView: {
     flex: 1,
@@ -265,6 +272,7 @@ const styles = StyleSheet.create({
   },
   backButton: {
     marginBottom: 20,
+    backgroundColor:"#5500FF"
   },
   title: {
     fontSize: 24,
@@ -282,11 +290,22 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   input: {
-    backgroundColor: '#374151',
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: ' 100%',
+    height: 50,
+    borderWidth:1,
     borderRadius: 8,
+    borderColor:'#FFFFFF',
+    paddingHorizontal: 16,
+    marginBottom: 16,
+
+    backgroundColor: '#151515',
+  
     padding: 12,
     color: '#FFFFFF',
     fontSize: 16,
+ 
   },
   errorText: {
     color: '#EF4444',
@@ -294,22 +313,29 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   picker: {
-    backgroundColor: '#374151',
-    borderRadius: 8,
+    backgroundColor: '#151515',
+    borderRadius: 3,
     color: '#FFFFFF',
+    borderWidth:1,
+    borderColor:'#FFFFFF',
+    justifyContent: 'center',
   },
   dateText: {
     color: '#FFFFFF',
     fontSize: 16,
+
   },
   countryPickerButton: {
-    backgroundColor: '#374151',
+    backgroundColor: '#151515',
     borderRadius: 8,
     padding: 12,
     justifyContent: 'center',
+    borderWidth:1,
+    borderColor:'#FFFFFF',
+
   },
   button: {
-    backgroundColor: '#7C3AED',
+    backgroundColor: '#5500FF',
     borderRadius: 8,
     padding: 16,
     alignItems: 'center',
