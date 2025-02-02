@@ -38,7 +38,7 @@ interface Ticket {
 }
 
 const TICKETS_PAGE_SIZE = 10; // Number of tickets per page for past events
-const FLATLIST_MAX_HEIGHT = 300; // Adjust as needed so each list is independently scrollable
+const FLATLIST_MAX_HEIGHT = 380; // Adjust as needed so each list is independently scrollable
 
 const TicketScreen: React.FC = () => {
   const [currentTickets, setCurrentTickets] = useState<Ticket[]>([]);
@@ -230,6 +230,8 @@ const TicketScreen: React.FC = () => {
     }
   };
 
+
+
   if (loading) {
     return <LoadingSpinner />;
   }
@@ -239,16 +241,14 @@ const TicketScreen: React.FC = () => {
   }
 
   return (
+    
     <SafeAreaView style={styles.container}>
-      <ScrollView
-        contentContainerStyle={styles.content}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
-        }
+      <View
+        style={styles.content}
       >
         <Text style={styles.title}>My tickets</Text>
 
-        {/* Incoming Events Section */}
+        
         <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>Incoming Events</Text>
           <FlatList
@@ -264,10 +264,13 @@ const TicketScreen: React.FC = () => {
             }
             nestedScrollEnabled
             style={{ maxHeight: FLATLIST_MAX_HEIGHT }}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
+            }
           />
         </View>
 
-        {/* Past Events Section */}
+        
         <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>Past Events</Text>
           <FlatList
@@ -294,9 +297,14 @@ const TicketScreen: React.FC = () => {
             ListFooterComponent={loadingMore ? <LoadingSpinner /> : null}
             nestedScrollEnabled
             style={{ maxHeight: FLATLIST_MAX_HEIGHT }}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
+            }
           />
         </View>
-      </ScrollView>
+      </View> 
+
+      
 
       <Modal
         visible={!!selectedTicket}
