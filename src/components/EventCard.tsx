@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { format, parseISO } from 'date-fns';
 import { LinearGradient } from 'expo-linear-gradient';
+import { supabase } from '@/lib/supabase';
+import { useState,useEffect   } from 'react';
 
 interface Event {
   id: string;
@@ -18,7 +20,55 @@ interface EventCardProps {
   onBuyTicket: () => void;
 }
 
+    const getAuthenticatedUser = async () => {
+      try {
+        const { data: { user }, error } = await supabase.auth.getUser();
+        
+        if (error) {
+          throw new Error(`Error fetching authenticated user: ${error.message}`);
+        }
+        
+        if (!user) {
+          throw new Error('No authenticated user found');
+        }
+        return user.id;
+        ; // Return the user's ID
+      } catch (err) {
+        return false; // Return null if there's an error
+      }
+    };
+
 const EventCard: React.FC<EventCardProps> = ({ event, clubName, onBuyTicket }) => {
+  console.log("Component Rendered")
+  const [userInfo,setUserInfo]=useState(false)
+  useEffect(() => {
+    const fetchClubData = async () => {
+      try {
+        const clubId = await getAuthenticatedUser();
+        console.log("Fetched Club ID:", clubId);
+
+        const { data: clubData, error: clubError } = await supabase
+          .from('users')
+          .select('isClub')
+          .eq('user_id', clubId)
+          .single();
+
+        if (clubError) {
+          console.error("Error fetching club data:", clubError);
+          return;
+        }
+
+        console.log("Club Data:", clubData);
+        setUserInfo(clubData?.isClub || false); // Ensure it's a boolean
+      } catch (err) {
+        console.error("Error in fetchClubData:", err);
+      }
+    };
+
+    fetchClubData();
+  }, []); 
+
+
   return (
     <View style={styles.container}>
       {event.image && (
@@ -40,16 +90,18 @@ const EventCard: React.FC<EventCardProps> = ({ event, clubName, onBuyTicket }) =
         {event.price !== null && (
           <Text style={styles.price}>${(event.price / 100).toFixed(2)}</Text>
         )}
-        <TouchableOpacity onPress={onBuyTicket}>
-          <LinearGradient
-            colors={['#8B5CF6', '#7C3AED']}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 0 }}
-            style={styles.buyButton}
-          >
-            <Text style={styles.buyButtonText}>Buy Ticket</Text>
-          </LinearGradient>
-        </TouchableOpacity>
+ {!userInfo && (
+  <TouchableOpacity onPress={onBuyTicket}>
+    <LinearGradient
+      colors={['#8B5CF6', '#7C3AED']}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 0 }}
+      style={styles.buyButton}
+    >
+      <Text style={styles.buyButtonText}>Buy Ticket</Text>
+    </LinearGradient>
+  </TouchableOpacity>
+)}
       </View>
     </View>
   );
@@ -57,7 +109,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, clubName, onBuyTicket }) =
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#374151',
+    backgroundColor: '#121212',
     borderRadius: 12,
     overflow: 'hidden',
     marginHorizontal: 16,
