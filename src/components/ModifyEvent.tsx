@@ -93,10 +93,10 @@ function ModifyEventModal({ visible, onClose, eventId, clubId, eventName, eventD
       const {error: updateError} = await supabase.from('event').update({
         name,
         date,
-        price: parseInt(price) * 100,
+        price: parseInt(price),
         description,
         image,
-      }).eq('event_id', eventId)
+      }).eq('id', eventId)
 
       if(updateError) throw new Error('Failed to update event')
     
@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   imageButtonText: {
-    color: "#8B5CF6",
+    color: "#FFFFFF",
     textAlign: "center",
   },
   previewImage: {
@@ -230,7 +230,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#2A2A2A",
   },
   submitButton: {
-    backgroundColor: "#8B5CF6",
+    backgroundColor: "#5500FF",
   },
   buttonText: {
     color: "#fff",

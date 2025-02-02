@@ -1,11 +1,13 @@
-import { useState } from "react"
-import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet, Image,Alert} from "react-native"
+import { useState,useRef  } from "react"
+import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet, Image,Alert,Button } from "react-native"
 import DateTimePicker from "@react-native-community/datetimepicker"
 import * as ImagePicker from "expo-image-picker"
 import { useClub } from "../../src/context/EventContext"
 import { supabase } from "@/lib/supabase"
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
+
+
 
 
 
@@ -20,12 +22,14 @@ export default function AddEventModal({ visible, onClose }: Props) {
   const [price, setPrice] = useState("")
   const [description, setDescription] = useState("")
   const [image, setImage] = useState<string | null>(null)
+  const [open, setOpen] = useState(false);
+
 
   const { addEvent,events,clubId } = useClub()
   const newUUID = uuidv4();
   const now = new Date();
 
-  const dateString = now.toISOString().split("T")[0];  // "2025-01-30"
+  // "2025-01-30"
   const timestampString = now.toISOString();           // "2025-01-30T17:21:21.000Z"
 
 
@@ -79,7 +83,7 @@ export default function AddEventModal({ visible, onClose }: Props) {
       }
     }
   };
-
+  const dateString =date.toISOString().split("T")[0];
   const newevent={    
     club_id:clubId,
     name,
@@ -88,7 +92,7 @@ export default function AddEventModal({ visible, onClose }: Props) {
     price: Number.parseFloat(price),
     description,
     image,
-    event_id:newUUID,}
+    id:newUUID,}
 
 
   const handleSubmit = () => {
@@ -115,9 +119,11 @@ export default function AddEventModal({ visible, onClose }: Props) {
             else{ const now = new Date();
               const dateString = now.toISOString().split("T")[0];  // "2025-01-30"
               const timestampString = now.toISOString(); 
-             const { data, error } = await supabase
+             const { data, error:eventError} = await supabase
                .from('event')
-               .insert(newevent) }
+               .insert(newevent) 
+               console.log(eventError)
+            }
            
                  Alert.alert('Success', 'Club details updated successfully.');
                } catch (error) {
@@ -133,8 +139,22 @@ export default function AddEventModal({ visible, onClose }: Props) {
         <View style={styles.modalContent}>
           <Text style={styles.title}>Add New Event</Text>
 
-          
+      <View>
+      <Button color={'#5500FF'}
+      title="Select Date" onPress={() => setOpen(true)} />
+        {open && (
+      <DateTimePicker
+            value={date}
          
+            mode="date"
+            display="inline"
+            onChange={(event, selectedDate) => {
+              setDate(selectedDate)
+              setOpen(false)
+            }}
+            themeVariant="dark"
+          /> )}
+    </View>
 
           <TextInput
             style={styles.input}
@@ -222,7 +242,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   imageButtonText: {
-    color: "#8B5CF6",
+    color: "#FFFFFF",
     textAlign: "center",
   },
   previewImage: {
@@ -246,7 +266,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#2A2A2A",
   },
   submitButton: {
-    backgroundColor: "#8B5CF6",
+    backgroundColor: "#5500FF",
   },
   buttonText: {
     color: "#fff",

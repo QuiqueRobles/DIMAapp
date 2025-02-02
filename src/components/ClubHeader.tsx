@@ -18,7 +18,7 @@ const ClubHeader: React.FC<ClubHeaderProps> = ({ club }) => {
     <View style={styles.container}>
       <View style={styles.nameContainer}>
         <LinearGradient
-          colors={['rgba(167, 139, 250, 0.5)', 'rgba(167, 139, 250, 0)']}
+          colors={['rgba(76, 43, 176, 0.97)', 'rgba(131, 27, 191, 0)']}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
           style={styles.nameGradient}

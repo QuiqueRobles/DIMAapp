@@ -16,7 +16,7 @@ interface Event {
     price: number |null
     description: string | null
     image: string | null
-    event_id: string | null
+    id: string | null
 
 
 }
@@ -30,22 +30,26 @@ const OwnedEventsList: React.FC<EventsListProps> = ({ events, clubName }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const today = new Date();
-  const formattedDate = format(today, 'MMM d, yyyy');
+  const [formattedDate ,setFormattedDate]=useState("");
+
+
   const openModal = (event: Event) => {
     setSelectedEvent(event);
     setIsModalVisible(true);
+    // setFormattedDate(format( event.date||today, 'MMM d, yyyy'));
+   
   };
 
   const closeModal = () => {
     setIsModalVisible(false);
     setSelectedEvent(null);
   };
-
+  
 
   return (
     <ScrollView style={styles.container}>
       {events.map((event) => (
-        <View key={event.event_id} style={styles.eventItem}>
+        <View key={event.id} style={styles.eventItem}>
           {event.image && (
             <Image 
               source={{ uri: event.image }} 
@@ -55,14 +59,14 @@ const OwnedEventsList: React.FC<EventsListProps> = ({ events, clubName }) => {
           )}
           <View style={styles.eventInfo}>
             <Text style={styles.eventName}>{event.name || 'Unnamed Event'}</Text>
-            <Text style={styles.eventDate}>{formattedDate}</Text>
+            <Text style={styles.eventDate}>{event.date}</Text>
             {event.description && (
               <Text style={styles.eventDescription} numberOfLines={2}>
                 {event.description}
               </Text>
             )}
             {event.price !== null && (
-              <Text style={styles.eventPrice}>${(event.price / 100).toFixed(2)}</Text>
+              <Text style={styles.eventPrice}>${(event.price).toFixed(2)}</Text>
             )}
           </View>
           
@@ -86,7 +90,7 @@ const OwnedEventsList: React.FC<EventsListProps> = ({ events, clubName }) => {
         <ModifyEventModal
           visible={isModalVisible}
           onClose={closeModal}
-          eventId={selectedEvent.event_id} 
+          eventId={selectedEvent.id} 
           clubId={selectedEvent.club_id} 
           eventName={selectedEvent.name || 'Unnamed Event'} 
           eventDate={selectedEvent.date} 
@@ -104,7 +108,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
   eventItem: {
-    backgroundColor: '#374151',
+    backgroundColor: '#121212',
     borderRadius: 12,
     marginBottom: 16,
     overflow: 'hidden',

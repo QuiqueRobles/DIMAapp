@@ -328,7 +328,7 @@
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#1F2937',
+      backgroundColor: '#121212',
     },
     scrollContent: {
       flexGrow: 1,
@@ -337,7 +337,7 @@
       height: height * 0.4,
       width: width,
       position: 'relative',
-      backgroundColor: '#1F2937',
+      backgroundColor: '#121212',
     },
     imageOverlay: {
       ...StyleSheet.absoluteFillObject,
@@ -376,7 +376,7 @@
       position: 'absolute',
       top: 16,
       right: 16,
-      backgroundColor: 'rgba(167, 139, 250, 0.8)',
+      backgroundColor: 'rgba(237, 41, 255, 0.8)',
       borderRadius: 16,
       paddingVertical: 4,
       paddingHorizontal: 12,
@@ -389,7 +389,7 @@
     content: {
       flex: 1,
       padding: 20,
-      backgroundColor: '#1F2937',
+      backgroundColor: '#121212',
       borderTopLeftRadius: 20,
       borderTopRightRadius: 20,
       marginTop: -20,

@@ -5,30 +5,11 @@ import { Feather } from '@expo/vector-icons';
 import { AppNavigationProp } from '../../navigation';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { add } from 'date-fns';
+import { v4 as uuidv4 } from "uuid";
 
 
 import Autocomplete from 'react-native-autocomplete-input';
-interface Club {
-  id: string;
-  name: string;
-  rating: number;
-  num_reviews: number;
-  address: string;
-  image: string | null;
-  category: string | null;
-  music_genre: string | null;
-  attendees: number;
-  opening_hours: string;
-  latitude:number;
-  longitude:number;
-  dress_code: string | null;
-  description: string | null;}
 
-
-interface ClubEditsProps {
-  club:Club;
-  setClub: React.Dispatch<React.SetStateAction<ClubEditsProps['club']| null >>;
-}
 
 export default function OwnerRegisterScreen() {
   const supabase = useSupabaseClient();
@@ -65,17 +46,20 @@ export default function OwnerRegisterScreen() {
       console.log("clubaddress: ", clubaddress);
       console.log("clubphone: ", clubphone);
       console.log("email: ", email);
+      const newUUID = uuidv4();
       
       const {data: clubRequestData, error: clubRequestError} = await supabase.from('club_requests').insert([
         {
           name: clubname,
           address: clubaddress,
-          club_id: clubId,
-          name: clubname,
+          id:newUUID,
           latitude:latitude,
           longitude:longitude,
+          email: email,
         }
       ]);
+      console.log("Error:", clubRequestError);
+
   
     } catch(error: any){
       alert(error.message);

@@ -36,7 +36,7 @@ const ReviewItem: React.FC<ReviewItemProps> = ({ review }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#374151',
+    backgroundColor: '#121212',
     borderRadius: 8,
     padding: 16,
     marginBottom: 16,

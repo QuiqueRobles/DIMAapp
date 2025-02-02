@@ -6,9 +6,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { View, Text, ScrollView, TouchableOpacity, Alert, Image, StyleSheet, Button } from 'react-native';
 import OwnedEventsList from '@/components/OwnedEventList';
 import { Calendar } from "react-native-calendars"
-//import { Plus } from "lucide-react-native"
+import { Plus } from "lucide-react-native"
 import AddEventModal from "@/components/addEvent"
 import { ClubProvider, useClub } from "../../src/context/EventContext"
+
+
+
+
 
 export function formatDate(date: Date): string {
   return date.toString().split("T")[0]
@@ -23,7 +27,7 @@ interface Event {
     price: number |null
     description: string | null
     image: string | null
-    event_id: string | null
+    id: string | null
   
 
 }
@@ -36,6 +40,7 @@ const EventsManage = () => {
     const { events,clubId,addEvent,setEvents,setClubId } = useClub()
     const [mytempEvents, setMytempEvents] = useState<Event[]>([]); //temporary variable to store events
 
+  
     useEffect(() => {
         fetchEvents();
         
@@ -111,7 +116,7 @@ const EventsManage = () => {
           
     
           <TouchableOpacity style={styles.fab} onPress={() => setIsNewEventModalVisible(true)}>
-            <Text/>
+          <Plus size={24} color="#fff" />
           </TouchableOpacity>
     
           <AddEventModal visible={isNewEventModalVisible} onClose={() => setIsNewEventModalVisible(false)} />
@@ -124,7 +129,7 @@ const EventsManage = () => {
     container: {
       flex: 1,
       paddingTop: 70,
-      backgroundColor: '#1F2937',
+      backgroundColor: '#121212',
     },
     scrollContent: {
         flexGrow: 1,
@@ -142,7 +147,7 @@ const EventsManage = () => {
       position: "absolute",
       bottom: 20,
       alignSelf: "center",
-      backgroundColor: "#8B5CF6",
+      backgroundColor: "#5500FF",
       width: 56,
       height: 56,
       borderRadius: 28,

@@ -47,7 +47,7 @@ const DetailItem: React.FC<{ icon: keyof typeof Feather.glyphMap; text: string }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'rgba(31, 41, 55, 0.5)',
+    backgroundColor: '#121212',
     borderRadius: 12,
     padding: 16,
     marginBottom: 24,
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: 'rgba(167, 139, 250, 0.1)',
+    backgroundColor: '#121212',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 12,
