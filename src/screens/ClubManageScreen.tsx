@@ -152,7 +152,7 @@ import React, { useState, useEffect } from 'react';
             onPress: async () => {
               try {
                 await supabase.auth.signOut();
-                navigation.navigate('Login');
+                //navigation.navigate('Login');
               } catch (error) {
                 console.error('Error signing out:', error);
                 Alert.alert('Error', 'Failed to sign out. Please try again.');

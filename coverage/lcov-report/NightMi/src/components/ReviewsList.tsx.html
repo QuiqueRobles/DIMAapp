@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">25% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>13/13</span>
+                <span class='fraction'>3/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/8</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">27.27% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>12/12</span>
+                <span class='fraction'>3/11</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -198,7 +198,12 @@
 <a name='L133'></a><a href='#L133'>133</a>
 <a name='L134'></a><a href='#L134'>134</a>
 <a name='L135'></a><a href='#L135'>135</a>
-<a name='L136'></a><a href='#L136'>136</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a>
+<a name='L138'></a><a href='#L138'>138</a>
+<a name='L139'></a><a href='#L139'>139</a>
+<a name='L140'></a><a href='#L140'>140</a>
+<a name='L141'></a><a href='#L141'>141</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -218,10 +223,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -231,10 +236,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -258,11 +263,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -352,24 +362,24 @@ interface ReviewsListProps {
   reviews: Review[];
 }
 &nbsp;
-const ReviewItem: React.FC&lt;{ review: Review }&gt; = ({ review }) =&gt; {
-  const renderStars = () =&gt; {
-    const stars = [];
-    for (let i = 0; i &lt; 5; i++) {
-      stars.push(
+const ReviewItem: React.FC&lt;{ review: Review }&gt; = <span class="fstat-no" title="function not covered" >({</span> review }) =&gt; {
+  const renderStars = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+    const stars = <span class="cstat-no" title="statement not covered" >[];</span>
+<span class="cstat-no" title="statement not covered" >    for (let i = <span class="cstat-no" title="statement not covered" >0;</span> i &lt; 5; i++) {</span>
+<span class="cstat-no" title="statement not covered" >      stars.push(</span>
         &lt;Feather
           key={i}
-          name={i &lt; review.num_stars ? 'star' : <span class="branch-1 cbranch-no" title="branch not covered" >'star'}</span>
+          name={i &lt; review.num_stars ? 'star' : 'star'}
           size={16}
-          color={i &lt; review.num_stars ? '#FFD700' : <span class="branch-1 cbranch-no" title="branch not covered" >'#4B5563'}</span>
+          color={i &lt; review.num_stars ? '#FFD700' : '#4B5563'}
           style={styles.star}
         /&gt;
       );
     }
-    return stars;
+<span class="cstat-no" title="statement not covered" >    return stars;</span>
   };
 &nbsp;
-  return (
+<span class="cstat-no" title="statement not covered" >  return (</span>
     &lt;View style={styles.reviewItem}&gt;
       &lt;View style={styles.reviewHeader}&gt;
         &lt;View style={styles.userInfo}&gt;
@@ -379,7 +389,7 @@ const ReviewItem: React.FC&lt;{ review: Review }&gt; = ({ review }) =&gt; {
             &lt;/Text&gt;
           &lt;/View&gt;
           &lt;View style={styles.nameAndDate}&gt;
-            &lt;Text style={styles.userName}&gt;{review.user_name || <span class="branch-1 cbranch-no" title="branch not covered" >'Anonymous'}</span>&lt;/Text&gt;
+            &lt;Text style={styles.userName}&gt;{review.user_name || 'Anonymous'}&lt;/Text&gt;
             &lt;Text style={styles.reviewDate}&gt;
               {format(new Date(review.created_at), 'MMM d, yyyy')}
             &lt;/Text&gt;
@@ -387,19 +397,24 @@ const ReviewItem: React.FC&lt;{ review: Review }&gt; = ({ review }) =&gt; {
         &lt;/View&gt;
         &lt;View style={styles.starRating}&gt;{renderStars()}&lt;/View&gt;
       &lt;/View&gt;
-      &lt;Text style={styles.reviewText}&gt;{review.text || <span class="branch-1 cbranch-no" title="branch not covered" >'No comment'}</span>&lt;/Text&gt;
+      &lt;Text style={styles.reviewText}&gt;{review.text || 'No comment'}&lt;/Text&gt;
     &lt;/View&gt;
   );
 };
 &nbsp;
-const ReviewsList: React.FC&lt;ReviewsListProps&gt; = ({ reviews }) =&gt; {
-  return (
-    &lt;FlatList
-      data={reviews}
-      renderItem={({ item }) =&gt; &lt;ReviewItem review={item} /&gt;}
-      keyExtractor={(item) =&gt; item.id}
-      contentContainerStyle={styles.container}
-    /&gt;
+const ReviewsList: React.FC&lt;ReviewsListProps&gt; = <span class="fstat-no" title="function not covered" >({</span> reviews }) =&gt; {
+<span class="cstat-no" title="statement not covered" >  return (</span>
+    // &lt;FlatList
+    //   data={reviews}
+    //   renderItem={({ item }) =&gt; &lt;ReviewItem review={item} /&gt;}
+    //   keyExtractor={(item) =&gt; item.id}
+    //   contentContainerStyle={styles.container}
+    // /&gt;
+    &lt;View style={styles.container}&gt;
+      {reviews.map(<span class="fstat-no" title="function not covered" >(r</span>eview) =&gt; (
+<span class="cstat-no" title="statement not covered" >        &lt;ReviewItem key={review.id} review={review} /&gt;</span>
+      ))}
+    &lt;/View&gt;
   );
 };
 &nbsp;
@@ -475,7 +490,7 @@ export default ReviewsList;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-02-01T14:38:47.623Z
+                at 2025-02-02T18:01:27.082Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

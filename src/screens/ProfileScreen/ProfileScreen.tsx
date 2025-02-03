@@ -76,6 +76,9 @@ export default function ProfileScreen() {
         .eq('profile_id', user.id)
         .single();
 
+      console.log('data', data);
+      console.log('error', error);
+
       if (error) throw error;
       if (data) {
         setUserData({
@@ -115,7 +118,7 @@ export default function ProfileScreen() {
           onPress: async () => {
             try {
               await supabase.auth.signOut();
-              navigation.navigate('Login');
+              //navigation.navigate('Login');
             } catch (error) {
               console.error('Error signing out:', error);
               Alert.alert(t('profile.error'), t('profile.failedToSignOut'));
@@ -186,7 +189,7 @@ export default function ProfileScreen() {
   const renderProfileInfo = (label: string, value: string, type?: 'gender' | 'country') => (
     <View style={styles.infoContainer}>
       <Text style={styles.infoLabel}>{label}</Text>
-      <View style={styles.infoValueContainer}>
+      <View style={styles.infoValueContainer} testID='info-value-container'>
         {type === 'gender' && (
           <FontAwesome name={getGenderIcon(value.toLowerCase())} size={20} color="#A78BFA" style={styles.icon} />
         )}
@@ -206,6 +209,7 @@ export default function ProfileScreen() {
           style={styles.profileImage}
         />
         <TouchableOpacity 
+          testID='camera-button'
           onPress={handleImageUpload}
           style={styles.cameraButton}
         >

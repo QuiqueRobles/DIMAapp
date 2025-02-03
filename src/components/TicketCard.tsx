@@ -49,7 +49,11 @@ const TicketCard: React.FC<TicketCardProps> = ({ ticket, onPress, isPast = false
         </View>
       </View>
       {isPast && (
-        <TouchableOpacity style={styles.reviewButton} onPress={onWriteReviewPress}>
+        <TouchableOpacity 
+          style={styles.reviewButton} 
+          onPress={onWriteReviewPress}
+          testID='write-review-button'
+        >
           <Text> Write Review</Text>
         </TouchableOpacity>
       )}

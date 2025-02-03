@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>2/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">87.5% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>7/8</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>2/3</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -178,7 +178,9 @@
 <a name='L113'></a><a href='#L113'>113</a>
 <a name='L114'></a><a href='#L114'>114</a>
 <a name='L115'></a><a href='#L115'>115</a>
-<a name='L116'></a><a href='#L116'>116</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L116'></a><a href='#L116'>116</a>
+<a name='L117'></a><a href='#L117'>117</a>
+<a name='L118'></a><a href='#L118'>118</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -198,8 +200,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -235,7 +237,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -313,8 +317,8 @@ interface EventCardProps {
   onBuyTicket: () =&gt; void;
 }
 &nbsp;
-const EventCard: React.FC&lt;EventCardProps&gt; = ({ event, clubName, onBuyTicket }) =&gt; {
-  return (
+const EventCard: React.FC&lt;EventCardProps&gt; = <span class="fstat-no" title="function not covered" >({</span> event, clubName, onBuyTicket }) =&gt; {
+<span class="cstat-no" title="statement not covered" >  return (</span>
     &lt;View style={styles.container}&gt;
       {event.image &amp;&amp; (
         &lt;Image 
@@ -324,7 +328,7 @@ const EventCard: React.FC&lt;EventCardProps&gt; = ({ event, clubName, onBuyTicke
         /&gt;
       )}
       &lt;View style={styles.content}&gt;
-        &lt;Text style={styles.name}&gt;{event.name || <span class="branch-1 cbranch-no" title="branch not covered" >'Unnamed Event'}</span>&lt;/Text&gt;
+        &lt;Text style={styles.name}&gt;{event.name || 'Unnamed Event'}&lt;/Text&gt;
         &lt;Text style={styles.date}&gt;{format(parseISO(event.date), 'MMMM d, yyyy')}&lt;/Text&gt;
         &lt;Text style={styles.clubName}&gt;{clubName}&lt;/Text&gt;
         {event.description &amp;&amp; (
@@ -335,7 +339,9 @@ const EventCard: React.FC&lt;EventCardProps&gt; = ({ event, clubName, onBuyTicke
         {event.price !== null &amp;&amp; (
           &lt;Text style={styles.price}&gt;${(event.price / 100).toFixed(2)}&lt;/Text&gt;
         )}
-        &lt;TouchableOpacity onPress={onBuyTicket}&gt;
+        &lt;TouchableOpacity 
+          testID='event-card'
+          onPress={onBuyTicket}&gt;
           &lt;LinearGradient
             colors={['#8B5CF6', '#7C3AED']}
             start={{ x: 0, y: 0 }}
@@ -415,7 +421,7 @@ export default EventCard;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-02-01T14:38:47.623Z
+                at 2025-02-02T18:01:27.082Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

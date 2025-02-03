@@ -44,10 +44,10 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ clubName,onReviewSubmit, onClos
             onChangeText={setReview}
             multiline
           />
-          <TouchableOpacity style={styles.button} onPress={onReviewSubmit}>
+          <TouchableOpacity style={styles.button} onPress={onReviewSubmit} testID="submit-review-button">
             <Text style={styles.buttonText}>Submit</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.closeButton} onPress={onClose}>
+          <TouchableOpacity style={styles.closeButton} onPress={onClose} testID="close-review-button">
             <Feather name="x" size={24} color="#FFFFFF" />
           </TouchableOpacity>
         </View>

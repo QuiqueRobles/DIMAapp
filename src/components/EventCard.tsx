@@ -40,7 +40,9 @@ const EventCard: React.FC<EventCardProps> = ({ event, clubName, onBuyTicket }) =
         {event.price !== null && (
           <Text style={styles.price}>${(event.price / 100).toFixed(2)}</Text>
         )}
-        <TouchableOpacity onPress={onBuyTicket}>
+        <TouchableOpacity 
+          testID='event-card'
+          onPress={onBuyTicket}>
           <LinearGradient
             colors={['#8B5CF6', '#7C3AED']}
             start={{ x: 0, y: 0 }}

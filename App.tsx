@@ -206,6 +206,7 @@ const AppNavigator = () => {
             <Stack.Screen name="EditProfile" component={EditProfileScreen} />
             <Stack.Screen name="Calendar" component={CalendarScreen} />
             <Stack.Screen name="Reviews" component={ReviewsScreen} />
+            
           </>
 
           )
