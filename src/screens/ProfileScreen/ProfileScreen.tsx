@@ -21,7 +21,6 @@ import CountryFlag from "react-native-country-flag";
 import countryCodes from 'country-codes-list';
 import LanguageSelector from '@/components/LanguageSelector';
 import { useTranslation } from 'react-i18next';
-
 interface UserProfile {
   id: string;
   name: string;
@@ -54,8 +53,22 @@ const getGenderIcon = (gender: string) => {
 };
 
 const getCountryCode = (country: string) => {
-  const myCountryCodesObject = countryCodes.customList('countryNameEn', '{countryCode}');
-  return myCountryCodesObject[country] || 'ES';
+  const countryVariations: { [key: string]: string } = {
+    'usa': 'US',
+    'united states': 'US',
+    'united kingdom': 'GB',
+    'great britain': 'GB',
+  };
+
+  const lowerCountry = country?.toLowerCase();
+  if (countryVariations[lowerCountry]) {
+    return countryVariations[lowerCountry];
+  }
+
+  const countryData = countryCodes.all().find(c => 
+    c.countryNameEn?.toLowerCase() === lowerCountry
+  );
+  return countryData?.countryCode || 'ES';
 };
 
 export default function ProfileScreen() {

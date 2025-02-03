@@ -400,11 +400,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#FFFFFF',
     padding: 16,
+    marginTop: 5,
+    marginBottom: 24,
     alignSelf:'center',
     fontFamily:'koboto'
   },
   sectionContainer: {
-    marginBottom: 24,
+    marginBottom: 80,
   },
   sectionTitle: {
     fontSize: 18,
