@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">85.18% </span>
+                <span class="strong">81.48% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>46/54</span>
+                <span class='fraction'>44/54</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">69.23% </span>
+                <span class="strong">65.38% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>18/26</span>
+                <span class='fraction'>17/26</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.66% </span>
+                <span class="strong">80% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>13/15</span>
+                <span class='fraction'>12/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.53% </span>
+                <span class="strong">82.69% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>45/52</span>
+                <span class='fraction'>43/52</span>
             </div>
         
             
@@ -298,7 +298,11 @@
 <a name='L233'></a><a href='#L233'>233</a>
 <a name='L234'></a><a href='#L234'>234</a>
 <a name='L235'></a><a href='#L235'>235</a>
-<a name='L236'></a><a href='#L236'>236</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L236'></a><a href='#L236'>236</a>
+<a name='L237'></a><a href='#L237'>237</a>
+<a name='L238'></a><a href='#L238'>238</a>
+<a name='L239'></a><a href='#L239'>239</a>
+<a name='L240'></a><a href='#L240'>240</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -337,8 +341,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -362,6 +366,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8x</span>
@@ -485,6 +490,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -571,9 +579,9 @@ import { I18nextProvider } from 'react-i18next';
 // Suppress warning about defaultProps
 &nbsp;
 const error = console.error;
-console.error = (...args: any) =&gt; {
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (/defaultProps/.test(args[0])) <span class="cstat-no" title="statement not covered" >return;</span>
-  error(...args);
+console.error = <span class="fstat-no" title="function not covered" >(.</span>..args: any) =&gt; {
+<span class="cstat-no" title="statement not covered" >  if (/defaultProps/.test(args[0])) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >  error(...args);</span>
 };
 &nbsp;
 &nbsp;
@@ -597,7 +605,8 @@ const tabIcons: { [key: string]: keyof typeof Feather.glyphMap } = {
 &nbsp;
 const CustomTabBar: React.FC&lt;any&gt; = ({ state, descriptors, navigation }) =&gt; {
   return (
-    &lt;View className="flex-row bg-gray-900 pt-2 pb-6"&gt;
+    &lt;View className="flex-row pt-2 pb-6" style={{ backgroundColor: "#121212" }}&gt;
+&nbsp;
       {state.routes.map((route: any, index: number) =&gt; {
         const { options } = descriptors[route.key];
         const label = options.tabBarLabel || route.name;
@@ -732,6 +741,8 @@ const AppNavigator = () =&gt; {
            &lt;Stack.Screen name="MapOwner" component={MapOwnerScreen} /&gt;
            &lt;Stack.Screen name="EventsManage" component={EventManageScreen} /&gt;
            &lt;Stack.Screen name="ClubManage" component={ClubManageScreen} /&gt;
+           &lt;Stack.Screen name="Club" component={ClubScreen} /&gt;
+           &lt;Stack.Screen name="Calendar" component={CalendarScreen} /&gt;
          &lt;/&gt;
           ):(
             &lt;&gt;
@@ -741,6 +752,7 @@ const AppNavigator = () =&gt; {
             &lt;Stack.Screen name="EditProfile" component={EditProfileScreen} /&gt;
             &lt;Stack.Screen name="Calendar" component={CalendarScreen} /&gt;
             &lt;Stack.Screen name="Reviews" component={ReviewsScreen} /&gt;
+            
           &lt;/&gt;
 &nbsp;
           )
@@ -775,7 +787,7 @@ export default function App() {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-02-01T14:38:47.623Z
+                at 2025-02-03T17:48:27.062Z
             </div>
         <script src="../prettify.js"></script>
         <script>

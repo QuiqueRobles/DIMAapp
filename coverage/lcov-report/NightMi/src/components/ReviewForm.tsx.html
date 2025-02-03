@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">28.57% </span>
+                <span class="strong">71.42% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/7</span>
+                <span class='fraction'>5/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>2/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/6</span>
+                <span class='fraction'>5/6</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -178,7 +178,9 @@
 <a name='L113'></a><a href='#L113'>113</a>
 <a name='L114'></a><a href='#L114'>114</a>
 <a name='L115'></a><a href='#L115'>115</a>
-<a name='L116'></a><a href='#L116'>116</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L116'></a><a href='#L116'>116</a>
+<a name='L117'></a><a href='#L117'>117</a>
+<a name='L118'></a><a href='#L118'>118</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -193,29 +195,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -236,7 +230,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -308,25 +312,25 @@ interface ReviewFormProps {
     onClose: () =&gt; void;
 }
 &nbsp;
-const ReviewForm: React.FC&lt;ReviewFormProps&gt; = <span class="fstat-no" title="function not covered" >({</span> clubName,onReviewSubmit, onClose, rating, rewiewtext, setRating,setReview}) =&gt; {
+const ReviewForm: React.FC&lt;ReviewFormProps&gt; = ({ clubName,onReviewSubmit, onClose, rating, rewiewtext, setRating,setReview}) =&gt; {
 &nbsp;
-  const handleStarPress = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(s</span>tar: number) =&gt; {</span>
+  const handleStarPress = <span class="fstat-no" title="function not covered" >(s</span>tar: number) =&gt; {
 <span class="cstat-no" title="statement not covered" >    setRating(star);</span>
   };
 &nbsp;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
+  return (
     &lt;TouchableWithoutFeedback onPress={Keyboard.dismiss}&gt;
       &lt;View style={styles.container}&gt;
         &lt;View style={styles.content}&gt;
           &lt;Text style={styles.title}&gt;Write a Review for {clubName}&lt;/Text&gt;
           &lt;View style={styles.starsContainer}&gt;
-            {[1, 2, 3, 4, 5].map(<span class="fstat-no" title="function not covered" >(s</span>tar) =&gt; (
-<span class="cstat-no" title="statement not covered" >              &lt;TouchableOpacity key={star} onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >handleStarPress(star)}</span>&gt;</span>
+            {[1, 2, 3, 4, 5].map((star) =&gt; (
+              &lt;TouchableOpacity key={star} onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >handleStarPress(star)}</span>&gt;
                 &lt;Feather
                   name="star"
                   size={30}
-                  color={star &lt;= rating ? '#FFD700' : '#CCCCCC'}
+                  color={star &lt;= rating ? <span class="branch-0 cbranch-no" title="branch not covered" >'#FFD700' </span>: '#CCCCCC'}
                   style={styles.star}
                 /&gt;
               &lt;/TouchableOpacity&gt;
@@ -339,10 +343,10 @@ const ReviewForm: React.FC&lt;ReviewFormProps&gt; = <span class="fstat-no" title
             onChangeText={setReview}
             multiline
           /&gt;
-          &lt;TouchableOpacity style={styles.button} onPress={onReviewSubmit}&gt;
+          &lt;TouchableOpacity style={styles.button} onPress={onReviewSubmit} testID="submit-review-button"&gt;
             &lt;Text style={styles.buttonText}&gt;Submit&lt;/Text&gt;
           &lt;/TouchableOpacity&gt;
-          &lt;TouchableOpacity style={styles.closeButton} onPress={onClose}&gt;
+          &lt;TouchableOpacity style={styles.closeButton} onPress={onClose} testID="close-review-button"&gt;
             &lt;Feather name="x" size={24} color="#FFFFFF" /&gt;
           &lt;/TouchableOpacity&gt;
         &lt;/View&gt;
@@ -359,7 +363,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     content: {
-        backgroundColor: '#1F2937',
+        backgroundColor: '#121212',
         borderRadius: 20,
         padding: 24,
         width: '90%',
@@ -384,14 +388,16 @@ const styles = StyleSheet.create({
         textAlign: 'left',
     },
     reviewTextInput: {
-        backgroundColor: '#F3F4F6',
+        backgroundColor: '#222222',
         height: 120,
         padding: 12,
         marginBottom: 16,
         borderRadius: 8,
+        color:'#FFFFFF',
+        
     },
     button: {
-        backgroundColor: '#A78BFA',
+        backgroundColor: '#5500FF',
         padding: 16,
         borderRadius: 8,
         alignItems: 'center',
@@ -415,7 +421,7 @@ export default ReviewForm;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-02-02T01:12:44.703Z
+                at 2025-02-03T17:48:27.062Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

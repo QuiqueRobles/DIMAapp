@@ -32,10 +32,10 @@ interface UserProfile {
 }
 
 const genderOptions = [
-  { label: 'Not Specified', value: 'not_specified' },
-  { label: 'Male', value: 'male' },
-  { label: 'Female', value: 'female' },
-  { label: 'Other', value: 'other' },
+  { label: '🚻 Not Specified', value: 'not_specified' },
+  { label: '♂ Male', value: 'male' },
+  { label: '♀ Female', value: 'female' },
+  { label: '⚧ Other', value: 'other' },
 ];
 
 const userSchema = z.object({
@@ -204,22 +204,23 @@ export default function EditProfileScreen() {
         <View style={styles.fieldContainer}>
           <Text style={styles.label}>Gender</Text>
           <View style={styles.picker}>
-          <Picker
-            selectedValue={userData?.gender_id}
-            onValueChange={(itemValue) => 
-              setUserData(prev => prev ? { ...prev, gender_id: itemValue } : null)
-            }
-            style={styles.picker}
-            
-          >
-            {genderOptions.map((option) => (
-              <Picker.Item key={option.value} label={option.label} value={option.value} color="#151515"
-             
-              />
-            ))}
-          </Picker>
+            <Picker
+              selectedValue={userData?.gender_id}
+              onValueChange={(itemValue) => 
+                setUserData(prev => prev ? { ...prev, gender_id: itemValue } : null)
+              }
+              style={styles.picker}
+            >
+              {genderOptions.map((option) => (
+                <Picker.Item 
+                  key={option.value} 
+                  label={option.label} 
+                  value={option.value}
+                  color="#FFFFFF" // Changed from #151515 to white
+                />
+              ))}
+            </Picker>
           </View>
-         
         </View>
 
         <View style={styles.fieldContainer}>

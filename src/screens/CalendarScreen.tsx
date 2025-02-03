@@ -7,6 +7,8 @@ import { supabase } from '@/lib/supabase';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Feather } from '@expo/vector-icons';
 import EventCard from '@/components/EventCard';
+import ErrorDisplay from '@/components/ErrorDisplay';
+import { set } from 'date-fns';
 
 type RootStackParamList = {
   Calendar: { clubId: string; clubName: string };
@@ -37,7 +39,7 @@ const CalendarScreen: React.FC = () => {
   const route = useRoute<CalendarScreenRouteProp>();
   const navigation = useNavigation<CalendarScreenNavigationProp>();
   const { clubId, clubName } = route.params;
-
+  const [error, setError] = useState<string | null>(null);
   const [events, setEvents] = useState<Event[]>([]);
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
 
@@ -46,17 +48,26 @@ const CalendarScreen: React.FC = () => {
   }, []);
 
   const fetchEvents = async () => {
-    const { data, error } = await supabase
+    const { data: eventData, error: eventError } = await supabase
       .from('event')
       .select('*')
       .eq('club_id', clubId);
 
-    if (error) {
-      console.error('Error fetching events:', error);
+    // console.log('data', data);
+    // console.log('error', error);
+
+    if (eventError) {
+      setError(eventError.message);
     } else {
-      setEvents(data || []);
+      setEvents(eventData);
+      
     }
   };
+
+  if (error) {
+    //console.log('error', error);
+    return <ErrorDisplay message={error} />;
+  }
 
   const markedDates = events.reduce((acc, event) => {
     acc[event.date] = { marked: true, dotColor: '#A78BFA' };
@@ -64,19 +75,30 @@ const CalendarScreen: React.FC = () => {
   }, {} as { [key: string]: { marked: boolean; dotColor: string } });
 
   const handleDayPress = (day: DateData) => {
+    // console.log('selected day', day);
+    // console.log('events', events);
     const selectedEvent = events.find(event => event.date === day.dateString);
     setSelectedEvent(selectedEvent || null);
   };
 
   return (
+
+    // console.log('events after fecths', events),
+
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        <TouchableOpacity 
+          onPress={() => {
+            navigation.goBack()
+          }}
+          testID="back-button"
+        >
           <Feather name="arrow-left" size={24} color="#FFFFFF" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>{clubName} Events</Text>
       </View>
       <Calendar
+        testID="calendar"
         markedDates={markedDates}
         onDayPress={handleDayPress}
         theme={{

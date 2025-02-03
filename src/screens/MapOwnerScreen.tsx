@@ -38,6 +38,7 @@ const CustomMarker: React.FC<{ club: Club; onPress: (club: Club) => void; isSele
   <Marker
     coordinate={{ latitude: club.latitude, longitude: club.longitude }}
     onPress={() => onPress(club)}
+    testID='marker'
   >
     <View style={styles.markerContainer}>
       <View style={[styles.marker, isSelected && styles.selectedMarker]}>
@@ -68,7 +69,7 @@ const ClubCard: React.FC<{
     ]}
     {...panResponder.panHandlers}
   >
-    <TouchableOpacity style={styles.closeButton} onPress={onClose}>
+    <TouchableOpacity style={styles.closeButton} onPress={onClose} testID='close-button'>
       <Feather name="x" size={24} color="#6D28D9" />
     </TouchableOpacity>
     <View style={styles.cardContent}>
@@ -93,7 +94,7 @@ const ClubCard: React.FC<{
         <Text style={styles.cardAddress} numberOfLines={1}>{club.address}</Text>
       </View>
     </View>
-    <TouchableOpacity style={styles.viewDetailsButton} onPress={onViewDetails}>
+    <TouchableOpacity style={styles.viewDetailsButton} onPress={onViewDetails} testID='view-details-button'>
       <Text style={styles.viewDetailsButtonText}>View Details</Text>
     </TouchableOpacity>
   </Animated.View>

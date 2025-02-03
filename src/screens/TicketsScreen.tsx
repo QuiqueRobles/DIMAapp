@@ -18,6 +18,8 @@ import ErrorDisplay from '@/components/ErrorDisplay';
 import { set } from 'date-fns';
 import { LinearGradient } from 'expo-linear-gradient';
 
+const DEBUG = true;
+
 interface Ticket {
   id: string;
   user_id: string;
@@ -38,7 +40,7 @@ interface Ticket {
   };
 }
 
-const TICKETS_PAGE_SIZE = 10; // Number of tickets per page for past events
+const TICKETS_PAGE_SIZE = 4; // Number of tickets per page for past events
 const FLATLIST_MAX_HEIGHT = 380; // Adjust as needed so each list is independently scrollable
 
 const TicketScreen: React.FC = () => {
@@ -56,6 +58,7 @@ const TicketScreen: React.FC = () => {
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState('');
 
+
   useEffect(() => {
     fetchTickets();
   }, []);
@@ -71,10 +74,19 @@ const TicketScreen: React.FC = () => {
       setPage(1);
       setHasMore(true);
 
+      console.log("fetchTickets");
+
       const { data: userData, error: userError } = await supabase.auth.getUser();
+      console.log("userData:", userData);
+      console.log("userError:", userError);
+
       if (userError || !userData.user) {
+        
         throw new Error('Failed to get user');
       }
+
+      
+
 
       // Fetch all tickets for the user
       const { data: ticketsData, error: ticketsError } = await supabase
@@ -85,6 +97,8 @@ const TicketScreen: React.FC = () => {
           event:event_id (name)
         `)
         .eq('user_id', userData.user.id);
+
+      //console.log("ticketsData:", ticketsData);
 
       if (ticketsError) {
         throw new Error('Failed to fetch tickets');
@@ -98,6 +112,7 @@ const TicketScreen: React.FC = () => {
             .select('name')
             .eq('club_id', ticket.club_id)
             .single();
+          //console.log("clubData:", clubData);
           return clubError ? ticket : { ...ticket, club: clubData };
         })
       );
@@ -121,6 +136,7 @@ const TicketScreen: React.FC = () => {
       setCurrentTickets(current);
       setPastTickets(initialPastTickets);
     } catch (err: unknown) {
+      //console.log("error:", err);
       setError(err instanceof Error ? err.message : 'An unknown error occurred');
     } finally {
       setLoading(false);
@@ -140,6 +156,9 @@ const TicketScreen: React.FC = () => {
    * Fetch more past tickets (for infinite scroll).
    */
   const fetchMorePastTickets = async () => {
+    console.log("fetchMorePastTickets");
+    console.log("loadingMore:", loadingMore);
+    console.log("hasMore:", hasMore);
     if (loadingMore || !hasMore) return;
     setLoadingMore(true);
 
@@ -162,6 +181,8 @@ const TicketScreen: React.FC = () => {
         .order('event_date', { ascending: false })
         .range(page * TICKETS_PAGE_SIZE, (page + 1) * TICKETS_PAGE_SIZE - 1);
 
+      console.log("moreTickets:", moreTickets);
+      console.log("ticketsError:", ticketsError);
       if (ticketsError) {
         throw new Error('Failed to fetch more tickets');
       }
@@ -175,6 +196,7 @@ const TicketScreen: React.FC = () => {
               .select('name')
               .eq('club_id', ticket.club_id)
               .single();
+            console.log("clubData:", clubData);
             return clubError ? ticket : { ...ticket, club: clubData };
           })
         );
@@ -242,6 +264,8 @@ const TicketScreen: React.FC = () => {
   }
 
   return (
+
+    //console.log("pastTickets:", pastTickets),
     
     <SafeAreaView style={styles.container}>
       <View
@@ -264,6 +288,7 @@ const TicketScreen: React.FC = () => {
           <Text style={styles.sectionTitle}>Incoming Events</Text>
           <FlatList
             data={currentTickets}
+            testID='future-events-list'
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
               <TicketCard ticket={item} onPress={() => handleTicketPress(item)} />
@@ -286,6 +311,7 @@ const TicketScreen: React.FC = () => {
           <Text style={styles.sectionTitle}>Past Events</Text>
           <FlatList
             data={pastTickets}
+            testID='past-events-list'
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
               <TicketCard
@@ -333,6 +359,7 @@ const TicketScreen: React.FC = () => {
       <Modal
         visible={showReviewForm}
         animationType="slide"
+        testID='review-modal'
         transparent
         onRequestClose={() => setShowReviewForm(false)}
       >
@@ -373,11 +400,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#FFFFFF',
     padding: 16,
+    marginTop: 5,
+    marginBottom: 24,
     alignSelf:'center',
     fontFamily:'koboto'
   },
   sectionContainer: {
-    marginBottom: 24,
+    marginBottom: 80,
   },
   sectionTitle: {
     fontSize: 18,
