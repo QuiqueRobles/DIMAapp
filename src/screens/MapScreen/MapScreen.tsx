@@ -36,6 +36,7 @@ const CustomMarker: React.FC<{ club: Club; onPress: (club: Club) => void; isSele
   <Marker
     coordinate={{ latitude: club.latitude, longitude: club.longitude }}
     onPress={() => onPress(club)}
+    testID='marker'
   >
     <View style={styles.markerContainer}>
       <View style={[styles.marker, isSelected && styles.selectedMarker]}>
@@ -66,7 +67,7 @@ const ClubCard: React.FC<{
     ]}
     {...panResponder.panHandlers}
   >
-    <TouchableOpacity style={styles.closeButton} onPress={onClose}>
+    <TouchableOpacity style={styles.closeButton} onPress={onClose} testID='close-button'>
       <Feather name="x" size={24} color="#6D28D9" />
     </TouchableOpacity>
     <View style={styles.cardContent}>
@@ -91,7 +92,7 @@ const ClubCard: React.FC<{
         <Text style={styles.cardAddress} numberOfLines={1}>{club.address}</Text>
       </View>
     </View>
-    <TouchableOpacity style={styles.viewDetailsButton} onPress={onViewDetails}>
+    <TouchableOpacity style={styles.viewDetailsButton} onPress={onViewDetails} testID='view-details-button'>
       <Text style={styles.viewDetailsButtonText}>View Details</Text>
     </TouchableOpacity>
   </Animated.View>
@@ -135,13 +136,18 @@ const MapScreen: React.FC = () => {
   const fetchClubs = async () => {
     try {
       setLoading(true);
+      //console.log('Fetching clubs...');
       const { data, error } = await supabase
         .from('club')
         .select('*')
         .not('latitude', 'is', null)
         .not('longitude', 'is', null);
 
+      //console.log('data:', data);
+      //console.log('error:', error);
       if (error) throw error;
+
+      
 
       const clubsWithCoordinates = data
         .filter((club: any) => club.latitude && club.longitude)
@@ -153,7 +159,7 @@ const MapScreen: React.FC = () => {
 
       setClubs(clubsWithCoordinates);
     } catch (error) {
-      console.error('Error fetching clubs:', error);
+      //console.error('Error fetching clubs:', error);
       setError('Failed to fetch clubs. Please try again.');
     } finally {
       setLoading(false);
@@ -162,6 +168,7 @@ const MapScreen: React.FC = () => {
 
   const handleClubPress = (club: Club) => {
     setSelectedClub(club);
+    //console.log('Selected club:', club.name);
     if (mapRef.current) {
       mapRef.current.animateToRegion({
         latitude: club.latitude - 0.004,

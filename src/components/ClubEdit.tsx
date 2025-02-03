@@ -101,12 +101,11 @@ const ClubEdit: React.FC<ClubEditsProps> = ({ club ,setClub}) => {
 
       <View style={styles.detailItem}>
       <View style={styles.iconContainer}>
-              <Feather name={"map-pin"} size={16} color="#A78BFA" />
-            </View>
+        <Feather name={"map-pin"} size={16} color="#A78BFA" />
+      </View>
       <Autocomplete 
-      
-       inputContainerStyle={{ borderWidth: 0 }} // Remove extra borders if needed
-       style={styles.detailInput}
+        inputContainerStyle={{ borderWidth: 0 }} // Remove extra borders if needed
+        style={styles.detailInput}
         data={suggestions}
         value={query}
         onChangeText={(text) => {
@@ -118,27 +117,21 @@ const ClubEdit: React.FC<ClubEditsProps> = ({ club ,setClub}) => {
         flatListProps={{
           keyExtractor: (_, index) => index.toString(),
           renderItem: ({ item }) => (
-         
-
             <TouchableOpacity style={styles.addresssuggestions}
              onPress={() => handleSelect(item)}>
               <Text style={styles.detailInput}>{item.display_name}</Text>
             </TouchableOpacity>
-       
-
-        ),
-
-
+          ),
         }}
       />
       </View>
     
-      <EditableDetailItem
-        icon="clock"
-        label="Opening Hours"
-        value={club.opening_hours || ''}
-        onChange={(value) => handleUpdate('opening_hours', value)}
-      />
+        <EditableDetailItem
+          icon="clock"
+          label="Opening Hours"
+          value={club.opening_hours || ''}
+          onChange={(value) => handleUpdate('opening_hours', value)}
+        />
       
         <EditableDetailItem
           icon="user"

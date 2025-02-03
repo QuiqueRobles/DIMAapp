@@ -427,7 +427,6 @@ describe('TicketsScreen', () => {
 
 
     it('send review', async () => {
-        
         supabase.auth.getUser.mockResolvedValueOnce({
             data: { 
                 user: {
@@ -436,8 +435,6 @@ describe('TicketsScreen', () => {
             },
             error: null,
         });
-        
-    
         supabase.from.mockReturnValueOnce({
             select: jest.fn().mockReturnThis(),
             eq: jest.fn().mockResolvedValueOnce({
@@ -445,7 +442,6 @@ describe('TicketsScreen', () => {
                 error: null,
             }),
         });
-    
         supabase.from.mockReturnValueOnce({
             select: jest.fn().mockReturnThis(),
             eq: jest.fn().mockReturnThis(),
@@ -454,15 +450,11 @@ describe('TicketsScreen', () => {
                 error: null,
             }),
         });
-
-
-
         const { getByText, getByTestId, queryByTestId} = render(<TicketsScreen />);
 
         await act(async () => {
             await new Promise((resolve) => setTimeout(resolve, 500));
         });
-
         await act(async () => {
             fireEvent.press(getByText('Write Review'));
         });
@@ -484,7 +476,6 @@ describe('TicketsScreen', () => {
         await waitFor(() => {
             expect(queryByTestId('review-modal')).toBeFalsy();    
         });
-    
     });
 });
 
