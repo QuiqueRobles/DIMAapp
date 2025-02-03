@@ -1,171 +1,145 @@
-import React, { useState, useEffect } from 'react';
-  import { 
-    View, 
-    Text, 
-    Image, 
-    TouchableOpacity, 
-    ScrollView, 
-    TextInput, 
-    ActivityIndicator, 
-    Alert, 
-    StyleSheet,
-    Platform,
-    KeyboardAvoidingView,
-  } from 'react-native';
+ 
+  import React, { useState, useEffect } from 'react';
+  import { View, ScrollView, Text, TouchableOpacity, RefreshControl, Image, StyleSheet, Dimensions,Alert,Button,GestureResponderEvent} from 'react-native';
   import { SafeAreaView } from 'react-native-safe-area-context';
+  import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
+  import { NativeStackNavigationProp } from '@react-navigation/native-stack';
   import { Feather } from '@expo/vector-icons';
+  import { LinearGradient } from 'expo-linear-gradient';
   import { supabase } from '@/lib/supabase';
-  import { useNavigation } from '@react-navigation/native';
-  import { AppNavigationProp } from '@/navigation';
-  import DateTimePicker from '@react-native-community/datetimepicker';
-  import { Picker } from '@react-native-picker/picker';
+  import ClubHeader from '@/components/ClubHeader';
+  import ClubDetails from '@/components/ClubDetails';
+  import ClubEdit from '@/components/ClubEdit';
+  import EventsList from '@/components/EventsList';
+  import ReviewsList from '@/components/ReviewsList';
+  import ErrorDisplay from '@/components/ErrorDisplay';
+  import LoadingSpinner from '@/components/LoadingSpinner';
+  import { AppNavigationProp, AppRouteProp } from '@/navigation';
+  import { launchImageLibrary } from 'react-native-image-picker';
   import * as ImagePicker from 'expo-image-picker';
-  import commonStyles from '@/styles/commonStyles';
-  import { z } from 'zod';
+  const { width, height } = Dimensions.get('window');
   
-  interface ClubProfile {
+  type RootStackParamList = {
+    Home: undefined;
+    Club: { clubId: string };
+    Reviews: { clubId: string; clubName: string };
+    Calendar: { clubId: string; clubName: string };
+  };
+
+  
+  type ClubScreenRouteProp = RouteProp<RootStackParamList, 'Club'>;
+  type ClubScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Club'>;
+  
+
+    interface Club {
+      id: string;
+      name: string;
+      rating: number;
+      num_reviews: number;
+      address: string;
+      image: string | null;
+      category: string | null;
+      music_genre: string | null;
+      attendees: number;
+      latitude:number;
+      longitude:number;
+      opening_hours: string;
+      dress_code: string | null;
+      description: string | null;}
+  
+  interface Event {
+    id: string;
+    created_at: string;
     club_id: string;
-    name: string;
-    image: string;
-    category: string;
-    description: string;
-    opening_hours: string;
-    dress_code: string;
-    music_genre: string;
-    rating: string;
-    num_reviews: string;
-    attendees: string;
+    date: string;
+    name: string | null;
+    price: number | null;
+    description: string | null;
+    image: string | null;
   }
-
-  const clubSchema = z.object({
-    name: z.string().min(2, 'Name must be at least 2 characters'),
-    category: z.string().min(2, 'Category must be at least 2 characters'),
-    description: z.string().min(5, 'Description must be at least 5 characters'),
-    opening_hours: z.string().regex(/^\d{2}:\d{2} - \d{2}:\d{2}$/, 'Invalid opening hours format'),
-    dress_code: z.string().min(2, 'Dress code must be at least 2 characters'),
-    music_genre: z.string().min(2, 'Music genre must be at least 2 characters'),
-    attendees: z.string().regex(/^\d+$/, 'Invalid number of attendees'),
-  });
-
   
+  interface Review {
+    id: string;
+    created_at: string;
+    user_id: string;
+    club_id: string;
+    text: string | null;
+    num_stars: number;
+  }
   
-  // const clubSchema = z.object({
-  //   name: z.string().min(2, 'Name must be at least 2 characters'),
-  //   email: z.string().email('Invalid email address'),
-  //   phone: z.string().regex(/^\+?[1-9]\d{1,14}$/, 'Invalid phone number'),
-  //   favorite_club: z.string().optional(),
-  //   date_of_birth: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Invalid date format'),
-  //   gender_id: z.string(),
-  //   country: z.string(),
-  // });
-  
-  export default function ClubManage() {
-    const [isEditing, setIsEditing] = useState(false);
-    const [clubData, setClubData] = useState<ClubProfile | null>(null);
+  const ClubManage: React.FC = () => {
+    const [club, setClub] = useState<Club | null>(null);
+    const [events, setEvents] = useState<Event[]>([]);
+    const [reviews, setReviews] = useState<Review[]>([]);
     const [loading, setLoading] = useState(true);
-    const [errors, setErrors] = useState<Record<string, string>>({});
-    const [showDatePicker, setShowDatePicker] = useState(false);
+    const [refreshing, setRefreshing] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const [imageUri, setImageUri] = useState(false);
+  
     const navigation = useNavigation<AppNavigationProp>();
-  
-    useEffect(() => {
-      fetchClubProfile();
-    }, []);
-  
-    const fetchClubProfile = async () => {
+    const [clubId,setClubId]=useState("0"); 
+    const [edit,setEdit]=useState(false);
+      
+
+    const getAuthenticatedUserId = async () => {
       try {
-        setLoading(true);
-        const { data: { user } } = await supabase.auth.getUser();
-        if (!user) throw new Error('No user found');
-        console.log('user:',user.id);
-  
-        const { data, error } = await supabase
-          .from('club')
-          .select('club_id, name, image, category, description, opening_hours, dress_code, music_genre, rating, num_reviews, attendees')
-          .eq('club_id', user.id)
-          .single();
-  
-        if (error) throw error;
-        if (data){
-          const clubData: ClubProfile = {
-            ...data,
-            rating: data.rating.toString(),
-            num_reviews: data.num_reviews.toString(),
-            attendees: data.attendees.toString(),
-          };
-          setClubData(clubData); 
-          
-        } 
-      } catch (error) {
-        console.error('Error fetching user profile:', error);
-        Alert.alert('Error', 'Failed to load profile. Please try again.');
-      } finally {
-        setLoading(false);
-        //console.log("club data:",clubData);
+        const { data: { user }, error } = await supabase.auth.getUser();
+        
+        if (error) {
+          throw new Error(`Error fetching authenticated user: ${error.message}`);
+        }
+        
+        if (!user) {
+          throw new Error('No authenticated user found');
+        }
+        setClubId(user.id)
+        return user.id; // Return the user's ID
+      } catch (err) {
+        return 123232; // Return null if there's an error
       }
     };
-  
-
-    const handleSave = async () => {
-      
-      if (!clubData) return;
+    
+   
+    const fetchClubData = async () => {
       try {
-
-        const validatedData = clubSchema.parse(clubData);
         setLoading(true);
-  
-        const { error } = await supabase
+        setError(null);
+       const clubId=await getAuthenticatedUserId();
+     
+        const { data: clubData, error: clubError } = await supabase
           .from('club')
-          .update(validatedData)
-          .eq('club_id', clubData.club_id);
+          .select('*')
+          .eq('club_id', clubId)
+          .single();
   
-        if (error) throw error;
-        console.log('validatedData:',validatedData);
-        setIsEditing(false);
-        Alert.alert('Success', 'Profile updated successfully');
-      } catch (error) {
-        console.log('error:',error);
-        if (error instanceof z.ZodError) {
-          const newErrors: Record<string, string> = {};
-          error.errors.forEach((err) => {
-            if (err.path) {
-              newErrors[err.path[0]] = err.message;
-            }
-          });
-          setErrors(newErrors);
+        if (clubError) throw new Error('Failed to fetch club data');
+        setClub(clubData);
+       
+        const { data: reviewsData, error: reviewsError } = await supabase
+          .from('review')
+          .select('*')
+          .eq('club_id', clubId)
+          .order('created_at', { ascending: false })
+          .limit(5);
+  
+        if (reviewsError) throw new Error('Failed to fetch reviews');
+        setReviews(reviewsData || []);
+  
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
         } else {
-          console.error('Error updating club profile:', error);
-          Alert.alert('Error', 'Failed to update profile. Please try again.');
+          setError('An unknown error occurred');
         }
       } finally {
         setLoading(false);
+        setRefreshing(false);
       }
     };
-  
-    const handleLogout = async () => {
-      Alert.alert(
-        "Logout",
-        "Are you sure you want to logout?",
-        [
-          { text: "Cancel", style: "cancel" },
-          {
-            text: "Logout",
-            onPress: async () => {
-              try {
-                await supabase.auth.signOut();
-                //navigation.navigate('Login');
-              } catch (error) {
-                console.error('Error signing out:', error);
-                Alert.alert('Error', 'Failed to sign out. Please try again.');
-              }
-            },
-            style: "destructive"
-          }
-        ]
-      );
-    };
-  
     const handleImageUpload = async () => {
+      //const clubId=await getAuthenticatedUserId();
       const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      
       if (permissionResult.granted === false) {
         Alert.alert('Permission Required', 'Please allow access to your photo library to upload an image.');
         return;
@@ -182,7 +156,7 @@ import React, { useState, useEffect } from 'react';
         try {
           setLoading(true);
           const ext = result.assets[0].uri.substring(result.assets[0].uri.lastIndexOf(".") + 1);
-          const fileName = `${clubData?.club_id}-${Date.now()}.${ext}`;
+          const fileName = `${club?.id}-${Date.now()}.${ext}`;
           const filePath = `${fileName}`;
   
           const formData = new FormData();
@@ -193,24 +167,24 @@ import React, { useState, useEffect } from 'react';
           } as any);
   
           const { error: uploadError } = await supabase.storage
-            .from('user_images')
+            .from('clubs-image')
             .upload(filePath, formData);
   
           if (uploadError) throw uploadError;
   
           const { data: { publicUrl } } = supabase.storage
-            .from('user_images')
+            .from('clubs-image')
             .getPublicUrl(filePath);
-  
-  
+           alert(publicUrl);
           const { error: updateError } = await supabase
-            .from('users')
-            .update({ profile_picture: publicUrl })
-            .eq('id', clubData?.club_id);
-  
+            .from('club') 
+            .update({'image': publicUrl })
+            .eq('club_id',clubId);
+          
+        
           if (updateError) throw updateError;
   
-          setClubData(prev => prev ? { ...prev, profile_picture: publicUrl } : null);
+          setClub(prev => prev ? { ...prev, image: publicUrl } : null);
           Alert.alert('Success', 'Profile picture updated successfully');
         } catch (error) {
           console.error('Error uploading image:', error);
@@ -220,192 +194,262 @@ import React, { useState, useEffect } from 'react';
         }
       }
     };
-  
-  
-    const renderField = (key: keyof ClubProfile, label: string, placeholder: string) => (
-      <View style={styles.fieldContainer}>
-        <Text style={styles.label}>{label}</Text>
-        <TextInput
-          value={clubData?.[key] as string}
-          onChangeText={(text) => setClubData(prev => prev ? { ...prev, [key]: text } : null)}
-          placeholder={placeholder}
-          placeholderTextColor="#666"
-          style={[styles.input, !isEditing && styles.disabledInput]}
-          editable={isEditing}
-        />
-        {errors[key] && <Text style={styles.errorText}>{errors[key]}</Text>}
-      </View>
-    );
-  
-    const renderContent = () => (
-      <ScrollView style={styles.scrollView}>
-        <View style={styles.profileImageContainer}>
-          <Image
-            source={{ uri: clubData?.image || 'https://via.placeholder.com/150' }}
-            style={styles.profileImage}
-          />
-          <TouchableOpacity 
-            onPress={handleImageUpload}
-            style={styles.cameraButton}
-          >
-            <Feather name="camera" size={20} color="white" />
-          </TouchableOpacity>
-        </View>
-  
-        <Text style={styles.title}>
-          {isEditing ? 'Edit Profile' : clubData?.name || 'User Profile'}
-        </Text>
-  
-        {renderField('name', 'Name', 'Enter your name')}
-        {renderField('category', 'Category', 'Enter your email')}
-        {renderField('opening_hours', 'Opening Hours', 'Enter new opening hours')}
-        {renderField('description', 'Description', 'Enter your phone number')}
-        {renderField('attendees', 'Attendees', 'Enter your favorite club')}
-        {renderField('music_genre', 'Music Genre', 'Enter your favorite club')}
-        {renderField('dress_code', 'Dress Code', 'Enter your date of birth')}
+ const saveChanges = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('club')
+        .update({
+          address: club.address,
+          opening_hours: club.opening_hours,
+          dress_code: club.dress_code,
+          music_genre: club.music_genre,
+          description: club.description,
+          latitude:club?.latitude,
+          longitude:club?.longitude,
+        })
+        .eq('club_id', clubId);// Match by the unique club ID 
+        if (error) {
+            throw error;
+          }
+    
+          Alert.alert('Success', 'Club details updated successfully.');
+          setEdit(!edit);
+        } catch (error) {
+          Alert.alert('Error', 'Failed to update club details.');
+          console.error(error);
+        }
         
-        
+      };
+         
+    
   
-        <TouchableOpacity
-          onPress={() => isEditing ? handleSave() : setIsEditing(true)}
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>
-            {isEditing ? 'Save Changes' : 'Edit Profile'}
-          </Text>
-        </TouchableOpacity>
-      </ScrollView>
-    );
+    useEffect(() => {
+      fetchClubData();
+    }, [clubId]);
+  
+    const handleRefresh = () => {
+      setRefreshing(true);
+      fetchClubData();
+    };
+      const handleLogout = async () => {
+        Alert.alert(
+          "Logout",
+          "Are you sure you want to logout?",
+          [
+            { text: "Cancel", style: "cancel" },
+            {
+              text: "Logout",
+              onPress: async () => {
+                try {
+                  await supabase.auth.signOut();
+                  //navigation.navigate('Login');
+                } catch (error) {
+                  console.error('Error signing out:', error);
+                  Alert.alert('Error', 'Failed to sign out. Please try again.');
+                }
+              },
+              style: "destructive"
+            }
+          ]
+        );
+      };
+  
+    if (error) {
+      return <ErrorDisplay message={error} />;
+    }
+  
+    if (!club) {
+      return <ErrorDisplay message="Club not found" />;
+    }
   
     return (
-      <KeyboardAvoidingView 
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={commonStyles.pageContainer}>
-        <SafeAreaView style={styles.container}>
-          {loading ? (
-            <View style={styles.loadingContainer}>
-              <ActivityIndicator size="large" color="#A78BFA" />
+      <SafeAreaView style={styles.container}>
+        <ScrollView
+          contentContainerStyle={styles.scrollContent}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor="#A78BFA" />
+          }
+        >
+          <View style={styles.imageContainer}>
+            <TouchableOpacity onPress={handleImageUpload} style={styles.imageContainer}>
+                <View style={styles.imageOverlay} />
+  
+                  <Image source={{ uri: club.image || 'https://via.placeholder.com/400x200?text=No+Image'}}
+                   style={styles.image} 
+                  />
+
+              <LinearGradient
+                colors={['rgba(0,0,0,0)', 'rgba(0,0,0,0.8)']}
+                style={styles.imageGradient}
+                />
+                <Text style={styles.seeAllText}>Tap to Change Image</Text>
+                </TouchableOpacity>
+            <TouchableOpacity onPress={handleLogout}
+              style={styles.backButton}
+              
+            >
+              <Feather name="arrow-left" size={24} color="#FFFFFF" />
+            </TouchableOpacity>
+            <View style={styles.clubType}>
+              <Text style={styles.clubTypeText}>{club.category || 'Nightclub'}</Text>
             </View>
-          ) : (
-            <>
-              {renderContent()}
-              <TouchableOpacity
-                onPress={handleLogout}
-                style={styles.logoutButton}
-              >
-                <Feather name="log-out" size={24} color="white" />
-              </TouchableOpacity>
-            </>
-          )}
-        </SafeAreaView>
-      </KeyboardAvoidingView>
+          </View>
+          <View style={styles.content}>
+            <ClubHeader club={club} />
+            <View>
+            <TouchableOpacity onPress={edit? (() => {
+    saveChanges().catch((error) => console.error('Error:', error));
+  }):(()=>setEdit(!edit))}
+              style={styles.EditButton} >
+  <Text style={styles.seeAllText}>{edit ? 'Save' : 'Edit'}</Text>
+</TouchableOpacity>
+      {edit ? (
+        <ClubEdit club={club} setClub={setClub}/>
+      ) : (
+        <ClubDetails club={club} />
+      )}
+    </View>
+            <View style={styles.section}>
+              <View style={styles.sectionHeader}>
+                <Text style={styles.sectionTitle}>Upcoming Events</Text>
+                <TouchableOpacity onPress={() => navigation.navigate('Calendar', { clubId: club.id, clubName: club.name })}>
+                  <Text style={styles.seeAllText}>See All</Text>
+                </TouchableOpacity>
+              </View>
+              {events.length > 0 ? (
+                <EventsList 
+                  events={events} 
+                  clubName={club.name}
+                  clubId={club.id}
+                />
+              ) : (
+                <Text style={styles.noEventsText}>No upcoming events</Text>
+              )}
+            </View>
+            <View style={styles.section}>
+              <View style={styles.sectionHeader}>
+                <Text style={styles.sectionTitle}>Reviews</Text>
+                <TouchableOpacity onPress={() => navigation.navigate('Reviews', { clubId: club.id, clubName: club.name })}>
+                  <Text style={styles.seeAllText}>See All</Text>
+                </TouchableOpacity>
+              </View>
+              {reviews.length > 0 ? (
+                <ReviewsList reviews={reviews.slice(0, 3)} />
+              ) : (
+                <Text style={styles.noReviewsText}>No reviews yet</Text>
+              )}
+            </View>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
     );
-  }
+  };
   
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#1F2937',
+      backgroundColor: '#121212',
     },
-    scrollView: {
-      flex: 1,
-      padding: 16,
+    scrollContent: {
+      flexGrow: 1,
     },
-    profileImageContainer: {
-      alignItems: 'center',
-      marginTop: 32,
-      marginBottom: 16,
+    imageContainer: {
+      height: height * 0.4,
+      width: width,
+      position: 'relative',
+      backgroundColor: '#121212',
     },
-    profileImage: {
-      width: 120,
-      height: 120,
-      borderRadius: 60,
+    imageOverlay: {
+      ...StyleSheet.absoluteFillObject,
+      backgroundColor: 'rgba(31, 41, 55, 0.5)',
     },
-    cameraButton: {
+    image: {
+      width: '100%',
+      height: '100%',
+      resizeMode: 'cover',
+    
+    },
+    imagee: {
+        width: 150,
+        height: 150,
+        borderRadius: 75,
+        borderWidth: 2,
+        borderColor: '#ccc',
+    },
+    imageGradient: {
       position: 'absolute',
+      left: 0,
+      right: 0,
       bottom: 0,
-      right: '33%',
-      backgroundColor: '#7C3AED',
+      height: '50%',
+    },
+    backButton: {
+      position: 'absolute',
+      top: 16,
+      left: 16,
+      zIndex: 10,
+      backgroundColor: 'rgba(101, 4, 4, 0.5)',
       borderRadius: 20,
       padding: 8,
     },
-    title: {
-      fontSize: 24,
-      fontWeight: 'bold',
-      color: '#FFFFFF',
-      textAlign: 'center',
-      marginBottom: 24,
-    },
-    fieldContainer: {
-      marginBottom: 16,
-    },
-    label: {
-      fontSize: 14,
-      fontWeight: '500',
-      color: '#9CA3AF',
-      marginBottom: 4,
-    },
-    input: {
-      backgroundColor: '#374151',
-      borderRadius: 8,
-      padding: 12,
-      color: '#FFFFFF',
-      fontSize: 16,
-    },
-    disabledInput: {
-      backgroundColor: '#1F2937',
-      color: '#6B7280',
-    },
-    errorText: {
-      color: '#EF4444',
-      fontSize: 12,
-      marginTop: 4,
-    },
-    picker: {
-      backgroundColor: '#374151',
-      borderRadius: 8,
-      color: '#FFFFFF',
-    },
-    disabledPicker: {
-      backgroundColor: '#1F2937',
-      color: '#6B7280',
-    },
-    dateText: {
-      color: '#FFFFFF',
-      fontSize: 16,
-    },
-    button: {
-      backgroundColor: '#7C3AED',
-      borderRadius: 8,
-      padding: 16,
-      alignItems: 'center',
-      marginTop: 24,
-    },
-    buttonText: {
-      color: '#FFFFFF',
-      fontSize: 16,
-      fontWeight: '600',
-    },
-    loadingContainer: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    logoutButton: {
+    clubType: {
       position: 'absolute',
       top: 16,
       right: 16,
-      backgroundColor: '#EF4444',
-      borderRadius: 30,
-      padding: 12,
-      shadowColor: "#000",
-      shadowOffset: {
-        width: 0,
-        height: 2,
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 3.84,
-      elevation: 5,
+      backgroundColor: 'rgba(64, 0, 132, 0.8)',
+      borderRadius: 16,
+      paddingVertical: 4,
+      paddingHorizontal: 12,
+    },
+    clubTypeText: {
+      color: '#FFFFFF',
+      fontSize: 12,
+      fontWeight: '600',
+    },
+    content: {
+      flex: 1,
+      padding: 20,
+      backgroundColor: '#121212',
+      borderTopLeftRadius: 20,
+      borderTopRightRadius: 20,
+      marginTop: -20,
+    },
+    section: {
+      marginTop: 24,
+    },
+    sectionHeader: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginBottom: 16,
+    },
+    sectionTitle: {
+      fontSize: 24,
+      fontWeight: 'bold',
+      color: '#FFFFFF',
+    },
+    seeAllText: {
+      fontSize: 14,
+      color: '#A78BFA',
+      fontWeight: '600',
+    },
+    noEventsText: {
+      color: '#9CA3AF',
+      fontSize: 16,
+      textAlign: 'center',
+    },
+    noReviewsText: {
+      color: '#9CA3AF',
+      fontSize: 16,
+      textAlign: 'center',
+      marginTop: 16,
+    },
+    EditButton: {
+      width: '30%',
+      color:'#9CA3AF',
+      overflow: 'hidden',
+      borderRadius: 8,
     },
   });
-    
+  
+  export default ClubManage;

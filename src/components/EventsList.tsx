@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { format, parseISO } from 'date-fns';
 import TicketButton from './TicketButton';
+import { useState,useEffect      } from 'react';
+import { supabase } from '@/lib/supabase';
 
 interface Event {
   id: string;
@@ -20,6 +22,52 @@ interface EventsListProps {
 }
 
 const EventsList: React.FC<EventsListProps> = ({ events, clubName }) => {
+  const [userInfo,setUserInfo]=useState(false)
+  
+      const getAuthenticatedUser = async () => {
+        try {
+          const { data: { user }, error } = await supabase.auth.getUser();
+          
+          if (error) {
+            throw new Error(`Error fetching authenticated user: ${error.message}`);
+          }
+          
+          if (!user) {
+            throw new Error('No authenticated user found');
+          }
+          return user.id;
+          ; // Return the user's ID
+        } catch (err) {
+          return false; // Return null if there's an error
+        }
+      };
+  useEffect(() => {
+    const fetchClub = async () => {
+      try {
+        const clubId = await getAuthenticatedUser();
+        console.log("Fetched Club ID:", clubId);
+
+        const { data: clubData, error: clubError } = await supabase
+          .from('users')
+          .select('isClub')
+          .eq('user_id', clubId)
+          .single();
+
+        if (clubError) {
+          console.error("Error fetching club data:", clubError);
+          return;
+        }
+
+        console.log("Club Data:", clubData);
+        setUserInfo(clubData?.isClub || false); // Ensure it's a boolean
+      } catch (err) {
+        console.error("Error in fetchClubData:", err);
+      }
+    };
+
+    fetchClub();
+  }, []); 
+
   return (
     <View style={styles.container}>
       {events.map((event) => (
@@ -42,9 +90,11 @@ const EventsList: React.FC<EventsListProps> = ({ events, clubName }) => {
             {event.price !== null && (
               <Text style={styles.eventPrice}>${(event.price / 100).toFixed(2)}</Text>
             )}
-          </View>
-          <TicketButton event={event} clubName={clubName} />
-        </View>
+             </View>
+            {!userInfo && (
+         
+          <TicketButton event={event} clubName={clubName} />)}
+        </View> 
       ))}
     </View>
   );
@@ -55,7 +105,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
   eventItem: {
-    backgroundColor: '#374151',
+    backgroundColor: '#222222',
     borderRadius: 12,
     marginBottom: 16,
     overflow: 'hidden',

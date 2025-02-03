@@ -44,7 +44,7 @@ const TicketCard: React.FC<TicketCardProps> = ({ ticket, onPress, isPast = false
           <Text style={styles.detailText}>{ticket.num_people} {ticket.num_people === 1 ? 'persona' : 'personas'}</Text>
         </View>
         <View style={styles.detailItem}>
-          <Feather name="dollar-sign" size={16} color="#A78BFA" />
+          <Feather name="dollar-sign" size={16} color="#67FF0C" />
           <Text style={styles.detailText}>{ticket.total_price.toFixed(2)}€</Text>
         </View>
       </View>
@@ -63,13 +63,13 @@ const TicketCard: React.FC<TicketCardProps> = ({ ticket, onPress, isPast = false
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#374151',
+    backgroundColor: '#222222',
     borderRadius: 12,
     padding: 16,
     marginBottom: 12,
   },
   pastCard: {
-    opacity: 0.7,
+    opacity: 0.8,
   },
   header: {
     flexDirection: 'row',
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   reviewButton: {
     marginTop: 16,
     padding: 8,
-    backgroundColor: '#A78BFA',
+    backgroundColor: '#5500FF',
     borderRadius: 8,
     alignItems: 'center',
   },

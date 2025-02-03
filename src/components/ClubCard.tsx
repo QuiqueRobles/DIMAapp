@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect} from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -27,13 +27,39 @@ interface ClubCardProps {
 
 export const ClubCard: React.FC<ClubCardProps> = ({ club, onPress, distance }) => {
   const [imageError, setImageError] = useState(false);
+  const [status, setStatus] = useState("");
+
+  useEffect(() => {
+    getOpenStatus(); // Call function when component mounts or when club.opening_hours changes
+  }, [club.opening_hours]);
 
   const getOpenStatus = () => {
+    if (!club.opening_hours) return;
+      const currentTime = new Date();
+      const currentHour = currentTime.getHours();
+      const currentMinutes = currentTime.getMinutes();
+  
+      // Define opening and closing hours (24-hour format)
+      const  [openingTime,closingTime]=club.opening_hours.split("-").map(String)
+    if( !openingTime || !closingTime)return;
+      // Convert opening & closing time to minutes for comparison
+      const [openHour, openMinutes] = openingTime.split(":").map(Number);
+      const [closeHour, closeMinutes] = closingTime.split(":").map(Number);
+  
+      const currentTotalMinutes = currentHour * 60 + currentMinutes;
+      const openingTotalMinutes = openHour * 60 + openMinutes;
+      const closingTotalMinutes = closeHour * 60 + closeMinutes;
+      if (currentTotalMinutes >= openingTotalMinutes && currentTotalMinutes < closingTotalMinutes) {
+        setStatus("Open");
+      } else {
+        setStatus("Closed");
+      }
     // This is a placeholder. In a real app, you'd compare current time with opening_hours
-    return Math.random() > 0.5 ? 'Open' : 'Closed';
+    return;
+    
   };
 
-  const openStatus = getOpenStatus();
+    //const openStatus = getOpenStatus();
 
   return (
     <TouchableOpacity style={styles.container} onPress={onPress} activeOpacity={0.9} testID="club-card">
@@ -77,8 +103,8 @@ export const ClubCard: React.FC<ClubCardProps> = ({ club, onPress, distance }) =
               </View>
               <View style={styles.infoItem}>
                 <Feather name="clock" size={14} color="#9CA3AF" />
-                <Text style={[styles.infoText, openStatus === 'Open' ? styles.openText : styles.closedText]}>
-                  {openStatus}
+                <Text style={[styles.infoText, status === 'Open' ? styles.openText : styles.closedText]}>
+                  {status}
                 </Text>
               </View>
             </View>
@@ -202,13 +228,13 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   tag: {
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    backgroundColor: 'rgba(137, 18, 255, 0.61)',
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 15,
   },
   tagPurple: {
-    backgroundColor: 'rgba(167, 139, 250, 0.3)',
+    backgroundColor: 'rgba(255, 230, 0, 0.51)',
   },
   tagText: {
     color: '#FFFFFF',

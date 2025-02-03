@@ -158,10 +158,10 @@ const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
     justifyContent: 'flex-end',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(5, 0, 11, 0.25)',
   },
   modalView: {
-    backgroundColor: '#1F2937',
+    backgroundColor: '#121212',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     padding: 20,
@@ -187,22 +187,24 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#FFFFFF',
+    color: '#CD9FF5',
     marginBottom: 10,
   },
   picker: {
-    backgroundColor: '#374151',
+    backgroundColor: '#222222',
     color: '#FFFFFF',
     borderRadius: 8,
   },
   slider: {
     width: '100%',
     height: 40,
+    color:'#B673EF',
   },
   sliderLabels: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 5,
+    color:'#B673EF',
   },
   sliderValue: {
     color: '#9CA3AF',

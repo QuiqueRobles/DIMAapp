@@ -62,7 +62,8 @@ const tabIcons: { [key: string]: keyof typeof Feather.glyphMap } = {
 
 const CustomTabBar: React.FC<any> = ({ state, descriptors, navigation }) => {
   return (
-    <View className="flex-row bg-gray-900 pt-2 pb-6">
+    <View className="flex-row pt-2 pb-6" style={{ backgroundColor: "#121212" }}>
+
       {state.routes.map((route: any, index: number) => {
         const { options } = descriptors[route.key];
         const label = options.tabBarLabel || route.name;
@@ -197,6 +198,8 @@ const AppNavigator = () => {
            <Stack.Screen name="MapOwner" component={MapOwnerScreen} />
            <Stack.Screen name="EventsManage" component={EventManageScreen} />
            <Stack.Screen name="ClubManage" component={ClubManageScreen} />
+           <Stack.Screen name="Club" component={ClubScreen} />
+           <Stack.Screen name="Calendar" component={CalendarScreen} />
          </>
           ):(
             <>

@@ -251,7 +251,7 @@ const BuyTicketScreen: React.FC = () => {
         </View>
         <TouchableOpacity onPress={handlePurchase} disabled={loading}>
           <LinearGradient
-            colors={['#8B5CF6', '#7C3AED']}
+            colors={['#5500FF', '#7C3AED']}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
             style={styles.purchaseButton}
@@ -269,7 +269,7 @@ const BuyTicketScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1F2937',
+    backgroundColor: '#121212',
   },
   scrollContent: {
     flexGrow: 1,
@@ -326,7 +326,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   quantityButton: {
-    backgroundColor: '#374151',
+    backgroundColor: '#222222',
     borderRadius: 8,
     padding: 10,
   },

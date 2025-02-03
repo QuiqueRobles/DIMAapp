@@ -157,7 +157,7 @@ const HomeScreen: React.FC = () => {
 
   return (
     <LinearGradient
-      colors={['#4F46E5', '#000000']}
+    colors={['#5500FF', '#121212']}
       style={styles.gradient}
       locations={[0, 0.3]}
     >

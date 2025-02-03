@@ -118,6 +118,7 @@ const ClubScreen: React.FC = () => {
     }
   };
 
+
   useEffect(() => {
     fetchClubData();
   }, [clubId]);
@@ -206,97 +207,111 @@ const ClubScreen: React.FC = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#1F2937',
-  },
-  scrollContent: {
-    flexGrow: 1,
-  },
-  imageContainer: {
-    height: height * 0.4,
-    width: width,
-    position: 'relative',
-    backgroundColor: '#1F2937',
-  },
-  imageOverlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(31, 41, 55, 0.5)',
-  },
-  image: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
-  },
-  imageGradient: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-    height: '50%',
-  },
-  backButton: {
-    position: 'absolute',
-    top: 16,
-    left: 16,
-    zIndex: 10,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    borderRadius: 20,
-    padding: 8,
-  },
-  clubType: {
-    position: 'absolute',
-    top: 16,
-    right: 16,
-    backgroundColor: 'rgba(167, 139, 250, 0.8)',
-    borderRadius: 16,
-    paddingVertical: 4,
-    paddingHorizontal: 12,
-  },
-  clubTypeText: {
-    color: '#FFFFFF',
-    fontSize: 12,
-    fontWeight: '600',
-  },
-  content: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: '#1F2937',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    marginTop: -20,
-  },
-  section: {
-    marginTop: 24,
-  },
-  sectionHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 16,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#FFFFFF',
-  },
-  seeAllText: {
-    fontSize: 14,
-    color: '#A78BFA',
-    fontWeight: '600',
-  },
-  noEventsText: {
-    color: '#9CA3AF',
-    fontSize: 16,
-    textAlign: 'center',
-  },
-  noReviewsText: {
-    color: '#9CA3AF',
-    fontSize: 16,
-    textAlign: 'center',
-    marginTop: 16,
-  },
-});
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#121212',
+    },
+    scrollContent: {
+      flexGrow: 1,
+    },
+    imageContainer: {
+      height: height * 0.4,
+      width: width,
+      position: 'relative',
+      backgroundColor: '#121212',
+    },
+    imageOverlay: {
+      ...StyleSheet.absoluteFillObject,
+      backgroundColor: 'rgba(31, 41, 55, 0.5)',
+    },
+    image: {
+      width: '100%',
+      height: '100%',
+      resizeMode: 'cover',
+    
+    },
+    imagee: {
+        width: 150,
+        height: 150,
+        borderRadius: 75,
+        borderWidth: 2,
+        borderColor: '#ccc',
+    },
+    imageGradient: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      bottom: 0,
+      height: '50%',
+    },
+    backButton: {
+      position: 'absolute',
+      top: 16,
+      left: 16,
+      zIndex: 10,
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      borderRadius: 20,
+      padding: 8,
+    },
+    clubType: {
+      position: 'absolute',
+      top: 16,
+      right: 16,
+      backgroundColor: 'rgba(237, 41, 255, 0.8)',
+      borderRadius: 16,
+      paddingVertical: 4,
+      paddingHorizontal: 12,
+    },
+    clubTypeText: {
+      color: '#FFFFFF',
+      fontSize: 12,
+      fontWeight: '600',
+    },
+    content: {
+      flex: 1,
+      padding: 20,
+      backgroundColor: '#121212',
+      borderTopLeftRadius: 20,
+      borderTopRightRadius: 20,
+      marginTop: -20,
+    },
+    section: {
+      marginTop: 24,
+    },
+    sectionHeader: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginBottom: 16,
+    },
+    sectionTitle: {
+      fontSize: 24,
+      fontWeight: 'bold',
+      color: '#FFFFFF',
+    },
+    seeAllText: {
+      fontSize: 14,
+      color: '#A78BFA',
+      fontWeight: '600',
+    },
+    noEventsText: {
+      color: '#9CA3AF',
+      fontSize: 16,
+      textAlign: 'center',
+    },
+    noReviewsText: {
+      color: '#9CA3AF',
+      fontSize: 16,
+      textAlign: 'center',
+      marginTop: 16,
+    },
+    EditButton: {
+      width: '30%',
+      color:'#9CA3AF',
+      overflow: 'hidden',
+      borderRadius: 8,
+    },
+  });
 
 export default ClubScreen;
