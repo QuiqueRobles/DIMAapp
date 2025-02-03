@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     fieldContainer:{
         flexDirection: 'column',
         justifyContent: 'flex-start',
-        alignItems: 'flex-start',
+        alignItems: 'center',
         width: '100%',
         height: 'auto',
         gap: 10,

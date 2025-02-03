@@ -294,6 +294,18 @@ export default function RegisterScreen() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#1E1E1E',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+  },
+  logo: {
+    width: 300,
+    height: 150,
+    marginBottom: 1,
+  },
   secondPageContainer: {
     flexDirection: 'column',
     justifyContent: 'flex-start',
