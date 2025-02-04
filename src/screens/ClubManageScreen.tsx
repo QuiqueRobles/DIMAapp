@@ -136,7 +136,6 @@
         setRefreshing(false);
       }
     };
-
     const handleImageUpload = async () => {
       //const clubId=await getAuthenticatedUserId();
       const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -243,7 +242,7 @@
               onPress: async () => {
                 try {
                   await supabase.auth.signOut();
-                  navigation.navigate('Login');
+                  //navigation.navigate('Login');
                 } catch (error) {
                   console.error('Error signing out:', error);
                   Alert.alert('Error', 'Failed to sign out. Please try again.');

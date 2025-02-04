@@ -47,13 +47,18 @@ export default function ForgotPasswordScreen() {
           autoCapitalize="none"
         />
       </View>
-      <TouchableOpacity style={styles.button} onPress={handleResetPassword} disabled={isLoading}>
-        {isLoading ? (
-          <Text style={styles.buttonText}>Sending...</Text>
-        ) : (
-          <Text style={styles.buttonText}>Reset Password</Text>
-        )}
-      </TouchableOpacity>
+      <TouchableOpacity
+  testID="reset-password-button"
+  style={styles.button}
+  onPress={handleResetPassword}
+  disabled={isLoading}
+>
+  {isLoading ? (
+    <Text style={styles.buttonText}>Sending...</Text>
+  ) : (
+    <Text style={styles.buttonText}>Reset Password</Text>
+  )}
+</TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('Login')}>
         <Text style={styles.backToLogin}>Back to Login</Text>
       </TouchableOpacity>

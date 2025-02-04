@@ -17,12 +17,14 @@ describe('ClubEdit', () => {
     attendees: 200,
     opening_hours: '10PM - 4AM',
     dress_code: 'Casual',
-    description: 'A great place to party!'
+    description: 'A great place to party!',
+    latitude: 0,
+    longitude: 0,
   };
 
   it('renders club details correctly', () => {
-    const { getByDisplayValue } = render(<ClubEdit club={mockClub} setClub={jest.fn()} />);
-    expect(getByDisplayValue('123 Test St')).toBeTruthy();
+    const { getByText, getByPlaceholderText, getByDisplayValue } = render(<ClubEdit club={mockClub} setClub={jest.fn()} />);
+    expect(getByPlaceholderText('123 Test St')).toBeTruthy();
     expect(getByDisplayValue('10PM - 4AM')).toBeTruthy();
     expect(getByDisplayValue('Casual')).toBeTruthy();
     expect(getByDisplayValue('EDM')).toBeTruthy();
@@ -31,11 +33,14 @@ describe('ClubEdit', () => {
 
   it('updates club details when input changes', () => {
     const mockSetClub = jest.fn();
-    const { getByPlaceholderText } = render(
+    const { getByText , getByDisplayValue} = render(
       <ClubEdit club={mockClub} setClub={mockSetClub} />
     );
 
-    fireEvent.changeText(getByPlaceholderText('Address'), '456 New Address');
-    expect(mockSetClub).toHaveBeenCalledWith(expect.any(Function));
+    fireEvent.changeText(getByDisplayValue('10PM - 4AM'), '9PM - 3AM');
+    fireEvent.changeText(getByDisplayValue('Casual'), 'Formal');
+    fireEvent.changeText(getByDisplayValue('A great place to party!'), 'A great place to relax!');
+    fireEvent.changeText(getByDisplayValue('EDM'), 'Pop');
+    expect(mockSetClub).toHaveBeenCalledTimes(4);
   });
 });

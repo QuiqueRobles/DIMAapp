@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+ {/*        import React, { useState, useEffect } from 'react';
   import { 
     View, 
     Text, 
@@ -407,5 +407,5 @@ import React, { useState, useEffect } from 'react';
       shadowRadius: 3.84,
       elevation: 5,
     },
-  });
+  }); */}
     

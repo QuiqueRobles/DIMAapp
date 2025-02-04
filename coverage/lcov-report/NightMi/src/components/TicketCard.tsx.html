@@ -30,9 +30,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">57.14% </span>
+                <span class="strong">55.55% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/7</span>
+                <span class='fraction'>5/9</span>
             </div>
         
             
@@ -159,7 +159,25 @@
 <a name='L94'></a><a href='#L94'>94</a>
 <a name='L95'></a><a href='#L95'>95</a>
 <a name='L96'></a><a href='#L96'>96</a>
-<a name='L97'></a><a href='#L97'>97</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L97'></a><a href='#L97'>97</a>
+<a name='L98'></a><a href='#L98'>98</a>
+<a name='L99'></a><a href='#L99'>99</a>
+<a name='L100'></a><a href='#L100'>100</a>
+<a name='L101'></a><a href='#L101'>101</a>
+<a name='L102'></a><a href='#L102'>102</a>
+<a name='L103'></a><a href='#L103'>103</a>
+<a name='L104'></a><a href='#L104'>104</a>
+<a name='L105'></a><a href='#L105'>105</a>
+<a name='L106'></a><a href='#L106'>106</a>
+<a name='L107'></a><a href='#L107'>107</a>
+<a name='L108'></a><a href='#L108'>108</a>
+<a name='L109'></a><a href='#L109'>109</a>
+<a name='L110'></a><a href='#L110'>110</a>
+<a name='L111'></a><a href='#L111'>111</a>
+<a name='L112'></a><a href='#L112'>112</a>
+<a name='L113'></a><a href='#L113'>113</a>
+<a name='L114'></a><a href='#L114'>114</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -212,7 +230,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -273,14 +307,15 @@ interface TicketCardProps {
   };
   onPress: () =&gt; void;
   isPast?: boolean;
+  onWriteReviewPress?: () =&gt; void;
 }
 &nbsp;
-const TicketCard: React.FC&lt;TicketCardProps&gt; = ({ ticket, onPress, isPast = false }) =&gt; {
+const TicketCard: React.FC&lt;TicketCardProps&gt; = ({ ticket, onPress, isPast = false, onWriteReviewPress}) =&gt; {
   const eventDate = new Date(ticket.event_date);
 &nbsp;
   return (
 &nbsp;
-    console.log("ticket:", ticket),
+    //console.log("ticket:", ticket),
 &nbsp;
     &lt;TouchableOpacity style={[styles.card, isPast &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >styles.pastCard]</span>} onPress={onPress}&gt;
       &lt;View style={styles.header}&gt;
@@ -300,23 +335,32 @@ const TicketCard: React.FC&lt;TicketCardProps&gt; = ({ ticket, onPress, isPast =
           &lt;Text style={styles.detailText}&gt;{ticket.num_people} {ticket.num_people === 1 ? <span class="branch-0 cbranch-no" title="branch not covered" >'persona' </span>: 'personas'}&lt;/Text&gt;
         &lt;/View&gt;
         &lt;View style={styles.detailItem}&gt;
-          &lt;Feather name="dollar-sign" size={16} color="#A78BFA" /&gt;
+          &lt;Feather name="dollar-sign" size={16} color="#67FF0C" /&gt;
           &lt;Text style={styles.detailText}&gt;{ticket.total_price.toFixed(2)}€&lt;/Text&gt;
         &lt;/View&gt;
       &lt;/View&gt;
+      {isPast &amp;&amp; (
+<span class="branch-1 cbranch-no" title="branch not covered" >        &lt;TouchableOpacity </span>
+          style={styles.reviewButton} 
+          onPress={onWriteReviewPress}
+          testID='write-review-button'
+        &gt;
+          &lt;Text&gt; Write Review&lt;/Text&gt;
+        &lt;/TouchableOpacity&gt;
+      )}
     &lt;/TouchableOpacity&gt;
   );
 };
 &nbsp;
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#374151',
+    backgroundColor: '#222222',
     borderRadius: 12,
     padding: 16,
     marginBottom: 12,
   },
   pastCard: {
-    opacity: 0.7,
+    opacity: 0.8,
   },
   header: {
     flexDirection: 'row',
@@ -347,6 +391,13 @@ const styles = StyleSheet.create({
     color: '#E5E7EB',
     fontSize: 14,
   },
+  reviewButton: {
+    marginTop: 16,
+    padding: 8,
+    backgroundColor: '#5500FF',
+    borderRadius: 8,
+    alignItems: 'center',
+  },
 });
 &nbsp;
 export default TicketCard;
@@ -358,7 +409,7 @@ export default TicketCard;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-02-01T14:38:47.623Z
+                at 2025-02-04T01:27:43.798Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

@@ -28,7 +28,7 @@ const ExpandedTicket: React.FC<ExpandedTicketProps> = ({ ticket, onClose }) => {
   const purchaseDate = new Date(ticket.purchase_date);
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID='expanded-ticket'>
       <View style={styles.content}>
         <TouchableOpacity style={styles.closeButton} onPress={onClose}>
           <Feather name="x" size={24} color="#FFFFFF" />
