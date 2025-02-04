@@ -22,6 +22,7 @@ interface SecondRegisterPhaseProps {
 }
 
 
+
 const SecondRegisterPhase: React.FC<SecondRegisterPhaseProps> = (
     {username, setUsername, dateOfBirth, setDateOfBirth, country, setCountry,gender,setGender}) => {
 
@@ -99,7 +100,7 @@ const SecondRegisterPhase: React.FC<SecondRegisterPhaseProps> = (
               <Feather name="user" size={70} color="#9CA3AF"/>
               <Text style={commonStyles.standardText}>Username:</Text>
               <View style={commonStyles.inputContainer}>
-                <TextInput
+                <TextInput testID='username-input'
                   style={commonStyles.textInput}
                   placeholder="Value"
                   placeholderTextColor="#9CA3AF"

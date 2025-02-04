@@ -80,18 +80,18 @@ const ReviewsScreen: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+        <TouchableOpacity onPress={() => navigation.goBack()} testID='back-button 'style={styles.backButton}>
           <Feather name="arrow-left" size={24} color="#FFFFFF" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>{clubName} Reviews</Text>
+        <Text testID='title'style={styles.headerTitle}>{clubName} Reviews</Text>
       </View>
       <FlatList
         data={reviews}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <ReviewItem review={item} />}
+        renderItem={({ item }) => <ReviewItem review={item} testId='review-item'/>}
         contentContainerStyle={styles.reviewsList}
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor="#A78BFA" />
+          <RefreshControl testID='refresh-control'refreshing={refreshing} onRefresh={handleRefresh} tintColor="#A78BFA" />
         }
         ListEmptyComponent={
           <Text style={styles.noReviewsText}>No reviews yet</Text>

@@ -4,11 +4,15 @@ import SecondRegisterPhase from '@/screens/Login/registerScreen/secondRegisterPh
 import { Country } from 'react-native-country-picker-modal/lib/types';
 
 // Mock country data
+
 const mockCountry: Country = {
     cca2: 'US',
     name: 'United States',
 
 } as any;
+jest.mock('@react-navigation/native', () => ({
+  useNavigation: jest.fn(),
+}));
 
 describe('SecondRegisterPhase Component', () => {
     const mockSetUsername = jest.fn();
@@ -18,15 +22,15 @@ describe('SecondRegisterPhase Component', () => {
 
     it('renders all input fields correctly', () => {
         const { getByPlaceholderText, getByText } = render(
-            <SecondRegisterPhase
+            <SecondRegisterPhase 
                 username=""
                 setUsername={mockSetUsername}
                 dateOfBirth={new Date()}
                 setDateOfBirth={mockSetDateOfBirth}
                 country={mockCountry}
                 setCountry={mockSetCountry}
-                gender=""
-                setGender={mockSetGender}
+                gender="F"
+                setGender={mockSetGender} 
             />
         );
 

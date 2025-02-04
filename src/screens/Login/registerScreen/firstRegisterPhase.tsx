@@ -34,7 +34,7 @@ const FirstRegisterPhase: React.FC<FirstRegisterPhaseProps> = (
                 <Text style={commonStyles.standardText}>Email</Text>
                 <View style={commonStyles.inputContainer}>
                     <Feather name="mail" size={24} color="#9CA3AF"  />
-                    <TextInput
+                    <TextInput testID="email-input"
                         style={commonStyles.textInput}
                         placeholder="Value"
                         placeholderTextColor="#9CA3AF"
@@ -49,7 +49,7 @@ const FirstRegisterPhase: React.FC<FirstRegisterPhaseProps> = (
                 <Text style={commonStyles.standardText}>Password</Text>
                 <View style={commonStyles.inputContainer}>
                     <Feather name="lock" size={24} color="#9CA3AF"/>
-                    <TextInput
+                    <TextInput testID="password-input"
                         style={commonStyles.textInput}
                         placeholder="Value"
                         placeholderTextColor="#9CA3AF"
@@ -63,7 +63,7 @@ const FirstRegisterPhase: React.FC<FirstRegisterPhaseProps> = (
                 <Text style={commonStyles.standardText}>Confirm Password</Text>
                 <View style={commonStyles.inputContainer}>
                     <Feather name="lock" size={24} color="#9CA3AF" />
-                    <TextInput
+                    <TextInput testID="confirm-password-input"
                     style={commonStyles.textInput}
                     placeholder="Value"
                     placeholderTextColor="#9CA3AF"
