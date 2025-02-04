@@ -61,12 +61,13 @@ const tabIcons: { [key: string]: keyof typeof Feather.glyphMap } = {
 };
 
 const CustomTabBar: React.FC<any> = ({ state, descriptors, navigation }) => {
+  const { t } = useTranslation();
+
   return (
     <View className="flex-row pt-2 pb-6" style={{ backgroundColor: "#121212" }}>
-
       {state.routes.map((route: any, index: number) => {
         const { options } = descriptors[route.key];
-        const label = options.tabBarLabel || route.name;
+        const label = t(`tabs.${route.name.toLowerCase()}`);
         const isFocused = state.index === index;
 
         const onPress = () => {

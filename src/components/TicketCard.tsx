@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 
 interface TicketCardProps {
   ticket: {
@@ -20,12 +21,10 @@ interface TicketCardProps {
 }
 
 const TicketCard: React.FC<TicketCardProps> = ({ ticket, onPress, isPast = false, onWriteReviewPress}) => {
+  const { t, i18n } = useTranslation();
   const eventDate = new Date(ticket.event_date);
 
   return (
-
-    //console.log("ticket:", ticket),
-
     <TouchableOpacity style={[styles.card, isPast && styles.pastCard]} onPress={onPress}>
       <View style={styles.header}>
         <Text style={styles.eventName}>{ticket.event.name}</Text>
@@ -36,12 +35,14 @@ const TicketCard: React.FC<TicketCardProps> = ({ ticket, onPress, isPast = false
         <View style={styles.detailItem}>
           <Feather name="calendar" size={16} color="#A78BFA" />
           <Text style={styles.detailText}>
-            {eventDate.toLocaleDateString('es-ES', { weekday: 'short', month: 'short', day: 'numeric' })}
+            {eventDate.toLocaleDateString(i18n.language, { weekday: 'short', month: 'short', day: 'numeric' })}
           </Text>
         </View>
         <View style={styles.detailItem}>
           <Feather name="users" size={16} color="#A78BFA" />
-          <Text style={styles.detailText}>{ticket.num_people} {ticket.num_people === 1 ? 'persona' : 'personas'}</Text>
+          <Text style={styles.detailText}>
+            {t('ticket_card.people', { count: ticket.num_people })}
+          </Text>
         </View>
         <View style={styles.detailItem}>
           <Feather name="dollar-sign" size={16} color="#67FF0C" />
@@ -54,7 +55,7 @@ const TicketCard: React.FC<TicketCardProps> = ({ ticket, onPress, isPast = false
           onPress={onWriteReviewPress}
           testID='write-review-button'
         >
-          <Text> Write Review</Text>
+          <Text style={styles.reviewButtonText}>{t('ticket_card.write_review')}</Text>
         </TouchableOpacity>
       )}
     </TouchableOpacity>
@@ -107,6 +108,11 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: 'center',
   },
+  reviewButtonText: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+  }
+  
 });
 
 export default TicketCard;
