@@ -2,12 +2,16 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
 import FirstRegisterPhase from '@/screens/Login/registerScreen/firstRegisterPhase';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
+jest.mock('@react-navigation/native', () => ({
+    useNavigation: jest.fn(),
+  }));
 
 describe('FirstRegisterPhase Component', () => {
     const mockGoToSecondPage = jest.fn();
     const mockSetEmail = jest.fn();
     const mockSetPassword = jest.fn();
     const mockSetConfirmPassword = jest.fn();
+    
 
     it('renders all input fields correctly', () => {
         const { getByPlaceholderText } = render(

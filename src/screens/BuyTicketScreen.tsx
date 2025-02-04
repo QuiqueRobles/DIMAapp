@@ -251,6 +251,7 @@ const BuyTicketScreen: React.FC = () => {
         </View>
         <TouchableOpacity onPress={handlePurchase} disabled={loading}>
           <LinearGradient
+          testID='linear-gradient'
             colors={['#5500FF', '#7C3AED']}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
