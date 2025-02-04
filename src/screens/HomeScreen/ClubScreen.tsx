@@ -82,6 +82,9 @@ const ClubScreen: React.FC = () => {
         .select('*')
         .eq('club_id', clubId)
         .single();
+      
+      //console.log(clubData);
+      //console.log(clubError);
 
       if (clubError) throw new Error('Failed to fetch club data');
       setClub(clubData);
