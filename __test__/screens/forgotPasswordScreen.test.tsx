@@ -51,4 +51,3 @@ describe("ForgotPasswordScreen", () => {
     await waitFor(() => expect(alert).toHaveBeenCalledWith("Password reset email sent. Check your inbox."))
     });
   });
-
