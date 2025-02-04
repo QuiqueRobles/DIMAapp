@@ -34,6 +34,11 @@ export default function AddEventModal({ visible, onClose }: Props) {
 
 
   const handleImageUpload = async () => {
+    if (!supabase) {
+      console.error("Supabase client is not initialized");
+      Alert.alert("Error", "Supabase client is not available.");
+      return;
+    }
     //const clubId=await getAuthenticatedUserId();
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
     
@@ -183,7 +188,7 @@ export default function AddEventModal({ visible, onClose }: Props) {
             multiline
           />
 
-          <TouchableOpacity style={styles.imageButton} onPress={handleImageUpload}>
+          <TouchableOpacity testID='image-button' style={styles.imageButton} onPress={handleImageUpload}>
             <Text style={styles.imageButtonText}>{image ? "Change Image" : "Add Image"}</Text>
           </TouchableOpacity>
 

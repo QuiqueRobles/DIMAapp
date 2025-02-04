@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+/*
+  import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, Platform, Alert } from 'react-native';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useNavigation } from '@react-navigation/native';
@@ -200,4 +201,4 @@ const styles = StyleSheet.create({
     color: '#A78BFA',
     marginTop: 16,
   },
-});
+}); */

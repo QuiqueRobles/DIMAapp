@@ -15,7 +15,7 @@ export default function OwnerLoginScreen() {
   const supabase = useSupabaseClient();
   const navigation = useNavigation<AppNavigationProp>();
    const {isOwner,setisOwner}=useSession();
-  console.log("Ownerr",isOwner);
+  
 
   const getAuthenticatedUserId = async () => {
     try {
