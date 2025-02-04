@@ -217,7 +217,7 @@ const BuyTicketScreen: React.FC = () => {
         >
           <Feather name="arrow-left" size={24} color="#FFFFFF" />
         </TouchableOpacity>
-        <Text style={styles.title}>{t('buy_tickets')}</Text>
+        <Text testID='buy-tickets' style={styles.title}>{t('buy_tickets')}</Text>
         {eventImage && (
           <Image 
             source={{ uri: eventImage }} 
@@ -232,14 +232,14 @@ const BuyTicketScreen: React.FC = () => {
           {eventDescription && (
             <Text style={styles.eventDescription}>{eventDescription}</Text>
           )}
-          <Text style={styles.eventPrice}>${eventPrice.toFixed(2)} {t('per_ticket')}</Text>
+          <Text testID='price'style={styles.eventPrice}>${eventPrice.toFixed(2)} {t('per_ticket')}</Text>
         </View>
         <View style={styles.quantitySelector}>
-          <TouchableOpacity onPress={handleDecrement} style={styles.quantityButton}>
+          <TouchableOpacity testID='decrement-button' onPress={handleDecrement} style={styles.quantityButton}>
             <Feather name="minus" size={24} color="#FFFFFF" />
           </TouchableOpacity>
           <Text style={styles.quantityText}>{quantity}</Text>
-          <TouchableOpacity onPress={handleIncrement} style={styles.quantityButton}>
+          <TouchableOpacity testID='increment-button' onPress={handleIncrement} style={styles.quantityButton}>
             <Feather name="plus" size={24} color="#FFFFFF" />
           </TouchableOpacity>
         </View>
@@ -255,7 +255,7 @@ const BuyTicketScreen: React.FC = () => {
             end={{ x: 1, y: 0 }}
             style={styles.purchaseButton}
           >
-            <Text style={styles.purchaseButtonText}>
+            <Text testID='purchase-tickets'style={styles.purchaseButtonText}>
               {loading ? t('processing') : t('purchase_tickets')}
             </Text>
           </LinearGradient>

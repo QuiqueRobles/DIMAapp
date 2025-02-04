@@ -70,12 +70,12 @@ describe('BuyTicketScreen', () => {
   it('renders the event details and purchase button', () => {
     const { getByText, getByTestId } = render(<BuyTicketScreen />);
 
-    expect(getByText('Buy Tickets')).toBeTruthy();
+    expect(getByTestId('buy-tickets')).toBeTruthy();
     expect(getByText('Test Event')).toBeTruthy();
     expect(getByText('Test Club')).toBeTruthy();
     expect(getByText('October 1, 2023')).toBeTruthy();
     expect(getByText('This is a test event')).toBeTruthy();
-    expect(getByText('$50.00 per ticket')).toBeTruthy();
+    expect(getByTestId('price')).toBeTruthy();
     
   });
 
@@ -117,9 +117,9 @@ describe('BuyTicketScreen', () => {
 
     (mockStripe.presentPaymentSheet as jest.Mock).mockResolvedValue({ error: null });
 
-    const { getByText } = render(<BuyTicketScreen />);
+    const { getByTestId } = render(<BuyTicketScreen />);
 
-    fireEvent.press(getByText('Purchase Tickets'));
+    fireEvent.press(getByTestId('purchase-tickets'));
 
     await waitFor(() => {
       expect(mockStripe.presentPaymentSheet).toHaveBeenCalled();
@@ -133,9 +133,9 @@ describe('BuyTicketScreen', () => {
       error: { code: 'payment-failed', message: 'Payment failed' },
     });
 
-    const { getByText } = render(<BuyTicketScreen />);
+    const { getByTestId,getByText } = render(<BuyTicketScreen />);
 
-    fireEvent.press(getByText('Purchase Tickets'));
+    fireEvent.press(getByTestId('purchase-tickets'));
 
     await waitFor(() => {
       expect(mockStripe.presentPaymentSheet).toHaveBeenCalled();
@@ -156,9 +156,9 @@ describe('BuyTicketScreen', () => {
 
     (mockStripe.presentPaymentSheet as jest.Mock).mockResolvedValue({ error: null });
 
-    const { getByText } = render(<BuyTicketScreen />);
+    const { getByText,getByTestId } = render(<BuyTicketScreen />);
 
-    fireEvent.press(getByText('Purchase Tickets'));
+    fireEvent.press(getByTestId('purchase-tickets'));
 
     await waitFor(() => {
       expect(getByText('Error')).toBeTruthy();

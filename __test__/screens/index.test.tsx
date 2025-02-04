@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent,waitFor        } from '@testing-library/react-native';
 import RegisterScreen from '@/screens/Login/registerScreen/index';
-import { TextInput, Button, View, Text } from 'react-native';
+import { TextInput, Button, View, Text ,Alert} from 'react-native';
 
 
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
@@ -10,7 +10,18 @@ import { useNavigation } from '@react-navigation/native';
 // Mock the useSupabaseClient and useNavigation hooks
 jest.mock('@supabase/auth-helpers-react', () => ({
   useSupabaseClient: jest.fn(),
+  
 }));
+jest.mock("@/lib/supabase", () => ({
+  supabase: {
+    auth: {
+      getUser: jest.fn(),
+    },
+    
+  },
+}));
+
+
 
 jest.mock('@react-navigation/native', () => ({
   useNavigation: jest.fn(),
@@ -49,6 +60,9 @@ describe('RegisterScreen', () => {
   beforeEach(() => {
     (useSupabaseClient as jest.Mock).mockReturnValue(mockSupabaseClient);
     (useNavigation as jest.Mock).mockReturnValue(mockNavigation);
+    
+  
+
   });
 
   afterEach(() => {
@@ -87,7 +101,8 @@ describe('RegisterScreen', () => {
     fireEvent.press(getByText('Submit'));
 
     await waitFor(() => {
-      expect(getByText('Passwords do not match')).toBeTruthy();
+      expect(alert).toHaveBeenCalledWith('Passwords do not match')
+      
     });
   });
 

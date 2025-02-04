@@ -100,6 +100,13 @@ import { render, waitFor, cleanup } from '@testing-library/react-native';
 import App from '../App'; // Adjust the path as needed
 import { supabase } from '@/lib/supabase';
 
+jest.mock('@react-navigation/native', () => ({
+  ...jest.requireActual('@react-navigation/native'),
+  useNavigation: () => {
+    return mockNavigation;
+  },
+}));
+
 // --- MOCK SUPABASE AUTH METHODS ---
 // These mocks simulate the behavior of the Supabase auth module.
 const customerSession = { user: { id: 'customer1' } };
