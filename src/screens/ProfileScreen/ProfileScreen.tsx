@@ -89,8 +89,8 @@ export default function ProfileScreen() {
         .eq('profile_id', user.id)
         .single();
 
-      console.log('data', data);
-      console.log('error', error);
+      //console.log('data', data);
+      //console.log('error', error);
 
       if (error) throw error;
       if (data) {
@@ -242,6 +242,7 @@ export default function ProfileScreen() {
       <TouchableOpacity
         onPress={() => navigation.navigate('EditProfile')}
         style={styles.editButton}
+        testID='edit-button'
       >
         <Text style={styles.editButtonText}>{t('profile.editProfile')}</Text>
       </TouchableOpacity>
@@ -260,6 +261,7 @@ export default function ProfileScreen() {
           <TouchableOpacity
             onPress={handleLogout}
             style={styles.logoutButton}
+            testID='logout-button'
           >
             <Feather name="log-out" size={24} color="white" />
           </TouchableOpacity>

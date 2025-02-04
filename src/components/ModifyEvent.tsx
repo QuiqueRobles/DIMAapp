@@ -75,18 +75,18 @@ function ModifyEventModal({ visible, onClose, eventId, clubId, eventName, eventD
       }
     };
 
-  const pickImage = async () => {
-      const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 1,
-      })
+  // const pickImage = async () => {
+  //     const result = await ImagePicker.launchImageLibraryAsync({
+  //       mediaTypes: ImagePicker.MediaTypeOptions.Images,
+  //       allowsEditing: true,
+  //       aspect: [4, 3],
+  //       quality: 1,
+  //     })
   
-      if (!result.canceled) {
-        setImage(result.assets[0].uri)
-      }
-    }
+  //     if (!result.canceled) {
+  //       setImage(result.assets[0].uri)
+  //     }
+  //   }
 
   const handleSubmit = async () => {
     try{
@@ -147,7 +147,7 @@ function ModifyEventModal({ visible, onClose, eventId, clubId, eventName, eventD
               multiline
             />
   
-            <TouchableOpacity style={styles.imageButton} onPress={handleImageUpload }>
+            <TouchableOpacity style={styles.imageButton} onPress={handleImageUpload } testID="image-button">
               <Text style={styles.imageButtonText}>{image ? "Change Image" : "Add Image"}</Text>
             </TouchableOpacity>
   
