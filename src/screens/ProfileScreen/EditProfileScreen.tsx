@@ -92,11 +92,14 @@ export default function EditProfileScreen() {
   };
 
   const handleSave = async () => {
+    console.log('userData', userData);
     if (!userData) return;
 
     try {
       const validatedData = userSchema.parse(userData);
       setLoading(true);
+    
+      console.log('validatedData', validatedData);
 
       const { error: profilesTableError } = await supabase
         .from('profiles')
@@ -109,6 +112,8 @@ export default function EditProfileScreen() {
         })
         .eq('id', userData.id);
 
+      console.log('profilesTableError', profilesTableError);
+
       if (profilesTableError) throw profilesTableError;
 
       const { error: authTableError } = await supabase.auth.updateUser({
@@ -120,6 +125,7 @@ export default function EditProfileScreen() {
       Alert.alert('Success', 'Profile updated successfully');
       navigation.goBack();
     } catch (error) {
+      console.log('error', error);
       if (error instanceof z.ZodError) {
         const newErrors: Record<string, string> = {};
         error.errors.forEach((err) => {
@@ -252,6 +258,7 @@ export default function EditProfileScreen() {
           onPress={handleSave}
           style={styles.button}
           disabled={loading}
+          testID='save-button'
         >
           <Text style={styles.buttonText}>
             {loading ? 'Saving...' : 'Save Changes'}
