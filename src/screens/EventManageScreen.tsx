@@ -90,6 +90,7 @@ const EventsManage = () => {
        
         <View style={styles.container}>
           <Calendar
+           testID='calendar'
             theme={{
               backgroundColor: "#121212",
               calendarBackground: "#121212",
@@ -100,6 +101,7 @@ const EventsManage = () => {
               dayTextColor: "#fff",
               textDisabledColor: "#444",
               monthTextColor: "#fff",
+              
             }}
             markedDates={markedDates}
           />
@@ -115,7 +117,7 @@ const EventsManage = () => {
 
           
     
-          <TouchableOpacity style={styles.fab} onPress={() => setIsNewEventModalVisible(true)}>
+          <TouchableOpacity testID='add-event-button' style={styles.fab} onPress={() => setIsNewEventModalVisible(true)}>
           <Plus size={24} color="#fff" />
           </TouchableOpacity>
     

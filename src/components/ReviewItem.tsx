@@ -9,6 +9,7 @@ interface ReviewItemProps {
     text: string | null;
     num_stars: number;
   };
+  testId:'review-item'
 }
 
 const ReviewItem: React.FC<ReviewItemProps> = ({ review }) => {

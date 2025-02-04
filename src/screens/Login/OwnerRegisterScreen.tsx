@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, Platform ,Alert} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 import { AppNavigationProp } from '../../navigation';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { add } from 'date-fns';
 import { v4 as uuidv4 } from "uuid";
+import { debounce } from "lodash";
 
 
 import Autocomplete from 'react-native-autocomplete-input';
@@ -36,7 +37,8 @@ export default function OwnerRegisterScreen() {
     setIsLoading(true);
 
     if (clubname.length == 0 || clubname.length > 20) {
-      alert('Club name must be between 1 and 20 characters');
+     Alert.alert('Club name must be between 1 and 20 characters');
+      setIsLoading(false);
       return;
     }
 
@@ -81,7 +83,7 @@ export default function OwnerRegisterScreen() {
       const [suggestions, setSuggestions] = useState([]);
       const [selectedAddress, setSelectedAddress] = useState(null);
     
-      const fetchAddressSuggestions = async (text) => {
+      const fetchAddressSuggestions =debounce(async (text) => {
         if (text.length < 3) return;
     
         try {
@@ -104,7 +106,7 @@ export default function OwnerRegisterScreen() {
         } catch (error) {
           console.error("Error fetching address suggestions:", error);
         }
-      };
+      });
     
   
    

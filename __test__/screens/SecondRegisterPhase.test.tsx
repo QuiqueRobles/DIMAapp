@@ -2,6 +2,7 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
 import SecondRegisterPhase from '@/screens/Login/registerScreen/secondRegisterPhase';
 import { Country } from 'react-native-country-picker-modal/lib/types';
+import { FontAwesome } from '@expo/vector-icons';
 
 // Mock country data
 
@@ -10,6 +11,17 @@ const mockCountry: Country = {
     name: 'United States',
 
 } as any;
+jest.mock('@expo/vector-icons', () => {
+    const React = require('react');
+    const { View,Text } = require('react-native');
+  
+    return {
+      FontAwesome: () => <View testID="font-awesome-mock" />, // Mocking FontAwesome component
+      Feather: (props) => <Text {...props} />,
+    };
+  });
+  
+  
 jest.mock('@react-navigation/native', () => ({
   useNavigation: jest.fn(),
 }));
@@ -23,7 +35,7 @@ describe('SecondRegisterPhase Component', () => {
     it('renders all input fields correctly', () => {
         const { getByPlaceholderText, getByText } = render(
             <SecondRegisterPhase 
-                username=""
+                username="Username"
                 setUsername={mockSetUsername}
                 dateOfBirth={new Date()}
                 setDateOfBirth={mockSetDateOfBirth}
@@ -76,6 +88,7 @@ describe('SecondRegisterPhase Component', () => {
         );
 
         fireEvent.press(getByText('Date of Birth:')); // Open Date Picker
+        
         fireEvent(getByText('Confirm'), 'press'); // Confirm Date Selection
 
         expect(mockSetDateOfBirth).toHaveBeenCalled();

@@ -119,6 +119,7 @@ const SecondRegisterPhase: React.FC<SecondRegisterPhaseProps> = (
               {showDatepicker && (
                 <View style={styles.datePickerContainer}>
                   <DateTimePicker
+                    testID="date-time-picker"
                     value={dateOfBirth}
                     mode="date"
                     display="spinner"

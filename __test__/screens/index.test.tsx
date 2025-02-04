@@ -16,7 +16,16 @@ jest.mock('@react-navigation/native', () => ({
   useNavigation: jest.fn(),
 }));
 
-
+jest.mock('@expo/vector-icons', () => {
+    const React = require('react');
+    const { View,Text } = require('react-native');
+  
+    return {
+      FontAwesome: () => <View testID="font-awesome-mock" />, // Mocking FontAwesome component
+      Feather: (props) => <Text {...props} />,
+    };
+  });
+  
 
 
 
