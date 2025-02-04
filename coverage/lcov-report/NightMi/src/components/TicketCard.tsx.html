@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">55.55% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/9</span>
+                <span class='fraction'>5/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -197,12 +197,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -239,7 +237,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -310,17 +310,17 @@ interface TicketCardProps {
   onWriteReviewPress?: () =&gt; void;
 }
 &nbsp;
-const TicketCard: React.FC&lt;TicketCardProps&gt; = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span> ticket, onPress, isPast = <span class="branch-0 cbranch-no" title="branch not covered" >false,</span> onWriteReviewPress}) =&gt; {</span>
-  const eventDate = <span class="cstat-no" title="statement not covered" >new Date(ticket.event_date);</span>
+const TicketCard: React.FC&lt;TicketCardProps&gt; = ({ ticket, onPress, isPast = false, onWriteReviewPress}) =&gt; {
+  const eventDate = new Date(ticket.event_date);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
+  return (
 &nbsp;
     //console.log("ticket:", ticket),
 &nbsp;
-    &lt;TouchableOpacity style={[styles.card, isPast &amp;&amp; styles.pastCard]} onPress={onPress}&gt;
+    &lt;TouchableOpacity style={[styles.card, isPast &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >styles.pastCard]</span>} onPress={onPress}&gt;
       &lt;View style={styles.header}&gt;
         &lt;Text style={styles.eventName}&gt;{ticket.event.name}&lt;/Text&gt;
-        {isPast &amp;&amp; &lt;Feather name="check-circle" size={20} color="#10B981" /&gt;}
+        {isPast &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >&lt;Feather name="check-circle" size={20} color="#10B981" /&gt;}</span>
       &lt;/View&gt;
       &lt;Text style={styles.clubName}&gt;{ticket.club.name}&lt;/Text&gt;
       &lt;View style={styles.details}&gt;
@@ -332,7 +332,7 @@ const TicketCard: React.FC&lt;TicketCardProps&gt; = <span class="cstat-no" title
         &lt;/View&gt;
         &lt;View style={styles.detailItem}&gt;
           &lt;Feather name="users" size={16} color="#A78BFA" /&gt;
-          &lt;Text style={styles.detailText}&gt;{ticket.num_people} {ticket.num_people === 1 ? 'persona' : 'personas'}&lt;/Text&gt;
+          &lt;Text style={styles.detailText}&gt;{ticket.num_people} {ticket.num_people === 1 ? <span class="branch-0 cbranch-no" title="branch not covered" >'persona' </span>: 'personas'}&lt;/Text&gt;
         &lt;/View&gt;
         &lt;View style={styles.detailItem}&gt;
           &lt;Feather name="dollar-sign" size={16} color="#67FF0C" /&gt;
@@ -340,7 +340,7 @@ const TicketCard: React.FC&lt;TicketCardProps&gt; = <span class="cstat-no" title
         &lt;/View&gt;
       &lt;/View&gt;
       {isPast &amp;&amp; (
-        &lt;TouchableOpacity 
+<span class="branch-1 cbranch-no" title="branch not covered" >        &lt;TouchableOpacity </span>
           style={styles.reviewButton} 
           onPress={onWriteReviewPress}
           testID='write-review-button'
@@ -352,7 +352,7 @@ const TicketCard: React.FC&lt;TicketCardProps&gt; = <span class="cstat-no" title
   );
 };
 &nbsp;
-const styles = <span class="cstat-no" title="statement not covered" >StyleSheet.create({</span>
+const styles = StyleSheet.create({
   card: {
     backgroundColor: '#222222',
     borderRadius: 12,
@@ -409,7 +409,7 @@ export default TicketCard;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-02-04T17:17:12.106Z
+                at 2025-02-04T17:25:00.727Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
