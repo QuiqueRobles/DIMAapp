@@ -199,7 +199,7 @@ const AppNavigator = () => {
            <Stack.Screen name="EventsManage" component={EventManageScreen} />
            <Stack.Screen name="ClubManage" component={ClubManageScreen} />
            <Stack.Screen name="Club" component={ClubScreen} />
-           <Stack.Screen name="Calendar" component={CalendarScreen} />
+            <Stack.Screen name="Calendar" component={CalendarScreen} />
          </>
           ):(
             <>
@@ -209,7 +209,6 @@ const AppNavigator = () => {
             <Stack.Screen name="EditProfile" component={EditProfileScreen} />
             <Stack.Screen name="Calendar" component={CalendarScreen} />
             <Stack.Screen name="Reviews" component={ReviewsScreen} />
-            
           </>
 
           )

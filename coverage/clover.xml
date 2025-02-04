@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1738632464004" clover="3.2.0">
-  <project timestamp="1738632464004" name="All files">
-    <metrics statements="1596" coveredstatements="682" conditionals="784" coveredconditionals="268" methods="369" coveredmethods="158" elements="2749" coveredelements="1108" complexity="0" loc="1596" ncloc="1596" packages="18" files="66" classes="66"/>
+<coverage generated="1738633076900" clover="3.2.0">
+  <project timestamp="1738633076900" name="All files">
+    <metrics statements="1597" coveredstatements="682" conditionals="784" coveredconditionals="268" methods="369" coveredmethods="158" elements="2750" coveredelements="1108" complexity="0" loc="1597" ncloc="1597" packages="18" files="66" classes="66"/>
     <package name="NightMi">
       <metrics statements="62" coveredstatements="51" conditionals="28" coveredconditionals="18" methods="18" coveredmethods="14"/>
       <file name="App.tsx" path="C:\Users\chiar\Documents\GitHub\NightMi\App.tsx">
@@ -57,7 +57,7 @@
         <line num="183" count="11" type="cond" truecount="2" falsecount="0"/>
         <line num="185" count="8" type="stmt"/>
         <line num="188" count="3" type="stmt"/>
-        <line num="226" count="3" type="stmt"/>
+        <line num="225" count="3" type="stmt"/>
       </file>
       <file name="env.d.ts" path="C:\Users\chiar\Documents\GitHub\NightMi\env.d.ts">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -538,7 +538,7 @@
       </file>
     </package>
     <package name="NightMi.src.screens">
-      <metrics statements="519" coveredstatements="226" conditionals="226" coveredconditionals="71" methods="107" coveredmethods="46"/>
+      <metrics statements="520" coveredstatements="226" conditionals="226" coveredconditionals="71" methods="107" coveredmethods="46"/>
       <file name="BuyTicketScreen.tsx" path="C:\Users\chiar\Documents\GitHub\NightMi\src\screens\BuyTicketScreen.tsx">
         <metrics statements="96" coveredstatements="2" conditionals="32" coveredconditionals="0" methods="12" coveredmethods="0"/>
         <line num="29" count="1" type="stmt"/>
@@ -668,7 +668,7 @@
         <line num="149" count="2" type="stmt"/>
       </file>
       <file name="ClubManageScreen.tsx" path="C:\Users\chiar\Documents\GitHub\NightMi\src\screens\ClubManageScreen.tsx">
-        <metrics statements="93" coveredstatements="3" conditionals="44" coveredconditionals="0" methods="15" coveredmethods="0"/>
+        <metrics statements="94" coveredstatements="3" conditionals="44" coveredconditionals="0" methods="15" coveredmethods="0"/>
         <line num="20" count="1" type="stmt"/>
         <line num="70" count="1" type="stmt"/>
         <line num="71" count="0" type="stmt"/>
@@ -707,61 +707,62 @@
         <line num="132" count="0" type="stmt"/>
         <line num="135" count="0" type="stmt"/>
         <line num="136" count="0" type="stmt"/>
-        <line num="139" count="0" type="stmt"/>
-        <line num="141" count="0" type="stmt"/>
-        <line num="143" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="144" count="0" type="stmt"/>
+        <line num="140" count="0" type="stmt"/>
+        <line num="142" count="0" type="stmt"/>
+        <line num="144" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="145" count="0" type="stmt"/>
-        <line num="148" count="0" type="stmt"/>
-        <line num="155" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="156" count="0" type="stmt"/>
+        <line num="146" count="0" type="stmt"/>
+        <line num="149" count="0" type="stmt"/>
+        <line num="156" count="0" type="cond" truecount="0" falsecount="4"/>
         <line num="157" count="0" type="stmt"/>
         <line num="158" count="0" type="stmt"/>
         <line num="159" count="0" type="stmt"/>
         <line num="160" count="0" type="stmt"/>
-        <line num="162" count="0" type="stmt"/>
+        <line num="161" count="0" type="stmt"/>
         <line num="163" count="0" type="stmt"/>
-        <line num="169" count="0" type="stmt"/>
-        <line num="173" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="175" count="0" type="stmt"/>
-        <line num="178" count="0" type="stmt"/>
+        <line num="164" count="0" type="stmt"/>
+        <line num="170" count="0" type="stmt"/>
+        <line num="174" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="176" count="0" type="stmt"/>
         <line num="179" count="0" type="stmt"/>
-        <line num="185" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="187" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="188" count="0" type="stmt"/>
-        <line num="190" count="0" type="stmt"/>
+        <line num="180" count="0" type="stmt"/>
+        <line num="186" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="188" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="189" count="0" type="stmt"/>
         <line num="191" count="0" type="stmt"/>
-        <line num="193" count="0" type="stmt"/>
-        <line num="197" count="0" type="stmt"/>
+        <line num="192" count="0" type="stmt"/>
+        <line num="194" count="0" type="stmt"/>
         <line num="198" count="0" type="stmt"/>
         <line num="199" count="0" type="stmt"/>
-        <line num="211" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="212" count="0" type="stmt"/>
-        <line num="215" count="0" type="stmt"/>
+        <line num="200" count="0" type="stmt"/>
+        <line num="212" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="213" count="0" type="stmt"/>
         <line num="216" count="0" type="stmt"/>
-        <line num="218" count="0" type="stmt"/>
+        <line num="217" count="0" type="stmt"/>
         <line num="219" count="0" type="stmt"/>
-        <line num="226" count="0" type="stmt"/>
+        <line num="220" count="0" type="stmt"/>
         <line num="227" count="0" type="stmt"/>
-        <line num="230" count="0" type="stmt"/>
+        <line num="228" count="0" type="stmt"/>
         <line num="231" count="0" type="stmt"/>
         <line num="232" count="0" type="stmt"/>
-        <line num="234" count="0" type="stmt"/>
+        <line num="233" count="0" type="stmt"/>
         <line num="235" count="0" type="stmt"/>
-        <line num="243" count="0" type="stmt"/>
+        <line num="236" count="0" type="stmt"/>
         <line num="244" count="0" type="stmt"/>
-        <line num="247" count="0" type="stmt"/>
+        <line num="245" count="0" type="stmt"/>
+        <line num="246" count="0" type="stmt"/>
         <line num="248" count="0" type="stmt"/>
-        <line num="257" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="258" count="0" type="stmt"/>
-        <line num="261" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="262" count="0" type="stmt"/>
-        <line num="265" count="0" type="stmt"/>
-        <line num="301" count="0" type="stmt"/>
+        <line num="249" count="0" type="stmt"/>
+        <line num="258" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="259" count="0" type="stmt"/>
+        <line num="262" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="263" count="0" type="stmt"/>
+        <line num="266" count="0" type="stmt"/>
         <line num="302" count="0" type="stmt"/>
-        <line num="315" count="0" type="stmt"/>
-        <line num="332" count="0" type="stmt"/>
-        <line num="348" count="1" type="stmt"/>
+        <line num="303" count="0" type="stmt"/>
+        <line num="316" count="0" type="stmt"/>
+        <line num="333" count="0" type="stmt"/>
+        <line num="349" count="1" type="stmt"/>
       </file>
       <file name="ClubManageScreenold.tsx" path="C:\Users\chiar\Documents\GitHub\NightMi\src\screens\ClubManageScreenold.tsx">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
