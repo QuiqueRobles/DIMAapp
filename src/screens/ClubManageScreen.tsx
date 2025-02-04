@@ -69,7 +69,6 @@
   
   const ClubManage: React.FC = () => {
     const [club, setClub] = useState<Club | null>(null);
-    const [events, setEvents] = useState<Event[]>([]);
     const [reviews, setReviews] = useState<Review[]>([]);
     const [loading, setLoading] = useState(true);
     const [refreshing, setRefreshing] = useState(false);
@@ -105,12 +104,17 @@
         setLoading(true);
         setError(null);
        const clubId=await getAuthenticatedUserId();
+
+       //console.log("clubID", clubId);
      
         const { data: clubData, error: clubError } = await supabase
           .from('club')
           .select('*')
           .eq('club_id', clubId)
           .single();
+
+        //console.log("clubData", clubData);
+        //console.log("clubError", clubError);
   
         if (clubError) throw new Error('Failed to fetch club data');
         setClub(clubData);
@@ -121,6 +125,9 @@
           .eq('club_id', clubId)
           .order('created_at', { ascending: false })
           .limit(5);
+
+        //console.log("reviewsData", reviewsData);
+        //console.log("reviewsError", reviewsError);
   
         if (reviewsError) throw new Error('Failed to fetch reviews');
         setReviews(reviewsData || []);
@@ -169,17 +176,23 @@
           const { error: uploadError } = await supabase.storage
             .from('clubs-image')
             .upload(filePath, formData);
+
+          //console.log("uploadError", uploadError);
   
           if (uploadError) throw uploadError;
   
           const { data: { publicUrl } } = supabase.storage
             .from('clubs-image')
             .getPublicUrl(filePath);
-           alert(publicUrl);
+
+          //console.log("publicUrl", publicUrl);
+          //alert(publicUrl);
           const { error: updateError } = await supabase
             .from('club') 
             .update({'image': publicUrl })
             .eq('club_id',clubId);
+
+          //console.log("updateError", updateError);
           
         
           if (updateError) throw updateError;
@@ -187,7 +200,7 @@
           setClub(prev => prev ? { ...prev, image: publicUrl } : null);
           Alert.alert('Success', 'Profile picture updated successfully');
         } catch (error) {
-          console.error('Error uploading image:', error);
+          //console.error('Error uploading image:', error);
           Alert.alert('Error', 'Failed to upload image. Please try again.');
         } finally {
           setLoading(false);
@@ -225,7 +238,7 @@
   
     useEffect(() => {
       fetchClubData();
-    }, [clubId]);
+    }, []);
   
     const handleRefresh = () => {
       setRefreshing(true);
@@ -255,14 +268,19 @@
       };
   
     if (error) {
+      //console.log("error",error);
       return <ErrorDisplay message={error} />;
     }
   
     if (!club) {
+      //console.log("club",club);
       return <ErrorDisplay message="Club not found" />;
     }
   
     return (
+      //console.log("club",club),
+      //console.log("edit",edit),
+
       <SafeAreaView style={styles.container}>
         <ScrollView
           contentContainerStyle={styles.scrollContent}
@@ -271,7 +289,7 @@
           }
         >
           <View style={styles.imageContainer}>
-            <TouchableOpacity onPress={handleImageUpload} style={styles.imageContainer}>
+            <TouchableOpacity onPress={handleImageUpload} style={styles.imageContainer} testID='image-upload'>
                 <View style={styles.imageOverlay} />
   
                   <Image source={{ uri: club.image || 'https://via.placeholder.com/400x200?text=No+Image'}}
@@ -300,7 +318,7 @@
             <TouchableOpacity onPress={edit? (() => {
     saveChanges().catch((error) => console.error('Error:', error));
   }):(()=>setEdit(!edit))}
-              style={styles.EditButton} >
+              style={styles.EditButton}  testID='edit-save-button'>
   <Text style={styles.seeAllText}>{edit ? 'Save' : 'Edit'}</Text>
 </TouchableOpacity>
       {edit ? (
@@ -308,24 +326,7 @@
       ) : (
         <ClubDetails club={club} />
       )}
-    </View>
-            <View style={styles.section}>
-              <View style={styles.sectionHeader}>
-                <Text style={styles.sectionTitle}>Upcoming Events</Text>
-                <TouchableOpacity onPress={() => navigation.navigate('Calendar', { clubId: club.id, clubName: club.name })}>
-                  <Text style={styles.seeAllText}>See All</Text>
-                </TouchableOpacity>
-              </View>
-              {events.length > 0 ? (
-                <EventsList 
-                  events={events} 
-                  clubName={club.name}
-                  clubId={club.id}
-                />
-              ) : (
-                <Text style={styles.noEventsText}>No upcoming events</Text>
-              )}
-            </View>
+    </View>r
             <View style={styles.section}>
               <View style={styles.sectionHeader}>
                 <Text style={styles.sectionTitle}>Reviews</Text>

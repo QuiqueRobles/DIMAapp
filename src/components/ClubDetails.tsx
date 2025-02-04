@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { Feather } from '@expo/vector-icons';
 
 interface ClubDetailsProps {
@@ -20,6 +21,8 @@ interface ClubDetailsProps {
 }
 
 const ClubDetails: React.FC<ClubDetailsProps> = ({ club }) => {
+  const { t } = useTranslation();
+
   return (
     <View style={styles.container}>
       <DetailItem icon="map-pin" text={club.address} />
@@ -28,7 +31,7 @@ const ClubDetails: React.FC<ClubDetailsProps> = ({ club }) => {
       {club.music_genre && <DetailItem icon="music" text={club.music_genre} />}
       {club.description && (
         <View style={styles.descriptionContainer}>
-          <Text style={styles.descriptionTitle}>About</Text>
+          <Text style={styles.descriptionTitle}>{t('club.about')}</Text>
           <Text style={styles.description}>{club.description}</Text>
         </View>
       )}

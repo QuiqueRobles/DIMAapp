@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 import QRCode from 'react-native-qrcode-svg';
 
 interface ExpandedTicketProps {
@@ -24,8 +25,19 @@ interface ExpandedTicketProps {
 }
 
 const ExpandedTicket: React.FC<ExpandedTicketProps> = ({ ticket, onClose }) => {
+  const { t, i18n } = useTranslation();
   const eventDate = new Date(ticket.event_date);
   const purchaseDate = new Date(ticket.purchase_date);
+
+  const DetailItem: React.FC<{ icon: string; label: string; value: string }> = ({ icon, label, value }) => (
+    <View style={styles.detailItem}>
+      <Feather name={icon} size={20} color="#A78BFA" />
+      <View style={styles.detailText}>
+        <Text style={styles.detailLabel}>{label}</Text>
+        <Text style={styles.detailValue}>{value}</Text>
+      </View>
+    </View>
+  );
 
   return (
     <View style={styles.container} testID='expanded-ticket'>
@@ -45,28 +57,54 @@ const ExpandedTicket: React.FC<ExpandedTicketProps> = ({ ticket, onClose }) => {
             />
           </View>
           <View style={styles.details}>
-            <DetailItem icon="user" label="Usuario" value={ticket.profiles.username} />
-            <DetailItem icon="calendar" label="Fecha del Evento" value={eventDate.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} />
-            <DetailItem icon="clock" label="Hora del Evento" value={eventDate.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })} />
-            <DetailItem icon="users" label="Número de Personas" value={`${ticket.num_people}`} />
-            <DetailItem icon="dollar-sign" label="Precio Total" value={`${ticket.total_price.toFixed(2)}€`} />
-            <DetailItem icon="shopping-bag" label="Fecha de Compra" value={purchaseDate.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })} />
+            <DetailItem 
+              icon="user" 
+              label={t('expanded_ticket.user')} 
+              value={ticket.profiles.username} 
+            />
+            <DetailItem 
+              icon="calendar" 
+              label={t('expanded_ticket.event_date')} 
+              value={eventDate.toLocaleDateString(i18n.language, { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+              })} 
+            />
+            <DetailItem 
+              icon="clock" 
+              label={t('expanded_ticket.event_time')} 
+              value={eventDate.toLocaleTimeString(i18n.language, { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+              })} 
+            />
+            <DetailItem 
+              icon="users" 
+              label={t('expanded_ticket.number_of_people')} 
+              value={`${ticket.num_people}`} 
+            />
+            <DetailItem 
+              icon="dollar-sign" 
+              label={t('expanded_ticket.total_price')} 
+              value={`${ticket.total_price.toFixed(2)}€`} 
+            />
+            <DetailItem 
+              icon="shopping-bag" 
+              label={t('expanded_ticket.purchase_date')} 
+              value={purchaseDate.toLocaleDateString(i18n.language, { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+              })} 
+            />
           </View>
         </ScrollView>
       </View>
     </View>
   );
 };
-
-const DetailItem: React.FC<{ icon: string; label: string; value: string }> = ({ icon, label, value }) => (
-  <View style={styles.detailItem}>
-    <Feather name={icon} size={20} color="#A78BFA" />
-    <View style={styles.detailText}>
-      <Text style={styles.detailLabel}>{label}</Text>
-      <Text style={styles.detailValue}>{value}</Text>
-    </View>
-  </View>
-);
 
 const styles = StyleSheet.create({
   container: {

@@ -6,6 +6,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Feather } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { supabase } from '@/lib/supabase';
+import { useTranslation } from 'react-i18next';
 import ClubHeader from '@/components/ClubHeader';
 import ClubDetails from '@/components/ClubDetails';
 import EventsList from '@/components/EventsList';
@@ -15,62 +16,22 @@ import LoadingSpinner from '@/components/LoadingSpinner';
 
 const { width, height } = Dimensions.get('window');
 
-type RootStackParamList = {
-  Home: undefined;
-  Club: { clubId: string };
-  Reviews: { clubId: string; clubName: string };
-  Calendar: { clubId: string; clubName: string };
-};
-
-type ClubScreenRouteProp = RouteProp<RootStackParamList, 'Club'>;
-type ClubScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Club'>;
-
-interface Club {
-  club_id: string;
-  name: string;
-  rating: number;
-  num_reviews: number;
-  address: string;
-  image: string | null;
-  category: string | null;
-  music_genre?: string | null;
-  attendees: number;
-  opening_hours: string;
-  dress_code: string | null;
-  description: string | null;
-}
-
-interface Event {
-  id: string;
-  created_at: string;
-  club_id: string;
-  date: string;
-  name: string | null;
-  price: number | null;
-  description: string | null;
-  image: string | null;
-}
-
-interface Review {
-  id: string;
-  created_at: string;
-  user_id: string;
-  club_id: string;
-  text: string | null;
-  num_stars: number;
-}
-
 const ClubScreen: React.FC = () => {
-  const [club, setClub] = useState<Club | null>(null);
-  const [events, setEvents] = useState<Event[]>([]);
-  const [reviews, setReviews] = useState<Review[]>([]);
+  const { t } = useTranslation();
+  const [club, setClub] = useState(null);
+  const [events, setEvents] = useState([]);
+  const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(null);
 
-  const navigation = useNavigation<ClubScreenNavigationProp>();
-  const route = useRoute<ClubScreenRouteProp>();
+  const navigation = useNavigation();
+  const route = useRoute();
   const { clubId } = route.params;
+
+  useEffect(() => {
+    fetchClubData();
+  }, [clubId]);
 
   const fetchClubData = async () => {
     try {
@@ -82,11 +43,7 @@ const ClubScreen: React.FC = () => {
         .select('*')
         .eq('club_id', clubId)
         .single();
-      
-      //console.log(clubData);
-      //console.log(clubError);
-
-      if (clubError) throw new Error('Failed to fetch club data');
+      if (clubError) throw new Error(t('error.fetchClub'));
       setClub(clubData);
 
       const { data: eventsData, error: eventsError } = await supabase
@@ -95,8 +52,7 @@ const ClubScreen: React.FC = () => {
         .eq('club_id', clubId)
         .order('date', { ascending: true })
         .limit(3);
-
-      if (eventsError) throw new Error('Failed to fetch events');
+      if (eventsError) throw new Error(t('error.fetchEvents'));
       setEvents(eventsData || []);
 
       const { data: reviewsData, error: reviewsError } = await supabase
@@ -105,26 +61,15 @@ const ClubScreen: React.FC = () => {
         .eq('club_id', clubId)
         .order('created_at', { ascending: false })
         .limit(5);
-       
-      if (reviewsError) throw new Error('Failed to fetch reviews');
+      if (reviewsError) throw new Error(t('error.fetchReviews'));
       setReviews(reviewsData || []);
-
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError('An unknown error occurred');
-      }
+    } catch (err) {
+      setError(err.message);
     } finally {
       setLoading(false);
       setRefreshing(false);
     }
   };
-
-
-  useEffect(() => {
-    fetchClubData();
-  }, [clubId]);
 
   const handleRefresh = () => {
     setRefreshing(true);
@@ -140,16 +85,14 @@ const ClubScreen: React.FC = () => {
   }
 
   if (!club) {
-    return <ErrorDisplay message="Club not found" />;
+    return <ErrorDisplay message={t('error.clubNotFound')} />;
   }
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
         contentContainerStyle={styles.scrollContent}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor="#A78BFA" />
-        }
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor="#A78BFA" />}
       >
         <View style={styles.imageContainer}>
           <View style={styles.imageOverlay} />
@@ -157,18 +100,12 @@ const ClubScreen: React.FC = () => {
             source={{ uri: club.image || 'https://via.placeholder.com/400x200?text=No+Image' }}
             style={styles.image}
           />
-          <LinearGradient
-            colors={['rgba(0,0,0,0)', 'rgba(0,0,0,0.8)']}
-            style={styles.imageGradient}
-          />
-          <TouchableOpacity
-            style={styles.backButton}
-            onPress={() => navigation.goBack()}
-          >
+          <LinearGradient colors={['rgba(0,0,0,0)', 'rgba(0,0,0,0.8)']} style={styles.imageGradient} />
+          <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
             <Feather name="arrow-left" size={24} color="#FFFFFF" />
           </TouchableOpacity>
           <View style={styles.clubType}>
-            <Text style={styles.clubTypeText}>{club.category || 'Nightclub'}</Text>
+            <Text style={styles.clubTypeText}>{t(club.category || 'defaultCategory')}</Text>
           </View>
         </View>
         <View style={styles.content}>
@@ -176,39 +113,29 @@ const ClubScreen: React.FC = () => {
           <ClubDetails club={club} />
           <View style={styles.section}>
             <View style={styles.sectionHeader}>
-              <Text style={styles.sectionTitle}>Upcoming Events</Text>
+              <Text style={styles.sectionTitle}>{t('events.upcoming')}</Text>
               <TouchableOpacity onPress={() => navigation.navigate('Calendar', { clubId: club.club_id, clubName: club.name })}>
-                <Text style={styles.seeAllText}>See All</Text>
+                <Text style={styles.seeAllText}>{t('common.seeAll')}</Text>
               </TouchableOpacity>
             </View>
-            {events.length > 0 ? (
-              <EventsList 
-                events={events} 
-                clubName={club.name}
-                clubId={club.club_id}
-              />
-            ) : (
-              <Text style={styles.noEventsText}>No upcoming events</Text>
-            )}
+            {events.length > 0 ? <EventsList events={events} clubName={club.name} clubId={club.club_id} /> : <Text style={styles.noEventsText}>{t('events.none')}</Text>}
           </View>
           <View style={styles.section}>
             <View style={styles.sectionHeader}>
-              <Text style={styles.sectionTitle}>Reviews</Text>
+              <Text style={styles.sectionTitle}>{t('reviews.title')}</Text>
               <TouchableOpacity onPress={() => navigation.navigate('Reviews', { clubId: club.club_id, clubName: club.name })}>
-                <Text style={styles.seeAllText}>See All</Text>
+                <Text style={styles.seeAllText}>{t('common.seeAll')}</Text>
               </TouchableOpacity>
             </View>
-            {reviews.length > 0 ? (
-              <ReviewsList reviews={reviews.slice(0, 3)} />
-            ) : (
-              <Text style={styles.noReviewsText}>No reviews yet</Text>
-            )}
+            {reviews.length > 0 ? <ReviewsList reviews={reviews.slice(0, 3)} /> : <Text style={styles.noReviewsText}>{t('reviews.none')}</Text>}
           </View>
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 };
+
+
 
   const styles = StyleSheet.create({
     container: {

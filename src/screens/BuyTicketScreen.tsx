@@ -9,6 +9,7 @@ import { format, parseISO } from 'date-fns';
 import { useStripe } from '@stripe/stripe-react-native';
 import { supabase } from '../lib/supabase';
 import { SUPABASE_URL, SUPABASE_ANON_KEY } from '@env';
+import { useTranslation } from 'react-i18next'; // Import the useTranslation hook
 
 type RootStackParamList = {
   BuyTicket: { 
@@ -27,6 +28,7 @@ type BuyTicketScreenRouteProp = RouteProp<RootStackParamList, 'BuyTicket'>;
 type BuyTicketScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'BuyTicket'>;
 
 const BuyTicketScreen: React.FC = () => {
+  const { t } = useTranslation(); // Initialize the useTranslation hook
   const route = useRoute<BuyTicketScreenRouteProp>();
   const navigation = useNavigation<BuyTicketScreenNavigationProp>();
   const { eventId, eventName, eventDate, eventPrice, clubName, eventDescription, eventImage, clubId } = route.params;
@@ -86,7 +88,7 @@ const BuyTicketScreen: React.FC = () => {
       return { paymentIntent: data.clientSecret };
     } catch (error) {
       console.error('Error fetching payment intent:', error);
-      Alert.alert('Error', 'Unable to initialize payment. Please try again.');
+      Alert.alert(t('error'), t('unable_to_initialize_payment'));
       throw error;
     }
   };
@@ -98,19 +100,19 @@ const BuyTicketScreen: React.FC = () => {
 
       const { error } = await initPaymentSheet({
         paymentIntentClientSecret: paymentIntent,
-        merchantDisplayName: 'Your App Name',
+        merchantDisplayName: t('your_app_name'),
         returnURL: 'your-app-scheme://stripe-redirect',
       });
 
       if (error) {
         console.error('Error initializing payment sheet:', error);
-        Alert.alert(`Error code: ${error.code}`, error.message);
+        Alert.alert(t('error_code', { code: error.code }), error.message);
       } else {
         console.log('Payment sheet initialized successfully');
       }
     } catch (error) {
       console.error('Error in initializePaymentSheet:', error);
-      Alert.alert('Error', 'Failed to initialize payment. Please try again.');
+      Alert.alert(t('error'), t('failed_to_initialize_payment'));
     }
   };
 
@@ -119,94 +121,90 @@ const BuyTicketScreen: React.FC = () => {
   }, [quantity]);
 
   const handlePurchase = async () => {
-  setLoading(true);
-  try {
-    console.log('Presenting payment sheet...');
-    const { error: paymentError } = await presentPaymentSheet();
+    setLoading(true);
+    try {
+      console.log('Presenting payment sheet...');
+      const { error: paymentError } = await presentPaymentSheet();
 
-    if (paymentError) {
-      console.error('Error presenting payment sheet:', JSON.stringify(paymentError, null, 2));
-      Alert.alert(`Payment Error: ${paymentError.code}`, paymentError.message);
-      return;
+      if (paymentError) {
+        console.error('Error presenting payment sheet:', JSON.stringify(paymentError, null, 2));
+        Alert.alert(t('payment_error', { code: paymentError.code }), paymentError.message);
+        return;
+      }
+
+      console.log('Payment successful');
+      const ticketData = await createTicketInDatabase();
+      console.log('Ticket created successfully:', JSON.stringify(ticketData, null, 2));
+      Alert.alert(t('success'), t('payment_successful_ticket_created'));
+      navigation.goBack();
+    } catch (error) {
+      console.error('Error in handlePurchase:', error instanceof Error ? error.stack : JSON.stringify(error, null, 2));
+      if (error instanceof Error) {
+        Alert.alert(t('error'), t('failed_to_process_payment_or_create_ticket', { message: error.message }));
+      } else {
+        Alert.alert(t('error'), t('unknown_error_occurred'));
+      }
+    } finally {
+      setLoading(false);
     }
-
-    console.log('Payment successful');
-    const ticketData = await createTicketInDatabase();
-    console.log('Ticket created successfully:', JSON.stringify(ticketData, null, 2));
-    Alert.alert('Success', 'Your payment was successful and ticket has been created!');
-    navigation.goBack();
-  } catch (error) {
-    console.error('Error in handlePurchase:', error instanceof Error ? error.stack : JSON.stringify(error, null, 2));
-    if (error instanceof Error) {
-      Alert.alert('Error', `Failed to process payment or create ticket: ${error.message}`);
-    } else {
-      Alert.alert('Error', 'An unknown error occurred while processing your purchase');
-    }
-  } finally {
-    setLoading(false);
-  }
-};
-
-
+  };
 
   const createTicketInDatabase = async () => {
-  try {
-    console.log('Creating ticket in database...');
-    const { data: { user }, error: userError } = await supabase.auth.getUser();
-    
-    if (userError) {
-      console.error('Error getting user:', JSON.stringify(userError, null, 2));
-      throw new Error(`User error: ${userError.message}`);
+    try {
+      console.log('Creating ticket in database...');
+      const { data: { user }, error: userError } = await supabase.auth.getUser();
+      
+      if (userError) {
+        console.error('Error getting user:', JSON.stringify(userError, null, 2));
+        throw new Error(`User error: ${userError.message}`);
+      }
+      
+      if (!user) {
+        console.error('No user found');
+        throw new Error(t('no_user_logged_in'));
+      }
+
+      const ticketData = {
+        user_id: user.id,
+        club_id: clubId,
+        event_id: eventId,
+        purchase_date: new Date().toISOString(),
+        total_price: quantity * eventPrice,
+        event_date: eventDate,
+        num_people: quantity,
+      };
+
+      console.log('Ticket data to be inserted:', JSON.stringify(ticketData, null, 2));
+
+      const { data, error } = await supabase
+        .from('ticket')
+        .insert(ticketData)
+        .select();
+
+      if (error) {
+        console.error('Supabase insertion error:', JSON.stringify(error, null, 2));
+        throw new Error(`Supabase error: ${error.message || t('unknown_error_occurred_during_insertion')}`);
+      }
+
+      if (!data || data.length === 0) {
+        console.error('No data returned from ticket insertion');
+        throw new Error(t('no_data_returned_from_ticket_insertion'));
+      }
+
+      console.log('Ticket created:', JSON.stringify(data[0], null, 2));
+      return data[0];
+    } catch (error) {
+      console.error('Error creating ticket:', error instanceof Error ? error.stack : JSON.stringify(error, null, 2));
+      throw error;
     }
-    
-    if (!user) {
-      console.error('No user found');
-      throw new Error('No user logged in');
-    }
-
-    const ticketData = {
-      user_id: user.id,
-      club_id: clubId,
-      event_id: eventId,
-      purchase_date: new Date().toISOString(),
-      total_price: quantity * eventPrice,
-      event_date: eventDate,
-      num_people: quantity,
-    };
-
-    console.log('Ticket data to be inserted:', JSON.stringify(ticketData, null, 2));
-
-    const { data, error } = await supabase
-      .from('ticket')
-      .insert(ticketData)
-      .select();
-
-    if (error) {
-      console.error('Supabase insertion error:', JSON.stringify(error, null, 2));
-      throw new Error(`Supabase error: ${error.message || 'Unknown error occurred during insertion'}`);
-    }
-
-    if (!data || data.length === 0) {
-      console.error('No data returned from ticket insertion');
-      throw new Error('No data returned from ticket insertion');
-    }
-
-    console.log('Ticket created:', JSON.stringify(data[0], null, 2));
-    return data[0];
-  } catch (error) {
-    console.error('Error creating ticket:', error instanceof Error ? error.stack : JSON.stringify(error, null, 2));
-    throw error;
-  }
-};
-
-
+  };
 
   const formatEventDate = (dateString: string) => {
     try {
       return format(parseISO(dateString), 'MMMM d, yyyy');
     } catch (error) {
       console.error('Error parsing date:', error);
-      return 'Date not available';
+      return t('date_not_available');
     }
   };
 
@@ -219,7 +217,7 @@ const BuyTicketScreen: React.FC = () => {
         >
           <Feather name="arrow-left" size={24} color="#FFFFFF" />
         </TouchableOpacity>
-        <Text style={styles.title}>Buy Tickets</Text>
+        <Text style={styles.title}>{t('buy_tickets')}</Text>
         {eventImage && (
           <Image 
             source={{ uri: eventImage }} 
@@ -234,7 +232,7 @@ const BuyTicketScreen: React.FC = () => {
           {eventDescription && (
             <Text style={styles.eventDescription}>{eventDescription}</Text>
           )}
-          <Text style={styles.eventPrice}>${eventPrice.toFixed(2)} per ticket</Text>
+          <Text style={styles.eventPrice}>${eventPrice.toFixed(2)} {t('per_ticket')}</Text>
         </View>
         <View style={styles.quantitySelector}>
           <TouchableOpacity onPress={handleDecrement} style={styles.quantityButton}>
@@ -246,19 +244,19 @@ const BuyTicketScreen: React.FC = () => {
           </TouchableOpacity>
         </View>
         <View style={styles.totalContainer}>
-          <Text style={styles.totalLabel}>Total:</Text>
+          <Text style={styles.totalLabel}>{t('total')}:</Text>
           <Text style={styles.totalPrice}>${(quantity * eventPrice).toFixed(2)}</Text>
         </View>
         <TouchableOpacity onPress={handlePurchase} disabled={loading}>
           <LinearGradient
-          testID='linear-gradient'
+            testID='linear-gradient'
             colors={['#5500FF', '#7C3AED']}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
             style={styles.purchaseButton}
           >
             <Text style={styles.purchaseButtonText}>
-              {loading ? 'Processing...' : 'Purchase Tickets'}
+              {loading ? t('processing') : t('purchase_tickets')}
             </Text>
           </LinearGradient>
         </TouchableOpacity>
@@ -365,4 +363,3 @@ const styles = StyleSheet.create({
 });
 
 export default BuyTicketScreen;
-
