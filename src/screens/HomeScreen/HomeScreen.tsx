@@ -10,7 +10,7 @@ import { supabase } from '@/lib/supabase';
 import { SearchBar } from '@/components/SearchBar';
 import { ClubCard } from '@/components/ClubCard';
 import { FilterModal } from '@/components/FilterModal';
-import { useTranslation } from 'react-i18next';
+
 type RootStackParamList = {
   Home: undefined;
   Club: { clubId: string };
@@ -52,7 +52,6 @@ const HomeScreen: React.FC = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
-   const { t } = useTranslation();
   const [isFilterModalVisible, setIsFilterModalVisible] = useState(false);
   const [filters, setFilters] = useState<Filters>({
     category: null,
@@ -114,8 +113,8 @@ const HomeScreen: React.FC = () => {
 
   useEffect(() => {
     fetchClubs();
-  }, [fetchClubs])  ;
-  
+  }, [fetchClubs]);
+
   const handleRefresh = useCallback(() => {
     setRefreshing(true);
     fetchClubs(0, true);
@@ -158,7 +157,7 @@ const HomeScreen: React.FC = () => {
 
   return (
     <LinearGradient
-      colors={['#5500FF', '#121212']}
+    colors={['#5500FF', '#121212']}
       style={styles.gradient}
       locations={[0, 0.3]}
     >
@@ -170,20 +169,15 @@ const HomeScreen: React.FC = () => {
             value={searchQuery}
             onChangeText={setSearchQuery}
             onClear={() => setSearchQuery('')}
-            placeholder={t('home.search_placeholder')}
           />
-          <TouchableOpacity 
-            style={styles.filterButton} 
-            onPress={handleFilterPress}
-            testID="filter-button"
-          >
+          <TouchableOpacity style={styles.filterButton} onPress={handleFilterPress}testID="filter-button">
             <Feather name="filter" size={24} color="#FFFFFF" />
           </TouchableOpacity>
         </View>
 
         {error ? (
           <View style={styles.errorContainer}>
-            <Text style={styles.errorText}>{t('home.error_message')}</Text>
+            <Text style={styles.errorText}>{error}</Text>
           </View>
         ) : (
           <FlatList
@@ -204,7 +198,6 @@ const HomeScreen: React.FC = () => {
                 refreshing={refreshing}
                 onRefresh={handleRefresh}
                 tintColor="#4F46E5"
-                title={t('home.refreshing')}
               />
             }
             onEndReached={handleLoadMore}
@@ -212,7 +205,7 @@ const HomeScreen: React.FC = () => {
             ListFooterComponent={renderFooter}
             ListEmptyComponent={
               <View style={styles.emptyContainer}>
-                <Text style={styles.emptyText}>{t('home.no_clubs_found')}</Text>
+                <Text style={styles.emptyText}>No clubs found</Text>
               </View>
             }
           />

@@ -29,7 +29,6 @@ jest.mock('@/lib/supabase', () => {
       update: jest.fn().mockReturnThis(),
       upload: jest.fn().mockReturnThis(),
       getPublicUrl: jest.fn().mockReturnThis(),
-      limit: jest.fn().mockReturnThis(),
     };
   
     return { 

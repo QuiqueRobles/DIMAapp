@@ -17,7 +17,6 @@ import ReviewForm from '@/components/ReviewForm';
 import ErrorDisplay from '@/components/ErrorDisplay';
 import { set } from 'date-fns';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useTranslation } from 'react-i18next';
 
 const DEBUG = true;
 
@@ -58,7 +57,6 @@ const TicketScreen: React.FC = () => {
   const [selectedTicketForReview, setSelectedTicketForReview] = useState<Ticket | null>(null);
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState('');
-  const { t } = useTranslation();
 
 
   useEffect(() => {
@@ -224,6 +222,8 @@ const TicketScreen: React.FC = () => {
     if (!selectedTicketForReview) return;
 
     try {
+    
+
       const { error: reviewError } = await supabase
         .from('review')
         .insert([
@@ -247,11 +247,12 @@ const TicketScreen: React.FC = () => {
       setSelectedTicketForReview(null);
       setRating(0);
       setReview('');
-      alert(t('tickets.review_submitted'));
+      alert('Review submitted successfully');
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'An unknown error occurred');
     }
   };
+
 
 
   if (loading) {
@@ -263,18 +264,28 @@ const TicketScreen: React.FC = () => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.content}>
-        <LinearGradient
-          colors={['rgba(76, 43, 176, 0.97)', 'rgba(131, 27, 191, 0)']}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 1 }}
-          style={styles.nameGradient}
-        />
-        <Text style={styles.title}>{t('tickets.title')}</Text>
 
+    //console.log("pastTickets:", pastTickets),
+    
+    <SafeAreaView style={styles.container}>
+      <View
+        style={styles.content}
+        
+      >
+        
+                <LinearGradient
+                  colors={['rgba(76, 43, 176, 0.97)', 'rgba(131, 27, 191, 0)']}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 1 }}
+                  style={styles.nameGradient}
+                />
+                <Text style={styles.title}>My Tickets</Text>
+              
+        
+
+        
         <View style={styles.sectionContainer}>
-          <Text style={styles.sectionTitle}>{t('tickets.incoming_events')}</Text>
+          <Text style={styles.sectionTitle}>Incoming Events</Text>
           <FlatList
             data={currentTickets}
             testID='future-events-list'
@@ -284,7 +295,7 @@ const TicketScreen: React.FC = () => {
             )}
             ListEmptyComponent={
               <Text style={styles.emptyText}>
-                {t('tickets.no_future_tickets')}
+                No hay entradas para próximos eventos
               </Text>
             }
             nestedScrollEnabled
@@ -297,7 +308,7 @@ const TicketScreen: React.FC = () => {
 
         
         <View style={styles.sectionContainer}>
-          <Text style={styles.sectionTitle}>{t('tickets.past_events')}</Text>
+          <Text style={styles.sectionTitle}>Past Events</Text>
           <FlatList
             data={pastTickets}
             testID='past-events-list'
@@ -315,7 +326,7 @@ const TicketScreen: React.FC = () => {
             )}
             ListEmptyComponent={
               <Text style={styles.emptyText}>
-                {t('tickets.no_past_tickets')}
+                No hay entradas de eventos pasados
               </Text>
             }
             onEndReached={fetchMorePastTickets}
