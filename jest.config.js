@@ -13,4 +13,8 @@ module.exports = {
     '!**/babel.config.js',
     '!**/jest.setup.js',
   ],
+  moduleNameMapper: {
+    '^@env$': '<rootDir>/__mocks__/env.js',
+    // add other mappings if needed
+  },
 };
