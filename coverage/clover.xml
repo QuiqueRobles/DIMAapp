@@ -1,114 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1738689900787" clover="3.2.0">
-  <project timestamp="1738689900787" name="All files">
-    <metrics statements="1591" coveredstatements="1070" conditionals="780" coveredconditionals="433" methods="367" coveredmethods="224" elements="2738" coveredelements="1727" complexity="0" loc="1591" ncloc="1591" packages="18" files="66" classes="66"/>
+<coverage generated="1738690263113" clover="3.2.0">
+  <project timestamp="1738690263114" name="All files">
+    <metrics statements="1595" coveredstatements="963" conditionals="774" coveredconditionals="397" methods="367" coveredmethods="199" elements="2736" coveredelements="1559" complexity="0" loc="1595" ncloc="1595" packages="18" files="66" classes="66"/>
     <package name="NightMi">
-      <metrics statements="62" coveredstatements="51" conditionals="28" coveredconditionals="18" methods="18" coveredmethods="14"/>
-      <file name="App.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/App.tsx">
-        <metrics statements="52" coveredstatements="43" conditionals="26" coveredconditionals="17" methods="15" coveredmethods="12"/>
-        <line num="38" count="1" type="stmt"/>
-        <line num="39" count="1" type="stmt"/>
+      <metrics statements="63" coveredstatements="0" conditionals="26" coveredconditionals="0" methods="18" coveredmethods="0"/>
+      <file name="App.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\App.tsx">
+        <metrics statements="53" coveredstatements="0" conditionals="24" coveredconditionals="0" methods="15" coveredmethods="0"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
         <line num="40" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="41" count="0" type="stmt"/>
-        <line num="45" count="1" type="stmt"/>
-        <line num="46" count="1" type="stmt"/>
-        <line num="47" count="1" type="stmt"/>
-        <line num="55" count="1" type="stmt"/>
-        <line num="63" count="1" type="stmt"/>
-        <line num="64" count="2" type="stmt"/>
-        <line num="68" count="8" type="stmt"/>
-        <line num="69" count="8" type="cond" truecount="2" falsecount="0"/>
-        <line num="70" count="8" type="stmt"/>
-        <line num="72" count="8" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="64" count="0" type="stmt"/>
+        <line num="66" count="0" type="stmt"/>
+        <line num="69" count="0" type="stmt"/>
+        <line num="70" count="0" type="stmt"/>
+        <line num="71" count="0" type="stmt"/>
         <line num="73" count="0" type="stmt"/>
-        <line num="79" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="80" count="0" type="stmt"/>
-        <line num="84" count="8" type="stmt"/>
-        <line num="105" count="1" type="stmt"/>
-        <line num="106" count="1" type="stmt"/>
-        <line num="107" count="1" type="stmt"/>
-        <line num="119" count="1" type="stmt"/>
-        <line num="120" count="1" type="stmt"/>
-        <line num="121" count="1" type="stmt"/>
-        <line num="134" count="1" type="stmt"/>
-        <line num="135" count="1" type="stmt"/>
-        <line num="144" count="1" type="stmt"/>
-        <line num="145" count="11" type="stmt"/>
-        <line num="146" count="11" type="stmt"/>
-        <line num="147" count="11" type="stmt"/>
-        <line num="148" count="11" type="stmt"/>
-        <line num="149" count="11" type="stmt"/>
-        <line num="150" count="11" type="stmt"/>
-        <line num="151" count="3" type="stmt"/>
-        <line num="152" count="3" type="stmt"/>
-        <line num="153" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="154" count="2" type="stmt"/>
-        <line num="155" count="2" type="stmt"/>
-        <line num="156" count="2" type="stmt"/>
-        <line num="162" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="164" count="2" type="stmt"/>
-        <line num="166" count="0" type="stmt"/>
-        <line num="170" count="3" type="stmt"/>
-        <line num="173" count="3" type="stmt"/>
+        <line num="74" count="0" type="stmt"/>
+        <line num="80" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="81" count="0" type="stmt"/>
+        <line num="85" count="0" type="stmt"/>
+        <line num="106" count="0" type="stmt"/>
+        <line num="107" count="0" type="stmt"/>
+        <line num="108" count="0" type="stmt"/>
+        <line num="120" count="0" type="stmt"/>
+        <line num="121" count="0" type="stmt"/>
+        <line num="122" count="0" type="stmt"/>
+        <line num="135" count="0" type="stmt"/>
+        <line num="136" count="0" type="stmt"/>
+        <line num="145" count="0" type="stmt"/>
+        <line num="146" count="0" type="stmt"/>
+        <line num="147" count="0" type="stmt"/>
+        <line num="148" count="0" type="stmt"/>
+        <line num="149" count="0" type="stmt"/>
+        <line num="150" count="0" type="stmt"/>
+        <line num="151" count="0" type="stmt"/>
+        <line num="152" count="0" type="stmt"/>
+        <line num="153" count="0" type="stmt"/>
+        <line num="154" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="155" count="0" type="stmt"/>
+        <line num="156" count="0" type="stmt"/>
+        <line num="157" count="0" type="stmt"/>
+        <line num="163" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="165" count="0" type="stmt"/>
+        <line num="167" count="0" type="stmt"/>
+        <line num="171" count="0" type="stmt"/>
         <line num="174" count="0" type="stmt"/>
-        <line num="175" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="176" count="0" type="stmt"/>
-        <line num="180" count="3" type="stmt"/>
-        <line num="183" count="11" type="cond" truecount="2" falsecount="0"/>
-        <line num="185" count="8" type="stmt"/>
-        <line num="188" count="3" type="stmt"/>
-        <line num="226" count="3" type="stmt"/>
+        <line num="175" count="0" type="stmt"/>
+        <line num="176" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="177" count="0" type="stmt"/>
+        <line num="181" count="0" type="stmt"/>
+        <line num="184" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="186" count="0" type="stmt"/>
+        <line num="189" count="0" type="stmt"/>
+        <line num="227" count="0" type="stmt"/>
       </file>
-      <file name="env.d.ts" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/env.d.ts">
+      <file name="env.d.ts" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\env.d.ts">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
-      <file name="isOwner.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/isOwner.tsx">
-        <metrics statements="8" coveredstatements="8" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="2"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="15" count="1" type="stmt"/>
-        <line num="16" count="4" type="stmt"/>
-        <line num="18" count="4" type="stmt"/>
-        <line num="25" count="1" type="stmt"/>
-        <line num="26" count="11" type="stmt"/>
-        <line num="27" count="11" type="cond" truecount="1" falsecount="1"/>
-        <line num="28" count="11" type="stmt"/>
+      <file name="isOwner.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\isOwner.tsx">
+        <metrics statements="8" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="28" count="0" type="stmt"/>
       </file>
-      <file name="jest.config.js" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/jest.config.js">
+      <file name="jest.config.js" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\jest.config.js">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
       </file>
-      <file name="tailwind.config.js" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/tailwind.config.js">
+      <file name="tailwind.config.js" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\tailwind.config.js">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
       </file>
     </package>
     <package name="NightMi.src">
       <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="navigation.ts" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/navigation.ts">
+      <file name="navigation.ts" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\navigation.ts">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
     </package>
     <package name="NightMi.src.components">
-      <metrics statements="326" coveredstatements="222" conditionals="188" coveredconditionals="114" methods="89" coveredmethods="55"/>
-      <file name="ActionButtons.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/components/ActionButtons.tsx">
+      <metrics statements="327" coveredstatements="214" conditionals="186" coveredconditionals="112" methods="89" coveredmethods="53"/>
+      <file name="ActionButtons.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\components\ActionButtons.tsx">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="12" count="1" type="stmt"/>
         <line num="17" count="4" type="stmt"/>
         <line num="44" count="1" type="stmt"/>
       </file>
-      <file name="ClubCard.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/components/ClubCard.tsx">
-        <metrics statements="25" coveredstatements="23" conditionals="22" coveredconditionals="16" methods="4" coveredmethods="3"/>
+      <file name="ClubCard.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\components\ClubCard.tsx">
+        <metrics statements="23" coveredstatements="22" conditionals="22" coveredconditionals="16" methods="4" coveredmethods="3"/>
         <line num="6" count="1" type="stmt"/>
         <line num="28" count="1" type="stmt"/>
         <line num="29" count="8" type="stmt"/>
         <line num="30" count="8" type="stmt"/>
-        <line num="32" count="8" type="stmt"/>
-        <line num="33" count="4" type="stmt"/>
-        <line num="36" count="8" type="stmt"/>
-        <line num="37" count="4" type="cond" truecount="1" falsecount="1"/>
-        <line num="38" count="4" type="stmt"/>
+        <line num="31" count="8" type="stmt"/>
+        <line num="33" count="8" type="stmt"/>
+        <line num="34" count="4" type="stmt"/>
+        <line num="37" count="8" type="stmt"/>
+        <line num="38" count="4" type="cond" truecount="1" falsecount="1"/>
         <line num="39" count="4" type="stmt"/>
         <line num="40" count="4" type="stmt"/>
+        <line num="41" count="4" type="stmt"/>
         <line num="43" count="4" type="stmt"/>
         <line num="44" count="4" type="cond" truecount="3" falsecount="1"/>
         <line num="46" count="4" type="stmt"/>
@@ -116,47 +118,45 @@
         <line num="49" count="4" type="stmt"/>
         <line num="50" count="4" type="stmt"/>
         <line num="51" count="4" type="stmt"/>
-        <line num="52" count="4" type="cond" truecount="2" falsecount="2"/>
-        <line num="53" count="0" type="stmt"/>
-        <line num="55" count="4" type="stmt"/>
-        <line num="58" count="4" type="stmt"/>
-        <line num="64" count="8" type="stmt"/>
-        <line num="74" count="0" type="stmt"/>
-        <line num="131" count="1" type="stmt"/>
+        <line num="53" count="4" type="stmt"/>
+        <line num="60" count="8" type="stmt"/>
+        <line num="75" count="0" type="stmt"/>
+        <line num="142" count="1" type="stmt"/>
       </file>
-      <file name="ClubDetails.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/components/ClubDetails.tsx">
-        <metrics statements="5" coveredstatements="5" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2"/>
-        <line num="22" count="3" type="stmt"/>
+      <file name="ClubDetails.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\components\ClubDetails.tsx">
+        <metrics statements="6" coveredstatements="6" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2"/>
         <line num="23" count="3" type="stmt"/>
-        <line num="39" count="3" type="stmt"/>
-        <line num="40" count="10" type="stmt"/>
-        <line num="48" count="3" type="stmt"/>
+        <line num="24" count="20" type="stmt"/>
+        <line num="26" count="20" type="stmt"/>
+        <line num="42" count="3" type="stmt"/>
+        <line num="43" count="78" type="stmt"/>
+        <line num="51" count="3" type="stmt"/>
       </file>
-      <file name="ClubEdit.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/components/ClubEdit.tsx">
+      <file name="ClubEdit.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\components\ClubEdit.tsx">
         <metrics statements="33" coveredstatements="16" conditionals="14" coveredconditionals="5" methods="15" coveredmethods="7"/>
         <line num="33" count="2" type="stmt"/>
-        <line num="34" count="6" type="stmt"/>
+        <line num="34" count="9" type="stmt"/>
         <line num="50" count="2" type="stmt"/>
-        <line num="52" count="2" type="stmt"/>
-        <line num="53" count="2" type="stmt"/>
-        <line num="54" count="2" type="stmt"/>
-        <line num="56" count="2" type="stmt"/>
+        <line num="52" count="3" type="stmt"/>
+        <line num="53" count="3" type="stmt"/>
+        <line num="54" count="3" type="stmt"/>
+        <line num="56" count="3" type="stmt"/>
         <line num="57" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="59" count="0" type="stmt"/>
         <line num="60" count="0" type="stmt"/>
         <line num="69" count="0" type="stmt"/>
         <line num="71" count="0" type="stmt"/>
         <line num="77" count="0" type="stmt"/>
-        <line num="83" count="2" type="stmt"/>
+        <line num="83" count="3" type="stmt"/>
         <line num="84" count="4" type="cond" truecount="0" falsecount="2"/>
-        <line num="88" count="2" type="stmt"/>
+        <line num="88" count="3" type="stmt"/>
         <line num="89" count="0" type="stmt"/>
         <line num="90" count="0" type="stmt"/>
         <line num="91" count="0" type="stmt"/>
         <line num="92" count="0" type="stmt"/>
         <line num="93" count="0" type="stmt"/>
         <line num="94" count="0" type="stmt"/>
-        <line num="98" count="2" type="stmt"/>
+        <line num="98" count="3" type="stmt"/>
         <line num="112" count="0" type="stmt"/>
         <line num="113" count="0" type="stmt"/>
         <line num="118" count="0" type="stmt"/>
@@ -168,25 +168,25 @@
         <line num="155" count="1" type="stmt"/>
         <line num="167" count="2" type="stmt"/>
       </file>
-      <file name="ClubHeader.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/components/ClubHeader.tsx">
+      <file name="ClubHeader.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\components\ClubHeader.tsx">
         <metrics statements="3" coveredstatements="3" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
         <line num="16" count="3" type="stmt"/>
-        <line num="17" count="3" type="stmt"/>
+        <line num="17" count="21" type="stmt"/>
         <line num="49" count="3" type="stmt"/>
       </file>
-      <file name="CountryPickerWrapper.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/components/CountryPickerWrapper.tsx">
+      <file name="CountryPickerWrapper.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\components\CountryPickerWrapper.tsx">
         <metrics statements="2" coveredstatements="2" conditionals="7" coveredconditionals="6" methods="1" coveredmethods="1"/>
         <line num="15" count="1" type="stmt"/>
         <line num="25" count="1" type="stmt"/>
       </file>
-      <file name="ErrorDisplay.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/components/ErrorDisplay.tsx">
+      <file name="ErrorDisplay.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\components\ErrorDisplay.tsx">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="9" count="5" type="stmt"/>
-        <line num="10" count="4" type="stmt"/>
+        <line num="10" count="12" type="stmt"/>
       </file>
-      <file name="EventCard.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/components/EventCard.tsx">
+      <file name="EventCard.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\components\EventCard.tsx">
         <metrics statements="27" coveredstatements="18" conditionals="16" coveredconditionals="8" methods="4" coveredmethods="4"/>
-        <line num="23" count="2" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
         <line num="24" count="2" type="stmt"/>
         <line num="25" count="2" type="stmt"/>
         <line num="27" count="2" type="cond" truecount="1" falsecount="1"/>
@@ -195,7 +195,7 @@
         <line num="32" count="0" type="stmt"/>
         <line num="34" count="0" type="stmt"/>
         <line num="37" count="2" type="stmt"/>
-        <line num="41" count="2" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
         <line num="42" count="2" type="stmt"/>
         <line num="43" count="2" type="stmt"/>
         <line num="44" count="2" type="stmt"/>
@@ -212,49 +212,50 @@
         <line num="64" count="0" type="stmt"/>
         <line num="68" count="2" type="stmt"/>
         <line num="72" count="2" type="stmt"/>
-        <line num="110" count="2" type="stmt"/>
+        <line num="110" count="1" type="stmt"/>
       </file>
-      <file name="EventsList.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/components/EventsList.tsx">
-        <metrics statements="27" coveredstatements="21" conditionals="18" coveredconditionals="13" methods="5" coveredmethods="5"/>
-        <line num="24" count="3" type="stmt"/>
-        <line num="25" count="2" type="stmt"/>
-        <line num="27" count="2" type="stmt"/>
-        <line num="28" count="2" type="stmt"/>
-        <line num="29" count="2" type="stmt"/>
-        <line num="31" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="32" count="1" type="stmt"/>
+      <file name="EventsList.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\components\EventsList.tsx">
+        <metrics statements="27" coveredstatements="19" conditionals="18" coveredconditionals="12" methods="5" coveredmethods="5"/>
+        <line num="24" count="2" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="31" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="32" count="0" type="stmt"/>
         <line num="35" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="36" count="0" type="stmt"/>
         <line num="38" count="0" type="stmt"/>
-        <line num="41" count="2" type="stmt"/>
-        <line num="44" count="2" type="stmt"/>
-        <line num="45" count="2" type="stmt"/>
-        <line num="46" count="2" type="stmt"/>
-        <line num="47" count="2" type="stmt"/>
-        <line num="48" count="2" type="stmt"/>
-        <line num="50" count="2" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="50" count="1" type="stmt"/>
         <line num="56" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="57" count="0" type="stmt"/>
         <line num="58" count="0" type="stmt"/>
         <line num="61" count="1" type="stmt"/>
         <line num="62" count="1" type="cond" truecount="2" falsecount="0"/>
         <line num="64" count="0" type="stmt"/>
-        <line num="68" count="2" type="stmt"/>
-        <line num="71" count="2" type="stmt"/>
-        <line num="74" count="2" type="stmt"/>
-        <line num="103" count="3" type="stmt"/>
+        <line num="68" count="1" type="stmt"/>
+        <line num="71" count="1" type="stmt"/>
+        <line num="74" count="1" type="stmt"/>
+        <line num="103" count="2" type="stmt"/>
       </file>
-      <file name="ExpandedTicket.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/components/ExpandedTicket.tsx">
-        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
-        <line num="26" count="3" type="stmt"/>
+      <file name="ExpandedTicket.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\components\ExpandedTicket.tsx">
+        <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="27" count="2" type="stmt"/>
         <line num="28" count="2" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
         <line num="30" count="2" type="stmt"/>
-        <line num="61" count="3" type="stmt"/>
-        <line num="62" count="12" type="stmt"/>
-        <line num="71" count="3" type="stmt"/>
+        <line num="32" count="2" type="stmt"/>
+        <line num="33" count="12" type="stmt"/>
+        <line num="42" count="2" type="stmt"/>
+        <line num="109" count="2" type="stmt"/>
       </file>
-      <file name="FilterModal.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/components/FilterModal.tsx">
+      <file name="FilterModal.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\components\FilterModal.tsx">
         <metrics statements="13" coveredstatements="7" conditionals="12" coveredconditionals="6" methods="8" coveredmethods="2"/>
         <line num="22" count="1" type="stmt"/>
         <line num="28" count="1" type="stmt"/>
@@ -270,9 +271,9 @@
         <line num="151" count="5" type="stmt"/>
         <line num="157" count="1" type="stmt"/>
       </file>
-      <file name="LanguageSelector.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/components/LanguageSelector.tsx">
-        <metrics statements="9" coveredstatements="2" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
-        <line num="6" count="1" type="stmt"/>
+      <file name="LanguageSelector.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\components\LanguageSelector.tsx">
+        <metrics statements="9" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
+        <line num="6" count="0" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
         <line num="9" count="0" type="stmt"/>
         <line num="10" count="0" type="stmt"/>
@@ -280,30 +281,30 @@
         <line num="21" count="0" type="stmt"/>
         <line num="26" count="0" type="stmt"/>
         <line num="29" count="0" type="stmt"/>
-        <line num="39" count="1" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
       </file>
-      <file name="LanguageSelector2.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/components/LanguageSelector2.tsx">
-        <metrics statements="13" coveredstatements="8" conditionals="4" coveredconditionals="2" methods="6" coveredmethods="2"/>
+      <file name="LanguageSelector2.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\components\LanguageSelector2.tsx">
+        <metrics statements="13" coveredstatements="2" conditionals="4" coveredconditionals="0" methods="6" coveredmethods="0"/>
         <line num="6" count="1" type="stmt"/>
-        <line num="7" count="12" type="stmt"/>
-        <line num="8" count="12" type="stmt"/>
-        <line num="10" count="12" type="stmt"/>
-        <line num="18" count="12" type="cond" truecount="1" falsecount="1"/>
-        <line num="20" count="12" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="18" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="20" count="0" type="stmt"/>
         <line num="21" count="0" type="stmt"/>
         <line num="22" count="0" type="stmt"/>
-        <line num="25" count="12" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
         <line num="34" count="0" type="stmt"/>
         <line num="36" count="0" type="stmt"/>
         <line num="48" count="1" type="stmt"/>
       </file>
-      <file name="LoadingSpinner.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/components/LoadingSpinner.tsx">
+      <file name="LoadingSpinner.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\components\LoadingSpinner.tsx">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="4" count="4" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
         <line num="5" count="28" type="stmt"/>
       </file>
-      <file name="ModifyEvent.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/components/ModifyEvent.tsx">
+      <file name="ModifyEvent.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\components\ModifyEvent.tsx">
         <metrics statements="34" coveredstatements="31" conditionals="16" coveredconditionals="12" methods="3" coveredmethods="3"/>
         <line num="21" count="4" type="stmt"/>
         <line num="22" count="4" type="stmt"/>
@@ -338,9 +339,9 @@
         <line num="106" count="1" type="stmt"/>
         <line num="107" count="1" type="stmt"/>
         <line num="114" count="4" type="stmt"/>
-        <line num="170" count="4" type="stmt"/>
+        <line num="170" count="3" type="stmt"/>
       </file>
-      <file name="ModifyEventButton.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/components/ModifyEventButton.tsx">
+      <file name="ModifyEventButton.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\components\ModifyEventButton.tsx">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="26" count="1" type="stmt"/>
         <line num="34" count="2" type="stmt"/>
@@ -349,9 +350,9 @@
         <line num="48" count="2" type="stmt"/>
         <line num="62" count="1" type="stmt"/>
       </file>
-      <file name="OwnedEventList.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/components/OwnedEventList.tsx">
+      <file name="OwnedEventList.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\components\OwnedEventList.tsx">
         <metrics statements="15" coveredstatements="10" conditionals="14" coveredconditionals="8" methods="5" coveredmethods="2"/>
-        <line num="29" count="3" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
         <line num="30" count="10" type="stmt"/>
         <line num="31" count="10" type="stmt"/>
         <line num="32" count="10" type="stmt"/>
@@ -365,45 +366,45 @@
         <line num="49" count="10" type="stmt"/>
         <line num="52" count="10" type="stmt"/>
         <line num="75" count="0" type="stmt"/>
-        <line num="106" count="3" type="stmt"/>
+        <line num="106" count="2" type="stmt"/>
       </file>
-      <file name="ReviewForm.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/components/ReviewForm.tsx">
+      <file name="ReviewForm.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\components\ReviewForm.tsx">
         <metrics statements="6" coveredstatements="5" conditionals="2" coveredconditionals="1" methods="4" coveredmethods="2"/>
-        <line num="16" count="2" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
         <line num="18" count="2" type="stmt"/>
         <line num="19" count="0" type="stmt"/>
         <line num="23" count="2" type="stmt"/>
         <line num="30" count="10" type="stmt"/>
-        <line num="59" count="2" type="stmt"/>
+        <line num="59" count="1" type="stmt"/>
       </file>
-      <file name="ReviewItem.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/components/ReviewItem.tsx">
+      <file name="ReviewItem.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\components\ReviewItem.tsx">
         <metrics statements="4" coveredstatements="4" conditionals="6" coveredconditionals="4" methods="2" coveredmethods="2"/>
-        <line num="15" count="2" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
         <line num="21" count="5" type="stmt"/>
-        <line num="38" count="2" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
       </file>
-      <file name="ReviewsList.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/components/ReviewsList.tsx">
-        <metrics statements="11" coveredstatements="11" conditionals="8" coveredconditionals="5" methods="4" coveredmethods="4"/>
+      <file name="ReviewsList.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\components\ReviewsList.tsx">
+        <metrics statements="11" coveredstatements="11" conditionals="8" coveredconditionals="7" methods="4" coveredmethods="4"/>
         <line num="20" count="3" type="stmt"/>
-        <line num="21" count="2" type="stmt"/>
-        <line num="22" count="2" type="stmt"/>
-        <line num="23" count="2" type="stmt"/>
-        <line num="24" count="10" type="stmt"/>
-        <line num="34" count="2" type="stmt"/>
-        <line num="37" count="2" type="stmt"/>
+        <line num="21" count="30" type="stmt"/>
+        <line num="22" count="30" type="stmt"/>
+        <line num="23" count="30" type="stmt"/>
+        <line num="24" count="150" type="stmt"/>
+        <line num="34" count="30" type="stmt"/>
+        <line num="37" count="30" type="stmt"/>
         <line num="60" count="3" type="stmt"/>
-        <line num="61" count="2" type="stmt"/>
-        <line num="70" count="2" type="stmt"/>
+        <line num="61" count="16" type="stmt"/>
+        <line num="70" count="30" type="stmt"/>
         <line num="76" count="3" type="stmt"/>
       </file>
-      <file name="SearchBar.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/components/SearchBar.tsx">
+      <file name="SearchBar.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\components\SearchBar.tsx">
         <metrics statements="3" coveredstatements="3" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
         <line num="11" count="1" type="stmt"/>
         <line num="12" count="2" type="stmt"/>
         <line num="31" count="1" type="stmt"/>
       </file>
-      <file name="StarRating.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/components/StarRating.tsx">
+      <file name="StarRating.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\components\StarRating.tsx">
         <metrics statements="5" coveredstatements="5" conditionals="6" coveredconditionals="6" methods="3" coveredmethods="3"/>
         <line num="10" count="1" type="stmt"/>
         <line num="11" count="2" type="stmt"/>
@@ -411,23 +412,24 @@
         <line num="16" count="1" type="stmt"/>
         <line num="32" count="1" type="stmt"/>
       </file>
-      <file name="TicketButton.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/components/TicketButton.tsx">
+      <file name="TicketButton.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\components\TicketButton.tsx">
         <metrics statements="6" coveredstatements="6" conditionals="4" coveredconditionals="2" methods="2" coveredmethods="2"/>
-        <line num="38" count="4" type="stmt"/>
-        <line num="39" count="3" type="stmt"/>
-        <line num="41" count="3" type="stmt"/>
+        <line num="38" count="3" type="stmt"/>
+        <line num="39" count="2" type="stmt"/>
+        <line num="41" count="2" type="stmt"/>
         <line num="42" count="1" type="stmt"/>
-        <line num="54" count="3" type="stmt"/>
-        <line num="68" count="4" type="stmt"/>
+        <line num="54" count="2" type="stmt"/>
+        <line num="68" count="3" type="stmt"/>
       </file>
-      <file name="TicketCard.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/components/TicketCard.tsx">
-        <metrics statements="4" coveredstatements="4" conditionals="9" coveredconditionals="5" methods="1" coveredmethods="1"/>
-        <line num="22" count="2" type="cond" truecount="1" falsecount="0"/>
-        <line num="23" count="1" type="stmt"/>
+      <file name="TicketCard.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\components\TicketCard.tsx">
+        <metrics statements="5" coveredstatements="5" conditionals="7" coveredconditionals="4" methods="1" coveredmethods="1"/>
+        <line num="23" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="24" count="1" type="stmt"/>
         <line num="25" count="1" type="stmt"/>
-        <line num="64" count="2" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
       </file>
-      <file name="addEvent.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/components/addEvent.tsx">
+      <file name="addEvent.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\components\addEvent.tsx">
         <metrics statements="61" coveredstatements="18" conditionals="16" coveredconditionals="3" methods="7" coveredmethods="1"/>
         <line num="20" count="9" type="stmt"/>
         <line num="21" count="9" type="stmt"/>
@@ -489,28 +491,28 @@
         <line num="144" count="0" type="stmt"/>
         <line num="152" count="0" type="stmt"/>
         <line num="153" count="0" type="stmt"/>
-        <line num="206" count="2" type="stmt"/>
+        <line num="206" count="1" type="stmt"/>
       </file>
     </package>
     <package name="NightMi.src.context">
-      <metrics statements="19" coveredstatements="11" conditionals="4" coveredconditionals="1" methods="6" coveredmethods="3"/>
-      <file name="EventContext.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/context/EventContext.tsx">
-        <metrics statements="19" coveredstatements="11" conditionals="4" coveredconditionals="1" methods="6" coveredmethods="3"/>
-        <line num="25" count="2" type="stmt"/>
-        <line num="28" count="3" type="stmt"/>
-        <line num="29" count="3" type="stmt"/>
-        <line num="31" count="3" type="stmt"/>
-        <line num="32" count="3" type="stmt"/>
-        <line num="33" count="3" type="stmt"/>
-        <line num="34" count="3" type="stmt"/>
-        <line num="35" count="3" type="cond" truecount="1" falsecount="1"/>
+      <metrics statements="19" coveredstatements="1" conditionals="4" coveredconditionals="0" methods="6" coveredmethods="0"/>
+      <file name="EventContext.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\context\EventContext.tsx">
+        <metrics statements="19" coveredstatements="1" conditionals="4" coveredconditionals="0" methods="6" coveredmethods="0"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="35" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="37" count="0" type="stmt"/>
         <line num="38" count="0" type="stmt"/>
         <line num="40" count="0" type="stmt"/>
-        <line num="44" count="3" type="stmt"/>
-        <line num="48" count="3" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
         <line num="49" count="0" type="stmt"/>
-        <line num="52" count="3" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
         <line num="56" count="0" type="stmt"/>
         <line num="57" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="58" count="0" type="stmt"/>
@@ -518,125 +520,126 @@
       </file>
     </package>
     <package name="NightMi.src.i18n">
-      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="index.ts" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/i18n/index.ts">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="9" count="1" type="stmt"/>
+      <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="index.ts" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\i18n\index.ts">
+        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="9" count="0" type="stmt"/>
       </file>
     </package>
     <package name="NightMi.src.lib">
       <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="supabase.ts" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/lib/supabase.ts">
+      <file name="supabase.ts" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\lib\supabase.ts">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="5" count="5" type="stmt"/>
-        <line num="6" count="5" type="stmt"/>
-        <line num="8" count="5" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
       </file>
     </package>
     <package name="NightMi.src.screens">
-      <metrics statements="515" coveredstatements="368" conditionals="224" coveredconditionals="122" methods="106" coveredmethods="72"/>
-      <file name="BuyTicketScreen.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/screens/BuyTicketScreen.tsx">
-        <metrics statements="96" coveredstatements="72" conditionals="32" coveredconditionals="21" methods="12" coveredmethods="7"/>
-        <line num="29" count="2" type="stmt"/>
-        <line num="30" count="12" type="stmt"/>
-        <line num="31" count="12" type="stmt"/>
-        <line num="32" count="12" type="stmt"/>
-        <line num="34" count="12" type="stmt"/>
-        <line num="35" count="12" type="stmt"/>
-        <line num="36" count="12" type="stmt"/>
-        <line num="38" count="12" type="stmt"/>
-        <line num="39" count="0" type="stmt"/>
-        <line num="42" count="12" type="stmt"/>
-        <line num="43" count="0" type="stmt"/>
-        <line num="46" count="12" type="stmt"/>
-        <line num="47" count="6" type="stmt"/>
+      <metrics statements="517" coveredstatements="384" conditionals="224" coveredconditionals="132" methods="106" coveredmethods="77"/>
+      <file name="BuyTicketScreen.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\screens\BuyTicketScreen.tsx">
+        <metrics statements="97" coveredstatements="27" conditionals="32" coveredconditionals="5" methods="12" coveredmethods="5"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="6" type="stmt"/>
+        <line num="32" count="6" type="stmt"/>
+        <line num="33" count="6" type="stmt"/>
+        <line num="34" count="6" type="stmt"/>
+        <line num="36" count="6" type="stmt"/>
+        <line num="37" count="6" type="stmt"/>
+        <line num="38" count="6" type="stmt"/>
+        <line num="40" count="6" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="44" count="6" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
         <line num="48" count="6" type="stmt"/>
         <line num="49" count="6" type="stmt"/>
-        <line num="61" count="6" type="stmt"/>
-        <line num="62" count="6" type="stmt"/>
-        <line num="64" count="6" type="stmt"/>
-        <line num="65" count="6" type="stmt"/>
-        <line num="67" count="6" type="cond" truecount="1" falsecount="1"/>
-        <line num="68" count="0" type="stmt"/>
-        <line num="72" count="6" type="stmt"/>
-        <line num="73" count="6" type="stmt"/>
+        <line num="50" count="6" type="stmt"/>
+        <line num="51" count="6" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="64" count="0" type="stmt"/>
+        <line num="66" count="0" type="stmt"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="69" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="70" count="0" type="stmt"/>
+        <line num="74" count="0" type="stmt"/>
         <line num="75" count="0" type="stmt"/>
-        <line num="76" count="0" type="stmt"/>
-        <line num="79" count="6" type="stmt"/>
-        <line num="81" count="6" type="cond" truecount="1" falsecount="1"/>
-        <line num="82" count="0" type="stmt"/>
-        <line num="83" count="0" type="stmt"/>
-        <line num="86" count="6" type="stmt"/>
+        <line num="77" count="0" type="stmt"/>
+        <line num="78" count="0" type="stmt"/>
+        <line num="81" count="0" type="stmt"/>
+        <line num="83" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="84" count="0" type="stmt"/>
+        <line num="85" count="0" type="stmt"/>
         <line num="88" count="0" type="stmt"/>
-        <line num="89" count="0" type="stmt"/>
         <line num="90" count="0" type="stmt"/>
-        <line num="94" count="12" type="stmt"/>
-        <line num="95" count="6" type="stmt"/>
+        <line num="91" count="0" type="stmt"/>
+        <line num="92" count="0" type="stmt"/>
         <line num="96" count="6" type="stmt"/>
         <line num="97" count="6" type="stmt"/>
+        <line num="98" count="6" type="stmt"/>
         <line num="99" count="6" type="stmt"/>
-        <line num="105" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="106" count="0" type="stmt"/>
-        <line num="107" count="0" type="stmt"/>
+        <line num="101" count="0" type="stmt"/>
+        <line num="107" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="108" count="0" type="stmt"/>
         <line num="109" count="0" type="stmt"/>
-        <line num="112" count="6" type="stmt"/>
-        <line num="113" count="6" type="stmt"/>
-        <line num="117" count="12" type="stmt"/>
-        <line num="118" count="6" type="stmt"/>
-        <line num="121" count="12" type="stmt"/>
-        <line num="122" count="3" type="stmt"/>
-        <line num="123" count="3" type="stmt"/>
-        <line num="124" count="3" type="stmt"/>
-        <line num="125" count="3" type="stmt"/>
-        <line num="127" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="128" count="1" type="stmt"/>
-        <line num="129" count="1" type="stmt"/>
-        <line num="130" count="1" type="stmt"/>
-        <line num="133" count="2" type="stmt"/>
-        <line num="134" count="2" type="stmt"/>
-        <line num="135" count="1" type="stmt"/>
-        <line num="136" count="1" type="stmt"/>
-        <line num="137" count="1" type="stmt"/>
-        <line num="139" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="140" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="141" count="1" type="stmt"/>
+        <line num="111" count="0" type="stmt"/>
+        <line num="114" count="0" type="stmt"/>
+        <line num="115" count="0" type="stmt"/>
+        <line num="119" count="6" type="stmt"/>
+        <line num="120" count="6" type="stmt"/>
+        <line num="123" count="6" type="stmt"/>
+        <line num="124" count="0" type="stmt"/>
+        <line num="125" count="0" type="stmt"/>
+        <line num="126" count="0" type="stmt"/>
+        <line num="127" count="0" type="stmt"/>
+        <line num="129" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="130" count="0" type="stmt"/>
+        <line num="131" count="0" type="stmt"/>
+        <line num="132" count="0" type="stmt"/>
+        <line num="135" count="0" type="stmt"/>
+        <line num="136" count="0" type="stmt"/>
+        <line num="137" count="0" type="stmt"/>
+        <line num="138" count="0" type="stmt"/>
+        <line num="139" count="0" type="stmt"/>
+        <line num="141" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="142" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="143" count="0" type="stmt"/>
-        <line num="146" count="3" type="stmt"/>
-        <line num="152" count="12" type="stmt"/>
-        <line num="153" count="2" type="stmt"/>
-        <line num="154" count="2" type="stmt"/>
-        <line num="155" count="2" type="stmt"/>
-        <line num="157" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="145" count="0" type="stmt"/>
+        <line num="148" count="0" type="stmt"/>
+        <line num="152" count="6" type="stmt"/>
+        <line num="153" count="0" type="stmt"/>
+        <line num="154" count="0" type="stmt"/>
+        <line num="155" count="0" type="stmt"/>
+        <line num="157" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="158" count="0" type="stmt"/>
         <line num="159" count="0" type="stmt"/>
-        <line num="162" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="162" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="163" count="0" type="stmt"/>
         <line num="164" count="0" type="stmt"/>
-        <line num="167" count="2" type="stmt"/>
-        <line num="177" count="2" type="stmt"/>
-        <line num="179" count="2" type="stmt"/>
-        <line num="184" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="185" count="1" type="stmt"/>
-        <line num="186" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="189" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="167" count="0" type="stmt"/>
+        <line num="177" count="0" type="stmt"/>
+        <line num="179" count="0" type="stmt"/>
+        <line num="184" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="185" count="0" type="stmt"/>
+        <line num="186" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="189" count="0" type="cond" truecount="0" falsecount="4"/>
         <line num="190" count="0" type="stmt"/>
         <line num="191" count="0" type="stmt"/>
-        <line num="194" count="1" type="stmt"/>
-        <line num="195" count="1" type="stmt"/>
-        <line num="197" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="198" count="1" type="stmt"/>
-        <line num="204" count="12" type="stmt"/>
-        <line num="205" count="12" type="stmt"/>
-        <line num="206" count="12" type="stmt"/>
-        <line num="208" count="0" type="stmt"/>
-        <line num="209" count="0" type="stmt"/>
-        <line num="213" count="12" type="stmt"/>
-        <line num="218" count="0" type="stmt"/>
-        <line num="270" count="2" type="stmt"/>
+        <line num="194" count="0" type="stmt"/>
+        <line num="195" count="0" type="stmt"/>
+        <line num="197" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="198" count="0" type="stmt"/>
+        <line num="202" count="6" type="stmt"/>
+        <line num="203" count="6" type="stmt"/>
+        <line num="204" count="6" type="stmt"/>
+        <line num="206" count="0" type="stmt"/>
+        <line num="207" count="0" type="stmt"/>
+        <line num="211" count="6" type="stmt"/>
+        <line num="216" count="0" type="stmt"/>
+        <line num="268" count="1" type="stmt"/>
       </file>
-      <file name="CalendarScreen.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/screens/CalendarScreen.tsx">
+      <file name="CalendarScreen.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\screens\CalendarScreen.tsx">
         <metrics statements="26" coveredstatements="26" conditionals="12" coveredconditionals="9" methods="8" coveredmethods="8"/>
-        <line num="38" count="2" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
         <line num="39" count="10" type="stmt"/>
         <line num="40" count="10" type="stmt"/>
         <line num="41" count="10" type="stmt"/>
@@ -661,71 +664,71 @@
         <line num="84" count="9" type="stmt"/>
         <line num="92" count="1" type="stmt"/>
         <line num="133" count="1" type="stmt"/>
-        <line num="149" count="2" type="stmt"/>
+        <line num="149" count="1" type="stmt"/>
       </file>
-      <file name="ClubManageScreen.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/screens/ClubManageScreen.tsx">
-        <metrics statements="89" coveredstatements="3" conditionals="42" coveredconditionals="0" methods="14" coveredmethods="0"/>
+      <file name="ClubManageScreen.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\screens\ClubManageScreen.tsx">
+        <metrics statements="89" coveredstatements="63" conditionals="42" coveredconditionals="26" methods="14" coveredmethods="7"/>
         <line num="20" count="1" type="stmt"/>
         <line num="70" count="1" type="stmt"/>
-        <line num="71" count="0" type="stmt"/>
-        <line num="72" count="0" type="stmt"/>
-        <line num="73" count="0" type="stmt"/>
-        <line num="74" count="0" type="stmt"/>
-        <line num="75" count="0" type="stmt"/>
-        <line num="76" count="0" type="stmt"/>
-        <line num="78" count="0" type="stmt"/>
-        <line num="79" count="0" type="stmt"/>
-        <line num="80" count="0" type="stmt"/>
-        <line num="83" count="0" type="stmt"/>
-        <line num="84" count="0" type="stmt"/>
-        <line num="85" count="0" type="stmt"/>
-        <line num="87" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="71" count="30" type="stmt"/>
+        <line num="72" count="30" type="stmt"/>
+        <line num="73" count="30" type="stmt"/>
+        <line num="74" count="30" type="stmt"/>
+        <line num="75" count="30" type="stmt"/>
+        <line num="76" count="30" type="stmt"/>
+        <line num="78" count="30" type="stmt"/>
+        <line num="79" count="30" type="stmt"/>
+        <line num="80" count="30" type="stmt"/>
+        <line num="83" count="30" type="stmt"/>
+        <line num="84" count="4" type="stmt"/>
+        <line num="85" count="4" type="stmt"/>
+        <line num="87" count="4" type="cond" truecount="1" falsecount="1"/>
         <line num="88" count="0" type="stmt"/>
-        <line num="91" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="91" count="4" type="cond" truecount="1" falsecount="1"/>
         <line num="92" count="0" type="stmt"/>
-        <line num="94" count="0" type="stmt"/>
-        <line num="95" count="0" type="stmt"/>
+        <line num="94" count="4" type="stmt"/>
+        <line num="95" count="4" type="stmt"/>
         <line num="97" count="0" type="stmt"/>
-        <line num="102" count="0" type="stmt"/>
-        <line num="103" count="0" type="stmt"/>
-        <line num="104" count="0" type="stmt"/>
-        <line num="105" count="0" type="stmt"/>
-        <line num="106" count="0" type="stmt"/>
-        <line num="110" count="0" type="stmt"/>
-        <line num="119" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="120" count="0" type="stmt"/>
-        <line num="122" count="0" type="stmt"/>
-        <line num="132" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="133" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="102" count="30" type="stmt"/>
+        <line num="103" count="4" type="stmt"/>
+        <line num="104" count="4" type="stmt"/>
+        <line num="105" count="4" type="stmt"/>
+        <line num="106" count="4" type="stmt"/>
+        <line num="110" count="4" type="stmt"/>
+        <line num="119" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="120" count="4" type="stmt"/>
+        <line num="122" count="4" type="stmt"/>
+        <line num="132" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="133" count="4" type="cond" truecount="1" falsecount="1"/>
         <line num="136" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="137" count="0" type="stmt"/>
         <line num="139" count="0" type="stmt"/>
-        <line num="142" count="0" type="stmt"/>
-        <line num="143" count="0" type="stmt"/>
-        <line num="146" count="0" type="stmt"/>
-        <line num="148" count="0" type="stmt"/>
-        <line num="150" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="142" count="4" type="stmt"/>
+        <line num="143" count="4" type="stmt"/>
+        <line num="146" count="30" type="stmt"/>
+        <line num="148" count="2" type="stmt"/>
+        <line num="150" count="2" type="cond" truecount="1" falsecount="1"/>
         <line num="151" count="0" type="stmt"/>
         <line num="152" count="0" type="stmt"/>
-        <line num="155" count="0" type="stmt"/>
-        <line num="162" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="163" count="0" type="stmt"/>
-        <line num="164" count="0" type="stmt"/>
-        <line num="165" count="0" type="stmt"/>
-        <line num="166" count="0" type="stmt"/>
-        <line num="167" count="0" type="stmt"/>
-        <line num="169" count="0" type="stmt"/>
-        <line num="170" count="0" type="stmt"/>
-        <line num="176" count="0" type="stmt"/>
-        <line num="182" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="184" count="0" type="stmt"/>
-        <line num="190" count="0" type="stmt"/>
-        <line num="198" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="200" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="201" count="0" type="stmt"/>
-        <line num="204" count="0" type="stmt"/>
-        <line num="206" count="0" type="stmt"/>
-        <line num="210" count="0" type="stmt"/>
+        <line num="155" count="2" type="stmt"/>
+        <line num="162" count="2" type="cond" truecount="3" falsecount="1"/>
+        <line num="163" count="2" type="stmt"/>
+        <line num="164" count="2" type="stmt"/>
+        <line num="165" count="2" type="stmt"/>
+        <line num="166" count="2" type="stmt"/>
+        <line num="167" count="2" type="stmt"/>
+        <line num="169" count="2" type="stmt"/>
+        <line num="170" count="2" type="stmt"/>
+        <line num="176" count="2" type="stmt"/>
+        <line num="182" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="184" count="1" type="stmt"/>
+        <line num="190" count="1" type="stmt"/>
+        <line num="198" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="200" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="201" count="1" type="stmt"/>
+        <line num="204" count="1" type="stmt"/>
+        <line num="206" count="2" type="stmt"/>
+        <line num="210" count="30" type="stmt"/>
         <line num="211" count="0" type="stmt"/>
         <line num="212" count="0" type="stmt"/>
         <line num="224" count="0" type="cond" truecount="0" falsecount="2"/>
@@ -734,34 +737,34 @@
         <line num="229" count="0" type="stmt"/>
         <line num="231" count="0" type="stmt"/>
         <line num="232" count="0" type="stmt"/>
-        <line num="239" count="0" type="stmt"/>
-        <line num="240" count="0" type="stmt"/>
-        <line num="243" count="0" type="stmt"/>
+        <line num="239" count="30" type="stmt"/>
+        <line num="240" count="4" type="stmt"/>
+        <line num="243" count="30" type="stmt"/>
         <line num="244" count="0" type="stmt"/>
         <line num="245" count="0" type="stmt"/>
-        <line num="247" count="0" type="stmt"/>
+        <line num="247" count="30" type="stmt"/>
         <line num="248" count="0" type="stmt"/>
         <line num="256" count="0" type="stmt"/>
         <line num="257" count="0" type="stmt"/>
         <line num="260" count="0" type="stmt"/>
         <line num="261" count="0" type="stmt"/>
-        <line num="270" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="270" count="30" type="cond" truecount="1" falsecount="1"/>
         <line num="272" count="0" type="stmt"/>
-        <line num="275" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="277" count="0" type="stmt"/>
-        <line num="280" count="0" type="stmt"/>
+        <line num="275" count="30" type="cond" truecount="2" falsecount="0"/>
+        <line num="277" count="8" type="stmt"/>
+        <line num="280" count="22" type="stmt"/>
         <line num="319" count="0" type="stmt"/>
-        <line num="320" count="0" type="stmt"/>
+        <line num="320" count="1" type="stmt"/>
         <line num="333" count="0" type="stmt"/>
         <line num="349" count="1" type="stmt"/>
       </file>
-      <file name="ClubManageScreenold.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/screens/ClubManageScreenold.tsx">
+      <file name="ClubManageScreenold.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\screens\ClubManageScreenold.tsx">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
-      <file name="EventManageScreen.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/screens/EventManageScreen.tsx">
+      <file name="EventManageScreen.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\screens\EventManageScreen.tsx">
         <metrics statements="31" coveredstatements="28" conditionals="6" coveredconditionals="3" methods="7" coveredmethods="5"/>
         <line num="18" count="0" type="stmt"/>
-        <line num="36" count="2" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
         <line num="37" count="10" type="stmt"/>
         <line num="38" count="9" type="stmt"/>
         <line num="39" count="9" type="stmt"/>
@@ -790,9 +793,9 @@
         <line num="89" count="9" type="stmt"/>
         <line num="120" count="1" type="stmt"/>
         <line num="124" count="0" type="stmt"/>
-        <line num="130" count="2" type="stmt"/>
+        <line num="130" count="1" type="stmt"/>
       </file>
-      <file name="HomeOwnerScreen.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/screens/HomeOwnerScreen.tsx">
+      <file name="HomeOwnerScreen.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\screens\HomeOwnerScreen.tsx">
         <metrics statements="66" coveredstatements="58" conditionals="40" coveredconditionals="27" methods="16" coveredmethods="13"/>
         <line num="45" count="1" type="stmt"/>
         <line num="47" count="1" type="stmt"/>
@@ -861,16 +864,16 @@
         <line num="216" count="0" type="stmt"/>
         <line num="225" count="1" type="stmt"/>
       </file>
-      <file name="MapOwnerScreen.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/screens/MapOwnerScreen.tsx">
+      <file name="MapOwnerScreen.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\screens\MapOwnerScreen.tsx">
         <metrics statements="55" coveredstatements="49" conditionals="30" coveredconditionals="21" methods="16" coveredmethods="13"/>
-        <line num="34" count="2" type="stmt"/>
-        <line num="35" count="2" type="stmt"/>
-        <line num="37" count="2" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
         <line num="38" count="8" type="stmt"/>
         <line num="40" count="3" type="stmt"/>
-        <line num="64" count="2" type="stmt"/>
+        <line num="64" count="1" type="stmt"/>
         <line num="65" count="3" type="stmt"/>
-        <line num="103" count="2" type="stmt"/>
+        <line num="103" count="1" type="stmt"/>
         <line num="104" count="20" type="stmt"/>
         <line num="105" count="19" type="stmt"/>
         <line num="106" count="19" type="stmt"/>
@@ -917,11 +920,11 @@
         <line num="207" count="1" type="stmt"/>
         <line num="214" count="8" type="stmt"/>
         <line num="228" count="8" type="stmt"/>
-        <line num="249" count="2" type="stmt"/>
+        <line num="249" count="1" type="stmt"/>
       </file>
-      <file name="ReviewScreen.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/screens/ReviewScreen.tsx">
+      <file name="ReviewScreen.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\screens\ReviewScreen.tsx">
         <metrics statements="34" coveredstatements="30" conditionals="12" coveredconditionals="10" methods="7" coveredmethods="5"/>
-        <line num="28" count="2" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
         <line num="29" count="23" type="stmt"/>
         <line num="30" count="22" type="stmt"/>
         <line num="31" count="22" type="stmt"/>
@@ -954,15 +957,14 @@
         <line num="83" count="0" type="stmt"/>
         <line num="90" count="5" type="stmt"/>
         <line num="91" count="3" type="stmt"/>
-        <line num="104" count="2" type="stmt"/>
+        <line num="104" count="1" type="stmt"/>
       </file>
-      <file name="TicketsScreen.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/screens/TicketsScreen.tsx">
-        <metrics statements="118" coveredstatements="102" conditionals="50" coveredconditionals="31" methods="26" coveredmethods="21"/>
-        <line num="21" count="2" type="stmt"/>
-        <line num="43" count="2" type="stmt"/>
-        <line num="44" count="2" type="stmt"/>
-        <line num="46" count="2" type="stmt"/>
-        <line num="47" count="35" type="stmt"/>
+      <file name="TicketsScreen.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\screens\TicketsScreen.tsx">
+        <metrics statements="119" coveredstatements="103" conditionals="50" coveredconditionals="31" methods="26" coveredmethods="21"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
         <line num="48" count="35" type="stmt"/>
         <line num="49" count="35" type="stmt"/>
         <line num="50" count="35" type="stmt"/>
@@ -975,75 +977,77 @@
         <line num="57" count="35" type="stmt"/>
         <line num="58" count="35" type="stmt"/>
         <line num="59" count="35" type="stmt"/>
-        <line num="62" count="35" type="stmt"/>
-        <line num="63" count="5" type="stmt"/>
-        <line num="70" count="35" type="stmt"/>
-        <line num="71" count="5" type="stmt"/>
-        <line num="72" count="5" type="stmt"/>
+        <line num="60" count="35" type="stmt"/>
+        <line num="61" count="35" type="stmt"/>
+        <line num="64" count="35" type="stmt"/>
+        <line num="65" count="5" type="stmt"/>
+        <line num="72" count="35" type="stmt"/>
         <line num="73" count="5" type="stmt"/>
         <line num="74" count="5" type="stmt"/>
         <line num="75" count="5" type="stmt"/>
+        <line num="76" count="5" type="stmt"/>
         <line num="77" count="5" type="stmt"/>
         <line num="79" count="5" type="stmt"/>
-        <line num="80" count="5" type="stmt"/>
         <line num="81" count="5" type="stmt"/>
-        <line num="83" count="5" type="cond" truecount="3" falsecount="1"/>
-        <line num="85" count="0" type="stmt"/>
-        <line num="92" count="5" type="stmt"/>
-        <line num="103" count="5" type="cond" truecount="1" falsecount="1"/>
-        <line num="104" count="0" type="stmt"/>
-        <line num="108" count="5" type="stmt"/>
-        <line num="110" count="23" type="stmt"/>
-        <line num="116" count="23" type="cond" truecount="1" falsecount="1"/>
-        <line num="121" count="5" type="stmt"/>
-        <line num="122" count="5" type="stmt"/>
-        <line num="123" count="23" type="stmt"/>
-        <line num="125" count="5" type="stmt"/>
-        <line num="126" count="23" type="stmt"/>
-        <line num="129" count="15" type="stmt"/>
-        <line num="131" count="5" type="stmt"/>
-        <line num="132" count="5" type="cond" truecount="2" falsecount="0"/>
-        <line num="133" count="2" type="stmt"/>
-        <line num="136" count="5" type="stmt"/>
-        <line num="137" count="5" type="stmt"/>
-        <line num="140" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="142" count="5" type="stmt"/>
-        <line num="149" count="35" type="stmt"/>
-        <line num="150" count="0" type="stmt"/>
-        <line num="151" count="0" type="stmt"/>
+        <line num="82" count="5" type="stmt"/>
+        <line num="83" count="5" type="stmt"/>
+        <line num="85" count="5" type="cond" truecount="3" falsecount="1"/>
+        <line num="87" count="0" type="stmt"/>
+        <line num="94" count="5" type="stmt"/>
+        <line num="105" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="106" count="0" type="stmt"/>
+        <line num="110" count="5" type="stmt"/>
+        <line num="112" count="23" type="stmt"/>
+        <line num="118" count="23" type="cond" truecount="1" falsecount="1"/>
+        <line num="123" count="5" type="stmt"/>
+        <line num="124" count="5" type="stmt"/>
+        <line num="125" count="23" type="stmt"/>
+        <line num="127" count="5" type="stmt"/>
+        <line num="128" count="23" type="stmt"/>
+        <line num="131" count="15" type="stmt"/>
+        <line num="133" count="5" type="stmt"/>
+        <line num="134" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="135" count="2" type="stmt"/>
+        <line num="138" count="5" type="stmt"/>
+        <line num="139" count="5" type="stmt"/>
+        <line num="142" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="144" count="5" type="stmt"/>
+        <line num="151" count="35" type="stmt"/>
         <line num="152" count="0" type="stmt"/>
-        <line num="158" count="35" type="stmt"/>
-        <line num="159" count="1" type="stmt"/>
-        <line num="160" count="1" type="stmt"/>
+        <line num="153" count="0" type="stmt"/>
+        <line num="154" count="0" type="stmt"/>
+        <line num="160" count="35" type="stmt"/>
         <line num="161" count="1" type="stmt"/>
-        <line num="162" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="162" count="1" type="stmt"/>
         <line num="163" count="1" type="stmt"/>
+        <line num="164" count="1" type="cond" truecount="3" falsecount="1"/>
         <line num="165" count="1" type="stmt"/>
-        <line num="166" count="1" type="stmt"/>
-        <line num="167" count="1" type="cond" truecount="3" falsecount="1"/>
-        <line num="168" count="0" type="stmt"/>
-        <line num="171" count="1" type="stmt"/>
-        <line num="172" count="1" type="stmt"/>
-        <line num="184" count="1" type="stmt"/>
-        <line num="185" count="1" type="stmt"/>
-        <line num="186" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="187" count="0" type="stmt"/>
-        <line num="190" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="192" count="1" type="stmt"/>
-        <line num="194" count="3" type="stmt"/>
-        <line num="199" count="3" type="stmt"/>
-        <line num="200" count="3" type="cond" truecount="1" falsecount="1"/>
-        <line num="204" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="205" count="1" type="stmt"/>
+        <line num="167" count="1" type="stmt"/>
+        <line num="168" count="1" type="stmt"/>
+        <line num="169" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="170" count="0" type="stmt"/>
+        <line num="173" count="1" type="stmt"/>
+        <line num="174" count="1" type="stmt"/>
+        <line num="186" count="1" type="stmt"/>
+        <line num="187" count="1" type="stmt"/>
+        <line num="188" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="189" count="0" type="stmt"/>
+        <line num="192" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="194" count="1" type="stmt"/>
+        <line num="196" count="3" type="stmt"/>
+        <line num="201" count="3" type="stmt"/>
+        <line num="202" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="206" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="207" count="1" type="stmt"/>
-        <line num="208" count="1" type="stmt"/>
-        <line num="211" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="213" count="1" type="stmt"/>
-        <line num="217" count="35" type="stmt"/>
-        <line num="218" count="1" type="stmt"/>
-        <line num="221" count="35" type="stmt"/>
-        <line num="222" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="224" count="1" type="stmt"/>
+        <line num="209" count="1" type="stmt"/>
+        <line num="210" count="1" type="stmt"/>
+        <line num="213" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="215" count="1" type="stmt"/>
+        <line num="219" count="35" type="stmt"/>
+        <line num="220" count="1" type="stmt"/>
+        <line num="223" count="35" type="stmt"/>
+        <line num="224" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="226" count="1" type="stmt"/>
         <line num="227" count="1" type="stmt"/>
         <line num="238" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="239" count="0" type="cond" truecount="0" falsecount="2"/>
@@ -1055,81 +1059,80 @@
         <line num="249" count="1" type="stmt"/>
         <line num="250" count="1" type="stmt"/>
         <line num="252" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="258" count="35" type="cond" truecount="2" falsecount="0"/>
-        <line num="259" count="17" type="stmt"/>
-        <line num="262" count="18" type="cond" truecount="2" falsecount="0"/>
-        <line num="263" count="1" type="stmt"/>
-        <line num="266" count="17" type="stmt"/>
-        <line num="292" count="12" type="stmt"/>
-        <line num="294" count="9" type="stmt"/>
-        <line num="315" count="58" type="stmt"/>
-        <line num="317" count="52" type="stmt"/>
-        <line num="319" count="0" type="stmt"/>
-        <line num="322" count="2" type="stmt"/>
-        <line num="323" count="2" type="stmt"/>
-        <line num="350" count="0" type="stmt"/>
-        <line num="355" count="0" type="stmt"/>
-        <line num="364" count="0" type="stmt"/>
-        <line num="370" count="1" type="stmt"/>
-        <line num="373" count="1" type="stmt"/>
-        <line num="374" count="1" type="stmt"/>
-        <line num="375" count="1" type="stmt"/>
-        <line num="376" count="1" type="stmt"/>
-        <line num="389" count="2" type="stmt"/>
+        <line num="257" count="35" type="cond" truecount="2" falsecount="0"/>
+        <line num="258" count="17" type="stmt"/>
+        <line num="261" count="18" type="cond" truecount="2" falsecount="0"/>
+        <line num="262" count="1" type="stmt"/>
+        <line num="265" count="17" type="stmt"/>
+        <line num="281" count="12" type="stmt"/>
+        <line num="283" count="9" type="stmt"/>
+        <line num="304" count="58" type="stmt"/>
+        <line num="306" count="52" type="stmt"/>
+        <line num="308" count="0" type="stmt"/>
+        <line num="311" count="2" type="stmt"/>
+        <line num="312" count="2" type="stmt"/>
+        <line num="339" count="0" type="stmt"/>
+        <line num="344" count="0" type="stmt"/>
+        <line num="353" count="0" type="stmt"/>
+        <line num="359" count="1" type="stmt"/>
+        <line num="362" count="1" type="stmt"/>
+        <line num="363" count="1" type="stmt"/>
+        <line num="364" count="1" type="stmt"/>
+        <line num="365" count="1" type="stmt"/>
+        <line num="378" count="1" type="stmt"/>
       </file>
     </package>
     <package name="NightMi.src.screens.HomeScreen">
-      <metrics statements="111" coveredstatements="96" conditionals="68" coveredconditionals="45" methods="23" coveredmethods="16"/>
-      <file name="ClubScreen.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/screens/HomeScreen/ClubScreen.tsx">
-        <metrics statements="45" coveredstatements="38" conditionals="28" coveredconditionals="18" methods="7" coveredmethods="3"/>
-        <line num="16" count="2" type="stmt"/>
-        <line num="63" count="2" type="stmt"/>
-        <line num="64" count="10" type="stmt"/>
-        <line num="65" count="10" type="stmt"/>
-        <line num="66" count="10" type="stmt"/>
-        <line num="67" count="10" type="stmt"/>
-        <line num="68" count="10" type="stmt"/>
-        <line num="69" count="10" type="stmt"/>
-        <line num="71" count="10" type="stmt"/>
-        <line num="72" count="10" type="stmt"/>
-        <line num="73" count="10" type="stmt"/>
-        <line num="75" count="10" type="stmt"/>
-        <line num="76" count="2" type="stmt"/>
-        <line num="77" count="2" type="stmt"/>
-        <line num="78" count="2" type="stmt"/>
-        <line num="80" count="2" type="stmt"/>
-        <line num="89" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="90" count="1" type="stmt"/>
-        <line num="92" count="1" type="stmt"/>
-        <line num="99" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="100" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="102" count="1" type="stmt"/>
-        <line num="109" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="110" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="113" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="114" count="1" type="stmt"/>
-        <line num="116" count="0" type="stmt"/>
-        <line num="119" count="2" type="stmt"/>
-        <line num="120" count="2" type="stmt"/>
-        <line num="125" count="10" type="stmt"/>
-        <line num="126" count="2" type="stmt"/>
-        <line num="129" count="10" type="stmt"/>
-        <line num="130" count="0" type="stmt"/>
-        <line num="131" count="0" type="stmt"/>
-        <line num="134" count="10" type="cond" truecount="4" falsecount="0"/>
-        <line num="135" count="6" type="stmt"/>
-        <line num="138" count="4" type="cond" truecount="2" falsecount="0"/>
-        <line num="139" count="2" type="stmt"/>
-        <line num="142" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="143" count="0" type="stmt"/>
-        <line num="146" count="2" type="stmt"/>
-        <line num="166" count="0" type="stmt"/>
-        <line num="180" count="0" type="stmt"/>
-        <line num="197" count="0" type="stmt"/>
-        <line num="213" count="2" type="stmt"/>
+      <metrics statements="111" coveredstatements="97" conditionals="66" coveredconditionals="44" methods="23" coveredmethods="16"/>
+      <file name="ClubScreen.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\screens\HomeScreen\ClubScreen.tsx">
+        <metrics statements="44" coveredstatements="38" conditionals="26" coveredconditionals="17" methods="7" coveredmethods="3"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="10" type="stmt"/>
+        <line num="21" count="10" type="stmt"/>
+        <line num="22" count="10" type="stmt"/>
+        <line num="23" count="10" type="stmt"/>
+        <line num="24" count="10" type="stmt"/>
+        <line num="25" count="10" type="stmt"/>
+        <line num="26" count="10" type="stmt"/>
+        <line num="28" count="10" type="stmt"/>
+        <line num="29" count="10" type="stmt"/>
+        <line num="30" count="10" type="stmt"/>
+        <line num="32" count="10" type="stmt"/>
+        <line num="33" count="2" type="stmt"/>
+        <line num="36" count="10" type="stmt"/>
+        <line num="37" count="2" type="stmt"/>
+        <line num="38" count="2" type="stmt"/>
+        <line num="39" count="2" type="stmt"/>
+        <line num="41" count="2" type="stmt"/>
+        <line num="46" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="49" count="1" type="stmt"/>
+        <line num="55" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="56" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="58" count="1" type="stmt"/>
+        <line num="64" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="65" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="67" count="1" type="stmt"/>
+        <line num="69" count="2" type="stmt"/>
+        <line num="70" count="2" type="stmt"/>
+        <line num="74" count="10" type="stmt"/>
+        <line num="75" count="0" type="stmt"/>
+        <line num="76" count="0" type="stmt"/>
+        <line num="79" count="10" type="cond" truecount="4" falsecount="0"/>
+        <line num="80" count="6" type="stmt"/>
+        <line num="83" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="84" count="2" type="stmt"/>
+        <line num="87" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="88" count="0" type="stmt"/>
+        <line num="91" count="2" type="stmt"/>
+        <line num="104" count="0" type="stmt"/>
+        <line num="117" count="0" type="stmt"/>
+        <line num="126" count="0" type="stmt"/>
+        <line num="140" count="1" type="stmt"/>
       </file>
-      <file name="HomeScreen.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/screens/HomeScreen/HomeScreen.tsx">
-        <metrics statements="66" coveredstatements="58" conditionals="40" coveredconditionals="27" methods="16" coveredmethods="13"/>
+      <file name="HomeScreen.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\screens\HomeScreen\HomeScreen.tsx">
+        <metrics statements="67" coveredstatements="59" conditionals="40" coveredconditionals="27" methods="16" coveredmethods="13"/>
         <line num="45" count="1" type="stmt"/>
         <line num="47" count="1" type="stmt"/>
         <line num="48" count="54" type="stmt"/>
@@ -1141,66 +1144,67 @@
         <line num="54" count="54" type="stmt"/>
         <line num="55" count="54" type="stmt"/>
         <line num="56" count="54" type="stmt"/>
-        <line num="63" count="54" type="stmt"/>
-        <line num="65" count="54" type="stmt"/>
-        <line num="66" count="1" type="stmt"/>
-        <line num="69" count="54" type="cond" truecount="2" falsecount="0"/>
-        <line num="70" count="10" type="stmt"/>
+        <line num="57" count="54" type="stmt"/>
+        <line num="64" count="54" type="stmt"/>
+        <line num="66" count="54" type="stmt"/>
+        <line num="67" count="1" type="stmt"/>
+        <line num="70" count="54" type="cond" truecount="2" falsecount="0"/>
         <line num="71" count="10" type="stmt"/>
         <line num="72" count="10" type="stmt"/>
-        <line num="74" count="10" type="stmt"/>
-        <line num="79" count="10" type="cond" truecount="1" falsecount="1"/>
-        <line num="80" count="0" type="stmt"/>
-        <line num="82" count="10" type="cond" truecount="1" falsecount="1"/>
-        <line num="83" count="0" type="stmt"/>
-        <line num="85" count="10" type="cond" truecount="2" falsecount="0"/>
-        <line num="86" count="1" type="stmt"/>
-        <line num="88" count="10" type="cond" truecount="1" falsecount="1"/>
-        <line num="89" count="0" type="stmt"/>
-        <line num="91" count="10" type="cond" truecount="1" falsecount="1"/>
-        <line num="92" count="0" type="stmt"/>
-        <line num="95" count="10" type="stmt"/>
-        <line num="98" count="10" type="cond" truecount="2" falsecount="0"/>
-        <line num="100" count="9" type="cond" truecount="1" falsecount="1"/>
-        <line num="101" count="9" type="cond" truecount="2" falsecount="0"/>
+        <line num="73" count="10" type="stmt"/>
+        <line num="75" count="10" type="stmt"/>
+        <line num="80" count="10" type="cond" truecount="1" falsecount="1"/>
+        <line num="81" count="0" type="stmt"/>
+        <line num="83" count="10" type="cond" truecount="1" falsecount="1"/>
+        <line num="84" count="0" type="stmt"/>
+        <line num="86" count="10" type="cond" truecount="2" falsecount="0"/>
+        <line num="87" count="1" type="stmt"/>
+        <line num="89" count="10" type="cond" truecount="1" falsecount="1"/>
+        <line num="90" count="0" type="stmt"/>
+        <line num="92" count="10" type="cond" truecount="1" falsecount="1"/>
+        <line num="93" count="0" type="stmt"/>
+        <line num="96" count="10" type="stmt"/>
+        <line num="99" count="10" type="cond" truecount="2" falsecount="0"/>
+        <line num="101" count="9" type="cond" truecount="1" falsecount="1"/>
         <line num="102" count="9" type="cond" truecount="2" falsecount="0"/>
-        <line num="103" count="9" type="stmt"/>
-        <line num="106" count="1" type="stmt"/>
+        <line num="103" count="9" type="cond" truecount="2" falsecount="0"/>
+        <line num="104" count="9" type="stmt"/>
         <line num="107" count="1" type="stmt"/>
-        <line num="109" count="10" type="stmt"/>
+        <line num="108" count="1" type="stmt"/>
         <line num="110" count="10" type="stmt"/>
-        <line num="114" count="54" type="stmt"/>
-        <line num="115" count="8" type="stmt"/>
-        <line num="118" count="54" type="stmt"/>
-        <line num="119" count="1" type="stmt"/>
+        <line num="111" count="10" type="stmt"/>
+        <line num="115" count="54" type="stmt"/>
+        <line num="116" count="8" type="stmt"/>
+        <line num="119" count="54" type="stmt"/>
         <line num="120" count="1" type="stmt"/>
-        <line num="123" count="54" type="stmt"/>
-        <line num="124" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="125" count="0" type="stmt"/>
-        <line num="129" count="54" type="stmt"/>
-        <line num="130" count="1" type="stmt"/>
-        <line num="133" count="54" type="stmt"/>
-        <line num="134" count="1" type="stmt"/>
+        <line num="121" count="1" type="stmt"/>
+        <line num="124" count="54" type="stmt"/>
+        <line num="125" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="126" count="0" type="stmt"/>
+        <line num="130" count="54" type="stmt"/>
+        <line num="131" count="1" type="stmt"/>
+        <line num="134" count="54" type="stmt"/>
         <line num="135" count="1" type="stmt"/>
         <line num="136" count="1" type="stmt"/>
-        <line num="139" count="54" type="stmt"/>
-        <line num="140" count="78" type="stmt"/>
+        <line num="137" count="1" type="stmt"/>
+        <line num="140" count="54" type="stmt"/>
         <line num="141" count="78" type="stmt"/>
-        <line num="149" count="54" type="stmt"/>
-        <line num="150" count="34" type="cond" truecount="2" falsecount="0"/>
-        <line num="151" count="22" type="stmt"/>
-        <line num="158" count="54" type="stmt"/>
-        <line num="171" count="0" type="stmt"/>
-        <line num="187" count="47" type="stmt"/>
-        <line num="189" count="1" type="stmt"/>
-        <line num="192" count="56" type="stmt"/>
-        <line num="216" count="0" type="stmt"/>
-        <line num="225" count="1" type="stmt"/>
+        <line num="142" count="78" type="stmt"/>
+        <line num="150" count="54" type="stmt"/>
+        <line num="151" count="34" type="cond" truecount="2" falsecount="0"/>
+        <line num="152" count="22" type="stmt"/>
+        <line num="159" count="54" type="stmt"/>
+        <line num="172" count="0" type="stmt"/>
+        <line num="193" count="47" type="stmt"/>
+        <line num="195" count="1" type="stmt"/>
+        <line num="198" count="56" type="stmt"/>
+        <line num="223" count="0" type="stmt"/>
+        <line num="232" count="1" type="stmt"/>
       </file>
     </package>
     <package name="NightMi.src.screens.Login">
-      <metrics statements="189" coveredstatements="84" conditionals="80" coveredconditionals="30" methods="38" coveredmethods="17"/>
-      <file name="ForgotPassword.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/screens/Login/ForgotPassword.tsx">
+      <metrics statements="189" coveredstatements="61" conditionals="80" coveredconditionals="17" methods="38" coveredmethods="11"/>
+      <file name="ForgotPassword.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\screens\Login\ForgotPassword.tsx">
         <metrics statements="15" coveredstatements="12" conditionals="6" coveredconditionals="4" methods="3" coveredmethods="2"/>
         <line num="9" count="7" type="stmt"/>
         <line num="10" count="7" type="stmt"/>
@@ -1216,37 +1220,37 @@
         <line num="23" count="0" type="stmt"/>
         <line num="27" count="7" type="stmt"/>
         <line num="62" count="0" type="stmt"/>
-        <line num="69" count="2" type="stmt"/>
+        <line num="69" count="1" type="stmt"/>
       </file>
-      <file name="LoginScreen.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/screens/Login/LoginScreen.tsx">
-        <metrics statements="25" coveredstatements="18" conditionals="18" coveredconditionals="13" methods="6" coveredmethods="5"/>
+      <file name="LoginScreen.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\screens\Login\LoginScreen.tsx">
+        <metrics statements="25" coveredstatements="2" conditionals="18" coveredconditionals="0" methods="6" coveredmethods="0"/>
         <line num="13" count="1" type="stmt"/>
-        <line num="16" count="13" type="stmt"/>
-        <line num="17" count="12" type="stmt"/>
-        <line num="18" count="12" type="stmt"/>
-        <line num="19" count="12" type="stmt"/>
-        <line num="20" count="12" type="stmt"/>
-        <line num="21" count="12" type="stmt"/>
-        <line num="22" count="12" type="stmt"/>
-        <line num="23" count="12" type="stmt"/>
-        <line num="25" count="12" type="stmt"/>
-        <line num="26" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="cond" truecount="0" falsecount="4"/>
         <line num="27" count="0" type="stmt"/>
         <line num="28" count="0" type="stmt"/>
-        <line num="30" count="1" type="stmt"/>
-        <line num="31" count="1" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
         <line num="35" count="0" type="stmt"/>
         <line num="37" count="0" type="stmt"/>
         <line num="38" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="39" count="0" type="stmt"/>
-        <line num="43" count="12" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
         <line num="91" count="0" type="stmt"/>
-        <line num="116" count="1" type="stmt"/>
-        <line num="119" count="1" type="stmt"/>
-        <line num="125" count="1" type="stmt"/>
+        <line num="116" count="0" type="stmt"/>
+        <line num="119" count="0" type="stmt"/>
+        <line num="125" count="0" type="stmt"/>
         <line num="137" count="1" type="stmt"/>
       </file>
-      <file name="OwnerLogScreen.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/screens/Login/OwnerLogScreen.tsx">
+      <file name="OwnerLogScreen.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\screens\Login\OwnerLogScreen.tsx">
         <metrics statements="31" coveredstatements="8" conditionals="10" coveredconditionals="0" methods="5" coveredmethods="1"/>
         <line num="11" count="2" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
@@ -1278,9 +1282,9 @@
         <line num="59" count="0" type="stmt"/>
         <line num="100" count="0" type="stmt"/>
         <line num="103" count="0" type="stmt"/>
-        <line num="110" count="2" type="stmt"/>
+        <line num="110" count="1" type="stmt"/>
       </file>
-      <file name="OwnerRegisterScreen.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/screens/Login/OwnerRegisterScreen.tsx">
+      <file name="OwnerRegisterScreen.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\screens\Login\OwnerRegisterScreen.tsx">
         <metrics statements="69" coveredstatements="39" conditionals="26" coveredconditionals="13" methods="16" coveredmethods="8"/>
         <line num="16" count="20" type="stmt"/>
         <line num="17" count="20" type="stmt"/>
@@ -1350,19 +1354,19 @@
         <line num="215" count="3" type="stmt"/>
         <line num="216" count="3" type="stmt"/>
         <line num="229" count="0" type="stmt"/>
-        <line num="241" count="2" type="stmt"/>
+        <line num="241" count="1" type="stmt"/>
       </file>
-      <file name="RegisterScreen.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/screens/Login/RegisterScreen.tsx">
+      <file name="RegisterScreen.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\screens\Login\RegisterScreen.tsx">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
-      <file name="ResetPasswordScreen.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/screens/Login/ResetPasswordScreen.tsx">
-        <metrics statements="49" coveredstatements="7" conditionals="20" coveredconditionals="0" methods="8" coveredmethods="1"/>
-        <line num="10" count="3" type="stmt"/>
-        <line num="11" count="2" type="stmt"/>
-        <line num="12" count="2" type="stmt"/>
-        <line num="13" count="2" type="stmt"/>
-        <line num="14" count="2" type="stmt"/>
-        <line num="15" count="2" type="stmt"/>
+      <file name="ResetPasswordScreen.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\screens\Login\ResetPasswordScreen.tsx">
+        <metrics statements="49" coveredstatements="0" conditionals="20" coveredconditionals="0" methods="8" coveredmethods="0"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
         <line num="17" count="0" type="stmt"/>
         <line num="18" count="0" type="stmt"/>
         <line num="19" count="0" type="cond" truecount="0" falsecount="2"/>
@@ -1405,71 +1409,71 @@
         <line num="91" count="0" type="stmt"/>
         <line num="97" count="0" type="stmt"/>
         <line num="139" count="0" type="stmt"/>
-        <line num="146" count="1" type="stmt"/>
+        <line num="146" count="0" type="stmt"/>
       </file>
     </package>
     <package name="NightMi.src.screens.Login.registerScreen">
-      <metrics statements="139" coveredstatements="82" conditionals="68" coveredconditionals="36" methods="35" coveredmethods="16"/>
-      <file name="RegisterScreen.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/screens/Login/registerScreen/RegisterScreen.tsx">
-        <metrics statements="48" coveredstatements="32" conditionals="22" coveredconditionals="11" methods="15" coveredmethods="5"/>
-        <line num="17" count="17" type="stmt"/>
-        <line num="21" count="16" type="stmt"/>
-        <line num="22" count="16" type="stmt"/>
-        <line num="29" count="16" type="stmt"/>
+      <metrics statements="139" coveredstatements="51" conditionals="68" coveredconditionals="25" methods="35" coveredmethods="11"/>
+      <file name="RegisterScreen.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\screens\Login\registerScreen\RegisterScreen.tsx">
+        <metrics statements="48" coveredstatements="1" conditionals="22" coveredconditionals="0" methods="15" coveredmethods="0"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
         <line num="30" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="31" count="0" type="stmt"/>
         <line num="32" count="0" type="stmt"/>
-        <line num="34" count="16" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
         <line num="35" count="0" type="stmt"/>
-        <line num="37" count="16" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
         <line num="38" count="0" type="stmt"/>
-        <line num="40" count="16" type="stmt"/>
-        <line num="41" count="5" type="stmt"/>
-        <line num="42" count="5" type="stmt"/>
-        <line num="43" count="5" type="stmt"/>
-        <line num="47" count="16" type="stmt"/>
-        <line num="48" count="16" type="stmt"/>
-        <line num="49" count="16" type="stmt"/>
-        <line num="50" count="16" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="50" count="0" type="stmt"/>
         <line num="51" count="0" type="stmt"/>
         <line num="52" count="0" type="stmt"/>
-        <line num="54" count="16" type="stmt"/>
-        <line num="55" count="16" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
         <line num="56" count="0" type="stmt"/>
         <line num="57" count="0" type="stmt"/>
-        <line num="59" count="16" type="stmt"/>
+        <line num="59" count="0" type="stmt"/>
         <line num="60" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="61" count="0" type="stmt"/>
         <line num="63" count="0" type="stmt"/>
-        <line num="67" count="16" type="stmt"/>
-        <line num="87" count="16" type="stmt"/>
-        <line num="90" count="16" type="stmt"/>
-        <line num="91" count="16" type="stmt"/>
-        <line num="92" count="16" type="stmt"/>
-        <line num="93" count="16" type="stmt"/>
-        <line num="94" count="16" type="stmt"/>
-        <line num="95" count="16" type="stmt"/>
-        <line num="98" count="16" type="cond" truecount="2" falsecount="0"/>
-        <line num="99" count="11" type="stmt"/>
-        <line num="143" count="5" type="stmt"/>
-        <line num="150" count="1" type="stmt"/>
-        <line num="155" count="5" type="cond" truecount="1" falsecount="1"/>
-        <line num="156" count="5" type="stmt"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="87" count="0" type="stmt"/>
+        <line num="90" count="0" type="stmt"/>
+        <line num="91" count="0" type="stmt"/>
+        <line num="92" count="0" type="stmt"/>
+        <line num="93" count="0" type="stmt"/>
+        <line num="94" count="0" type="stmt"/>
+        <line num="95" count="0" type="stmt"/>
+        <line num="98" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="99" count="0" type="stmt"/>
+        <line num="143" count="0" type="stmt"/>
+        <line num="150" count="0" type="stmt"/>
+        <line num="155" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="156" count="0" type="stmt"/>
         <line num="161" count="0" type="stmt"/>
         <line num="232" count="0" type="stmt"/>
         <line num="233" count="0" type="stmt"/>
         <line num="237" count="0" type="stmt"/>
         <line num="296" count="1" type="stmt"/>
       </file>
-      <file name="firstRegisterPhase.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/screens/Login/registerScreen/firstRegisterPhase.tsx">
+      <file name="firstRegisterPhase.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\screens\Login\registerScreen\firstRegisterPhase.tsx">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="23" count="3" type="stmt"/>
+        <line num="23" count="2" type="stmt"/>
         <line num="26" count="18" type="stmt"/>
         <line num="27" count="18" type="stmt"/>
         <line num="31" count="18" type="stmt"/>
-        <line num="87" count="3" type="stmt"/>
+        <line num="87" count="2" type="stmt"/>
       </file>
-      <file name="index.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/screens/Login/registerScreen/index.tsx">
+      <file name="index.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\screens\Login\registerScreen\index.tsx">
         <metrics statements="53" coveredstatements="24" conditionals="34" coveredconditionals="18" methods="7" coveredmethods="5"/>
         <line num="20" count="18" type="stmt"/>
         <line num="23" count="18" type="stmt"/>
@@ -1523,11 +1527,11 @@
         <line num="159" count="0" type="stmt"/>
         <line num="189" count="4" type="stmt"/>
         <line num="192" count="1" type="stmt"/>
-        <line num="201" count="2" type="stmt"/>
+        <line num="201" count="1" type="stmt"/>
       </file>
-      <file name="secondRegisterPhase.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/screens/Login/registerScreen/secondRegisterPhase.tsx">
+      <file name="secondRegisterPhase.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\screens\Login\registerScreen\secondRegisterPhase.tsx">
         <metrics statements="33" coveredstatements="21" conditionals="12" coveredconditionals="7" methods="12" coveredmethods="5"/>
-        <line num="26" count="3" type="stmt"/>
+        <line num="26" count="2" type="stmt"/>
         <line num="30" count="10" type="stmt"/>
         <line num="37" count="10" type="stmt"/>
         <line num="38" count="0" type="cond" truecount="0" falsecount="2"/>
@@ -1559,21 +1563,21 @@
         <line num="165" count="0" type="stmt"/>
         <line num="166" count="0" type="stmt"/>
         <line num="170" count="1" type="stmt"/>
-        <line num="206" count="3" type="stmt"/>
+        <line num="206" count="2" type="stmt"/>
       </file>
     </package>
     <package name="NightMi.src.screens.MapScreen">
       <metrics statements="54" coveredstatements="48" conditionals="30" coveredconditionals="21" methods="16" coveredmethods="13"/>
-      <file name="MapScreen.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/screens/MapScreen/MapScreen.tsx">
+      <file name="MapScreen.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\screens\MapScreen\MapScreen.tsx">
         <metrics statements="54" coveredstatements="48" conditionals="30" coveredconditionals="21" methods="16" coveredmethods="13"/>
-        <line num="32" count="2" type="stmt"/>
-        <line num="33" count="2" type="stmt"/>
-        <line num="35" count="2" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
         <line num="36" count="8" type="stmt"/>
         <line num="38" count="3" type="stmt"/>
-        <line num="62" count="2" type="stmt"/>
+        <line num="62" count="1" type="stmt"/>
         <line num="63" count="3" type="stmt"/>
-        <line num="101" count="2" type="stmt"/>
+        <line num="101" count="1" type="stmt"/>
         <line num="102" count="20" type="stmt"/>
         <line num="103" count="19" type="stmt"/>
         <line num="104" count="19" type="stmt"/>
@@ -1619,15 +1623,15 @@
         <line num="211" count="1" type="stmt"/>
         <line num="218" count="8" type="stmt"/>
         <line num="232" count="8" type="stmt"/>
-        <line num="253" count="2" type="stmt"/>
+        <line num="253" count="1" type="stmt"/>
       </file>
     </package>
     <package name="NightMi.src.screens.ProfileScreen">
       <metrics statements="131" coveredstatements="103" conditionals="82" coveredconditionals="46" methods="30" coveredmethods="18"/>
-      <file name="EditProfileScreen.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/screens/ProfileScreen/EditProfileScreen.tsx">
+      <file name="EditProfileScreen.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\screens\ProfileScreen\EditProfileScreen.tsx">
         <metrics statements="61" coveredstatements="43" conditionals="40" coveredconditionals="15" methods="17" coveredmethods="6"/>
-        <line num="34" count="2" type="stmt"/>
-        <line num="41" count="2" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
         <line num="51" count="10" type="stmt"/>
         <line num="52" count="10" type="stmt"/>
         <line num="53" count="10" type="stmt"/>
@@ -1686,18 +1690,18 @@
         <line num="200" count="0" type="stmt"/>
         <line num="216" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="221" count="40" type="stmt"/>
-        <line num="272" count="2" type="stmt"/>
+        <line num="272" count="1" type="stmt"/>
       </file>
-      <file name="ProfileScreen.tsx" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/screens/ProfileScreen/ProfileScreen.tsx">
+      <file name="ProfileScreen.tsx" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\screens\ProfileScreen\ProfileScreen.tsx">
         <metrics statements="70" coveredstatements="60" conditionals="42" coveredconditionals="31" methods="13" coveredmethods="12"/>
-        <line num="35" count="2" type="stmt"/>
-        <line num="42" count="2" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
         <line num="43" count="8" type="cond" truecount="1" falsecount="3"/>
         <line num="45" count="0" type="stmt"/>
         <line num="47" count="0" type="stmt"/>
         <line num="49" count="0" type="stmt"/>
         <line num="51" count="8" type="stmt"/>
-        <line num="55" count="2" type="stmt"/>
+        <line num="55" count="1" type="stmt"/>
         <line num="56" count="8" type="stmt"/>
         <line num="63" count="8" type="stmt"/>
         <line num="64" count="8" type="cond" truecount="1" falsecount="1"/>
@@ -1759,12 +1763,12 @@
         <line num="218" count="8" type="stmt"/>
         <line num="243" count="1" type="stmt"/>
         <line num="252" count="22" type="stmt"/>
-        <line num="274" count="2" type="stmt"/>
+        <line num="274" count="1" type="stmt"/>
       </file>
     </package>
     <package name="NightMi.src.services">
       <metrics statements="5" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
-      <file name="authServices.ts" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/services/authServices.ts">
+      <file name="authServices.ts" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\services\authServices.ts">
         <metrics statements="5" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="4" count="0" type="stmt"/>
         <line num="6" count="0" type="stmt"/>
@@ -1775,23 +1779,23 @@
     </package>
     <package name="NightMi.src.styles">
       <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="commonStyles.ts" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/styles/commonStyles.ts">
+      <file name="commonStyles.ts" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\styles\commonStyles.ts">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="3" count="5" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
       </file>
     </package>
     <package name="NightMi.src.types">
       <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="nativewind.d.ts" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/types/nativewind.d.ts">
+      <file name="nativewind.d.ts" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\types\nativewind.d.ts">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
-      <file name="react-native-country-picket.d.ts" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/types/react-native-country-picket.d.ts">
+      <file name="react-native-country-picket.d.ts" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\types\react-native-country-picket.d.ts">
         <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       </file>
     </package>
     <package name="NightMi.src.utils">
       <metrics statements="17" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="0"/>
-      <file name="stripe.ts" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/utils/stripe.ts">
+      <file name="stripe.ts" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\utils\stripe.ts">
         <metrics statements="14" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="4" count="0" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
@@ -1808,7 +1812,7 @@
         <line num="34" count="0" type="stmt"/>
         <line num="35" count="0" type="stmt"/>
       </file>
-      <file name="validation.ts" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/src/utils/validation.ts">
+      <file name="validation.ts" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\src\utils\validation.ts">
         <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
@@ -1817,7 +1821,7 @@
     </package>
     <package name="NightMi.supabase.functions.create-payment-intent">
       <metrics statements="7" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-      <file name="index.ts" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/supabase/functions/create-payment-intent/index.ts">
+      <file name="index.ts" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\supabase\functions\create-payment-intent\index.ts">
         <metrics statements="7" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="4" count="0" type="stmt"/>
         <line num="9" count="0" type="stmt"/>
@@ -1830,7 +1834,7 @@
     </package>
     <package name="NightMi.supabase.functions.forgot-password">
       <metrics statements="11" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="0"/>
-      <file name="index.ts" path="/Users/francescotorella/Documents/temporaneo/NightMi/NightMi/supabase/functions/forgot-password/index.ts">
+      <file name="index.ts" path="C:\Users\qrobl\OneDrive - Fundación Universitaria San Pablo CEU\Escritorio\TELECOCO\APLICACIONES WEB\NightMi\supabase\functions\forgot-password\index.ts">
         <metrics statements="11" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="4" count="0" type="stmt"/>
         <line num="9" count="0" type="stmt"/>

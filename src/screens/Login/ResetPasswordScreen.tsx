@@ -6,6 +6,8 @@ import { Feather } from '@expo/vector-icons';
 import { AppNavigationProp } from '@/navigation';
 import * as Linking from 'expo-linking';
 
+import {useTranslation} from 'react-i18next';
+
 export default function ResetPasswordScreen() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -13,7 +15,7 @@ export default function ResetPasswordScreen() {
   const [isLoading, setIsLoading] = useState(false);
   const supabase = useSupabaseClient();
   const navigation = useNavigation<AppNavigationProp>();
-
+  const { t } = useTranslation();
  useEffect(() => {
   const handleDeepLink = (url: string | null) => {
     if (!url) return;
@@ -104,7 +106,7 @@ const handleResetPassword = async () => {
         style={styles.logo}
         resizeMode="contain"
       />
-      <Text style={styles.title}>Reset Password</Text>
+      <Text style={styles.title}>{t("reset_password")}</Text>
       <View style={styles.inputContainer}>
         <Feather name="lock" size={24} color="#9CA3AF" style={styles.icon} />
         <TextInput

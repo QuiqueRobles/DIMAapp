@@ -5,17 +5,19 @@ import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 import { AppNavigationProp } from '@/navigation';
 import { useSession } from 'isOwner';
-import {useClub} from '../../../src/context/EventContext'
+import { useClub } from '../../../src/context/EventContext';
+import { useTranslation } from 'react-i18next'; // Add this import
 
 export default function OwnerLoginScreen() {
+  const { t } = useTranslation(); // Add translation hook
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const {clubId,setClubId} = useClub()
+  const {clubId, setClubId} = useClub()
   const [isLoading, setIsLoading] = useState(false);
   const supabase = useSupabaseClient();
   const navigation = useNavigation<AppNavigationProp>();
-   const {isOwner,setisOwner}=useSession();
-  console.log("Ownerr",isOwner);
+  const {isOwner, setisOwner} = useSession();
+  console.log("Ownerr", isOwner);
 
   const getAuthenticatedUserId = async () => {
     try {
@@ -29,9 +31,9 @@ export default function OwnerLoginScreen() {
         throw new Error('No authenticated user found');
       }
       setClubId(user.id)
-      return user.id; // Return the user's ID
+      return user.id;
     } catch (err) {
-      return ''; // Return null if there's an error
+      return '';
     }
   };
 
@@ -46,15 +48,11 @@ export default function OwnerLoginScreen() {
     if (error) {
       alert(error.message);
     } else {
-      // Navigate to owner dashboard or perform owner-specific actions
       setisOwner(true);
       const id = await getAuthenticatedUserId();
       setClubId(id);
-
     }
   };
-     
-      
 
   return (
     <KeyboardAvoidingView 
@@ -66,12 +64,12 @@ export default function OwnerLoginScreen() {
         style={styles.logo}
         resizeMode="contain"
       />
-      <Text style={styles.title}>Owner Login</Text>
+      <Text style={styles.title}>{t('owner_login.title')}</Text>
       <View style={styles.inputContainer}>
         <Feather name="mail" size={24} color="#9CA3AF" style={styles.icon} />
         <TextInput
           style={styles.input}
-          placeholder="Email"
+          placeholder={t('owner_login.email_placeholder')}
           placeholderTextColor="#9CA3AF"
           value={email}
           onChangeText={setEmail}
@@ -83,7 +81,7 @@ export default function OwnerLoginScreen() {
         <Feather name="lock" size={24} color="#9CA3AF" style={styles.icon} />
         <TextInput
           style={styles.input}
-          placeholder="Password"
+          placeholder={t('owner_login.password_placeholder')}
           placeholderTextColor="#9CA3AF"
           value={password}
           onChangeText={setPassword}
@@ -92,16 +90,16 @@ export default function OwnerLoginScreen() {
       </View>
       <TouchableOpacity style={styles.button} onPress={handleOwnerSignIn} disabled={isLoading}>
         {isLoading ? (
-          <Text style={styles.buttonText}>Loading...</Text>
+          <Text style={styles.buttonText}>{t('owner_login.loading')}</Text>
         ) : (
-          <Text style={styles.buttonText}>Sign In as Owner</Text>
+          <Text style={styles.buttonText}>{t('owner_login.sign_in')}</Text>
         )}
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-        <Text style={styles.backToLogin}>Back to User Login</Text>
+        <Text style={styles.backToLogin}>{t('owner_login.back_to_user_login')}</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('OwnerRegister')}>
-        <Text style={styles.backToLogin}>Register as owner</Text>
+        <Text style={styles.backToLogin}>{t('owner_login.register_as_owner')}</Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>
   );

@@ -4,7 +4,7 @@ import { format, parseISO } from 'date-fns';
 import TicketButton from './TicketButton';
 import { useState,useEffect      } from 'react';
 import { supabase } from '@/lib/supabase';
-
+import { useTranslation } from 'react-i18next';
 interface Event {
   id: string;
   created_at: string;
@@ -22,25 +22,26 @@ interface EventsListProps {
 }
 
 const EventsList: React.FC<EventsListProps> = ({ events, clubName }) => {
-  const [userInfo,setUserInfo]=useState(false)
+  const { t } = useTranslation();
+  const [userInfo, setUserInfo] = useState(false)
   
-      const getAuthenticatedUser = async () => {
-        try {
-          const { data: { user }, error } = await supabase.auth.getUser();
-          
-          if (error) {
-            throw new Error(`Error fetching authenticated user: ${error.message}`);
-          }
-          
-          if (!user) {
-            throw new Error('No authenticated user found');
-          }
-          return user.id;
-          ; // Return the user's ID
-        } catch (err) {
-          return false; // Return null if there's an error
-        }
-      };
+  const getAuthenticatedUser = async () => {
+    try {
+      const { data: { user }, error } = await supabase.auth.getUser();
+      
+      if (error) {
+        throw new Error(`Error fetching authenticated user: ${error.message}`);
+      }
+      
+      if (!user) {
+        throw new Error('No authenticated user found');
+      }
+      return user.id;
+    } catch (err) {
+      return false;
+    }
+  };
+
   useEffect(() => {
     const fetchClub = async () => {
       try {
@@ -59,7 +60,7 @@ const EventsList: React.FC<EventsListProps> = ({ events, clubName }) => {
         }
 
         console.log("Club Data:", clubData);
-        setUserInfo(clubData?.isClub || false); // Ensure it's a boolean
+        setUserInfo(clubData?.isClub || false);
       } catch (err) {
         console.error("Error in fetchClubData:", err);
       }
@@ -80,7 +81,7 @@ const EventsList: React.FC<EventsListProps> = ({ events, clubName }) => {
             />
           )}
           <View style={styles.eventInfo}>
-            <Text style={styles.eventName}>{event.name || 'Unnamed Event'}</Text>
+            <Text style={styles.eventName}>{event.name || t('events.unnamed_event')}</Text>
             <Text style={styles.eventDate}>{format(parseISO(event.date), 'MMM d, yyyy')}</Text>
             {event.description && (
               <Text style={styles.eventDescription} numberOfLines={2}>
@@ -88,17 +89,20 @@ const EventsList: React.FC<EventsListProps> = ({ events, clubName }) => {
               </Text>
             )}
             {event.price !== null && (
-              <Text style={styles.eventPrice}>${(event.price / 100).toFixed(2)}</Text>
+              <Text style={styles.eventPrice}>
+                {t('events.price', { price: (event.price / 100).toFixed(2) })}
+              </Text>
             )}
-             </View>
-            {!userInfo && (
-         
-          <TicketButton event={event} clubName={clubName} />)}
+          </View>
+          {!userInfo && (
+            <TicketButton event={event} clubName={clubName} />
+          )}
         </View> 
       ))}
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {

@@ -10,6 +10,8 @@ import { CountryCode, Country } from 'react-native-country-picker-modal/lib/type
 import RadioGroup, {RadioButtonProps} from 'react-native-radio-buttons-group';
 import { FontAwesome } from '@expo/vector-icons';
 import commonStyles from '@/styles/commonStyles';
+import { useTranslation } from 'react-i18next';
+
 
 export default function RegisterScreen() {
 
@@ -93,9 +95,9 @@ export default function RegisterScreen() {
   const [isLoading, setIsLoading] = useState(false);
   const supabase = useSupabaseClient();
   const navigation = useNavigation<AppNavigationProp>();
+  const { t } = useTranslation();
 
-
-  if (currentPage === 0) {
+ if (currentPage === 0) {
     return (
       <KeyboardAvoidingView 
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -110,7 +112,7 @@ export default function RegisterScreen() {
             <Feather name="mail" size={24} color="#9CA3AF"  />
             <TextInput
               style={commonStyles.textInput}
-              placeholder="Email"
+              placeholder={t('register.email_placeholder')}
               placeholderTextColor="#9CA3AF"
               value={email}
               onChangeText={setEmail}
@@ -122,7 +124,7 @@ export default function RegisterScreen() {
             <Feather name="lock" size={24} color="#9CA3AF"/>
             <TextInput
               style={commonStyles.textInput}
-              placeholder="Password"
+              placeholder={t('register.password_placeholder')}
               placeholderTextColor="#9CA3AF"
               value={password}
               onChangeText={setPassword}
@@ -133,7 +135,7 @@ export default function RegisterScreen() {
             <Feather name="lock" size={24} color="#9CA3AF" />
             <TextInput
               style={commonStyles.textInput}
-              placeholder="Confirm Password"
+              placeholder={t('register.confirm_password_placeholder')}
               placeholderTextColor="#9CA3AF"
               value={confirmPassword}
               onChangeText={setConfirmPassword}
@@ -142,17 +144,17 @@ export default function RegisterScreen() {
           </View>
           <TouchableOpacity style={commonStyles.primaryButton} onPress={() => {setCurrentPage(1)}} disabled={isLoading}>
             {isLoading ? (
-              <Text style={commonStyles.primaryButtonText}>Loading...</Text>
+              <Text style={commonStyles.primaryButtonText}>{t('common.loading')}</Text>
             ) : (
-              <Text style={commonStyles.primaryButtonText}>Sign Up</Text>
+              <Text style={commonStyles.primaryButtonText}>{t('register.signup')}</Text>
             )}
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-            <Text style={commonStyles.textLink}>Already have an account? Sign in</Text>
+            <Text style={commonStyles.textLink}>{t('register.already_account')}</Text>
           </TouchableOpacity>
       </KeyboardAvoidingView>
     );
-  }else if(currentPage === 1){
+  } else if(currentPage === 1){
     return (
       <KeyboardAvoidingView 
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -172,14 +174,14 @@ export default function RegisterScreen() {
               <View style={commonStyles.inputContainer}>
                 <TextInput
                   style={commonStyles.textInput}
-                  placeholder="Value"
+                  placeholder={t('register.value_placeholder')}
                   placeholderTextColor="#9CA3AF"
                 />
               </View>
             </View>
             <View style={styles.dobContainer} >
               <View style={styles.dateInputHeader}>
-                <Text style={commonStyles.standardText}>Date of Birth:</Text>
+                <Text style={commonStyles.standardText}>{t('register.date_of_birth')}</Text>
                 <TouchableOpacity onPress={showDatepickerDatepicker} style={styles.dateInputButton}>
                   <Text style={commonStyles.standardText}>{formatDate(date)}</Text>
                 </TouchableOpacity>
@@ -195,7 +197,7 @@ export default function RegisterScreen() {
                     locale="en-US"
                   />
                   <TouchableOpacity onPress={confirmDate} style={commonStyles.primaryButton}>
-                      <Text style={commonStyles.standardText}>Confirm</Text>
+                      <Text style={commonStyles.standardText}>{t('common.confirm')}</Text>
                   </TouchableOpacity>
                 </View>
               )}
@@ -203,10 +205,9 @@ export default function RegisterScreen() {
             <View style={styles.otherInfoContainer} >
               <View style={styles.countryFormContainer}>
                 <Text style={commonStyles.standardText}>
-                  Country:
+                  {t('register.country')}
                 </Text>
                 <View style={commonStyles.inputContainer}>
-
                   {(country || countryButtonPressed)  ?
                     (
                       <CountryPicker

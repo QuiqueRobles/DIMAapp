@@ -58,15 +58,21 @@
   },
   "events": {
     "upcoming": "Upcoming Events",
-    "none": "No upcoming events"
+    "none": "No upcoming events",
+    "unnamed_event": "Unnamed Event",
+    "price": "${{price}}"
   },
   "reviews": {
     "title": "Reviews",
     "none": "No reviews yet"
   },
   "common": {
-    "seeAll": "See All"
+    "seeAll": "See All",
+    "loading": "Loading...",
+    "confirm": "Confirm",
+    "submit": "Submit"
   },
+ 
   "defaultCategory": "Nightclub",
   "tabs": {
     "home": "Home",
@@ -105,5 +111,63 @@
     "open": "Open",
     "closed": "Closed",
     "about": "About"
+  },
+  "buyTicket":"Buy Ticket",
+  "viewDetails":"View Details",
+  "map": {
+    "view_details": "View Details",
+    "loading_clubs": "Loading clubs..."
+  },
+  "reset_password":"Reset Password",
+  "sending":"Sending...",
+  "back_to_login":"Back to Login",
+    "register": {
+    "email_placeholder": "Email",
+    "password_placeholder": "Password", 
+    "confirm_password_placeholder": "Confirm Password",
+    "signup": "Sign Up",
+    "already_account": "Already have an account? Sign in",
+    "value_placeholder": "Value",
+    "date_of_birth": "Date of Birth:",
+    "country": "Country:",
+    "select_country": "Select country",
+     "first_phase": {
+      "email": "Email",
+      "email_placeholder": "Enter your email",
+      "password": "Password", 
+      "confirm_password": "Confirm Password",
+      "password_placeholder": "Enter your password"
+    },
+    "second_phase": {
+      "username": "Username:",
+      "username_placeholder": "Enter your username",
+      "date_of_birth": "Date of Birth:",
+      "confirm": "Confirm",
+      "country": "Country:",
+      "select_country": "Select country"
+    }
+  },
+   "owner_login": {
+    "title": "Owner Loginsss",
+    "email_placeholder": "Email",
+    "password_placeholder": "Password",
+    "loading": "Loading...",
+    "sign_in": "Sign In as Owner",
+    "back_to_user_login": "Back to User Login",
+    "register_as_owner": "Register as owner"
+  },
+  "owner_register": {
+    "interested_text": "Interested in working with us? Fill this form, you'll be contacted!",
+    "club_name_placeholder": "Club Name",
+    "email_placeholder": "Email",
+    "loading": "Loading...",
+    "confirm": "Confirm",
+    "have_account": "Already have an account? Sign in",
+    "thank_you_text": "Thank you for being interested in our project. We'll be contacting you soon!",
+    "validation": {
+      "club_name_length": "Club name must be between 1 and 20 characters",
+      "missing_parameters": "Missing Parameters"
+    }
   }
+  
 }

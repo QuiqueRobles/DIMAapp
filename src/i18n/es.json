@@ -19,16 +19,153 @@
     "editProfile": "Editar perfil",
     "selectLanguage": "Selecciona tu idioma"
   },
-   "login": {
+  "login": {
     "email": "Correo electrónico",
-    "enterEmail": "Ingresa tu correo electrónico",
+    "enterEmail": "Introduce tu correo electrónico",
     "password": "Contraseña",
-    "enterPassword": "Ingresa tu contraseña",
+    "enterPassword": "Introduce tu contraseña",
     "signIn": "Iniciar sesión",
     "forgotPassword": "¿Olvidaste tu contraseña?",
     "newHere": "¿Nuevo aquí?",
     "signUp": "¡Regístrate!",
     "areYouOwner": "¿Eres propietario?",
-    "enterEmailPassword": "Por favor, ingresa tu correo electrónico y contraseña"
+    "enterEmailPassword": "Por favor, introduce tanto el correo electrónico como la contraseña"
+  },
+  "buy_tickets": "Comprar entradas",
+  "per_ticket": "por entrada",
+  "total": "Total",
+  "processing": "Procesando...",
+  "purchase_tickets": "Comprar entradas",
+  "error": "Error",
+  "unable_to_initialize_payment": "No se pudo inicializar el pago. Por favor, inténtelo de nuevo.",
+  "your_app_name": "Nombre de tu aplicación",
+  "error_code": "Código de error: {{code}}",
+  "failed_to_initialize_payment": "Error al inicializar el pago. Por favor, inténtelo de nuevo.",
+  "payment_error": "Error de pago: {{code}}",
+  "success": "Éxito",
+  "payment_successful_ticket_created": "¡Tu pago se realizó con éxito y la entrada ha sido creada!",
+  "failed_to_process_payment_or_create_ticket": "Error al procesar el pago o crear la entrada: {{message}}",
+  "unknown_error_occurred": "Ocurrió un error desconocido al procesar tu compra",
+  "no_user_logged_in": "No hay ningún usuario conectado",
+  "unknown_error_occurred_during_insertion": "Ocurrió un error desconocido durante la inserción",
+  "no_data_returned_from_ticket_insertion": "No se devolvieron datos de la inserción de la entrada",
+  "date_not_available": "Fecha no disponible",
+  "home": {
+    "search_placeholder": "Buscar clubes...",
+    "error_message": "Error al cargar los clubes. Por favor, inténtelo de nuevo.",
+    "refreshing": "Actualizando...",
+    "no_clubs_found": "No se encontraron clubes"
+  },
+  "events": {
+    "upcoming": "Próximos eventos",
+    "none": "No hay eventos próximos",
+    "unnamed_event": "Evento sin nombre",
+    "price": "${{price}}"
+  },
+  "reviews": {
+    "title": "Reseñas",
+    "none": "Aún no hay reseñas"
+  },
+  "common": {
+    "seeAll": "Ver todo",
+    "loading": "Cargando...",
+    "confirm": "Confirmar",
+    "submit": "Enviar"
+  },
+  "defaultCategory": "Club nocturno",
+  "tabs": {
+    "home": "Inicio",
+    "map": "Mapa",
+    "tickets": "Entradas",
+    "profile": "Perfil",
+    "events": "Eventos"
+  },
+  "tickets": {
+    "title": "Mis entradas",
+    "incoming_events": "Eventos próximos",
+    "past_events": "Eventos pasados",
+    "no_future_tickets": "No hay entradas para eventos próximos",
+    "no_past_tickets": "No hay entradas para eventos pasados",
+    "review_submitted": "Reseña enviada con éxito"
+  },
+  "ticket_card": {
+    "write_review": "Escribir reseña",
+    "people": "{{count}} persona",
+    "people_plural": "{{count}} personas"
+  },
+  "expanded_ticket": {
+    "user": "Usuario",
+    "event_date": "Fecha del evento",
+    "event_time": "Hora del evento",
+    "number_of_people": "Número de personas",
+    "total_price": "Precio total",
+    "purchase_date": "Fecha de compra"
+  },
+  "placeholder": {
+    "no_image": "Sin imagen"
+  },
+  "club": {
+    "reviews_count": "({{count}} reseñas)",
+    "attendees": "{{count}} asistiendo",
+    "open": "Abierto",
+    "closed": "Cerrado",
+    "about": "Acerca de"
+  },
+  "buyTicket": "Comprar entrada",
+  "viewDetails": "Ver detalles",
+  "map": {
+    "view_details": "Ver detalles",
+    "loading_clubs": "Cargando clubes..."
+  },
+  "reset_password": "Restablecer contraseña",
+  "sending": "Enviando...",
+  "back_to_login": "Volver a iniciar sesión",
+  "register": {
+    "email_placeholder": "Correo electrónico",
+    "password_placeholder": "Contraseña",
+    "confirm_password_placeholder": "Confirmar contraseña",
+    "signup": "Registrarse",
+    "already_account": "¿Ya tienes una cuenta? Inicia sesión",
+    "value_placeholder": "Valor",
+    "date_of_birth": "Fecha de nacimiento:",
+    "country": "País:",
+    "select_country": "Seleccionar país",
+    "first_phase": {
+      "email": "Correo electrónico",
+      "email_placeholder": "Introduce tu correo electrónico",
+      "password": "Contraseña",
+      "confirm_password": "Confirmar contraseña",
+      "password_placeholder": "Introduce tu contraseña"
+    },
+    "second_phase": {
+      "username": "Nombre de usuario:",
+      "username_placeholder": "Introduce tu nombre de usuario",
+      "date_of_birth": "Fecha de nacimiento:",
+      "confirm": "Confirmar",
+      "country": "País:",
+      "select_country": "Seleccionar país"
+    }
+  },
+  "owner_login": {
+    "title": "Inicio de sesión de propietario",
+    "email_placeholder": "Correo electrónico",
+    "password_placeholder": "Contraseña",
+    "loading": "Cargando...",
+    "sign_in": "Iniciar sesión como propietario",
+    "back_to_user_login": "Volver al inicio de sesión de usuario",
+    "register_as_owner": "Registrarse como propietario"
+  },
+  "owner_register": {
+    "interested_text": "¿Interesado en trabajar con nosotros? Completa este formulario, ¡te contactaremos!",
+    "club_name_placeholder": "Nombre del club",
+    "email_placeholder": "Correo electrónico",
+    "loading": "Cargando...",
+    "confirm": "Confirmar",
+    "have_account": "¿Ya tienes una cuenta? Inicia sesión",
+    "thank_you_text": "Gracias por tu interés en nuestro proyecto. ¡Nos pondremos en contacto contigo pronto!",
+    "validation": {
+      "club_name_length": "El nombre del club debe tener entre 1 y 20 caracteres",
+      "missing_parameters": "Faltan parámetros"
+    }
   }
 }

@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">55.55% </span>
+                <span class="strong">57.14% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/9</span>
+                <span class='fraction'>4/7</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
@@ -176,7 +176,13 @@
 <a name='L111'></a><a href='#L111'>111</a>
 <a name='L112'></a><a href='#L112'>112</a>
 <a name='L113'></a><a href='#L113'>113</a>
-<a name='L114'></a><a href='#L114'>114</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L114'></a><a href='#L114'>114</a>
+<a name='L115'></a><a href='#L115'>115</a>
+<a name='L116'></a><a href='#L116'>116</a>
+<a name='L117'></a><a href='#L117'>117</a>
+<a name='L118'></a><a href='#L118'>118</a>
+<a name='L119'></a><a href='#L119'>119</a>
+<a name='L120'></a><a href='#L120'>120</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -197,7 +203,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -238,8 +246,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -292,6 +304,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 &nbsp;
 interface TicketCardProps {
   ticket: {
@@ -311,12 +324,10 @@ interface TicketCardProps {
 }
 &nbsp;
 const TicketCard: React.FC&lt;TicketCardProps&gt; = ({ ticket, onPress, isPast = false, onWriteReviewPress}) =&gt; {
+  const { t, i18n } = useTranslation();
   const eventDate = new Date(ticket.event_date);
 &nbsp;
   return (
-&nbsp;
-    //console.log("ticket:", ticket),
-&nbsp;
     &lt;TouchableOpacity style={[styles.card, isPast &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >styles.pastCard]</span>} onPress={onPress}&gt;
       &lt;View style={styles.header}&gt;
         &lt;Text style={styles.eventName}&gt;{ticket.event.name}&lt;/Text&gt;
@@ -327,12 +338,14 @@ const TicketCard: React.FC&lt;TicketCardProps&gt; = ({ ticket, onPress, isPast =
         &lt;View style={styles.detailItem}&gt;
           &lt;Feather name="calendar" size={16} color="#A78BFA" /&gt;
           &lt;Text style={styles.detailText}&gt;
-            {eventDate.toLocaleDateString('es-ES', { weekday: 'short', month: 'short', day: 'numeric' })}
+            {eventDate.toLocaleDateString(i18n.language, { weekday: 'short', month: 'short', day: 'numeric' })}
           &lt;/Text&gt;
         &lt;/View&gt;
         &lt;View style={styles.detailItem}&gt;
           &lt;Feather name="users" size={16} color="#A78BFA" /&gt;
-          &lt;Text style={styles.detailText}&gt;{ticket.num_people} {ticket.num_people === 1 ? <span class="branch-0 cbranch-no" title="branch not covered" >'persona' </span>: 'personas'}&lt;/Text&gt;
+          &lt;Text style={styles.detailText}&gt;
+            {t('ticket_card.people', { count: ticket.num_people })}
+          &lt;/Text&gt;
         &lt;/View&gt;
         &lt;View style={styles.detailItem}&gt;
           &lt;Feather name="dollar-sign" size={16} color="#67FF0C" /&gt;
@@ -345,7 +358,7 @@ const TicketCard: React.FC&lt;TicketCardProps&gt; = ({ ticket, onPress, isPast =
           onPress={onWriteReviewPress}
           testID='write-review-button'
         &gt;
-          &lt;Text&gt; Write Review&lt;/Text&gt;
+          &lt;Text style={styles.reviewButtonText}&gt;{t('ticket_card.write_review')}&lt;/Text&gt;
         &lt;/TouchableOpacity&gt;
       )}
     &lt;/TouchableOpacity&gt;
@@ -398,6 +411,11 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: 'center',
   },
+  reviewButtonText: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+  }
+  
 });
 &nbsp;
 export default TicketCard;
@@ -409,7 +427,7 @@ export default TicketCard;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-02-04T17:25:00.727Z
+                at 2025-02-04T17:31:01.903Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

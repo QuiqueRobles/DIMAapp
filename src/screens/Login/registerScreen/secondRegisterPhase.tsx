@@ -9,7 +9,7 @@ import { CountryCode, Country } from 'react-native-country-picker-modal/lib/type
 import RadioGroup, {RadioButtonProps} from 'react-native-radio-buttons-group';
 import { FontAwesome } from '@expo/vector-icons';
 import commonStyles from '@/styles/commonStyles';
-
+import { useTranslation } from 'react-i18next'; // Add this import
 interface SecondRegisterPhaseProps {
     username: string;
     setUsername: (username: string) => void;
@@ -25,7 +25,7 @@ interface SecondRegisterPhaseProps {
 
 const SecondRegisterPhase: React.FC<SecondRegisterPhaseProps> = (
     {username, setUsername, dateOfBirth, setDateOfBirth, country, setCountry,gender,setGender}) => {
-
+    const {t} = useTranslation();
     //date of birth selection
     const [showDatepicker, setshowDatepicker] = useState(false);
     interface DatePickerEvent {
@@ -94,15 +94,15 @@ const SecondRegisterPhase: React.FC<SecondRegisterPhaseProps> = (
 
 
 
-    return (
+   return (
         <View style={styles.secondPageContainer}>
             <View style={styles.usernameContainer} >
               <Feather name="user" size={70} color="#9CA3AF"/>
-              <Text style={commonStyles.standardText}>Username:</Text>
+              <Text style={commonStyles.standardText}>{t('register.second_phase.username')}</Text>
               <View style={commonStyles.inputContainer}>
                 <TextInput testID='username-input'
                   style={commonStyles.textInput}
-                  placeholder="Value"
+                  placeholder={t('register.second_phase.username_placeholder')}
                   placeholderTextColor="#9CA3AF"
                   value={username}
                   onChangeText={setUsername}
@@ -111,7 +111,7 @@ const SecondRegisterPhase: React.FC<SecondRegisterPhaseProps> = (
             </View>
             <View style={styles.dobContainer} >
               <View style={styles.dateInputHeader}>
-                <Text style={commonStyles.standardText}>Date of Birth:</Text>
+                <Text style={commonStyles.standardText}>{t('register.second_phase.date_of_birth')}</Text>
                 <TouchableOpacity onPress={showDatepickerDatepicker} style={styles.dateInputButton}>
                   <Text style={commonStyles.standardText}>{formatDate(dateOfBirth)}</Text>
                 </TouchableOpacity>
@@ -128,7 +128,7 @@ const SecondRegisterPhase: React.FC<SecondRegisterPhaseProps> = (
                     locale="en-US"
                   />
                   <TouchableOpacity onPress={confirmDate} style={commonStyles.primaryButton}>
-                      <Text style={commonStyles.standardText}>Confirm</Text>
+                      <Text style={commonStyles.standardText}>{t('register.second_phase.confirm')}</Text>
                   </TouchableOpacity>
                 </View>
               )}
@@ -136,7 +136,7 @@ const SecondRegisterPhase: React.FC<SecondRegisterPhaseProps> = (
             <View style={styles.otherInfoContainer} >
               <View style={styles.countryFormContainer}>
                 <Text style={commonStyles.standardText}>
-                  Country:
+                  {t('register.second_phase.country')}
                 </Text>
                 <View style={commonStyles.inputContainer}>
 
@@ -168,7 +168,7 @@ const SecondRegisterPhase: React.FC<SecondRegisterPhaseProps> = (
                       />
                     ) : (
                       <TouchableOpacity style={styles.countrySelectionButton} onPress={() => openCountryPickerForTheFirstTime()}>
-                        <Text style={commonStyles.placeholderText}>Select country </Text>
+                        <Text style={commonStyles.placeholderText}>{t('register.second_phase.select_country')}</Text>
                       </TouchableOpacity>
                     )
                   } 
@@ -190,17 +190,10 @@ const SecondRegisterPhase: React.FC<SecondRegisterPhaseProps> = (
                     }
                   }
                 />
-                  
-                <View style={styles.genderLabelContainer}>
-                  <FontAwesome name="mars" size={24} color="#9CA3AF" />
-                  <FontAwesome name="venus" size={24} color="#9CA3AF" />
-                  <FontAwesome name="genderless" size={24} color="#9CA3AF" />
-                </View>
               </View>
             </View>
           </View>
     );
-
 }
 
 const styles = StyleSheet.create({

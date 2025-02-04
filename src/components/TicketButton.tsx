@@ -3,7 +3,7 @@ import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-
+import {useTranslation} from 'react-i18next';
 type RootStackParamList = {
   BuyTicket: { 
     eventId: string; 
@@ -37,7 +37,7 @@ interface TicketButtonProps {
 
 const TicketButton: React.FC<TicketButtonProps> = ({ event, clubName }) => {
   const navigation = useNavigation<BuyTicketScreenNavigationProp>();
-
+  const { t } = useTranslation();
   const handlePress = () => {
     navigation.navigate('BuyTicket', { 
       eventId: event.id, 
@@ -59,7 +59,7 @@ const TicketButton: React.FC<TicketButtonProps> = ({ event, clubName }) => {
         end={{ x: 1, y: 0 }}
         style={styles.button}
       >
-        <Text style={styles.buttonText}>Buy Ticket</Text>
+        <Text style={styles.buttonText}>{t('buyTicket')}</Text>
       </LinearGradient>
     </TouchableOpacity>
   );

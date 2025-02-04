@@ -6,7 +6,7 @@ import { Feather } from '@expo/vector-icons';
 import { supabase } from '@/lib/supabase';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-
+import { useTranslation } from 'react-i18next';
 interface Club {
   club_id: string;
   name: string;
@@ -31,7 +31,6 @@ type MapScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Cl
 
 const { width, height } = Dimensions.get('window');
 const CARD_HEIGHT = 200;
-
 const CustomMarker: React.FC<{ club: Club; onPress: (club: Club) => void; isSelected: boolean }> = ({ club, onPress, isSelected }) => (
   <Marker
     coordinate={{ latitude: club.latitude, longitude: club.longitude }}
@@ -59,46 +58,50 @@ const ClubCard: React.FC<{
   onClose: () => void;
   panResponder: any;
   translateY: Animated.Value;
-}> = ({ club, onViewDetails, onClose, panResponder, translateY }) => (
-  <Animated.View 
-    style={[
-      styles.cardContainer, 
-      { transform: [{ translateY }] }
-    ]}
-    {...panResponder.panHandlers}
-  >
-    <TouchableOpacity style={styles.closeButton} onPress={onClose} testID='close-button'>
-      <Feather name="x" size={24} color="#6D28D9" />
-    </TouchableOpacity>
-    <View style={styles.cardContent}>
-      <Image source={{ uri: club.image }} style={styles.clubImage} />
-      <View style={styles.cardInfo}>
-        <Text style={styles.cardTitle}>{club.name}</Text>
-        <Text style={styles.cardCategory}>{club.category}</Text>
-        <View style={styles.cardDetails}>
-          <View style={styles.cardRow}>
-            <Feather name="star" size={16} color="#FFD700" />
-            <Text style={styles.cardText}>{club.rating.toFixed(1)}</Text>
+}> = ({ club, onViewDetails, onClose, panResponder, translateY }) => {
+  const { t } = useTranslation();
+  return (
+    <Animated.View 
+      style={[
+        styles.cardContainer, 
+        { transform: [{ translateY }] }
+      ]}
+      {...panResponder.panHandlers}
+    >
+      <TouchableOpacity style={styles.closeButton} onPress={onClose} testID='close-button'>
+        <Feather name="x" size={24} color="#6D28D9" />
+      </TouchableOpacity>
+      <View style={styles.cardContent}>
+        <Image source={{ uri: club.image }} style={styles.clubImage} />
+        <View style={styles.cardInfo}>
+          <Text style={styles.cardTitle}>{club.name}</Text>
+          <Text style={styles.cardCategory}>{club.category}</Text>
+          <View style={styles.cardDetails}>
+            <View style={styles.cardRow}>
+              <Feather name="star" size={16} color="#FFD700" />
+              <Text style={styles.cardText}>{club.rating.toFixed(1)}</Text>
+            </View>
+            <View style={styles.cardRow}>
+              <Feather name="users" size={16} color="#A78BFA" />
+              <Text style={styles.cardText}>{club.attendees}</Text>
+            </View>
+            <View style={styles.cardRow}>
+              <Feather name="music" size={16} color="#10B981" />
+              <Text style={styles.cardText}>{club.music_genre}</Text>
+            </View>
           </View>
-          <View style={styles.cardRow}>
-            <Feather name="users" size={16} color="#A78BFA" />
-            <Text style={styles.cardText}>{club.attendees}</Text>
-          </View>
-          <View style={styles.cardRow}>
-            <Feather name="music" size={16} color="#10B981" />
-            <Text style={styles.cardText}>{club.music_genre}</Text>
-          </View>
+          <Text style={styles.cardAddress} numberOfLines={1}>{club.address}</Text>
         </View>
-        <Text style={styles.cardAddress} numberOfLines={1}>{club.address}</Text>
       </View>
-    </View>
-    <TouchableOpacity style={styles.viewDetailsButton} onPress={onViewDetails} testID='view-details-button'>
-      <Text style={styles.viewDetailsButtonText}>View Details</Text>
-    </TouchableOpacity>
-  </Animated.View>
-);
+      <TouchableOpacity style={styles.viewDetailsButton} onPress={onViewDetails} testID='view-details-button'>
+        <Text style={styles.viewDetailsButtonText}>{t('map.view_details')}</Text>
+      </TouchableOpacity>
+    </Animated.View>
+  );
+};
 
 const MapScreen: React.FC = () => {
+  const { t } = useTranslation();
   const [clubs, setClubs] = useState<Club[]>([]);
   const [selectedClub, setSelectedClub] = useState<Club | null>(null);
   const [loading, setLoading] = useState(true);
@@ -202,7 +205,7 @@ const MapScreen: React.FC = () => {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color="#6D28D9" />
-        <Text>Loading clubs...</Text>
+        <Text>{t('map.loading_clubs')}</Text>
       </View>
     );
   }
