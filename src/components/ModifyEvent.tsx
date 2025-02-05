@@ -100,8 +100,14 @@ function ModifyEventModal({ visible, onClose, eventId, clubId, eventName, eventD
         description,
         image,
       }).eq('id', eventId)
-      
-      
+   
+
+      const updatedEvents = events.map(event =>
+        event.id === eventId
+          ? { ...event,data:updateData } // Modify only the event with id '123'
+          : event
+      );
+      setEvents(updatedEvents)
 
       if(updateError) throw new Error('Failed to update event')
     

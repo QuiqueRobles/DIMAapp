@@ -419,7 +419,7 @@ describe('ClubManageScreen', () => {
         });
 
         await waitFor(() => {
-            expect(Alert.alert).toHaveBeenCalledWith('Success', 'Club details updated successfully');
+            expect(Alert.alert).toHaveBeenCalledWith('Success', 'Profile Picture updated successfully');
         });
     });
 

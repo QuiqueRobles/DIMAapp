@@ -154,19 +154,31 @@ export default function OwnerRegisterScreen() {
               autoCapitalize="none"
             />
           </View>
-          <View style={styles.inputContainerAutocomplete}>
+          <View style={styles.inputContainer}>
             <Feather name="map" size={24} color="#9CA3AF" style={styles.icon} />
       <Autocomplete 
-        style={styles.autocompleteInput}
+        style={styles.autocompleteInput} //stile di dove scrivi
         //ntainerStyle={styles.autocompleteContainer}
         listContainerStyle={{
           display: suggestions.length > 0 ?"flex" : "none",
-          height: Math.min(suggestions.length *70,210),
+          height: Math.min(-60+(( suggestions.length-1) *70),210),
+          position:'absolute',
+          top: 50,  // Position below input field
+          left: 0,
+          right: 0,
           zIndex:10,
-          width:'auto' }}
+        alignSelf:'auto',
+      }}
        
-       
-        inputContainerStyle={styles.autocompleteInput}
+    
+
+
+
+
+
+
+
+        inputContainerStyle={styles.autocompleteInputStyle}
         hideResults={hide}
         
          // Remove extra borders if needed
@@ -275,6 +287,7 @@ const styles = StyleSheet.create({
     borderColor:'#FFFFFF',
     paddingHorizontal: 16,
     marginBottom: 1,
+    flex:1,
  
   },
   inputContainer: {
@@ -292,14 +305,28 @@ const styles = StyleSheet.create({
   autocompleteContainer: {
     flex: 1,
     zIndex: 10, // Ensures dropdown appears above other components
-    height:'100%',
+    height:'100%'
   },
   autocompleteInput: {
     borderWidth: 0, // Removes extra border
     backgroundColor: "#1E1E1E",
   color:'#FFFFFF',
   fontSize: 16,
-flex:1,
+
+ 
+
+ 
+
+
+  },
+  autocompleteInputStyle:
+  {
+    borderWidth: 0, // Removes extra border
+ 
+  
+
+  
+
   },
   listContainer:{
     height:'300%',
@@ -326,7 +353,6 @@ flex:1,
 
   icon: {
     marginRight: 10,
-    alignSelf:'center'
   },
   input: {
     flex: 1,

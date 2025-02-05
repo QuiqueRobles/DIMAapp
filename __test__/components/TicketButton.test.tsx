@@ -26,13 +26,13 @@ describe('TicketButton', () => {
     };
 
     const { getByText } = render(<TicketButton event={mockEvent} clubName="Club XYZ" />);
-    fireEvent.press(getByText('Buy Ticket'));
+    fireEvent.press(getByText('buyTicket'));
 
     expect(mockNavigate).toHaveBeenCalledWith('BuyTicket', {
       eventId: mockEvent.id,
       eventName: mockEvent.name || 'Unnamed Event',
       eventDate: mockEvent.date,
-      eventPrice: mockEvent.price !== null ? mockEvent.price / 100 : 0,
+      eventPrice: mockEvent.price !== null ? mockEvent.price : 0,
       clubName: 'Club XYZ',
       eventDescription: mockEvent.description,
       eventImage: mockEvent.image,

@@ -4,6 +4,7 @@ import React from 'react';
 import { render, fireEvent, waitFor, act } from '@testing-library/react-native';
 import { Alert, Text } from 'react-native';
 import ModifyEvent from '@/components/ModifyEvent';
+import { useClub } from '@/context/EventContext';
 
 // --- MOCK di expo-image-picker ---
 jest.mock('expo-image-picker', () => {
@@ -38,6 +39,9 @@ jest.mock('@/lib/supabase', () => {
     
   };
 });
+jest.mock("../../src/context/EventContext", () => ({
+  useClub: jest.fn(),
+}));
 
 const {supabase: mockedSupabase} = require('@/lib/supabase');
 
@@ -49,12 +53,22 @@ global.alert = jest.fn();
 
 // Creiamo una funzione mock per onClose da passare come prop
 const onCloseMock = jest.fn();
+describe("ModifyEventModal", () => {
+  const mockSetEvents = jest.fn();
 
+  beforeEach(() => {
+    (useClub as jest.Mock).mockReturnValue({
+      setEvents: mockSetEvents,
+      events: [{ id: "1", name: "Test Event" }],
+    });
+  });
 
-describe('ModifyEventModal - Image Upload', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
+
+
+
 
   it('uploads image successfully and displays success alert', async () => {
     // Renderizza il componente con i dati iniziali
@@ -179,6 +193,10 @@ describe('ModifyEventModal - Image Upload', () => {
     await waitFor(() => {
       expect(global.alert).toHaveBeenCalledWith("Event updated successfully");
       expect(onCloseMock).toHaveBeenCalled();
+        expect(mockSetEvents).toHaveBeenCalled();
+       
+     
+    
     });
   });
 });

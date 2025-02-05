@@ -99,13 +99,14 @@ const ClubEdit: React.FC<ClubEditsProps> = ({ club ,setClub}) => {
 
     <View style={styles.container}>
 
-      <View style={styles.detailItem}>
+      <View style={styles.detailItem}> 
       <View style={styles.iconContainer}>
         <Feather name={"map-pin"} size={16} color="#A78BFA" />
       </View>
       <Autocomplete 
         inputContainerStyle={{ borderWidth: 0 }} // Remove extra borders if needed
         style={styles.detailInput}
+
         data={suggestions}
         value={query}
         onChangeText={(text) => {
