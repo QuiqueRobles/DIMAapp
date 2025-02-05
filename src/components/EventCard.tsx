@@ -88,7 +88,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, clubName, onBuyTicket }) =
           </Text>
         )}
         {event.price !== null && (
-          <Text style={styles.price}>${(event.price / 100).toFixed(2)}</Text>
+          <Text style={styles.price}>${(event.price).toFixed(2)}</Text>
         )}
         <TouchableOpacity 
           testID='event-card'

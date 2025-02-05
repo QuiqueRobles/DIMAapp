@@ -278,8 +278,7 @@
     }
   
     return (
-      //console.log("club",club),
-      //console.log("edit",edit),
+   
 
       <SafeAreaView style={styles.container}>
         <ScrollView
@@ -326,7 +325,7 @@
       ) : (
         <ClubDetails club={club} />
       )}
-    </View>r
+    </View>
             <View style={styles.section}>
               <View style={styles.sectionHeader}>
                 <Text style={styles.sectionTitle}>Reviews</Text>

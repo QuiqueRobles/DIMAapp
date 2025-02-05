@@ -66,7 +66,7 @@ const OwnedEventsList: React.FC<EventsListProps> = ({ events, clubName }) => {
               </Text>
             )}
             {event.price !== null && (
-              <Text style={styles.eventPrice}>${(event.price /100 ).toFixed(2)}</Text>
+              <Text style={styles.eventPrice}>${(event.price ).toFixed(2)}</Text>
             )}
           </View>
           
