@@ -74,9 +74,9 @@ describe('OwnerLoginScreen', () => {
 
   it('handles login button press', async () => {
     const { getByText, getByPlaceholderText } = render(<OwnerLoginScreen />);
-    const emailInput = getByPlaceholderText('Email');
-    const passwordInput = getByPlaceholderText('Password');
-    const loginButton = getByText('Sign In as Owner');
+    const emailInput = getByPlaceholderText('owner_login.email_placeholder');
+    const passwordInput = getByPlaceholderText('owner_login.password_placeholder');
+    const loginButton = getByText('owner_login.sign_in');
 
     fireEvent.changeText(emailInput, 'owner@example.com');
     fireEvent.changeText(passwordInput, 'password123');
@@ -90,7 +90,7 @@ describe('OwnerLoginScreen', () => {
 
   it('navigates to user login screen', () => {
     const { getByText } = render(<OwnerLoginScreen />);
-    const backToLoginButton = getByText('Back to User Login');
+    const backToLoginButton = getByText('owner_login.back_to_user_login');
 
     fireEvent.press(backToLoginButton);
 
@@ -99,7 +99,7 @@ describe('OwnerLoginScreen', () => {
 
   it('navigates to owner registration screen', () => {
     const { getByText } = render(<OwnerLoginScreen />);
-    const registerButton = getByText('Register as owner');
+    const registerButton = getByText('owner_login.register_as_owner');
 
     fireEvent.press(registerButton);
 

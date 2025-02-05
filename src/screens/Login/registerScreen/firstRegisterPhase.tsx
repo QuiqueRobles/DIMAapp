@@ -9,6 +9,7 @@ import { CountryCode, Country } from 'react-native-country-picker-modal/lib/type
 import RadioGroup, {RadioButtonProps} from 'react-native-radio-buttons-group';
 import { FontAwesome } from '@expo/vector-icons';
 import commonStyles from '@/styles/commonStyles';
+import { useTranslation } from 'react-i18next'; // Add this import
 
 interface FirstRegisterPhaseProps {
     goToSecondPage: () => void;
@@ -25,18 +26,17 @@ const FirstRegisterPhase: React.FC<FirstRegisterPhaseProps> = (
 
     const [isLoading, setIsLoading] = useState(false);
     const navigation = useNavigation<AppNavigationProp>();
-
-
+    const { t } = useTranslation(); // Add translation hook
 
     return (
         <View style={styles.firstPageContainer}> 
             <View style={styles.fieldContainer}>
-                <Text style={commonStyles.standardText}>Email</Text>
+                <Text style={commonStyles.standardText}>{t('register.first_phase.email')}</Text>
                 <View style={commonStyles.inputContainer}>
                     <Feather name="mail" size={24} color="#9CA3AF"  />
                     <TextInput testID="email-input"
                         style={commonStyles.textInput}
-                        placeholder="Value"
+                        placeholder={t('register.first_phase.email_placeholder')}
                         placeholderTextColor="#9CA3AF"
                         value={email}
                         onChangeText={setEmail}
@@ -46,12 +46,12 @@ const FirstRegisterPhase: React.FC<FirstRegisterPhaseProps> = (
                 </View> 
             </View>
             <View style={styles.fieldContainer}>
-                <Text style={commonStyles.standardText}>Password</Text>
+                <Text style={commonStyles.standardText}>{t('register.first_phase.password')}</Text>
                 <View style={commonStyles.inputContainer}>
                     <Feather name="lock" size={24} color="#9CA3AF"/>
                     <TextInput testID="password-input"
                         style={commonStyles.textInput}
-                        placeholder="Value"
+                        placeholder={t('register.first_phase.password_placeholder')}
                         placeholderTextColor="#9CA3AF"
                         value={password}
                         onChangeText={setPassword}
@@ -60,12 +60,12 @@ const FirstRegisterPhase: React.FC<FirstRegisterPhaseProps> = (
                 </View>
             </View>
             <View style={styles.fieldContainer}>
-                <Text style={commonStyles.standardText}>Confirm Password</Text>
+                <Text style={commonStyles.standardText}>{t('register.first_phase.confirm_password')}</Text>
                 <View style={commonStyles.inputContainer}>
                     <Feather name="lock" size={24} color="#9CA3AF" />
                     <TextInput testID="confirm-password-input"
                     style={commonStyles.textInput}
-                    placeholder="Value"
+                    placeholder={t('register.first_phase.password_placeholder')}
                     placeholderTextColor="#9CA3AF"
                     value={confirmPassword}
                     onChangeText={setConfirmPassword}
@@ -73,13 +73,6 @@ const FirstRegisterPhase: React.FC<FirstRegisterPhaseProps> = (
                     />
                 </View>
             </View>
-            {/* <TouchableOpacity style={commonStyles.primaryButton} onPress={goToSecondPage} disabled={isLoading}>
-                {isLoading ? (
-                <Text style={commonStyles.primaryButtonText}>Loading...</Text>
-                ) : (
-                <Text style={commonStyles.primaryButtonText}>Sign Up</Text>
-                )}
-            </TouchableOpacity> */}
         </View>
     );
 }

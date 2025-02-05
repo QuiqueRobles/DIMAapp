@@ -32,17 +32,17 @@ describe('RegisterScreen', () => {
     const { getByText, getByPlaceholderText } = render(<RegisterScreen />);
 
     // Check if the first page elements are rendered
-    expect(getByText('Sign Up')).toBeTruthy();
-    expect(getByPlaceholderText('Email')).toBeTruthy();
-    expect(getByPlaceholderText('Password')).toBeTruthy();
-    expect(getByPlaceholderText('Confirm Password')).toBeTruthy();
-    expect(getByText('Already have an account? Sign in')).toBeTruthy();
+    expect(getByText('register.signup')).toBeTruthy();
+    expect(getByPlaceholderText('register.email_placeholder')).toBeTruthy();
+    expect(getByPlaceholderText('register.password_placeholder')).toBeTruthy();
+    expect(getByPlaceholderText('register.confirm-password_placeholder')).toBeTruthy();
+    expect(getByText('register.already_account')).toBeTruthy();
   });
 
   it('navigates to the second page when "Sign Up" is pressed', () => {
     const { getByText } = render(<RegisterScreen />);
 
-    const signUpButton = getByText('Sign Up');
+    const signUpButton = getByText('register.signup');
     fireEvent.press(signUpButton);
 
     // Check if the second page elements are rendered
@@ -52,9 +52,9 @@ describe('RegisterScreen', () => {
   it('handles email and password input on the first page', () => {
     const { getByPlaceholderText } = render(<RegisterScreen />);
 
-    const emailInput = getByPlaceholderText('Email');
-    const passwordInput = getByPlaceholderText('Password');
-    const confirmPasswordInput = getByPlaceholderText('Confirm Password');
+    const emailInput =getByPlaceholderText('register.email_placeholder');
+    const passwordInput =getByPlaceholderText('register.password_placeholder');
+    const confirmPasswordInput = getByPlaceholderText('register.confirm-password_placeholder');
 
     fireEvent.changeText(emailInput, 'test@example.com');
     fireEvent.changeText(passwordInput, 'password123');
@@ -69,7 +69,7 @@ describe('RegisterScreen', () => {
     const { getByText, getByTestId } = render(<RegisterScreen />);
 
     // Navigate to the second page
-    const signUpButton = getByText('Sign Up');
+    const signUpButton = getByText('register.signup');
     fireEvent.press(signUpButton);
 
     // Press the back button
@@ -77,22 +77,22 @@ describe('RegisterScreen', () => {
     fireEvent.press(backButton);
 
     // Check if the first page elements are rendered again
-    expect(getByText('Sign Up')).toBeTruthy();
+    expect(getByText('register.signup')).toBeTruthy();
   });
 
   it('handles date picker interaction on the second page', () => {
     const { getByText, getByTestId } = render(<RegisterScreen />);
 
     // Navigate to the second page
-    const signUpButton = getByText('Sign Up');
+    const signUpButton = getByText('register.signup');
     fireEvent.press(signUpButton);
 
     // Open the date picker
-    const datePickerButton = getByText('Select Date'); // Adjust based on your component
+    const datePickerButton = getByText('register.date_of_birth'); // Adjust based on your component
     fireEvent.press(datePickerButton);
 
     // Confirm the date
-    const confirmButton = getByText('Confirm'); // Adjust based on your component
+    const confirmButton = getByText('common.confirm'); // Adjust based on your component
     fireEvent.press(confirmButton);
 
     // Check if the date is updated
@@ -103,11 +103,11 @@ describe('RegisterScreen', () => {
     const { getByText, getByTestId } = render(<RegisterScreen />);
 
     // Navigate to the second page
-    const signUpButton = getByText('Sign Up');
+    const signUpButton = getByText('register.signup');
     fireEvent.press(signUpButton);
 
     // Open the country picker
-    const countryPickerButton = getByText('Select Country'); // Adjust based on your component
+    const countryPickerButton = getByText('register.country'); // Adjust based on your component
     fireEvent.press(countryPickerButton);
 
     // Select a country
@@ -122,7 +122,7 @@ describe('RegisterScreen', () => {
     const { getByText, getByTestId } = render(<RegisterScreen />);
 
     // Navigate to the second page
-    const signUpButton = getByText('Sign Up');
+    const signUpButton = getByText('register.signup');
     fireEvent.press(signUpButton);
 
     // Select a gender
@@ -136,7 +136,7 @@ describe('RegisterScreen', () => {
   it('navigates to the login screen when "Already have an account? Sign in" is pressed', () => {
     const { getByText } = render(<RegisterScreen />);
 
-    const loginLink = getByText('Already have an account? Sign in');
+    const loginLink = getByText('register.already_account');
     fireEvent.press(loginLink);
 
     expect(mockNavigation.navigate).toHaveBeenCalledWith('Login');

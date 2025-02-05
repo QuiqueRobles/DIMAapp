@@ -35,15 +35,15 @@ describe("OwnerRegisterScreen", () => {
 
   test("renders correctly", () => {
     const { getByPlaceholderText } = render(<OwnerRegisterScreen />);
-    expect(getByPlaceholderText("Club Name")).toBeTruthy();
-    expect(getByPlaceholderText("Club Address")).toBeTruthy();
-    expect(getByPlaceholderText("Email")).toBeTruthy();
-    expect(getByPlaceholderText("Phone")).toBeTruthy();
+    expect(getByPlaceholderText('owner_register.club_name_placeholder')).toBeTruthy();
+    expect(getByPlaceholderText('Club Address')).toBeTruthy();
+    expect(getByPlaceholderText('owner_register.email_placeholder')).toBeTruthy();
+    expect(getByPlaceholderText('Phone')).toBeTruthy();
   });
 
   test("disables button when required fields are empty", async () => {
     const { getByText } = render(<OwnerRegisterScreen />);
-    const button = getByText("Confirm");
+    const button = getByText('owner_register.confirm');
 
     fireEvent.press(button);
     await waitFor(() => {
@@ -54,12 +54,13 @@ describe("OwnerRegisterScreen", () => {
   test("enables button when all fields are filled", async () => {
     const { getByPlaceholderText, getByText } = render(<OwnerRegisterScreen />);
 
-    fireEvent.changeText(getByPlaceholderText("Club Name"), "Test Club");
+    fireEvent.changeText(getByPlaceholderText('owner_register.club_name_placeholder'), "Test Club");
     fireEvent.changeText(getByPlaceholderText("Club Address"), "Test Address");
-    fireEvent.changeText(getByPlaceholderText("Email"), "test@example.com");
+    fireEvent.changeText(getByPlaceholderText('owner_register.email_placeholder'), "test@example.com");
     fireEvent.changeText(getByPlaceholderText("Phone"), "1234567890");
+    const button = getByText('owner_register.confirm');
 
-    const button = getByText("Confirm");
+   
 
     fireEvent.press(button);
 
@@ -71,17 +72,16 @@ describe("OwnerRegisterScreen", () => {
   test("shows success message after form submission", async () => {
     const { getByPlaceholderText, getByText, queryByText } = render(<OwnerRegisterScreen />);
 
-    fireEvent.changeText(getByPlaceholderText("Club Name"), "Test Club");
+    fireEvent.changeText(getByPlaceholderText('owner_register.club_name_placeholder'), "Test Club");
     fireEvent.changeText(getByPlaceholderText("Club Address"), "Test Address");
-    fireEvent.changeText(getByPlaceholderText("Email"), "test@example.com");
+    fireEvent.changeText(getByPlaceholderText('owner_register.email_placeholder'), "test@example.com");
     fireEvent.changeText(getByPlaceholderText("Phone"), "1234567890");
-
-    const button = getByText("Confirm");
+    const button = getByText('owner_register.confirm');
 
     fireEvent.press(button);
 
     await waitFor(() => {
-      expect(queryByText("Thank you for being interested in our project. We'll be contacting you soon!")).toBeTruthy();
+      expect(queryByText('owner_register.thank_you_text')).toBeTruthy();
     });
   });
 
@@ -91,13 +91,11 @@ describe("OwnerRegisterScreen", () => {
     }));
 
     const { getByPlaceholderText, getByText } = render(<OwnerRegisterScreen />);
-
-    fireEvent.changeText(getByPlaceholderText("Club Name"), "Test Club");
+    fireEvent.changeText(getByPlaceholderText('owner_register.club_name_placeholder'), "Test Club");
     fireEvent.changeText(getByPlaceholderText("Club Address"), "Test Address");
-    fireEvent.changeText(getByPlaceholderText("Email"), "test@example.com");
+    fireEvent.changeText(getByPlaceholderText('owner_register.email_placeholder'), "test@example.com");
     fireEvent.changeText(getByPlaceholderText("Phone"), "1234567890");
-
-    const button = getByText("Confirm");
+    const button = getByText('owner_register.confirm');
 
     fireEvent.press(button);
 

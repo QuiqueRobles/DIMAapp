@@ -4,13 +4,14 @@ import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 import { AppNavigationProp } from '@/navigation';
+import { useTranslation } from 'react-i18next';
 
 export default function ForgotPasswordScreen() {
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const supabase = useSupabaseClient();
   const navigation = useNavigation<AppNavigationProp>();
-
+  const { t } = useTranslation();
   const handleResetPassword = async () => {
     setIsLoading(true);
     const { error } = await supabase.auth.resetPasswordForEmail(email);
@@ -34,7 +35,7 @@ export default function ForgotPasswordScreen() {
         style={styles.logo}
         resizeMode="contain"
       />
-      <Text style={styles.title}>Reset Password</Text>
+      <Text style={styles.title}>{t("reset_password")}</Text>
       <View style={styles.inputContainer}>
         <Feather name="mail" size={24} color="#9CA3AF" style={styles.icon} />
         <TextInput
@@ -54,13 +55,13 @@ export default function ForgotPasswordScreen() {
   disabled={isLoading}
 >
   {isLoading ? (
-    <Text style={styles.buttonText}>Sending...</Text>
+    <Text style={styles.buttonText}>{t("sending")}</Text>
   ) : (
-    <Text style={styles.buttonText}>Reset Password</Text>
+    <Text style={styles.buttonText}>{t("reset_password")}</Text>
   )}
 </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-        <Text style={styles.backToLogin}>Back to Login</Text>
+        <Text style={styles.backToLogin}>{t("back_to_login")}</Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>
   );

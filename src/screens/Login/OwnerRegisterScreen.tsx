@@ -8,11 +8,13 @@ import { add } from 'date-fns';
 import { v4 as uuidv4 } from "uuid";
 import { debounce } from "lodash";
 
+import { useTranslation } from 'react-i18next';
 
 import Autocomplete from 'react-native-autocomplete-input';
 
 
 export default function OwnerRegisterScreen() {
+  const { t } = useTranslation();
   const supabase = useSupabaseClient();
   const KNOWN_PASSWORD = 'club_password';
   const [email, setEmail] = useState('');
@@ -134,12 +136,12 @@ export default function OwnerRegisterScreen() {
       />
       {!showText && ( 
         <>
-          <Text style={styles.signIn}>Interested in working with us? Fill this form, you'll be contacted!</Text>
+          <Text style={styles.signIn}>{t('owner_register.interested_text')}</Text>
           <View style={styles.inputContainer}>
             <Feather name="user" size={24} color="#9CA3AF" style={styles.icon} />
             <TextInput
               style={styles.input}
-              placeholder="Club Name"
+              placeholder={t('owner_register.club_name_placeholder')}
               placeholderTextColor="#9CA3AF"
               value={clubname}
               onChangeText={(text)=>{setClubName(text);
@@ -192,11 +194,12 @@ export default function OwnerRegisterScreen() {
 
       />
       </View>
-          <View style={styles.inputContainer}>
+
+         <View style={styles.inputContainer}>
             <Feather name="mail" size={24} color="#9CA3AF" style={styles.icon} />
             <TextInput
               style={styles.input}
-              placeholder="Email"
+              placeholder={t('owner_register.email_placeholder')}
               placeholderTextColor="#9CA3AF"
               value={email}
               onChangeText={(text)=>{setEmail(text);
@@ -205,11 +208,12 @@ export default function OwnerRegisterScreen() {
               autoCapitalize="none"
             />
           </View>
+  
           <View style={styles.inputContainer}>
             <Feather name="phone" size={24} color="#9CA3AF" style={styles.icon} />
             <TextInput
               style={styles.input}
-              placeholder="Phone"
+              placeholder={'Phone'}
               placeholderTextColor="#9CA3AF"
               value={clubphone}
               onChangeText={(text)=>{setClubPhone(text);
@@ -221,21 +225,22 @@ export default function OwnerRegisterScreen() {
           
           <TouchableOpacity style={styles.button} disabled={isLoading} onPress={handlePress}>
             {isLoading ? (
-              <Text style={styles.buttonText}>Loading...</Text>
+              <Text style={styles.buttonText}>{t('owner_register.loading')}</Text>
             ) : ( 
-              <Text style={styles.buttonText}>Confirm</Text>
+              <Text style={styles.buttonText}>{t('owner_register.confirm')}</Text>
             )}
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('OwnerLogin')}>
-            <Text style={styles.signIn}>Already have an account? Sign in</Text>
+            <Text style={styles.signIn}>{t('owner_register.have_account')}</Text>
           </TouchableOpacity>
-          
       </> )}
       {showText && (
         <>
-          <Text style={styles.signIn}>Thank you for being interested in our project. We'll be contacting you soon!</Text></>
+          <Text style={styles.signIn}>{t('owner_register.thank_you_text')}</Text>
+        </>
       )}
-    </KeyboardAvoidingView> );
+    </KeyboardAvoidingView>
+  );
 }
 
 const styles = StyleSheet.create({

@@ -5,13 +5,13 @@
     "logout": "Esci",
     "logoutConfirmation": "Sei sicuro di voler uscire?",
     "cancel": "Annulla",
-    "failedToSignOut": "Errore durante la disconnessione. Riprova.",
+    "failedToSignOut": "Impossibile disconnettere. Riprova.",
     "permissionRequired": "Autorizzazione richiesta",
-    "allowPhotoLibraryAccess": "Per favore, consenti l'accesso alla tua libreria fotografica per caricare un'immagine.",
+    "allowPhotoLibraryAccess": "Consenti l'accesso alla libreria fotografica per caricare un'immagine.",
     "success": "Successo",
     "profilePictureUpdated": "Foto del profilo aggiornata con successo",
     "error": "Errore",
-    "failedToUploadImage": "Errore durante il caricamento dell'immagine. Riprova.",
+    "failedToUploadImage": "Impossibile caricare l'immagine. Riprova.",
     "dateOfBirth": "Data di nascita",
     "gender": "Genere",
     "country": "Paese",
@@ -25,10 +25,147 @@
     "password": "Password",
     "enterPassword": "Inserisci la tua password",
     "signIn": "Accedi",
-    "forgotPassword": "Hai dimenticato la password?",
-    "newHere": "Sei nuovo qui?",
+    "forgotPassword": "Password dimenticata?",
+    "newHere": "Sei nuovo?",
     "signUp": "Registrati!",
     "areYouOwner": "Sei un proprietario?",
-    "enterEmailPassword": "Per favore, inserisci email e password"
+    "enterEmailPassword": "Inserisci sia l'email che la password"
+  },
+  "buy_tickets": "Acquista biglietti",
+  "per_ticket": "per biglietto",
+  "total": "Totale",
+  "processing": "Elaborazione...",
+  "purchase_tickets": "Acquista biglietti",
+  "error": "Errore",
+  "unable_to_initialize_payment": "Impossibile inizializzare il pagamento. Riprova.",
+  "your_app_name": "Nome della tua app",
+  "error_code": "Codice di errore: {{code}}",
+  "failed_to_initialize_payment": "Impossibile inizializzare il pagamento. Riprova.",
+  "payment_error": "Errore di pagamento: {{code}}",
+  "success": "Successo",
+  "payment_successful_ticket_created": "Il pagamento è stato effettuato con successo e il biglietto è stato creato!",
+  "failed_to_process_payment_or_create_ticket": "Impossibile elaborare il pagamento o creare il biglietto: {{message}}",
+  "unknown_error_occurred": "Si è verificato un errore sconosciuto durante l'elaborazione dell'acquisto",
+  "no_user_logged_in": "Nessun utente connesso",
+  "unknown_error_occurred_during_insertion": "Si è verificato un errore sconosciuto durante l'inserimento",
+  "no_data_returned_from_ticket_insertion": "Nessun dato restituito dall'inserimento del biglietto",
+  "date_not_available": "Data non disponibile",
+  "home": {
+    "search_placeholder": "Cerca club...",
+    "error_message": "Impossibile caricare i club. Riprova.",
+    "refreshing": "Aggiornamento...",
+    "no_clubs_found": "Nessun club trovato"
+  },
+  "events": {
+    "upcoming": "Prossimi eventi",
+    "none": "Nessun evento in programma",
+    "unnamed_event": "Evento senza nome",
+    "price": "${{price}}"
+  },
+  "reviews": {
+    "title": "Recensioni",
+    "none": "Ancora nessuna recensione"
+  },
+  "common": {
+    "seeAll": "Vedi tutto",
+    "loading": "Caricamento...",
+    "confirm": "Conferma",
+    "submit": "Invia"
+  },
+  "defaultCategory": "Nightclub",
+  "tabs": {
+    "home": "Home",
+    "map": "Mappa",
+    "tickets": "Biglietti",
+    "profile": "Profilo",
+    "events": "Eventi"
+  },
+  "tickets": {
+    "title": "I miei biglietti",
+    "incoming_events": "Eventi in arrivo",
+    "past_events": "Eventi passati",
+    "no_future_tickets": "Nessun biglietto per eventi futuri",
+    "no_past_tickets": "Nessun biglietto per eventi passati",
+    "review_submitted": "Recensione inviata con successo"
+  },
+  "ticket_card": {
+    "write_review": "Scrivi una recensione",
+    "people": "{{count}} persona",
+    "people_plural": "{{count}} persone"
+  },
+  "expanded_ticket": {
+    "user": "Utente",
+    "event_date": "Data dell'evento",
+    "event_time": "Ora dell'evento",
+    "number_of_people": "Numero di persone",
+    "total_price": "Prezzo totale",
+    "purchase_date": "Data di acquisto"
+  },
+  "placeholder": {
+    "no_image": "Nessuna immagine"
+  },
+  "club": {
+    "reviews_count": "({{count}} recensioni)",
+    "attendees": "{{count}} partecipanti",
+    "open": "Aperto",
+    "closed": "Chiuso",
+    "about": "Informazioni"
+  },
+  "buyTicket": "Acquista biglietto",
+  "viewDetails": "Visualizza dettagli",
+  "map": {
+    "view_details": "Visualizza dettagli",
+    "loading_clubs": "Caricamento club..."
+  },
+  "reset_password": "Reimposta password",
+  "sending": "Invio...",
+  "back_to_login": "Torna al login",
+  "register": {
+    "email_placeholder": "Email",
+    "password_placeholder": "Password",
+    "confirm_password_placeholder": "Conferma password",
+    "signup": "Registrati",
+    "already_account": "Hai già un account? Accedi",
+    "value_placeholder": "Valore",
+    "date_of_birth": "Data di nascita:",
+    "country": "Paese:",
+    "select_country": "Seleziona paese",
+    "first_phase": {
+      "email": "Email",
+      "email_placeholder": "Inserisci la tua email",
+      "password": "Password",
+      "confirm_password": "Conferma password",
+      "password_placeholder": "Inserisci la tua password"
+    },
+    "second_phase": {
+      "username": "Nome utente:",
+      "username_placeholder": "Inserisci il tuo nome utente",
+      "date_of_birth": "Data di nascita:",
+      "confirm": "Conferma",
+      "country": "Paese:",
+      "select_country": "Seleziona paese"
+    }
+  },
+  "owner_login": {
+    "title": "Login proprietario",
+    "email_placeholder": "Email",
+    "password_placeholder": "Password",
+    "loading": "Caricamento...",
+    "sign_in": "Accedi come proprietario",
+    "back_to_user_login": "Torna al login utente",
+    "register_as_owner": "Registrati come proprietario"
+  },
+  "owner_register": {
+    "interested_text": "Interessato a lavorare con noi? Compila questo modulo, ti contatteremo!",
+    "club_name_placeholder": "Nome del club",
+    "email_placeholder": "Email",
+    "loading": "Caricamento...",
+    "confirm": "Conferma",
+    "have_account": "Hai già un account? Accedi",
+    "thank_you_text": "Grazie per il tuo interesse nel nostro progetto. Ti contatteremo presto!",
+    "validation": {
+      "club_name_length": "Il nome del club deve essere compreso tra 1 e 20 caratteri",
+      "missing_parameters": "Parametri mancanti"
+    }
   }
 }

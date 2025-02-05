@@ -46,9 +46,9 @@ describe('SecondRegisterPhase Component', () => {
             />
         );
 
-        expect(getByPlaceholderText('Value')).toBeTruthy(); // Username input
-        expect(getByText('Date of Birth:')).toBeTruthy(); // DOB label
-        expect(getByText('Country:')).toBeTruthy(); // Country label
+        expect(getByPlaceholderText('register.second_phase.username')).toBeTruthy(); // Username 
+        expect(getByText('register.second_phase.date_of_birth')).toBeTruthy(); // DOB label
+        expect(getByText('register.second_phase.country')).toBeTruthy(); // Country label
     });
 
     it('calls setUsername when typing in username field', () => {
@@ -65,7 +65,7 @@ describe('SecondRegisterPhase Component', () => {
             />
         );
 
-        const usernameInput = getByPlaceholderText('Value');
+        const usernameInput = getByPlaceholderText('register.second_phase.username_placeholder');
         fireEvent.changeText(usernameInput, 'testUser');
 
         expect(mockSetUsername).toHaveBeenCalledWith('testUser');
@@ -87,9 +87,9 @@ describe('SecondRegisterPhase Component', () => {
             />
         );
 
-        fireEvent.press(getByText('Date of Birth:')); // Open Date Picker
+        fireEvent.press(getByText('register.second_phase.date_of_birth')); // Open Date Picker
         
-        fireEvent(getByText('Confirm'), 'press'); // Confirm Date Selection
+        fireEvent(getByText('register.second_phase.confirm'), 'press'); // Confirm Date Selection
 
         expect(mockSetDateOfBirth).toHaveBeenCalled();
     });
@@ -108,7 +108,7 @@ describe('SecondRegisterPhase Component', () => {
             />
         );
 
-        fireEvent.press(getByText('Select country'));
+        fireEvent.press(getByText('register.second_phase.country'));
         expect(mockSetCountry).toHaveBeenCalled();
     });
 

@@ -53,7 +53,7 @@ export default function LoginScreen() {
         >
           <StatusBar barStyle="light-content" />
           <ScrollView contentContainerStyle={styles.scrollViewContent}>
-            {/* Language Selector */}
+           
             <LanguageSelector2 />
 
             <Image
@@ -63,12 +63,12 @@ export default function LoginScreen() {
             />
 
             <View style={styles.formContainer}>
-              <Text style={styles.label}>{t('login.email')}</Text> {/* Translated label */}
+              <Text style={styles.label}>{t('login.email')}</Text> 
               <View style={styles.inputContainer}>
                 <Feather name="mail" size={20} color="#9CA3AF" style={styles.inputIcon} />
                 <TextInput
                   style={styles.input}
-                  placeholder={t('login.enterEmail')} // Translated placeholder
+                  placeholder={t('login.enterEmail')}
                   placeholderTextColor="#9CA3AF"
                   value={email}
                   onChangeText={setEmail}
@@ -77,12 +77,12 @@ export default function LoginScreen() {
                 />
               </View>
 
-              <Text style={styles.label}>{t('login.password')}</Text> {/* Translated label */}
+              <Text style={styles.label}>{t('login.password')}</Text> 
               <View style={styles.inputContainer}>
                 <Feather name="lock" size={20} color="#9CA3AF" style={styles.inputIcon} />
                 <TextInput
                   style={styles.input}
-                  placeholder={t('login.enterPassword')} // Translated placeholder
+                  placeholder={t('login.enterPassword')} 
                   placeholderTextColor="#9CA3AF"
                   value={password}
                   onChangeText={setPassword}
@@ -114,7 +114,7 @@ export default function LoginScreen() {
 
               <View style={styles.optionsContainer}>
                 <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
-                  <Text style={styles.optionText}>{t('login.forgotPassword')}</Text> {/* Translated text */}
+                  <Text style={styles.optionText}>{t('login.forgotPassword')}</Text> 
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Register')}>
   <Text style={styles.optionText}>
@@ -123,7 +123,7 @@ export default function LoginScreen() {
 </TouchableOpacity>
 
                 <TouchableOpacity onPress={() => navigation.navigate('OwnerLogin')}>
-                  <Text style={styles.optionText}>{t('login.areYouOwner')}</Text> {/* Translated text */}
+                  <Text style={styles.optionText}>{t('login.areYouOwner')}</Text> 
                 </TouchableOpacity>
               </View>
             </View>

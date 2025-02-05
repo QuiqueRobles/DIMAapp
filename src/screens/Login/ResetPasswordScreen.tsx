@@ -7,17 +7,19 @@ import { Feather } from '@expo/vector-icons';
 import { AppNavigationProp } from '@/navigation';
 import * as Linking from 'expo-linking';
 
-// export default function ResetPasswordScreen() {
-//   const [password, setPassword] = useState('');
-//   const [confirmPassword, setConfirmPassword] = useState('');
-//   const [token, setToken] = useState('');
-//   const [isLoading, setIsLoading] = useState(false);
-//   const supabase = useSupabaseClient();
-//   const navigation = useNavigation<AppNavigationProp>();
+import {useTranslation} from 'react-i18next';
 
-//  useEffect(() => {
-//   const handleDeepLink = (url: string | null) => {
-//     if (!url) return;
+export default function ResetPasswordScreen() {
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [token, setToken] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const supabase = useSupabaseClient();
+  const navigation = useNavigation<AppNavigationProp>();
+  const { t } = useTranslation();
+ useEffect(() => {
+  const handleDeepLink = (url: string | null) => {
+    if (!url) return;
 
 //     const parsed = Linking.parse(url);
 //     console.log('Parsed URL:', parsed);
@@ -95,54 +97,54 @@ import * as Linking from 'expo-linking';
 
 
 
-//   return (
-//     <KeyboardAvoidingView 
-//       behavior={Platform.OS === "ios" ? "padding" : "height"}
-//       style={styles.container}
-//     >
-//       <Image
-//         source={require('@/assets/nightmi_logo.png')}
-//         style={styles.logo}
-//         resizeMode="contain"
-//       />
-//       <Text style={styles.title}>Reset Password</Text>
-//       <View style={styles.inputContainer}>
-//         <Feather name="lock" size={24} color="#9CA3AF" style={styles.icon} />
-//         <TextInput
-//           style={styles.input}
-//           placeholder="New Password"
-//           placeholderTextColor="#9CA3AF"
-//           secureTextEntry
-//           value={password}
-//           onChangeText={setPassword}
-//           autoCapitalize="none"
-//         />
-//       </View>
-//       <View style={styles.inputContainer}>
-//         <Feather name="lock" size={24} color="#9CA3AF" style={styles.icon} />
-//         <TextInput
-//           style={styles.input}
-//           placeholder="Confirm Password"
-//           placeholderTextColor="#9CA3AF"
-//           secureTextEntry
-//           value={confirmPassword}
-//           onChangeText={setConfirmPassword}
-//           autoCapitalize="none"
-//         />
-//       </View>
-//       <TouchableOpacity style={styles.button} onPress={handleResetPassword} disabled={isLoading}>
-//         {isLoading ? (
-//           <Text style={styles.buttonText}>Resetting...</Text>
-//         ) : (
-//           <Text style={styles.buttonText}>Reset Password</Text>
-//         )}
-//       </TouchableOpacity>
-//       <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-//         <Text style={styles.backToLogin}>Back to Login</Text>
-//       </TouchableOpacity>
-//     </KeyboardAvoidingView>
-//   );
-// }
+  return (
+    <KeyboardAvoidingView 
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
+      <Image
+        source={require('@/assets/nightmi_logo.png')}
+        style={styles.logo}
+        resizeMode="contain"
+      />
+      <Text style={styles.title}>{t("reset_password")}</Text>
+      <View style={styles.inputContainer}>
+        <Feather name="lock" size={24} color="#9CA3AF" style={styles.icon} />
+        <TextInput
+          style={styles.input}
+          placeholder="New Password"
+          placeholderTextColor="#9CA3AF"
+          secureTextEntry
+          value={password}
+          onChangeText={setPassword}
+          autoCapitalize="none"
+        />
+      </View>
+      <View style={styles.inputContainer}>
+        <Feather name="lock" size={24} color="#9CA3AF" style={styles.icon} />
+        <TextInput
+          style={styles.input}
+          placeholder="Confirm Password"
+          placeholderTextColor="#9CA3AF"
+          secureTextEntry
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
+          autoCapitalize="none"
+        />
+      </View>
+      <TouchableOpacity style={styles.button} onPress={handleResetPassword} disabled={isLoading}>
+        {isLoading ? (
+          <Text style={styles.buttonText}>Resetting...</Text>
+        ) : (
+          <Text style={styles.buttonText}>Reset Password</Text>
+        )}
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+        <Text style={styles.backToLogin}>Back to Login</Text>
+      </TouchableOpacity>
+    </KeyboardAvoidingView>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {

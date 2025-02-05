@@ -1,34 +1,171 @@
 {
   "profile": {
     "noUserFound": "Kein Benutzer gefunden",
-    "failedToLoad": "Profil konnte nicht geladen werden. Bitte versuchen Sie es erneut.",
+    "failedToLoad": "Profil konnte nicht geladen werden. Bitte versuche es erneut.",
     "logout": "Abmelden",
-    "logoutConfirmation": "Sind Sie sicher, dass Sie sich abmelden möchten?",
+    "logoutConfirmation": "Bist du sicher, dass du dich abmelden möchtest?",
     "cancel": "Abbrechen",
-    "failedToSignOut": "Abmeldung fehlgeschlagen. Bitte versuchen Sie es erneut.",
+    "failedToSignOut": "Abmeldung fehlgeschlagen. Bitte versuche es erneut.",
     "permissionRequired": "Berechtigung erforderlich",
-    "allowPhotoLibraryAccess": "Bitte erlauben Sie den Zugriff auf Ihre Fotobibliothek, um ein Bild hochzuladen.",
+    "allowPhotoLibraryAccess": "Bitte erlaube den Zugriff auf deine Fotobibliothek, um ein Bild hochzuladen.",
     "success": "Erfolg",
     "profilePictureUpdated": "Profilbild erfolgreich aktualisiert",
     "error": "Fehler",
-    "failedToUploadImage": "Bild konnte nicht hochgeladen werden. Bitte versuchen Sie es erneut.",
+    "failedToUploadImage": "Bild konnte nicht hochgeladen werden. Bitte versuche es erneut.",
     "dateOfBirth": "Geburtsdatum",
     "gender": "Geschlecht",
     "country": "Land",
     "notSpecified": "Nicht angegeben",
     "editProfile": "Profil bearbeiten",
-    "selectLanguage": "Wählen Sie Ihre Sprache"
+    "selectLanguage": "Wähle deine Sprache"
   },
   "login": {
     "email": "E-Mail",
-    "enterEmail": "Geben Sie Ihre E-Mail ein",
+    "enterEmail": "Gib deine E-Mail-Adresse ein",
     "password": "Passwort",
-    "enterPassword": "Geben Sie Ihr Passwort ein",
+    "enterPassword": "Gib dein Passwort ein",
     "signIn": "Anmelden",
     "forgotPassword": "Passwort vergessen?",
     "newHere": "Neu hier?",
-    "signUp": "Registrieren Sie sich!",
-    "areYouOwner": "Sind Sie ein Eigentümer?",
-    "enterEmailPassword": "Bitte geben Sie E-Mail und Passwort ein"
+    "signUp": "Registrieren!",
+    "areYouOwner": "Bist du ein Besitzer?",
+    "enterEmailPassword": "Bitte gib sowohl E-Mail als auch Passwort ein"
+  },
+  "buy_tickets": "Tickets kaufen",
+  "per_ticket": "pro Ticket",
+  "total": "Gesamt",
+  "processing": "Wird verarbeitet...",
+  "purchase_tickets": "Tickets kaufen",
+  "error": "Fehler",
+  "unable_to_initialize_payment": "Zahlung konnte nicht initialisiert werden. Bitte versuche es erneut.",
+  "your_app_name": "Dein App-Name",
+  "error_code": "Fehlercode: {{code}}",
+  "failed_to_initialize_payment": "Initialisierung der Zahlung fehlgeschlagen. Bitte versuche es erneut.",
+  "payment_error": "Zahlungsfehler: {{code}}",
+  "success": "Erfolg",
+  "payment_successful_ticket_created": "Deine Zahlung war erfolgreich und das Ticket wurde erstellt!",
+  "failed_to_process_payment_or_create_ticket": "Zahlung konnte nicht verarbeitet oder Ticket nicht erstellt werden: {{message}}",
+  "unknown_error_occurred": "Ein unbekannter Fehler ist beim Kauf aufgetreten",
+  "no_user_logged_in": "Kein Benutzer angemeldet",
+  "unknown_error_occurred_during_insertion": "Ein unbekannter Fehler ist beim Einfügen aufgetreten",
+  "no_data_returned_from_ticket_insertion": "Keine Daten von der Ticket-Einfügung zurückgegeben",
+  "date_not_available": "Datum nicht verfügbar",
+  "home": {
+    "search_placeholder": "Clubs suchen...",
+    "error_message": "Clubs konnten nicht geladen werden. Bitte versuche es erneut.",
+    "refreshing": "Aktualisiere...",
+    "no_clubs_found": "Keine Clubs gefunden"
+  },
+  "events": {
+    "upcoming": "Kommende Veranstaltungen",
+    "none": "Keine kommenden Veranstaltungen",
+    "unnamed_event": "Unbenannte Veranstaltung",
+    "price": "${{price}}"
+  },
+  "reviews": {
+    "title": "Bewertungen",
+    "none": "Noch keine Bewertungen"
+  },
+  "common": {
+    "seeAll": "Alle anzeigen",
+    "loading": "Lade...",
+    "confirm": "Bestätigen",
+    "submit": "Absenden"
+  },
+  "defaultCategory": "Nachtclub",
+  "tabs": {
+    "home": "Startseite",
+    "map": "Karte",
+    "tickets": "Tickets",
+    "profile": "Profil",
+    "events": "Veranstaltungen"
+  },
+  "tickets": {
+    "title": "Meine Tickets",
+    "incoming_events": "Kommende Veranstaltungen",
+    "past_events": "Vergangene Veranstaltungen",
+    "no_future_tickets": "Keine Tickets für zukünftige Veranstaltungen",
+    "no_past_tickets": "Keine Tickets für vergangene Veranstaltungen",
+    "review_submitted": "Bewertung erfolgreich abgegeben"
+  },
+  "ticket_card": {
+    "write_review": "Bewertung schreiben",
+    "people": "{{count}} Person",
+    "people_plural": "{{count}} Personen"
+  },
+  "expanded_ticket": {
+    "user": "Benutzer",
+    "event_date": "Veranstaltungsdatum",
+    "event_time": "Veranstaltungszeit",
+    "number_of_people": "Anzahl der Personen",
+    "total_price": "Gesamtpreis",
+    "purchase_date": "Kaufdatum"
+  },
+  "placeholder": {
+    "no_image": "Kein Bild"
+  },
+  "club": {
+    "reviews_count": "({{count}} Bewertungen)",
+    "attendees": "{{count}} Teilnehmer",
+    "open": "Geöffnet",
+    "closed": "Geschlossen",
+    "about": "Über"
+  },
+  "buyTicket": "Ticket kaufen",
+  "viewDetails": "Details anzeigen",
+  "map": {
+    "view_details": "Details anzeigen",
+    "loading_clubs": "Clubs werden geladen..."
+  },
+  "reset_password": "Passwort zurücksetzen",
+  "sending": "Sende...",
+  "back_to_login": "Zurück zur Anmeldung",
+  "register": {
+    "email_placeholder": "E-Mail",
+    "password_placeholder": "Passwort",
+    "confirm_password_placeholder": "Passwort bestätigen",
+    "signup": "Registrieren",
+    "already_account": "Hast du bereits ein Konto? Anmelden",
+    "value_placeholder": "Wert",
+    "date_of_birth": "Geburtsdatum:",
+    "country": "Land:",
+    "select_country": "Land auswählen",
+    "first_phase": {
+      "email": "E-Mail",
+      "email_placeholder": "Gib deine E-Mail-Adresse ein",
+      "password": "Passwort",
+      "confirm_password": "Passwort bestätigen",
+      "password_placeholder": "Gib dein Passwort ein"
+    },
+    "second_phase": {
+      "username": "Benutzername:",
+      "username_placeholder": "Gib deinen Benutzernamen ein",
+      "date_of_birth": "Geburtsdatum:",
+      "confirm": "Bestätigen",
+      "country": "Land:",
+      "select_country": "Land auswählen"
+    }
+  },
+  "owner_login": {
+    "title": "Besitzer-Anmeldung",
+    "email_placeholder": "E-Mail",
+    "password_placeholder": "Passwort",
+    "loading": "Lade...",
+    "sign_in": "Als Besitzer anmelden",
+    "back_to_user_login": "Zurück zur Benutzer-Anmeldung",
+    "register_as_owner": "Als Besitzer registrieren"
+  },
+  "owner_register": {
+    "interested_text": "Interessiert an einer Zusammenarbeit? Fülle dieses Formular aus, wir melden uns bei dir!",
+    "club_name_placeholder": "Clubname",
+    "email_placeholder": "E-Mail",
+    "loading": "Lade...",
+    "confirm": "Bestätigen",
+    "have_account": "Hast du bereits ein Konto? Anmelden",
+    "thank_you_text": "Vielen Dank für dein Interesse an unserem Projekt. Wir werden uns bald bei dir melden!",
+    "validation": {
+      "club_name_length": "Der Clubname muss zwischen 1 und 20 Zeichen lang sein",
+      "missing_parameters": "Fehlende Parameter"
+    }
   }
 }
