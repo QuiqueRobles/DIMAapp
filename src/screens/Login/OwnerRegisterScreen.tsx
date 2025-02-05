@@ -28,6 +28,7 @@ export default function OwnerRegisterScreen() {
   const[latitude,setLatitude]=useState('');
   const[longitude,setLongitude]=useState('');
   const checkInputs=()=>{
+    setHide(true);
     if (clubname==''|| clubaddress=='' || clubphone=='' || email=='') {
       setMissingParameters(true)
     }
@@ -84,11 +85,13 @@ export default function OwnerRegisterScreen() {
       const [query, setQuery] = useState("");
       const [suggestions, setSuggestions] = useState([]);
       const [selectedAddress, setSelectedAddress] = useState(null);
+      const [hide,setHide]=useState(false);
     
       const fetchAddressSuggestions =debounce(async (text) => {
         if (text.length < 3) return;
     
         try {
+          setHide(false);
           const response = await fetch(
             `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(text)}`,
             {
@@ -120,6 +123,7 @@ export default function OwnerRegisterScreen() {
         setLatitude(address.lat);
         setLongitude(address.lon);
         setClubAddress(address.display_name);
+        checkInputs();
         }
   
 
@@ -154,12 +158,16 @@ export default function OwnerRegisterScreen() {
             <Feather name="map" size={24} color="#9CA3AF" style={styles.icon} />
       <Autocomplete 
         style={styles.autocompleteInput}
-        containerStyle={styles.autocompleteContainer}
+        //ntainerStyle={styles.autocompleteContainer}
         listContainerStyle={{
-          display: suggestions.length > 0 ? "flex" : "none",
-          height: Math.min(suggestions.length *70,500),
-          zIndex:10,}}
+          display: suggestions.length > 0 ?"flex" : "none",
+          height: Math.min(suggestions.length *70,210),
+          zIndex:10,
+          width:'auto' }}
+       
+       
         inputContainerStyle={styles.autocompleteInput}
+        hideResults={hide}
         
          // Remove extra borders if needed
          // style={styles.inputContainer}
@@ -172,7 +180,7 @@ export default function OwnerRegisterScreen() {
         placeholder={clubaddress||'Club Address'}
         placeholderTextColor="#9CA3AF"
         flatListProps={{
-          keyboardShouldPersistTaps: "handled",
+          keyboardShouldPersistTaps: "never",
           keyExtractor: (_, index) => index.toString(),
           getItemLayout: (_, index) => ({
             length: 60,
@@ -284,12 +292,14 @@ const styles = StyleSheet.create({
   autocompleteContainer: {
     flex: 1,
     zIndex: 10, // Ensures dropdown appears above other components
+    height:'100%',
   },
   autocompleteInput: {
     borderWidth: 0, // Removes extra border
     backgroundColor: "#1E1E1E",
   color:'#FFFFFF',
   fontSize: 16,
+flex:1,
   },
   listContainer:{
     height:'300%',
@@ -316,6 +326,7 @@ const styles = StyleSheet.create({
 
   icon: {
     marginRight: 10,
+    alignSelf:'center'
   },
   input: {
     flex: 1,

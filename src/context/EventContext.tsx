@@ -10,7 +10,7 @@ export type Event = {
     price: number |null
     description: string | null
     image: string | null
-    event_id: string | null
+    id: string | null
   }
 
 type ClubContextType = {
@@ -19,6 +19,8 @@ type ClubContextType = {
   setClubId: (clubId: string | null) => void;
   addEvent: (events: Event) => void
   setEvents: (events: Event[]) => void
+  refresh:any
+  setRefresh:(refresh:number)=>void;
 }
 
 
@@ -27,6 +29,7 @@ const ClubContext = createContext<ClubContextType | undefined>(undefined);
 export function ClubProvider({ children }: { children: React.ReactNode }) {
   const [events, setEvents] = useState<Event[]>([]);
   const [clubId, setClubId] = useState<string | null>(null); // Initialize with null
+  const[refresh,setRefresh]=useState(0);
 
   useEffect(() => {
     const fetchClubId = async () => {
@@ -49,7 +52,7 @@ export function ClubProvider({ children }: { children: React.ReactNode }) {
     setEvents((prev) => [...prev, event])
   }
 
-  return <ClubContext.Provider value={{ events,clubId,setClubId, addEvent,setEvents}}>{children}</ClubContext.Provider>
+  return <ClubContext.Provider value={{ events,clubId,setClubId, addEvent,setEvents,refresh,setRefresh}}>{children}</ClubContext.Provider>
 }
 
 export function useClub() {

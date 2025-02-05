@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, ScrollView, Image, Modal, TextInput, TouchableO
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as ImagePicker from "expo-image-picker"
 import { supabase } from '@/lib/supabase';
+import { useClub } from "../../src/context/EventContext"
+import { KeyboardAvoidingView,Platform } from "react-native";
 
 type Props = {
   visible: boolean
@@ -23,6 +25,7 @@ function ModifyEventModal({ visible, onClose, eventId, clubId, eventName, eventD
   const [price, setPrice] = useState(eventPrice.toString())
   const [description, setDescription] = useState(eventDescription)
   const [image, setImage] = useState(eventImage)
+  const { setEvents,events,setRefresh,refresh } = useClub()
 
   const handleImageUpload = async () => {
       //const clubId=await getAuthenticatedUserId();
@@ -90,13 +93,15 @@ function ModifyEventModal({ visible, onClose, eventId, clubId, eventName, eventD
 
   const handleSubmit = async () => {
     try{
-      const {error: updateError} = await supabase.from('event').update({
+      const {data:updateData,error: updateError} = await supabase.from('event').update({
         name,
         date,
         price: parseInt(price),
         description,
         image,
       }).eq('id', eventId)
+      
+      
 
       if(updateError) throw new Error('Failed to update event')
     
@@ -104,6 +109,7 @@ function ModifyEventModal({ visible, onClose, eventId, clubId, eventName, eventD
       console.error(error)
     }finally {
       alert("Event updated successfully")
+     
       onClose()
     }
 
@@ -112,6 +118,10 @@ function ModifyEventModal({ visible, onClose, eventId, clubId, eventName, eventD
 
 
   return (
+     <KeyboardAvoidingView 
+              behavior={Platform.OS === "ios" ? "padding" : "height"}
+              
+            >
       <Modal visible={visible} animationType="slide" transparent={true} onRequestClose={onClose}>
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
@@ -164,6 +174,7 @@ function ModifyEventModal({ visible, onClose, eventId, clubId, eventName, eventD
           </View>
         </View>
       </Modal>
+      </KeyboardAvoidingView>
     )
 }
 

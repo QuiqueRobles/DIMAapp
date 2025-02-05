@@ -4,6 +4,8 @@ import { format, parseISO } from 'date-fns';
 import ModifyEventButton from '@/components/ModifyEventButton';
 import ModifyEventModal from '@/components/ModifyEvent';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useEffect } from 'react';
+import { useClub } from '@/context/EventContext';
 
 
 
@@ -31,6 +33,9 @@ const OwnedEventsList: React.FC<EventsListProps> = ({ events, clubName }) => {
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const today = new Date();
   const [formattedDate ,setFormattedDate]=useState("");
+  const {setRefresh,refresh } = useClub()
+
+
 
 
   const openModal = (event: Event) => {
@@ -43,6 +48,7 @@ const OwnedEventsList: React.FC<EventsListProps> = ({ events, clubName }) => {
   const closeModal = () => {
     setIsModalVisible(false);
     setSelectedEvent(null);
+    setRefresh(refresh+1);
   };
   
 
@@ -97,6 +103,7 @@ const OwnedEventsList: React.FC<EventsListProps> = ({ events, clubName }) => {
           eventPrice={selectedEvent.price !== null ? selectedEvent.price: 0} 
           eventDescription={selectedEvent.description} 
           eventImage={selectedEvent.image}
+        
         />
       )}
     </ScrollView>

@@ -37,14 +37,20 @@ const EventsManage = () => {
     const [loading, setLoading] = useState(true);
     const [isNewEventModalVisible, setIsNewEventModalVisible] = useState(false)
     const [isModifyEventModalVisible, setIsModifyEventModalVisible] = useState(false)
-    const { events,clubId,addEvent,setEvents,setClubId } = useClub()
+    const { events,clubId,addEvent,setEvents,setClubId,refresh } = useClub()
     const [mytempEvents, setMytempEvents] = useState<Event[]>([]); //temporary variable to store events
 
   
     useEffect(() => {
         fetchEvents();
-        
+
     }, []);
+
+   
+    useEffect(() => {
+      fetchEvents();
+
+  }, [refresh]);
     
     
     const fetchEvents = async () => {
@@ -88,7 +94,7 @@ const EventsManage = () => {
     
     return (
        
-        <View style={styles.container}>
+        <View key={refresh}  style={styles.container}>
           <Calendar
            testID='calendar'
             theme={{
@@ -112,7 +118,8 @@ const EventsManage = () => {
           
           <OwnedEventsList 
             events={events}
-            clubName="Club Name" 
+            clubName="Club Name"
+            
           />
 
           
@@ -121,7 +128,10 @@ const EventsManage = () => {
           <Plus size={24} color="#fff" />
           </TouchableOpacity>
     
-          <AddEventModal visible={isNewEventModalVisible} onClose={() => setIsNewEventModalVisible(false)} />
+          <AddEventModal visible={isNewEventModalVisible} onClose={() =>{setIsNewEventModalVisible(false)
+          fetchEvents();}
+
+          } />
         </View>
         
       )

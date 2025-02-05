@@ -282,7 +282,7 @@ import { useClub } from "../../src/context/EventContext"
 import { supabase } from "@/lib/supabase"
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
-
+import { KeyboardAvoidingView,Platform } from "react-native"
 
 
 
@@ -345,13 +345,13 @@ export default function AddEventModal({ visible, onClose }: Props) {
         } as any);
 
         const { error: uploadError } = await supabase.storage
-          .from('clubs-image')
+          .from('event_image')
           .upload(filePath, formData);
 
         if (uploadError) throw uploadError;
 
         const { data: { publicUrl } } = supabase.storage
-          .from('event-image')
+          .from('event_image')
           .getPublicUrl(filePath);
 
          setImage(publicUrl)
@@ -372,7 +372,7 @@ export default function AddEventModal({ visible, onClose }: Props) {
     created_at:timestampString,
     price: Number.parseFloat(price),
     description,
-    image,
+    image:image,
     id:newUUID,}
 
 
@@ -415,6 +415,10 @@ export default function AddEventModal({ visible, onClose }: Props) {
              };
 
   return (
+        <KeyboardAvoidingView 
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+         
+        >
     <Modal visible={visible} animationType="slide" transparent={true} onRequestClose={onClose}>
       <View style={styles.modalContainer}>
         <View style={styles.modalContent}>
@@ -481,6 +485,7 @@ export default function AddEventModal({ visible, onClose }: Props) {
         </View>
       </View>
     </Modal>
+    </KeyboardAvoidingView>
   )
 }
 
